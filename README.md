@@ -21,6 +21,8 @@ async function main() {
 main();
 ```
 
+Here the inputs and outputs are both arrays of RDF/JS Quads
+
 ## Advanced usage
 
 To have more granular control one can also use this module as follows
