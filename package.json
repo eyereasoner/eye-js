@@ -16,14 +16,13 @@
     "test": "jest",
     "lint": "eslint lib/**/*.ts __tests__/* scripts/* --ext .ts",
     "lint:fix": "eslint lib/**/*.ts __tests__/* scripts/* --ext .ts --fix",
-    "build": "tsc",
-    "prepare": "npm run eye:prepare && npm run build",
+    "build": "npm run eye:prepare && tsc",
+    "prepare": "npm run build",
     "semantic-release": "semantic-release",
     "eye:fetch": "ts-node scripts/fetch-eye",
     "eye:build": "rollup --config rollup.config.mjs",
     "eye:prepare": "npm run eye:fetch && npm run eye:build",
-    "eye:update": "ts-node scripts/update",
-    "postinstall": "npm run eye:prepare"
+    "eye:update": "ts-node scripts/update"
   },
   "repository": {
     "type": "git",
