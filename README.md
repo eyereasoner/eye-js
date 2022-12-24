@@ -9,6 +9,41 @@ Distributing the [EYE](https://github.com/josd/eye) reasoner for browser and nod
 
 ## Usage
 
+The simplest way to use this package is to execute a query over a dataset and get the results
+
+```ts
+import { basicQuery } from 'eyereasoner';
+
+async function main() {
+  const resultQuads = await basicQuery(dataQuads, queryQuads);
+}
+
+main();
+```
+
+## Advanced usage
+
+To have more granular control once can also use this module as follows
+
+```ts
+import { SWIPL, loadEye } from 'eyereasoner';
+
+async function main() {
+  // Instantiate a new SWIPL module and log any results it produces to the console
+  const Module = await SWIPL({ print: (str: string) => { console.log(str) }, arguments: ['-q'] });
+
+  // Load EYE into the SWIPL Module and run consule("eye.pl").
+  loadEye(MODULE)
+
+  // Load the the strings data and query as files data.n3 and query.n3 into the module
+  Module.FS.writeFile('data.n3', data);
+  Module.FS.writeFile('query.n3', query);
+
+  // Execute main(['--quiet', './data.n3', '--query', './query.n3']).
+  queryOnce(Module, 'main', ['--quiet', './data.n3', '--query', './query.n3']);
+}
+```
+
 ## License
 ©2022–present
 [Jesse Wright](https://github.com/jeswr),

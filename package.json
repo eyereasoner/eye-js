@@ -1,5 +1,5 @@
 {
-  "name": "@eyereasoner/eye-js",
+  "name": "eyereasoner",
   "version": "0.0.0",
   "description": "Distributing the [EYE](https://github.com/josd/eye) reasoner for browser and node using WebAssembly.",
   "main": "dist/index.js",
@@ -43,6 +43,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@types/jest": "^29.2.4",
+    "@types/n3": "^1.10.4",
     "@typescript-eslint/eslint-plugin": "^5.47.0",
     "@typescript-eslint/parser": "^5.47.0",
     "cross-fetch": "^3.1.5",
@@ -88,6 +89,10 @@
     }
   },
   "dependencies": {
+    "n3": "^1.16.3",
     "swipl-wasm": "^3.0.0"
+  },
+  "peerDependencies": {
+    "@rdfjs/types": "^1.1.0"
   }
 }

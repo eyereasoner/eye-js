@@ -1,1 +1,3 @@
-it('', () => { expect(true).toEqual(true); });
+it('', () => {
+  expect(true).toEqual(true);
+});
