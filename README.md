@@ -8,7 +8,7 @@ Distributing the [EYE](https://github.com/josd/eye) reasoner for browser and nod
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 ## Usage
-
+<!--
 The simplest way to use this package is to execute a query over a dataset and get the results
 
 ```ts
@@ -26,16 +26,35 @@ Here the inputs and outputs are both arrays of RDF/JS Quads
 ## Advanced usage
 
 To have more granular control one can also use this module as follows
+-->
+
+An example usage of the module is as follows
 
 ```ts
-import { SWIPL, loadEye } from 'eyereasoner';
+import { SWIPL, loadEye, queryOnce } from 'eyereasoner';
+
+const query = `
+@prefix : <http://example.org/socrates#>.
+
+{:Socrates a ?WHAT} => {:Socrates a ?WHAT}.
+`
+
+const data = `
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix : <http://example.org/socrates#>.
+
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.
+`
 
 async function main() {
   // Instantiate a new SWIPL module and log any results it produces to the console
   const Module = await SWIPL({ print: (str: string) => { console.log(str) }, arguments: ['-q'] });
 
   // Load EYE into the SWIPL Module and run consule("eye.pl").
-  loadEye(MODULE)
+  loadEye(Module)
 
   // Load the the strings data and query as files data.n3 and query.n3 into the module
   Module.FS.writeFile('data.n3', data);
@@ -44,6 +63,9 @@ async function main() {
   // Execute main(['--quiet', './data.n3', '--query', './query.n3']).
   queryOnce(Module, 'main', ['--quiet', './data.n3', '--query', './query.n3']);
 }
+
+main();
+
 ```
 
 ## License
