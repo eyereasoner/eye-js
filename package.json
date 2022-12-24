@@ -1,0 +1,87 @@
+{
+  "name": "",
+  "version": "0.0.0-development",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test:coverage": "npm test -- --coverage",
+    "test:badges": "npm run test:coverage  && jest-coverage-badges",
+    "test": "jest",
+    "lint": "eslint lib/* __tests__/* --ext .ts",
+    "lint:fix": "eslint lib/* __tests__/* --ext .ts --fix",
+    "build": "tsc",
+    "prepare": "tsc",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [],
+  "author": "Jesse Wright <jesse.wright@anu.edu.au>",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "devDependencies": {
+    "@types/jest": "^28.1.7",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "eslint": "^8.22.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.3",
+    "pre-commit": "^1.2.2",
+    "semantic-release": "^19.0.3",
+    "ts-jest": "^28.0.8",
+    "typescript": "^4.7.4"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json-summary", 
+      "text",
+      "lcov"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
+  },
+  "pre-commit": [
+    "lint",
+    "build",
+    "test"
+  ],
+  "release": {
+    "branches": [
+      "main",
+      "+([0-9])?(.{+([0-9]),x}).x",
+      "next",
+      {
+        "name": "alpha",
+        "prerelease": true
+      },
+      {
+        "name": "beta",
+        "prerelease": true
+      }
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
