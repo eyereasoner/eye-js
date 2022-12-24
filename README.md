@@ -23,7 +23,7 @@ main();
 
 ## Advanced usage
 
-To have more granular control once can also use this module as follows
+To have more granular control one can also use this module as follows
 
 ```ts
 import { SWIPL, loadEye } from 'eyereasoner';

@@ -29,7 +29,17 @@
     "type": "git",
     "url": "https://github.com/eyereasoner/eye-js.git"
   },
-  "keywords": [],
+  "keywords": [
+    "eye",
+    "eye-js",
+    "reasoning",
+    "reasoner",
+    "rdf",
+    "owl",
+    "semantic",
+    "surfaces",
+    "solid"
+  ],
   "author": "Jesse Wright <https://github.com/jeswr/>",
   "contributors": [
     "Jesse Wright <https://github.com/jeswr/>",
