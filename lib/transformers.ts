@@ -93,18 +93,11 @@ export async function executeBasicEyeQueryQuads(
   const parser = new Parser({ format: 'text/n3' });
   const writer = new Writer({ format: 'text/n3' });
 
-  console.log(writer.quadsToString(data))
-  console.log(writer.quadsToString(queryString))
-
-  const res = await executeBasicEyeQuery(
-    swipl,
-    writer.quadsToString(data),
-    writer.quadsToString(queryString),
-  );
-
-  console.log(res)
-
   return parser.parse(
-    res,
+    await executeBasicEyeQuery(
+      swipl,
+      writer.quadsToString(data),
+      writer.quadsToString(queryString),
+    ),
   );
 }
