@@ -9,7 +9,7 @@ const EYE_COMMIT = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'packag
 (async () => {
   const res = (await fetch(`https://raw.githubusercontent.com/eyereasoner/eye/${EYE_COMMIT}/eye.pl`));
   if (res.status === 200) {
-    fs.writeFileSync(path.join(__dirname, '..', 'lib', 'eye.pl'), await res.text());
+    fs.writeFileSync(path.join(__dirname, '..', 'eye', 'eye.pl'), await res.text());
   } else {
     console.error(await res.text());
     process.exit(1);

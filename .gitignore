@@ -1,4 +1,5 @@
 node_modules
 coverage
 dist
-lib/eye.pl
+lib/*.pl.ts
+/eye/*.pl
