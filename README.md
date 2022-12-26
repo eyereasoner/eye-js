@@ -1,5 +1,5 @@
 # EYE JS
-Distributing the [EYE](https://github.com/josd/eye) reasoner for browser and node using WebAssembly.
+Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser and node using WebAssembly.
 
 [![GitHub license](https://img.shields.io/github/license/eyereasoner/eye-js.svg)](https://github.com/eyereasoner/eye-js/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/eyereasoner.svg)](https://www.npmjs.com/package/eyereasoner)
