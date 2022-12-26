@@ -3,7 +3,8 @@
 import type { SWIPLModule } from 'swipl-wasm/dist/swipl/swipl';
 import type SWIPL from 'swipl-wasm/dist/swipl/swipl';
 import { Quad } from '@rdfjs/types';
-import { Parser, Writer } from 'n3';
+import { DataFactory, Parser, Store } from 'n3';
+import { write } from './n3Writer.temp';
 import EYE from './eye.pl';
 
 /**
@@ -46,9 +47,9 @@ export function loadEye(Module: SWIPLModule): SWIPLModule {
  * @returns The same SWIPL module
  */
 export function runQuery(Module: SWIPLModule, data: string, queryString: string): SWIPLModule {
-  Module.FS.writeFile('data.n3', data);
-  Module.FS.writeFile('query.n3', queryString);
-  queryOnce(Module, 'main', ['--quiet', './data.n3', '--query', './query.n3']);
+  Module.FS.writeFile('data.nq', data);
+  Module.FS.writeFile('query.nq', queryString);
+  queryOnce(Module, 'main', ['--quiet', './data.nq', '--query', './query.nq']);
   return Module;
 }
 
@@ -74,7 +75,7 @@ export async function executeBasicEyeQuery(
   queryString: string,
 ): Promise<string> {
   let res = '';
-  const Module = await swipl({ print: (str: string) => { res += str; }, arguments: ['-q'] });
+  const Module = await swipl({ print: (str: string) => { res += `${str}\n`; }, arguments: ['-q'] });
   loadAndRunQuery(Module, data, queryString);
   return res;
 }
@@ -89,15 +90,37 @@ export async function executeBasicEyeQueryQuads(
   swipl: typeof SWIPL,
   data: Quad[],
   queryString: Quad[],
-): Promise<Quad[]> {
+): Promise<{ result: Quad[], proof: Quad[] }> {
   const parser = new Parser({ format: 'text/n3' });
-  const writer = new Writer({ format: 'text/n3' });
+  const queryResult = await executeBasicEyeQuery(swipl, write(data), write(queryString));
+  const proof = parser.parse(queryResult);
+  const store = new Store(proof);
 
-  return parser.parse(
-    await executeBasicEyeQuery(
-      swipl,
-      writer.quadsToString(data),
-      writer.quadsToString(queryString),
-    ),
+  const proofNode = store.getSubjects(
+    'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
+    'http://www.w3.org/2000/10/swap/reason#Proof',
+    DataFactory.defaultGraph(),
   );
+
+  if (proofNode.length !== 1) {
+    throw new Error(`Expected exactly one proof: received ${proofNode.length}`);
+  }
+
+  const results = store.getObjects(
+    proofNode[0],
+    'http://www.w3.org/2000/10/swap/reason#gives',
+    DataFactory.defaultGraph(),
+  );
+
+  if (results.length !== 1) {
+    throw new Error(`Expected exactly one triple giving inference results from proof: received ${results.length}`);
+  }
+
+  const result = store.getQuads(null, null, null, results[0])
+    .map((res) => DataFactory.quad(res.subject, res.predicate, res.object));
+
+  return {
+    proof,
+    result,
+  };
 }

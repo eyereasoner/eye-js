@@ -14,6 +14,9 @@ export { default as SWIPL } from './swipl-bundled.temp';
  * @param query The query as RDF/JS quads
  * @returns The result of the query as RDF/JS quads
  */
-export function basicQuery(data: Quad[], query: Quad[]): Promise<Quad[]> {
+export function basicQuery(
+  data: Quad[],
+  query: Quad[],
+): Promise<{ result: Quad[], proof: Quad[] }> {
   return executeBasicEyeQueryQuads(SWIPL, data, query);
 }
