@@ -1,2 +1,3 @@
 lib/*.pl.ts
 lib/*.temp.ts
+*.sh
