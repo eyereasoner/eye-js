@@ -11,6 +11,8 @@ elif [ ${before:25:4} != ${after:25:4} ]; then
   version="fix"
 fi
 
+version="feat"
+
 git config --global user.name 'Jesse Wright'
 git config --global user.email '63333554+jeswr@users.noreply.github.com'
 git commit -am "$version: update eye"
