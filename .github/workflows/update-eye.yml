@@ -10,7 +10,9 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
       - name: Update eye
-        run: npm run eye:update
+        run: | 
+          npm ci
+          npm run eye:update
       - name: Check for modified files
         id: git-check
         run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
