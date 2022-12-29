@@ -125,8 +125,14 @@ async function main() {
 }
 
 main();
-
 ```
+
+## Selecting the `SWIPL` module
+
+The `SWIPL` module exported from this library is a build that inlines WebAssembly and data strings in order to be
+isomorphic across browser and node without requiring any bundlers. Some users may wish to have more fine-grained control
+over their SWIPL module; for instance in order to load the `.wasm` file separately for performance. In these cases
+see the `SWIPL` modules exported by [npm swipl wasm](https://github.com/rla/npm-swipl-wasm/).
 
 ## License
 ©2022–present
