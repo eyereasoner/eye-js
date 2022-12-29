@@ -13,7 +13,7 @@
   "scripts": {
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
-    "test": "jest",
+    "test": "jest __tests__/*-test.ts",
     "lint": "eslint lib/**/*.ts __tests__/* scripts/* --ext .ts",
     "lint:fix": "eslint lib/**/*.ts __tests__/* scripts/* --ext .ts --fix",
     "build": "npm run eye:prepare && tsc",
@@ -48,7 +48,7 @@
   "bugs": {
     "url": "https://github.com/eyereasoner/eye-js/issues"
   },
-  "homepage": "",
+  "homepage": "https://github.com/eyereasoner/eye-js#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@types/jest": "^29.2.4",
@@ -60,6 +60,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "jest": "^29.3.1",
+    "jest-environment-jsdom": "^29.3.1",
     "jest-rdf": "^1.7.1",
     "pre-commit": "^1.2.2",
     "rollup": "^3.8.1",
