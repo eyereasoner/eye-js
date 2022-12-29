@@ -12,7 +12,7 @@ import path from 'path';
     pkg.config.eye = { name: tag.name, sha: tag.commit.sha };
     fs.writeFileSync(
       path.join(__dirname, '..', 'package.json'),
-      JSON.stringify(pkg, null, 2) + '\n',
+      `${JSON.stringify(pkg, null, 2)}\n`,
     );
   } else {
     console.error(await res.text());
