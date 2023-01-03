@@ -13,7 +13,7 @@ jobs:
     steps:
       - # It is often a desired behavior to merge only when a workflow execution
         # succeeds. This can be changed as needed.
-        if: ${{ contains(github.event.pull_request.labels.*.name, 'automerge') }}
+        if: contains(github.event.pull_request.labels.*.name, 'automerge')
         name: automerge
         uses: ridedott/merge-me-action@v2
         with:
