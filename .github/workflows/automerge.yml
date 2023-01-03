@@ -11,6 +11,7 @@ jobs:
     name: automerge
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ github.event.pull_request.labels.*.name }}
       - # It is often a desired behavior to merge only when a workflow execution
         # succeeds. This can be changed as needed.
         if: contains(github.event.pull_request.labels.*.name, 'automerge')
