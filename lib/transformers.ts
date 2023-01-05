@@ -29,26 +29,6 @@ export function consultEye(Module: SWIPLModule): SWIPLModule {
 }
 
 /**
- * Writes eye.pl to the Module
- * @param Module A SWIPL Module
- * @returns A SWIPL Module
- */
-export function writeEye(Module: SWIPLModule): SWIPLModule {
-  Module.FS.writeFile('eye.pl', EYE);
-  return Module;
-}
-
-/**
- * Consults the eye.pl Module
- * @param Module A SWIPL Module
- * @returns A SWIPL Module
- */
-export function consultEye(Module: SWIPLModule): SWIPLModule {
-  queryOnce(Module, 'consult', 'eye.pl');
-  return Module;
-}
-
-/**
  * A SWIPL transformer that loads and consults eye.pl in the
  * given SWIPL module
  * @param Module A SWIPL Module
