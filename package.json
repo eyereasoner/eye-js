@@ -96,8 +96,8 @@
   },
   "config": {
     "eye": {
-      "name": "v23.0104.1515",
-      "sha": "8dc1fb1a5fd5db9122d7bd431d4d914d2350e07d"
+      "name": "v23.0105.0024",
+      "sha": "74c1c4346f3e1b567aa8266a28b77edbee8a4932"
     }
   },
   "dependencies": {
