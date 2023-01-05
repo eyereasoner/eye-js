@@ -20,6 +20,7 @@
     "prepare": "npm run build",
     "semantic-release": "semantic-release",
     "eye:fetch": "ts-node scripts/fetch-eye",
+    "eye:pvm": "ts-node scripts/generate-pvm",
     "eye:build": "rollup --config rollup.config.mjs",
     "eye:prepare": "npm run eye:fetch && npm run eye:build",
     "eye:update": "ts-node scripts/update",
