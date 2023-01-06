@@ -6,25 +6,26 @@ import { Quad } from '@rdfjs/types';
 import { DataFactory, Parser, Store } from 'n3';
 import { write } from './n3Writer.temp';
 import EYE from './eye.pl';
+import { queryOnce } from './query';
 
 /**
- * Executes a query
- * @param Module The module to execute the query on
- * @param name The name of the query function
- * @param args The arguments of the query function
- * @returns The result of the query
+ * Writes eye.pl to the Module
+ * @param Module A SWIPL Module
+ * @returns A SWIPL Module
  */
-export function query(Module: SWIPLModule, name: string, args: string[] | string) {
-  const queryString = `${name}(${
-    typeof args === 'string'
-      ? `"${args}"`
-      : `[${args.map((arg) => `'${arg}'`).join(', ')}]`
-  }).`;
-  return Module.prolog.query(queryString);
+export function writeEye(Module: SWIPLModule): SWIPLModule {
+  Module.FS.writeFile('eye.pl', EYE);
+  return Module;
 }
 
-export function queryOnce(Module: SWIPLModule, name: string, args: string[] | string) {
-  return query(Module, name, args).once();
+/**
+ * Consults the eye.pl Module
+ * @param Module A SWIPL Module
+ * @returns A SWIPL Module
+ */
+export function consultEye(Module: SWIPLModule): SWIPLModule {
+  queryOnce(Module, 'consult', 'eye.pl');
+  return Module;
 }
 
 /**
@@ -34,9 +35,7 @@ export function queryOnce(Module: SWIPLModule, name: string, args: string[] | st
  * @returns The same SWIPL module with EYE loaded and consulted
  */
 export function loadEye(Module: SWIPLModule): SWIPLModule {
-  Module.FS.writeFile('eye.pl', EYE);
-  queryOnce(Module, 'consult', 'eye.pl');
-  return Module;
+  return consultEye(writeEye(Module));
 }
 
 /**

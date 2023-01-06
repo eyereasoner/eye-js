@@ -4,6 +4,7 @@ import SWIPL from './swipl-bundled.temp';
 
 import { executeBasicEyeQueryQuads } from './transformers';
 
+export * from './query';
 export * from './transformers';
 // @ts-ignore
 export { default as SWIPL } from './swipl-bundled.temp';
