@@ -6,7 +6,7 @@ import SWIPL from '../lib/swipl-bundled.temp';
 
 (async () => {
   const Module: SWIPLModule = await SWIPL({
-    arguments: ['-t', '-x', './eye.pvm', '-t', '--', '"$@"'],
+    arguments: ['-x', 'eye.pvm'],
     preRun: (module: SWIPLModule) => {
       module.FS.writeFile('eye.pvm', fs.readFileSync(path.join(__dirname, '..', 'eye', 'eye.pvm')).toString());
     },
