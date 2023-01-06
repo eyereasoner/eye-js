@@ -1,12 +1,12 @@
 import { SWIPL, loadEye, queryOnce } from '..';
 import { query, data } from '../data/socrates';
 
-// The results recorded using DELL XPS 15 9520 (32GB RAM) on commit 2869782798e5b89d0a1f2321321a63dc21e6da1f are
-// Initialise SWIPL        : 103.502ms
-// Load and consult EYE    : 459.548ms
-// Load data.n3            : 0.065ms
-// Load query.n3           : 0.022ms
-// Execute query           : 6.672ms
+// The results recorded using DELL XPS 15 9520 (32GB RAM) on commit 563f3cfc663b8d746d653e90337002eec74d246e are
+// Initialise SWIPL        : 103.505ms
+// Load and consult EYE    : 464.449ms
+// Load data.n3            : 0.07ms
+// Load query.n3           : 0.021ms
+// Execute query           : 7.207ms
 async function main() {
   // Instantiate a new SWIPL module and log any results it produces to the console
   console.time('Initialise SWIPL\t');
