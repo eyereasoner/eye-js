@@ -1,6 +1,5 @@
-import { SWIPL, loadEye, queryOnce, EYE_PVM, strToBuffer } from '../dist';
-import { query, data } from '../data/socrates';
-import { SWIPLModule } from 'swipl-wasm/dist/common';
+import { data, query } from '../data/socrates';
+import { queryOnce, SwiplEye } from '../lib';
 
 // The results recorded using DELL XPS 15 9520 (32GB RAM)
 // Initialise SWIPL        : 110.441ms (averages about 50-60ms on subsequent loads in the same session)
@@ -12,11 +11,7 @@ async function main() {
 
   // Instantiate a new SWIPL module and log any results it produces to the console
   console.time(`Initialise SWIPL with EYE image\t`);
-    const Module = await SWIPL({
-      arguments: ['-q', '-x', 'eye.pvm'],
-      preRun: (module: SWIPLModule) => module.FS.writeFile('eye.pvm', strToBuffer(EYE_PVM)),
-      print: () => {}
-    });
+  const Module = await SwiplEye({ print: () => {} });
   console.timeEnd(`Initialise SWIPL with EYE image\t`);
 
   // Load the the strings data and query as files data.n3 and query.n3 into the module

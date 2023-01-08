@@ -1,9 +1,18 @@
 import fs from 'fs';
 import path from 'path';
-import { SWIPLModule } from 'swipl-wasm/dist/common';
+import type { SWIPLModule } from 'swipl-wasm/dist/common';
 import { queryOnce } from '../lib/query';
 // @ts-ignore
 import SWIPL from '../lib/swipl-bundled.temp';
+
+function Uint8ToString(u8a: any) {
+  const CHUNK_SZ = 0x8000;
+  const c: string[] = [];
+  for (let i = 0; i < u8a.length; i += CHUNK_SZ) {
+    c.push(String.fromCharCode.apply(null, u8a.subarray(i, i + CHUNK_SZ)));
+  }
+  return c.join('');
+}
 
 (async () => {
   const Module: SWIPLModule = await SWIPL({
@@ -14,13 +23,7 @@ import SWIPL from '../lib/swipl-bundled.temp';
   });
   queryOnce(Module, 'main', ['--image', 'eye.pvm']);
 
-  // Since the .pvm file is *not* utf-8 we encounter issues
-  // if we try and just to `.toString()` in particular
-  // see <https://github.com/eyereasoner/eye-js/issues/20>
-  let s = '';
-  for (const code of Module.FS.readFile('eye.pvm')) {
-    s += String.fromCharCode(code);
-  }
+  const eyeBuffer = Module.FS.readFile('eye.pvm');
 
-  fs.writeFileSync(path.join(__dirname, '..', 'eye', 'eye.pvm'), s);
+  fs.writeFileSync(path.join(__dirname, '..', 'eye', 'eye.pvm'), btoa(Uint8ToString(eyeBuffer)));
 })();

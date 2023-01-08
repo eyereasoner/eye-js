@@ -1,29 +1,15 @@
 // A set of functions that take a SWIPLModule as input, apply
 // a transformation, and then return the same module
 import type { SWIPLModule } from 'swipl-wasm/dist/swipl/swipl';
-import SWIPL from 'swipl-wasm/dist/swipl/swipl';
 import { Quad } from '@rdfjs/types';
 import { DataFactory, Parser, Store } from 'n3';
+// @ts-ignore
+import SWIPL from './swipl-bundled.temp';
 import { write } from './n3Writer.temp';
 import EYE from './eye.pl';
 import EYE_PVM from './eye.pvm';
 import { queryOnce } from './query';
-
-/**
- * A function that converts a string into a buffer.
- * This is required *only* for the conversion of the inlined
- * EYE_PVM string into a buffer
- * @param string The string to convert
- * @returns A Uint8Array Buffer
- */
-export function strToBuffer(string: string) {
-  const arrayBuffer = new ArrayBuffer(string.length * 1);
-  const newUint = new Uint8Array(arrayBuffer);
-  newUint.forEach((_, i) => {
-    newUint[i] = string.charCodeAt(i);
-  });
-  return newUint;
-}
+import { strToBuffer } from './strToBuffer';
 
 export function loadEyeImage(swipl: typeof SWIPL) {
   return (options?: Partial<EmscriptenModule> | undefined) => swipl({
