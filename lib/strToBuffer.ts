@@ -23,7 +23,7 @@ export function strToBuffer(data: string) {
     }
   }
   if (accumulatedBits === 2) {
-    output.push(buffer >>= 4);
+    output.push(buffer >> 4);
   } else if (accumulatedBits === 3) {
     output.push(((buffer >>= 2) & 0xff00) >> 8, buffer & 0xff);
   }
