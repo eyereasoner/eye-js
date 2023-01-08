@@ -1,17 +1,37 @@
 // A set of functions that take a SWIPLModule as input, apply
 // a transformation, and then return the same module
 import type { SWIPLModule } from 'swipl-wasm/dist/swipl/swipl';
-import type SWIPL from 'swipl-wasm/dist/swipl/swipl';
 import { Quad } from '@rdfjs/types';
 import { DataFactory, Parser, Store } from 'n3';
+// @ts-ignore
+import SWIPL from './swipl-bundled.temp';
 import { write } from './n3Writer.temp';
 import EYE from './eye.pl';
+import EYE_PVM from './eye.pvm';
 import { queryOnce } from './query';
+import { strToBuffer } from './strToBuffer';
+
+export function loadEyeImage(swipl: typeof SWIPL) {
+  return (options?: Partial<EmscriptenModule> | undefined) => swipl({
+    ...options,
+    arguments: ['-q', '-x', 'eye.pvm'],
+    // @ts-ignore
+    preRun: (module: SWIPLModule) => module.FS.writeFile('eye.pvm', strToBuffer(EYE_PVM)),
+  });
+}
+
+/**
+ * Creates default SWIPL image loaded with EYE
+ */
+export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
+  return loadEyeImage(SWIPL)(options);
+}
 
 /**
  * Writes eye.pl to the Module
  * @param Module A SWIPL Module
  * @returns A SWIPL Module
+ * @deprecated
  */
 export function writeEye(Module: SWIPLModule): SWIPLModule {
   Module.FS.writeFile('eye.pl', EYE);
@@ -22,6 +42,7 @@ export function writeEye(Module: SWIPLModule): SWIPLModule {
  * Consults the eye.pl Module
  * @param Module A SWIPL Module
  * @returns A SWIPL Module
+ * @deprecated
  */
 export function consultEye(Module: SWIPLModule): SWIPLModule {
   queryOnce(Module, 'consult', 'eye.pl');
@@ -33,6 +54,7 @@ export function consultEye(Module: SWIPLModule): SWIPLModule {
  * given SWIPL module
  * @param Module A SWIPL Module
  * @returns The same SWIPL module with EYE loaded and consulted
+ * @deprecated
  */
 export function loadEye(Module: SWIPLModule): SWIPLModule {
   return consultEye(writeEye(Module));
@@ -57,6 +79,7 @@ export function runQuery(Module: SWIPLModule, data: string, queryString: string)
  * @param data The data as N3
  * @param queryString The query as N3
  * @returns
+ * @deprecated
  */
 export function loadAndRunQuery(Module: SWIPLModule, data: string, queryString: string) {
   return runQuery(loadEye(Module), data, queryString);
@@ -74,8 +97,8 @@ export async function executeBasicEyeQuery(
   queryString: string,
 ): Promise<string> {
   let res = '';
-  const Module = await swipl({ print: (str: string) => { res += `${str}\n`; }, arguments: ['-q'] });
-  loadAndRunQuery(Module, data, queryString);
+  const Module = await loadEyeImage(swipl)({ print: (str: string) => { res += `${str}\n`; }, arguments: ['-q'] });
+  runQuery(Module, data, queryString);
   return res;
 }
 

@@ -1,4 +1,4 @@
-import { SWIPL, loadEye, queryOnce } from '..';
+import { SWIPL, loadEye, queryOnce } from '../dist';
 import { query, data } from '../data/socrates';
 
 // The results recorded using DELL XPS 15 9520 (32GB RAM) on commit 563f3cfc663b8d746d653e90337002eec74d246e are
@@ -8,6 +8,8 @@ import { query, data } from '../data/socrates';
 // Load query.n3           : 0.021ms
 // Execute query           : 7.207ms
 async function main() {
+  console.log('Testing performance of socrates query using eye.pl')
+
   // Instantiate a new SWIPL module and log any results it produces to the console
   console.time('Initialise SWIPL\t');
   const Module = await SWIPL({ print: () => {}, arguments: ['-q'] });
@@ -27,10 +29,11 @@ async function main() {
   Module.FS.writeFile('query.n3', query);
   console.timeEnd('Load query.n3\t\t');
 
-  // Execute main(['--nope', '--quiet', './data.n3', '--query', './query.n3']).
   console.time('Execute query\t\t');
   queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--query', './query.n3']);
   console.timeEnd('Execute query\t\t');
+
+  console.log()
 }
 
 main();
