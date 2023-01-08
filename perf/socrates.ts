@@ -8,6 +8,8 @@ import { query, data } from '../data/socrates';
 // Load query.n3           : 0.021ms
 // Execute query           : 7.207ms
 async function main() {
+  console.log('Testing performance of socrates query using eye.pl')
+
   // Instantiate a new SWIPL module and log any results it produces to the console
   console.time('Initialise SWIPL\t');
   const Module = await SWIPL({ print: () => {}, arguments: ['-q'] });
@@ -31,6 +33,8 @@ async function main() {
   console.time('Execute query\t\t');
   queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--query', './query.n3']);
   console.timeEnd('Execute query\t\t');
+
+  console.log()
 }
 
 main();

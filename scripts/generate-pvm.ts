@@ -6,12 +6,21 @@ import { queryOnce } from '../lib/query';
 import SWIPL from '../lib/swipl-bundled.temp';
 
 (async () => {
-  const Module = await SWIPL({
+  const Module: SWIPLModule = await SWIPL({
     arguments: ['-q', '-f', 'eye.pl'],
     preRun: (module: SWIPLModule) => {
-      module.FS.writeFile('eye.pl', fs.readFileSync(path.join(__dirname, '..', 'eye', 'eye.pl')).toString());
+      module.FS.writeFile('eye.pl', fs.readFileSync(path.join(__dirname, '..', 'eye', 'eye.pl')));
     },
   });
   queryOnce(Module, 'main', ['--image', 'eye.pvm']);
-  fs.writeFileSync(path.join(__dirname, '..', 'eye', 'eye.pvm'), Module.FS.readFile('eye.pvm'));
+
+  // Since the .pvm file is *not* utf-8 we encounter issues
+  // if we try and just to `.toString()` in particular
+  // see <https://github.com/eyereasoner/eye-js/issues/20>
+  let s = '';
+  for (const code of Module.FS.readFile('eye.pvm')) {
+    s += String.fromCharCode(code);
+  }
+
+  fs.writeFileSync(path.join(__dirname, '..', 'eye', 'eye.pvm'), s);
 })();

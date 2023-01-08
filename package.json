@@ -24,9 +24,9 @@
     "eye:pvm:test": "ts-node scripts/run-pvm",
     "eye:build:pl": "rollup --config rollup.config.mjs",
     "eye:build:pvm": "rollup --config rollup.config.pvm.mjs",
-    "eye:prepare": "npm run eye:fetch && npm run eye:build:pl && npm run eye:pvm",
+    "eye:prepare": "npm run eye:fetch && npm run eye:build:pl && npm run eye:pvm && npm run eye:build:pvm",
     "eye:update": "ts-node scripts/update",
-    "perf": "ts-node perf/socrates"
+    "perf": "ts-node perf/socrates && ts-node perf/socrates-pvm"
   },
   "repository": {
     "type": "git",
