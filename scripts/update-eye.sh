@@ -1,19 +1,18 @@
-before=$(git diff HEAD~1 | grep "\-      \"name\"")
-after=$(git diff HEAD~1 | grep "\+      \"name\"")
+before=$(git show HEAD~1:./package.json | jq .config.eye.name)
+current=$(cat ./package.json | jq .config.eye.name)
 
-# Use change in eye version to determine whether
-# this needs to be a major, minor or patch update
-if [ ${before:17:2} != ${after:17:2} ]; then
-  version="breaking"
-elif [ ${before:20:4} != ${after:20:4} ]; then
+readarray -d . -t before <<<"${before:2:-1}"
+readarray -d . -t after <<<"${current:2:-1}"
+
+if [ ${before[0]} != ${after[0]} ]; then
+  version="BREAKING CHANGE"
+elif [ ${before[1]} != ${after[1]} ]; then
   version="feat"
-elif [ ${before:25:4} != ${after:25:4} ]; then
+elif [ ${before[2]} != ${after[2]} ]; then
   version="fix"
 fi
 
-version="feat"
-
 git config --global user.name 'Jesse Wright'
 git config --global user.email '63333554+jeswr@users.noreply.github.com'
-git commit -am "$version: update eye"
+git commit -am "$version: update to eye ${current:1:-1}"
 git push

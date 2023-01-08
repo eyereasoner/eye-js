@@ -4,10 +4,12 @@ import { fetch } from 'cross-fetch';
 import * as fs from 'fs';
 import path from 'path';
 
-const EYE_COMMIT = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json')).toString()).config.eye.sha;
+const EYE_URL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json')).toString()).config.eye.url;
 
 (async () => {
-  const res = (await fetch(`https://raw.githubusercontent.com/eyereasoner/eye/${EYE_COMMIT}/eye.pl`));
+  const releaseInfo = (await (await fetch(EYE_URL)).json());
+  const res = (await fetch(`https://raw.githubusercontent.com/eyereasoner/eye/${releaseInfo.tag_name}/eye.pl`));
+
   if (res.status === 200) {
     fs.writeFileSync(path.join(__dirname, '..', 'eye', 'eye.pl'), await res.text());
   } else {
