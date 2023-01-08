@@ -1,5 +1,5 @@
 import { data, query } from '../data/socrates';
-import { queryOnce, SwiplEye } from '../lib';
+import { queryOnce, SwiplEye } from '../dist';
 
 // The results recorded using DELL XPS 15 9520 (32GB RAM)
 // Initialise SWIPL        : 110.441ms (averages about 50-60ms on subsequent loads in the same session)

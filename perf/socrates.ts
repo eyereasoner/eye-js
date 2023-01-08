@@ -1,4 +1,4 @@
-import { SWIPL, loadEye, queryOnce } from '..';
+import { SWIPL, loadEye, queryOnce } from '../dist';
 import { query, data } from '../data/socrates';
 
 // The results recorded using DELL XPS 15 9520 (32GB RAM) on commit 563f3cfc663b8d746d653e90337002eec74d246e are
