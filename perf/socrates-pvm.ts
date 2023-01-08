@@ -23,7 +23,6 @@ async function main() {
   Module.FS.writeFile('query.n3', query);
   console.timeEnd('Load query.n3\t\t');
 
-  // Execute main(['--nope', '--quiet', './data.n3', '--query', './query.n3']).
   console.time('Execute query\t\t');
   queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--query', './query.n3']);
   console.timeEnd('Execute query\t\t');
