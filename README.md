@@ -131,13 +131,13 @@ isomorphic across browser and node without requiring any bundlers. Some users ma
 over their SWIPL module; for instance in order to load the `.wasm` file separately for performance. In these cases
 see the `SWIPL` modules exported by [npm swipl wasm](https://github.com/rla/npm-swipl-wasm/).
 
-An example usage of the node-specific swipl-wasm build is as follows;
+An example usage of the node-specific swipl-wasm build is as follows:
 ```ts
 import { loadEyeImage, queryOnce } from 'eyereasoner';
 import SWIPL from 'swipl-wasm/dist/swipl-node';
 
 async function main() {
-  const SwiplEye = loadEyeImage();
+  const SwiplEye = loadEyeImage(SWIPL);
 
   // Instantiate a new SWIPL module and log any results it produces to the console
   const Module = await SwiplEye({ print: (str: string) => { console.log(str) }, arguments: ['-q'] });
