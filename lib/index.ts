@@ -8,8 +8,6 @@ export * from './query';
 export * from './transformers';
 // @ts-ignore
 export { default as SWIPL } from './swipl-bundled.temp';
-
-export { default as EYE_PL } from './eye.pl';
 export { default as EYE_PVM } from './eye.pvm';
 
 /**

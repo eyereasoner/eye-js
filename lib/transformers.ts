@@ -6,7 +6,6 @@ import { DataFactory, Parser, Store } from 'n3';
 // @ts-ignore
 import SWIPL from './swipl-bundled.temp';
 import { write } from './n3Writer.temp';
-import EYE from './eye.pl';
 import EYE_PVM from './eye.pvm';
 import { queryOnce } from './query';
 import { strToBuffer } from './strToBuffer';
@@ -28,39 +27,6 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
 }
 
 /**
- * Writes eye.pl to the Module
- * @param Module A SWIPL Module
- * @returns A SWIPL Module
- * @deprecated
- */
-export function writeEye(Module: SWIPLModule): SWIPLModule {
-  Module.FS.writeFile('eye.pl', EYE);
-  return Module;
-}
-
-/**
- * Consults the eye.pl Module
- * @param Module A SWIPL Module
- * @returns A SWIPL Module
- * @deprecated
- */
-export function consultEye(Module: SWIPLModule): SWIPLModule {
-  queryOnce(Module, 'consult', 'eye.pl');
-  return Module;
-}
-
-/**
- * A SWIPL transformer that loads and consults eye.pl in the
- * given SWIPL module
- * @param Module A SWIPL Module
- * @returns The same SWIPL module with EYE loaded and consulted
- * @deprecated
- */
-export function loadEye(Module: SWIPLModule): SWIPLModule {
-  return consultEye(writeEye(Module));
-}
-
-/**
  * Execute a query over a given data file
  * @param Module A SWIPL Module
  * @param data The data for the query (in Notation3)
@@ -72,17 +38,6 @@ export function runQuery(Module: SWIPLModule, data: string, queryString: string)
   Module.FS.writeFile('query.nq', queryString);
   queryOnce(Module, 'main', ['--quiet', './data.nq', '--query', './query.nq']);
   return Module;
-}
-
-/**
- * @param Module A SWIPL Module
- * @param data The data as N3
- * @param queryString The query as N3
- * @returns
- * @deprecated
- */
-export function loadAndRunQuery(Module: SWIPLModule, data: string, queryString: string) {
-  return runQuery(loadEye(Module), data, queryString);
 }
 
 /**

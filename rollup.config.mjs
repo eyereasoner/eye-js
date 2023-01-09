@@ -1,14 +1,14 @@
 import { string } from "rollup-plugin-string";
 
 export default {
-  input: "./eye/pl",
+  input: "./eye/pvm",
   output: {
-    file: "lib/eye.pl.ts"
+    file: "lib/eye.pvm.ts"
   },
   plugins: [
     string({
       // Required to be specified
-      include: "**/*.pl",
+      include: "**/*.pvm",
     }),
   ],
 };
