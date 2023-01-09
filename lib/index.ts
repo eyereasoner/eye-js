@@ -1,13 +1,17 @@
+/// <reference types="emscripten" />
+
 import { Quad } from '@rdfjs/types';
 // @ts-ignore
-import SWIPL from './swipl-bundled.temp';
+import type { SWIPLModule } from 'swipl-wasm/dist/common';
+import SWIPL_BUNDLE from './swipl-bundled.temp';
 
 import { executeBasicEyeQueryQuads } from './transformers';
 
 export * from './query';
 export * from './transformers';
-// @ts-ignore
-export { default as SWIPL } from './swipl-bundled.temp';
+// eslint-disable-next-line no-unused-vars
+export const SWIPL: (options?: Partial<EmscriptenModule>) => Promise<SWIPLModule> = SWIPL_BUNDLE;
+
 export { default as EYE_PVM } from './eye';
 
 /**
@@ -20,5 +24,5 @@ export function basicQuery(
   data: Quad[],
   query: Quad[],
 ): Promise<{ result: Quad[], proof: Quad[] }> {
-  return executeBasicEyeQueryQuads(SWIPL, data, query);
+  return executeBasicEyeQueryQuads(SWIPL_BUNDLE, data, query);
 }
