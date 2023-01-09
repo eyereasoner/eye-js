@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import type { SWIPLModule } from 'swipl-wasm/dist/swipl-node';
+import type { SWIPLModule } from 'swipl-wasm/dist/common';
 import { queryOnce } from '../lib/query';
 // @ts-ignore
 import SWIPL from './swipl-bundled.temp';
