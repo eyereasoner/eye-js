@@ -22,7 +22,8 @@ export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof 
 
 export function universalTests() {
   describe('testing basic module utilities', () => {
-    it('should execute the basicQuery', () => expect(basicQuery(dataQuads, queryQuads)
-      .then((r) => r.result)).resolves.toBeRdfIsomorphic(resultQuads));
+    it('should execute the basicQuery', () => expect(
+      basicQuery(dataQuads, queryQuads),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
   });
 }

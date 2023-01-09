@@ -23,6 +23,6 @@ export { default as EYE_PVM } from './eye';
 export function basicQuery(
   data: Quad[],
   query: Quad[],
-): Promise<{ result: Quad[], proof: Quad[] }> {
+): Promise<Quad[]> {
   return executeBasicEyeQueryQuads(SWIPL_BUNDLE, data, query);
 }

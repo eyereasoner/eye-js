@@ -15,12 +15,8 @@ The simplest way to use this package is to execute a query over a dataset and ge
 import { basicQuery } from 'eyereasoner';
 
 async function main() {
-  const {
-    // The result of the query (as an array of quads)
-    result,
-    // The proof of the results (as an array of quads)
-    proof
-  } = await basicQuery(dataQuads, queryQuads);
+  // The result of the query (as an array of quads)
+  const result = await basicQuery(dataQuads, queryQuads);
 }
 
 main();
