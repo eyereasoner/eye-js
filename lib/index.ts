@@ -1,8 +1,8 @@
 /// <reference types="emscripten" />
 
 import { Quad } from '@rdfjs/types';
-// @ts-ignore
 import type { SWIPLModule } from 'swipl-wasm/dist/common';
+// @ts-ignore
 import SWIPL_BUNDLE from './swipl-bundled.temp';
 
 import { executeBasicEyeQueryQuads } from './transformers';
