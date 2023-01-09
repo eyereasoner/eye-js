@@ -149,6 +149,14 @@ async function main() {
 main();
 ```
 
+## CLI Usage
+
+Globally installing `eyereasoner` using `npm i -g eyereasoner` will also expose a CLI interface for using the reasoner:
+
+```bash
+eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
+```
+
 ## License
 ©2022–present
 [Jesse Wright](https://github.com/jeswr),

@@ -105,5 +105,8 @@
   "peerDependencies": {
     "@rdfjs/types": "^1.1.0",
     "@types/emscripten": "^1.39.6"
+  },
+  "bin": {
+    "eyereasoner": "dist/bin/index.js"
   }
 }

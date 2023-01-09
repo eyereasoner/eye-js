@@ -5,12 +5,13 @@ import { Quad } from '@rdfjs/types';
 import { Parser } from 'n3';
 // @ts-ignore
 import SWIPL from './swipl-bundled.temp';
+import type SWIPL_TYPE from 'swipl-wasm/dist/common';
 import { write } from './n3Writer.temp';
 import EYE_PVM from './eye';
 import { queryOnce } from './query';
 import { strToBuffer } from './strToBuffer';
 
-export function loadEyeImage(swipl: typeof SWIPL) {
+export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
   return (options?: Partial<EmscriptenModule> | undefined) => swipl({
     ...options,
     arguments: ['-q', '-x', 'eye.pvm'],
@@ -47,7 +48,7 @@ export function runQuery(Module: SWIPLModule, data: string, queryString: string)
  * @returns The result of the query
  */
 export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL,
+  swipl: typeof SWIPL_TYPE,
   data: string,
   queryString: string,
 ): Promise<string> {
@@ -64,7 +65,7 @@ export async function executeBasicEyeQuery(
  * @returns The result of the query
  */
 export async function executeBasicEyeQueryQuads(
-  swipl: typeof SWIPL,
+  swipl: typeof SWIPL_TYPE,
   data: Quad[],
   queryString: Quad[],
 ): Promise<Quad[]> {
