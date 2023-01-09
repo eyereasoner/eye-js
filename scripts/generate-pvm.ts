@@ -1,5 +1,8 @@
 import fs from 'fs';
 import path from 'path';
+// This rule should not be triggered anyway since the scripts are not part of the build...
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { fetch } from 'cross-fetch';
 import type { SWIPLModule } from 'swipl-wasm/dist/common';
 import { queryOnce } from '../lib/query';
 // @ts-ignore
