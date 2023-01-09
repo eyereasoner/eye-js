@@ -26,7 +26,7 @@ async function main() {
   console.time('Execute query\t\t');
   queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--query', './query.n3']);
   console.timeEnd('Execute query\t\t');
-  
+
   console.log()
 }
 
