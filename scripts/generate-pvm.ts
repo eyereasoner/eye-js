@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import type { SWIPLModule } from 'swipl-wasm/dist/common';
+import type { SWIPLModule } from 'swipl-wasm/dist/swipl-node';
 import { queryOnce } from '../lib/query';
 // @ts-ignore
-import SWIPL from '../lib/swipl-bundled.temp';
+import SWIPL from './swipl-bundled.temp';
 
 function Uint8ToString(u8a: any) {
   const CHUNK_SZ = 0x8000;
