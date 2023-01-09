@@ -21,8 +21,7 @@
     "semantic-release": "semantic-release",
     "eye:pvm": "ts-node scripts/generate-pvm",
     "eye:pvm:test": "ts-node scripts/run-pvm",
-    "eye:build:pvm": "rollup --config rollup.config.mjs",
-    "eye:prepare": "npm run eye:pvm && npm run eye:build:pvm",
+    "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
     "perf": "ts-node perf/socrates"
   },

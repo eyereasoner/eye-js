@@ -6,7 +6,7 @@ import { DataFactory, Parser, Store } from 'n3';
 // @ts-ignore
 import SWIPL from './swipl-bundled.temp';
 import { write } from './n3Writer.temp';
-import EYE_PVM from './eye.pvm';
+import EYE_PVM from './eye';
 import { queryOnce } from './query';
 import { strToBuffer } from './strToBuffer';
 

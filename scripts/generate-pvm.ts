@@ -35,7 +35,11 @@ async function main() {
   });
 
   queryOnce(Module, 'main', ['--image', 'eye.pvm']);
-  fs.writeFileSync(path.join(__dirname, '..', 'eye', 'eye.pvm'), btoa(Uint8ToString(Module.FS.readFile('eye.pvm'))));
+
+  fs.writeFileSync(
+    path.join(__dirname, '..', 'lib', 'eye.ts'),
+    `export default "${btoa(Uint8ToString(Module.FS.readFile('eye.pvm')))}"`,
+  );
 }
 
 main();

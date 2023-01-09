@@ -8,7 +8,7 @@ export * from './query';
 export * from './transformers';
 // @ts-ignore
 export { default as SWIPL } from './swipl-bundled.temp';
-export { default as EYE_PVM } from './eye.pvm';
+export { default as EYE_PVM } from './eye';
 
 /**
  * Executes a basic query using the EYE Reasoner and default build of SWIPL
