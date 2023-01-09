@@ -2,16 +2,16 @@
 // a transformation, and then return the same module
 import type { SWIPLModule } from 'swipl-wasm/dist/swipl/swipl';
 import { Quad } from '@rdfjs/types';
-import { DataFactory, Parser, Store } from 'n3';
+import { Parser } from 'n3';
 // @ts-ignore
 import SWIPL from './swipl-bundled.temp';
+import type SWIPL_TYPE from 'swipl-wasm/dist/common';
 import { write } from './n3Writer.temp';
-import EYE from './eye.pl';
-import EYE_PVM from './eye.pvm';
+import EYE_PVM from './eye';
 import { queryOnce } from './query';
 import { strToBuffer } from './strToBuffer';
 
-export function loadEyeImage(swipl: typeof SWIPL) {
+export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
   return (options?: Partial<EmscriptenModule> | undefined) => swipl({
     ...options,
     arguments: ['-q', '-x', 'eye.pvm'],
@@ -28,39 +28,6 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
 }
 
 /**
- * Writes eye.pl to the Module
- * @param Module A SWIPL Module
- * @returns A SWIPL Module
- * @deprecated
- */
-export function writeEye(Module: SWIPLModule): SWIPLModule {
-  Module.FS.writeFile('eye.pl', EYE);
-  return Module;
-}
-
-/**
- * Consults the eye.pl Module
- * @param Module A SWIPL Module
- * @returns A SWIPL Module
- * @deprecated
- */
-export function consultEye(Module: SWIPLModule): SWIPLModule {
-  queryOnce(Module, 'consult', 'eye.pl');
-  return Module;
-}
-
-/**
- * A SWIPL transformer that loads and consults eye.pl in the
- * given SWIPL module
- * @param Module A SWIPL Module
- * @returns The same SWIPL module with EYE loaded and consulted
- * @deprecated
- */
-export function loadEye(Module: SWIPLModule): SWIPLModule {
-  return consultEye(writeEye(Module));
-}
-
-/**
  * Execute a query over a given data file
  * @param Module A SWIPL Module
  * @param data The data for the query (in Notation3)
@@ -70,19 +37,8 @@ export function loadEye(Module: SWIPLModule): SWIPLModule {
 export function runQuery(Module: SWIPLModule, data: string, queryString: string): SWIPLModule {
   Module.FS.writeFile('data.nq', data);
   Module.FS.writeFile('query.nq', queryString);
-  queryOnce(Module, 'main', ['--quiet', './data.nq', '--query', './query.nq']);
+  queryOnce(Module, 'main', ['--nope', '--quiet', './data.nq', '--query', './query.nq']);
   return Module;
-}
-
-/**
- * @param Module A SWIPL Module
- * @param data The data as N3
- * @param queryString The query as N3
- * @returns
- * @deprecated
- */
-export function loadAndRunQuery(Module: SWIPLModule, data: string, queryString: string) {
-  return runQuery(loadEye(Module), data, queryString);
 }
 
 /**
@@ -92,7 +48,7 @@ export function loadAndRunQuery(Module: SWIPLModule, data: string, queryString: 
  * @returns The result of the query
  */
 export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL,
+  swipl: typeof SWIPL_TYPE,
   data: string,
   queryString: string,
 ): Promise<string> {
@@ -109,40 +65,11 @@ export async function executeBasicEyeQuery(
  * @returns The result of the query
  */
 export async function executeBasicEyeQueryQuads(
-  swipl: typeof SWIPL,
+  swipl: typeof SWIPL_TYPE,
   data: Quad[],
   queryString: Quad[],
-): Promise<{ result: Quad[], proof: Quad[] }> {
+): Promise<Quad[]> {
   const parser = new Parser({ format: 'text/n3' });
   const queryResult = await executeBasicEyeQuery(swipl, write(data), write(queryString));
-  const proof = parser.parse(queryResult);
-  const store = new Store(proof);
-
-  const proofNode = store.getSubjects(
-    'http://www.w3.org/1999/02/22-rdf-syntax-ns#type',
-    'http://www.w3.org/2000/10/swap/reason#Proof',
-    DataFactory.defaultGraph(),
-  );
-
-  if (proofNode.length !== 1) {
-    throw new Error(`Expected exactly one proof: received ${proofNode.length}`);
-  }
-
-  const results = store.getObjects(
-    proofNode[0],
-    'http://www.w3.org/2000/10/swap/reason#gives',
-    DataFactory.defaultGraph(),
-  );
-
-  if (results.length !== 1) {
-    throw new Error(`Expected exactly one triple giving inference results from proof: received ${results.length}`);
-  }
-
-  const result = store.getQuads(null, null, null, results[0])
-    .map((res) => DataFactory.quad(res.subject, res.predicate, res.object));
-
-  return {
-    proof,
-    result,
-  };
+  return parser.parse(queryResult);
 }
