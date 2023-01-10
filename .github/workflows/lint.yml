@@ -16,5 +16,4 @@ jobs:
       - name: npm install, build, and lint
         run: |
           npm install
-          npm run build --if-present
           npm run-script lint
