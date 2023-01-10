@@ -151,11 +151,23 @@ main();
 
 ## CLI Usage
 
-Globally installing `eyereasoner` using `npm i -g eyereasoner` will also expose a CLI interface for using the reasoner:
+This package also exposes a CLI interface for using the reasoner. It can be used via `npx`
 
 ```bash
+# Run the command using the latest version of eyereasoner on npm
+npx eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
+```
+
+or by globally installing `eyereasoner`
+
+```bash
+# Gloablly install eyereasoner
+npm i -g eyereasoner
+# Run a command with eyereasoner
 eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
 ```
+
+
 
 ## License
 ©2022–present
