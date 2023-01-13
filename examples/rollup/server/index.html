@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <textarea id="data" rows="10" cols="75">
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix : <http://example.org/socrates#>.
+
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.</textarea>
+    <button id="execute">Execute</button>
+    <div id="result"></div>
+  </body>
+  <script src="./bundle.js"></script>
+</html>

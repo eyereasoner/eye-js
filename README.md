@@ -167,7 +167,10 @@ npm i -g eyereasoner
 eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
 ```
 
+## Examples
 
+We provide some examples of using `eyereasoner`:
+ - Using as an npm package and bundling using webpack (`./examples/rollup`) 
 
 ## License
 ©2022–present
