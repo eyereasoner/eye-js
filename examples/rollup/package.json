@@ -1,0 +1,21 @@
+{
+  "name": "rollup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.config.js",
+    "serve": "http-server server"
+  },
+  "author": "jeswr",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  },
+  "dependencies": {
+    "eyereasoner": "^2.1.0"
+  }
+}
