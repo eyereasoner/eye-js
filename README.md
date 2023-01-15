@@ -169,7 +169,7 @@ eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
 
 ## Browser Builds
 
-For convenience we provide deploy bundled versions of the eyereasoner on github pages which can be directly used in an html script as shown in [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html) which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
+For convenience we provide deploy bundled versions of the eyereasoner on github pages which can be directly used in an HTML document as shown in [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html) which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
 
 There is a bundled version for each release - which can be found at the url:
 <p align=center>
