@@ -14,7 +14,7 @@ jobs:
           # Get version of EYE before any updates are run
           before=$(cat ./package.json | jq .config.eye.name)
           
-          npm run update:eye
+          npm run eye:update
 
           # Version of EYE after getting updates
           current=$(cat ./package.json | jq .config.eye.name)
