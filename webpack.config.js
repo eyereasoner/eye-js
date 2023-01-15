@@ -6,6 +6,7 @@ module.exports = {
   mode: 'production',
   entry: './dist/index.js',
   output: {
+    library: "eyereasoner",
     filename: 'index.js',
     path: path.resolve(__dirname, 'bundle', ...(version ? version.split('.') : [])),
   },

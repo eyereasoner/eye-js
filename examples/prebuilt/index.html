@@ -1,5 +1,20 @@
-import { loadEyeImage, SWIPL, queryOnce } from 'eyereasoner';
+<!DOCTYPE html>
+<html>
+  <body>
+    <textarea id="data" rows="10" cols="75">
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix : <http://example.org/socrates#>.
 
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.</textarea>
+    <button id="execute">Execute</button>
+    <div id="result"></div>
+  </body>
+  <script src="https://eyereasoner.github.io/eye-js/2/latest/index.js"></script>
+  <script>
+const { SWIPL, loadEyeImage, queryOnce } = eyereasoner;
 document.addEventListener('click', async function (event) {
   if (event.target.id === 'execute') {
     let result = '';
@@ -19,3 +34,5 @@ document.addEventListener('click', async function (event) {
     document.getElementById("result").innerHTML = result;
   }
 });
+  </script>
+</html>
