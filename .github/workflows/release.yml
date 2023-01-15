@@ -20,6 +20,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm ci
+          mkdir ./bundle
           npx semantic-release --dry-run
           version=$(npx semantic-release --version)
           npm run bundle:webpack -- --name=$version
