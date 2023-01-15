@@ -1,7 +1,9 @@
 name: "Deploy Bundled Release"
 
 on:
-  create
+  push:
+    tags:        
+      - '*'
 
 jobs:
   tagged-release:
