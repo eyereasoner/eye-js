@@ -14,18 +14,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - name: "Install"
-        run: npm ci
-      - name: "Bundle"
+      - run: npm ci
+      - run: mkdir ./bundle
+      - name: "Create Bundle"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          mkdir ./bundle
           version=$(npx semantic-release --dry-run | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
           npm run bundle:webpack -- --name=v$version
           npm run bundle:latest -- --name=v$version
-          cp -r ./examples/prebuilt/ bundle/example/
+      - run: cp -r ./examples/prebuilt/ bundle/example/
       - run: npm test
       - name: Release
         env:
