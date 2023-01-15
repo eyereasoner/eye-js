@@ -15,11 +15,10 @@
   </body>
   <script src="https://eyereasoner.github.io/eye-js/2/latest/index.js"></script>
   <script>
-    const { SWIPL, loadEyeImage, queryOnce } = eyereasoner;
+    const { SwiplEye, queryOnce } = eyereasoner;
     document.addEventListener("click", async function (event) {
       if (event.target.id === "execute") {
         let result = "";
-        const SwiplEye = loadEyeImage(SWIPL);
 
         // Instantiate a new SWIPL module and add results to the result string
         const Module = await SwiplEye({
