@@ -16,8 +16,8 @@ jobs:
           node-version: 18.x
       - run: |
           npm ci
+          npx semantic-release --dry-run
           version=$(npx semantic-release --version)
-          echo $version
           npm run bundle:webpack -- --name=$version
           npm run bundle:latest -- --name=$version
       - run: npm test
