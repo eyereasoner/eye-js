@@ -12,4 +12,5 @@ jobs:
     steps:
      - run: |
         npm ci
-        npm run webpack -- --name=${{ github.ref_name }}
+        npm run bundle:webpack -- --name=${{ github.ref_name }}
+        npm run bundle:latest -- --name=${{ github.ref_name }}
