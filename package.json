@@ -106,7 +106,6 @@
         {
           "msg": "add version <%= nextRelease.gitTag %>",
           "branch": "pages",
-          "add": true,
           "src": "bundle"
         }
       ]

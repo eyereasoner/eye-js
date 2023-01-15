@@ -21,8 +21,7 @@ jobs:
         run: |
           npm ci
           mkdir ./bundle
-          npx semantic-release --dry-run
-          version=$(npx semantic-release --version)
+          version=$(npx semantic-release --dry-run | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+')
           npm run bundle:webpack -- --name=$version
           npm run bundle:latest -- --name=$version
       - run: npm test
