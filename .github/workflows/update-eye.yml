@@ -11,6 +11,8 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       - name: Commit latest release version
         run: |
+          npm ci
+
           # Get version of EYE before any updates are run
           before=$(cat ./package.json | jq .config.eye.name)
           
