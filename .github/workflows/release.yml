@@ -14,7 +14,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - run: |
+      - name: "Install and build"
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
           npm ci
           npx semantic-release --dry-run
           version=$(npx semantic-release --version)
