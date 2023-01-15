@@ -167,6 +167,21 @@ npm i -g eyereasoner
 eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
 ```
 
+## Browser Builds
+
+For convenience we provide deploy bundled versions of the eyereasoner on github pages which can be directly used in an html script as shown in [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html) which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
+
+There is a bundled version for each release - which can be found at the url:
+<p align=center>
+https://eyereasoner.github.io/eye-js/vMajor/vMinor/vPatch/index.js
+
+for instance v2.3.8 has the url https://eyereasoner.github.io/eye-js/2/3/8/index.js. We also have shortcuts for:
+ - the latest version https://eyereasoner.github.io/eye-js/latest/index.js,
+ - the latest of each major version https://eyereasoner.github.io/eye-js/vMajor/latest/index.js, and
+ - the latest of each minor version https://eyereasoner.github.io/eye-js/vMajor/vMinor/latest/index.js
+
+Available versions can be browsed at https://github.com/eyereasoner/eye-js/tree/pages.
+
 ## Examples
 
 We provide some examples of using `eyereasoner`:
