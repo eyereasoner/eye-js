@@ -14,7 +14,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 18.x
-      - run: npm ci
+      - run: |
+          npm ci
+          version=$(npx semantic-release --version)
+          npm run bundle:webpack -- --name=$version
+          npm run bundle:latest -- --name=$version
       - run: npm test
       - name: Release
         env:

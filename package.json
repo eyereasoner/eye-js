@@ -53,6 +53,7 @@
   },
   "homepage": "https://github.com/eyereasoner/eye-js#readme",
   "devDependencies": {
+    "@qiwi/semantic-release-gh-pages-plugin": "^5.2.3",
     "@rollup/plugin-commonjs": "^24.0.0",
     "@types/jest": "^29.2.5",
     "@types/n3": "^1.10.4",
