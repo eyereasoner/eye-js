@@ -2,6 +2,8 @@ name: release
 
 on:
   push:
+    branches:
+      - main
   check_suite:
     types:
       - completed
