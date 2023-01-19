@@ -182,6 +182,10 @@ for instance v2.3.8 has the url https://eyereasoner.github.io/eye-js/2/3/8/index
 
 Available versions can be browsed at https://github.com/eyereasoner/eye-js/tree/pages.
 
+Github also serves these files with a `gzip` content encoding which compresses the script to ~1.4MB when being served.
+
+![](./github-transfer.png)
+
 ## Examples
 
 We provide some examples of using `eyereasoner`:
