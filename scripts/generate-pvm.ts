@@ -1,12 +1,13 @@
+/* eslint-disable no-await-in-loop, no-console */
 import fs from 'fs';
 import path from 'path';
 // This rule should not be triggered anyway since the scripts are not part of the build...
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { fetch } from 'cross-fetch';
 import type { SWIPLModule } from 'swipl-wasm/dist/common';
 import { queryOnce } from '../lib/query';
 // @ts-ignore
 import SWIPL from './swipl-bundled.temp';
+import { fetchRetry } from './util';
 
 function Uint8ToString(u8a: any) {
   const CHUNK_SZ = 0x8000;
@@ -19,8 +20,8 @@ function Uint8ToString(u8a: any) {
 
 async function eyePlString() {
   const EYE_URL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json')).toString()).config.eye.url;
-  const releaseInfo = (await (await fetch(EYE_URL)).json());
-  const res = (await fetch(`https://raw.githubusercontent.com/eyereasoner/eye/${releaseInfo.tag_name}/eye.pl`));
+  const releaseInfo = (await (await fetchRetry(EYE_URL)).json());
+  const res = (await fetchRetry(`https://raw.githubusercontent.com/eyereasoner/eye/${releaseInfo.tag_name}/eye.pl`));
 
   if (res.status !== 200) {
     throw new Error(`Error fetching eye.pl: ${await res.text()}`);
