@@ -63,7 +63,6 @@
     "eslint": "^8.31.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "fetch-retry": "^5.0.3",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
     "jest-rdf": "^1.8.0",

@@ -1,10 +1,31 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import retry from 'fetch-retry';
+/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-console */
 import { fetch } from 'cross-fetch';
 
-export const fetchRetry = retry(fetch, {
-  retryOn:
-  (_: number, error: Error, response: Response) => error !== null || response.status !== 200,
-  retryDelay: (attempt: number) => 2 ** attempt * 1000,
-  retries: 5,
-});
+export async function fetchRetry(
+  input: RequestInfo | URL,
+  init?: RequestInit | undefined,
+): Promise<Response> {
+  let res: Response | undefined;
+  let err: unknown | undefined;
+
+  for (let i = 0; i < 5; i += 1) {
+    try {
+      res = await fetch(input, init);
+
+      if (res.status === 200) return res;
+    } catch (e: unknown) {
+      err = e;
+    }
+
+    if (i < 4) {
+      console.warn(`Failed attempt [${i + 1}/5] to fetch ${input}`);
+      await new Promise((resolve) => { setTimeout(resolve, 2 ** i * 1000); });
+    }
+  }
+
+  if (res) {
+    return res;
+  }
+
+  throw err;
+}
