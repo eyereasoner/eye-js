@@ -175,7 +175,7 @@ There is a bundled version for each release - which can be found at the url:
 <p align=center>
 https://eyereasoner.github.io/eye-js/vMajor/vMinor/vPatch/index.js
 
-for instance v2.3.8 has the url https://eyereasoner.github.io/eye-js/2/3/8/index.js. We also have shortcuts for:
+for instance v2.3.14 has the url https://eyereasoner.github.io/eye-js/2/3/14/index.js. We also have shortcuts for:
  - the latest version https://eyereasoner.github.io/eye-js/latest/index.js,
  - the latest of each major version https://eyereasoner.github.io/eye-js/vMajor/latest/index.js, and
  - the latest of each minor version https://eyereasoner.github.io/eye-js/vMajor/vMinor/latest/index.js
