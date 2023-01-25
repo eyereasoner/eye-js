@@ -22,6 +22,19 @@ async function main() {
 main();
 ```
 
+or if you just wish to get all inferred facts
+
+```ts
+import { basicQuery } from 'eyereasoner';
+
+async function main() {
+  // The result of the query (as an array of quads)
+  const result = await basicQuery(dataQuads);
+}
+
+main();
+```
+
 Here the inputs and outputs are both arrays of RDF/JS Quads; for instance
 
 ```ts

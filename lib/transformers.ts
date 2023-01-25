@@ -34,10 +34,11 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  * @param queryString The query (in Notation3)
  * @returns The same SWIPL module
  */
-export function runQuery(Module: SWIPLModule, data: string, queryString: string): SWIPLModule {
+export function runQuery(Module: SWIPLModule, data: string, queryString?: string): SWIPLModule {
   Module.FS.writeFile('data.nq', data);
-  Module.FS.writeFile('query.nq', queryString);
-  queryOnce(Module, 'main', ['--nope', '--quiet', './data.nq', '--query', './query.nq']);
+  if (queryString)
+    Module.FS.writeFile('query.nq', queryString);
+  queryOnce(Module, 'main', ['--nope', '--quiet', ...(queryString ? ['data.nq', '--query', './query.nq'] : ['--pass', 'data.nq'])]);
   return Module;
 }
 
@@ -50,7 +51,7 @@ export function runQuery(Module: SWIPLModule, data: string, queryString: string)
 export async function executeBasicEyeQuery(
   swipl: typeof SWIPL_TYPE,
   data: string,
-  queryString: string,
+  queryString?: string,
 ): Promise<string> {
   let res = '';
   const Module = await loadEyeImage(swipl)({ print: (str: string) => { res += `${str}\n`; }, arguments: ['-q'] });
@@ -67,9 +68,9 @@ export async function executeBasicEyeQuery(
 export async function executeBasicEyeQueryQuads(
   swipl: typeof SWIPL_TYPE,
   data: Quad[],
-  queryString: Quad[],
+  queryString?: Quad[],
 ): Promise<Quad[]> {
   const parser = new Parser({ format: 'text/n3' });
-  const queryResult = await executeBasicEyeQuery(swipl, write(data), write(queryString));
+  const queryResult = await executeBasicEyeQuery(swipl, write(data), queryString && write(queryString));
   return parser.parse(queryResult);
 }

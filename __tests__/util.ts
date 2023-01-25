@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import { Parser } from 'n3';
+import { DataFactory, Parser } from 'n3';
 import { basicQuery } from '../dist';
 import 'jest-rdf';
 import { query, data, result } from '../data/socrates';
@@ -25,5 +25,13 @@ export function universalTests() {
     it('should execute the basicQuery', () => expect(
       basicQuery(dataQuads, queryQuads),
     ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the basicQuery without query quads', () => expect(
+      basicQuery(dataQuads),
+    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
+      DataFactory.namedNode('http://example.org/socrates#Human'),
+      DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
+      DataFactory.namedNode('http://example.org/socrates#Mortal'),
+    )]));
   });
 }
