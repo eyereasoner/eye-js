@@ -186,6 +186,22 @@ Github also serves these files with a `gzip` content encoding which compresses t
 
 ![](./github-transfer.png)
 
+### Dynamic imports
+
+We also distribute bundles that can be dynamically imported on github pages; for example
+```ts
+const { eyereasoner } = await import('https://eyereasoner.github.io/eye-js/2/latest/index.js');
+
+// Instantiate a new SWIPL module and log any results it produces to the console
+const Module = await eyereasoner.SwiplEye({ print: (str: string) => { console.log(str) }, arguments: ['-q'] });
+
+// Load the the strings data and query as files data.n3 and query.n3 into the module
+Module.FS.writeFile('data.n3', data);
+Module.FS.writeFile('query.n3', query);
+
+// Execute main(['--nope', '--quiet', './data.n3', '--query', './query.n3']).
+eyereasoner.queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--query', './query.n3']);
+```
 ## Examples
 
 We provide some examples of using `eyereasoner`:
