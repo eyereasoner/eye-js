@@ -190,7 +190,7 @@ Github also serves these files with a `gzip` content encoding which compresses t
 
 We also distribute bundles that can be dynamically imported on github pages; for example
 ```ts
-const { eyereasoner } = await import('https://eyereasoner.github.io/eye-js/2/latest/index.js');
+const { eyereasoner } = await import('https://eyereasoner.github.io/eye-js/2/latest/dynamic-import.js');
 
 // Instantiate a new SWIPL module and log any results it produces to the console
 const Module = await eyereasoner.SwiplEye({ print: (str: string) => { console.log(str) }, arguments: ['-q'] });
