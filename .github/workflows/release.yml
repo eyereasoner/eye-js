@@ -24,9 +24,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           version=$(npx semantic-release --dry-run | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+') || true
-          npm run bundle:webpack -- --name=v$version
-          npm run bundle:latest -- --name=v$version
-      - run: cp -r ./examples/prebuilt/ bundle/example/
+          if [ $version ]
+          then
+            npm run bundle:webpack -- --name=v$version
+            npm run bundle:latest -- --name=v$version
+            cp -r ./examples/prebuilt/ bundle/example/
+          fi
       - run: npm test
       - name: Release
         env:
