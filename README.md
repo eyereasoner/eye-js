@@ -149,7 +149,7 @@ async function main() {
   const SwiplEye = loadEyeImage(SWIPL);
 
   // Instantiate a new SWIPL module and log any results it produces to the console
-  const Module = await SwiplEye({ print: (str: string) => { console.log(str) }, arguments: ['-q'] });
+  const Module = await SwiplEye({ print: (str) => { console.log(str) }, arguments: ['-q'] });
 
   // Load the the strings data and query as files data.n3 and query.n3 into the module
   Module.FS.writeFile('data.n3', data);
