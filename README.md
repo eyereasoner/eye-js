@@ -11,6 +11,8 @@ Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser 
 
 The simplest way to use this package is to execute a query over a dataset and get the results
 
+**Note**: the `dataQuads` should include any inference rules that you wish to apply to the dataset
+
 ```ts
 import { basicQuery } from 'eyereasoner';
 
