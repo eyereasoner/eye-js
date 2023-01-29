@@ -4,8 +4,8 @@ import path from 'path';
 // This rule should not be triggered anyway since the scripts are not part of the build...
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type { SWIPLModule } from 'swipl-wasm/dist/common';
-import { queryOnce } from '../lib/query';
 import SWIPL from 'swipl-wasm/dist/swipl/swipl-bundle';
+import { queryOnce } from '../lib/query';
 import { fetchRetry } from './util';
 
 function Uint8ToString(u8a: any) {
