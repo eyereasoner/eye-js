@@ -5,8 +5,7 @@ import path from 'path';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import type { SWIPLModule } from 'swipl-wasm/dist/common';
 import { queryOnce } from '../lib/query';
-// @ts-ignore
-import SWIPL from './swipl-bundled.temp';
+import SWIPL from 'swipl-wasm/dist/swipl/swipl-bundle';
 import { fetchRetry } from './util';
 
 function Uint8ToString(u8a: any) {
@@ -35,6 +34,7 @@ async function main() {
 
   const Module: SWIPLModule = await SWIPL({
     arguments: ['-q', '-f', 'eye.pl'],
+    // @ts-ignore
     preRun: (module: SWIPLModule) => module.FS.writeFile('eye.pl', eye),
   });
 
