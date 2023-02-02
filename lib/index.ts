@@ -5,7 +5,7 @@ import type { SWIPLModule } from 'swipl-wasm/dist/common';
 // @ts-ignore
 import SWIPL_BUNDLE from './swipl-bundled.temp';
 
-import { executeBasicEyeQueryQuads } from './transformers';
+import { executeBasicEyeQuery, executeBasicEyeQueryQuads } from './transformers';
 
 export * from './query';
 export * from './transformers';
@@ -24,5 +24,13 @@ export function basicQuery(
   data: Quad[],
   query?: Quad[],
 ): Promise<Quad[]> {
-  return executeBasicEyeQueryQuads(SWIPL_BUNDLE, data, query);
+  return executeBasicEyeQueryQuads(SWIPL_BUNDLE, data, query) as Promise<Quad[]>;
+}
+
+export async function n3reasoner(
+  data: Quad[] | string,
+  query?: Quad[] | string,
+  options = { output: 'derivations', blogic: false, outputType: 'string' },
+): Promise<Quad[] | string> {
+  return executeBasicEyeQuery(SWIPL_BUNDLE, data, query, options);
 }
