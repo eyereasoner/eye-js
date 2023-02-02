@@ -99,6 +99,39 @@ const dataQuads = [
 
 ## Advanced usage
 
+Another way to use this package is with the use of the `n3reasoner` function allowing one to optionally pass along a set of options
+
+```ts
+import { n3reasoner } from 'eyereasoner';
+
+const data = `
+@prefix : <urn:example.org:> .
+:Alice a :Person .
+{ ?S a :Person } => { ?S a :Human } .
+`;
+
+const query = `{?S ?P ?O . } => {?S ?P ?O . } .`;
+
+const options = { output: "derivations", blogic: false, outputType: 'string' };
+
+const result = await n3reasoner(data, query, options);
+```
+
+### Options
+
+The `options` parameter is optional and can be used to configure the reasoning process. The following options are available:
+- `output`: What to output.
+    - `derivations`: output only new derived triples, a.k.a `--pass-only-new` (default)
+    - `deductive_closure`: output deductive closure, a.k.a `--pass`
+    - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
+    - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
+- `blogic`: Whether to use the blogic or not. Used to support RDF surfaces.
+    - `true`: use blogic
+    - `false`: do not use blogic (default)
+- `outputType`: The type of output
+    - `string`: output as string (default)
+    - `quads`: output as array of RDF/JS Quads, see output of `basicQuery` before
+
 To have more granular control one can also use this module as follows
 
 ```ts
