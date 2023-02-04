@@ -1,5 +1,5 @@
 /* eslint-disable default-case */
-import { Quad } from '@rdfjs/types';
+import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser } from 'n3';
 import { data, query, result } from '../data/socrates';
