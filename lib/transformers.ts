@@ -14,7 +14,7 @@ import { strToBuffer } from './strToBuffer';
 export interface IQueryOptions {
   blogic?: boolean;
   outputType?: 'string' | 'quads'
-  output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules'
+  output?: 'none' | 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules'
 }
 
 export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
@@ -39,7 +39,7 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  * @param data The data for the query (in Notation3)
  * @param queryString The query (in Notation3)
  * @param options The reasoner options
- *  - output: What to output (default: 'derivations')
+ *  - output: What to output with implicit queries (default: 'none')
  *  - blogic: Whether to use blogic (default: false)
  * @returns The same SWIPL module
  */
@@ -50,7 +50,10 @@ export function runQuery(
   options?: IQueryOptions,
 ): SWIPLModule {
   let pass: string;
-  switch (options?.output || 'derivations') {
+  switch (options?.output || 'none') {
+    case 'none':
+      pass = '';
+      break;
     case 'derivations':
       pass = '--pass-only-new';
       break;
@@ -73,7 +76,7 @@ export function runQuery(
   if (queryString && !blogic) {
     Module.FS.writeFile('query.nq', queryString);
   }
-  queryOnce(Module, 'main', [blogic ? '--blogic' : '--nope', '--quiet', pass, ...(queryString && !blogic ? ['data.nq', '--query', './query.nq'] : ['--pass', 'data.nq'])]);
+  queryOnce(Module, 'main', [blogic ? '--blogic' : '--nope', '--quiet', pass, 'data.nq', ...(queryString ? ['--query', './query.nq'] : [])]);
   return Module;
 }
 
@@ -82,7 +85,7 @@ export function runQuery(
  * @param data The data for the query (in N3 format)
  * @param query The query (in N3 format)
  * @param options The reasoner options
- *  - output: What to output (default: 'derivations')
+ *  - output: What to output with implicit queries (default: 'none')
  *  - blogic: Whether to use blogic (default: false)
  *  - outputType: The type of output, either 'string' or 'quads' (default: 'string')
  * @returns The result of the query
@@ -144,7 +147,7 @@ export async function executeBasicEyeQuery(
  * @param data The data for the query (in N3 format)
  * @param query The query (in N3 format)
  * @param options The reasoner options
- *  - output: What to output (default: 'derivations')
+ *  - output: What to output with implicit queries (default: 'none')
  *  - blogic: Whether to use blogic (default: false)
  *  - outputType: The type of output, either 'string' or 'quads' (default: 'quads')
  * @returns The result of the query

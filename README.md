@@ -116,8 +116,9 @@ const result = await n3reasoner(data, undefined, { output: 'derivations', blogic
 ### Options
 
 The `options` parameter is optional and can be used to configure the reasoning process. The following options are available:
-- `output`: What to output.
-    - `derivations`: output only new derived triples, a.k.a `--pass-only-new` (default)
+- `output`: What to output with implicit queries.
+    - `none`: no implicit query is passed (default)
+    - `derivations`: output only new derived triples, a.k.a `--pass-only-new`
     - `deductive_closure`: output deductive closure, a.k.a `--pass`
     - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
     - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
