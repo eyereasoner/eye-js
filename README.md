@@ -110,11 +110,7 @@ const data = `
 { ?S a :Person } => { ?S a :Human } .
 `;
 
-const query = `{?S ?P ?O . } => {?S ?P ?O . } .`;
-
-const options = { output: "derivations", blogic: false, outputType: 'string' };
-
-const result = await n3reasoner(data, query, options);
+const result = await n3reasoner(data, undefined, { output: 'derivations', blogic: false, outputType: 'string' });
 ```
 
 ### Options
