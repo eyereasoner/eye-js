@@ -18,6 +18,10 @@ export { default as EYE_PVM } from './eye';
  * Executes a basic query using the EYE Reasoner and default build of SWIPL
  * @param data The data for the query as RDF/JS quads
  * @param query The query as RDF/JS quads
+ * @param options The reasoner options
+ *  - output: What to output (default: 'derivations')
+ *  - blogic: Whether to use blogic (default: false)
+ *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
  * @returns The result of the query as RDF/JS quads
  */
 export function basicQuery(
@@ -53,4 +57,4 @@ export function basicQuery(
   return executeBasicEyeQuery(SWIPL_BUNDLE, data, query, options);
 }
 
-export { basicQuery as n3reasoner }
+export { basicQuery as n3reasoner };

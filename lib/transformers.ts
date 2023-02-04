@@ -43,9 +43,14 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  *  - blogic: Whether to use blogic (default: false)
  * @returns The same SWIPL module
  */
-export function runQuery(Module: SWIPLModule, data: string, queryString?: string, options?: IQueryOptions): SWIPLModule {
+export function runQuery(
+  Module: SWIPLModule,
+  data: string,
+  queryString?: string,
+  options?: IQueryOptions,
+): SWIPLModule {
   let pass: string;
-  switch(options?.output || 'derivations') {
+  switch (options?.output || 'derivations') {
     case 'derivations':
       pass = '--pass-only-new';
       break;
@@ -59,7 +64,7 @@ export function runQuery(Module: SWIPLModule, data: string, queryString?: string
       pass = '--pass-all-ground';
       break;
     default:
-      throw new Error(`Unknown output option: ${options?.output}`)
+      throw new Error(`Unknown output option: ${options?.output}`);
   }
 
   const blogic = options?.blogic;
