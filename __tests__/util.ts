@@ -34,19 +34,19 @@ export function universalTests() {
     it('should execute the basicQuery [quad input explicit string output]', async () => {
       const resultStr: string = await basicQuery(dataQuads, queryQuads, { outputType: 'string' });
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
-      expect<Quad[]>(quads).toBeRdfIsomorphic(quads);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
     });
 
     it('should execute the basicQuery [string input string output]', async () => {
       const resultStr: string = await basicQuery(data, query);
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
-      expect<Quad[]>(quads).toBeRdfIsomorphic(quads);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
     });
 
     it('should execute the basicQuery [string input explicit string output]', async () => {
       const resultStr: string = await basicQuery(data, query, { outputType: 'string' });
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
-      expect<Quad[]>(quads).toBeRdfIsomorphic(quads);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
     });
 
     it('should execute the basicQuery [string input explicit quad output]', () => expect<Promise<Quad[]>>(
