@@ -11,6 +11,12 @@ import EYE_PVM from './eye';
 import { queryOnce } from './query';
 import { strToBuffer } from './strToBuffer';
 
+export interface IQueryOptions {
+  blogic?: boolean;
+  outputType?: 'string' | 'quads'
+  output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules'
+}
+
 export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
   return (options?: Partial<EmscriptenModule> | undefined) => swipl({
     ...options,
@@ -37,29 +43,26 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  *  - blogic: Whether to use blogic (default: false)
  * @returns The same SWIPL module
  */
-export function runQuery(Module: SWIPLModule, data: string, queryString?: string, options = { output: 'derivations', blogic: false }): SWIPLModule {
-  // Check options
-  const unknownOptions = Object.keys(options).filter(
-    (key) => !['output', 'blogic', 'outputType'].includes(key),
-  );
-  if (unknownOptions.length > 0) {
-    throw new Error(
-      `Unknown options: ${unknownOptions.join(', ')}`,
-    );
+export function runQuery(Module: SWIPLModule, data: string, queryString?: string, options?: IQueryOptions): SWIPLModule {
+  let pass: string;
+  switch(options?.output || 'derivations') {
+    case 'derivations':
+      pass = '--pass-only-new';
+      break;
+    case 'deductive_closure':
+      pass = '--pass';
+      break;
+    case 'deductive_closure_plus_rules':
+      pass = '--pass-all';
+      break;
+    case 'grounded_deductive_closure_plus_rules':
+      pass = '--pass-all-ground';
+      break;
+    default:
+      throw new Error(`Unknown output option: ${options?.output}`)
   }
-  const { output = 'derivations', blogic = false } = options;
 
-  const passMap: {[index: string]:string} = {
-    derivations: '--pass-only-new',
-    deductive_closure: '--pass',
-    deductive_closure_plus_rules: '--pass-all',
-    grounded_deductive_closure_plus_rules: '--pass-all-ground',
-  };
-  // Check if output is valid
-  if (!(output in passMap)) {
-    throw new Error(`Unknown output option: ${output}`);
-  }
-  const pass = passMap[output];
+  const blogic = options?.blogic;
 
   Module.FS.writeFile('data.nq', data);
   if (queryString && !blogic) {
@@ -70,8 +73,6 @@ export function runQuery(Module: SWIPLModule, data: string, queryString?: string
 }
 
 /**
- * @deprecated Use n3reasoner instead
- *
  * @param swipl The base SWIPL module to use
  * @param data The data for the query (in N3 format)
  * @param query The query (in N3 format)
@@ -84,34 +85,55 @@ export function runQuery(Module: SWIPLModule, data: string, queryString?: string
 export async function executeBasicEyeQuery(
   swipl: typeof SWIPL_TYPE,
   data: Quad[] | string,
-  query?: Quad[] | string,
-  options = { output: 'derivations', blogic: false, outputType: 'string' },
+  query: Quad[] | string | undefined,
+  options: ({ outputType: 'string' } & IQueryOptions),
+): Promise<string>
+export async function executeBasicEyeQuery(
+  swipl: typeof SWIPL_TYPE,
+  data: Quad[] | string,
+  query: Quad[] | string | undefined,
+  options: { outputType: 'quads' } & IQueryOptions,
+): Promise<Quad[]>
+export async function executeBasicEyeQuery(
+  swipl: typeof SWIPL_TYPE,
+  data: Quad[],
+  query?: Quad[] | string | undefined,
+  options?: { outputType?: undefined } & IQueryOptions,
+): Promise<Quad[]>
+export async function executeBasicEyeQuery(
+  swipl: typeof SWIPL_TYPE,
+  data: string,
+  query?: Quad[] | string | undefined,
+  options?: { outputType?: undefined } & IQueryOptions,
+): Promise<string>
+export async function executeBasicEyeQuery(
+  swipl: typeof SWIPL_TYPE,
+  data: Quad[] | string,
+  query?: Quad[] | string | undefined,
+  options?: IQueryOptions,
+): Promise<Quad[] | string>;
+export async function executeBasicEyeQuery(
+  swipl: typeof SWIPL_TYPE,
+  data: Quad[] | string,
+  query?: Quad[] | string | undefined,
+  options: IQueryOptions = {},
 ): Promise<Quad[] | string> {
-  const { outputType = 'string' } = options;
-
-  // Check if outputType is valid
-  if (!['string', 'quads'].includes(outputType)) {
-    throw new Error(`Invalid outputType: ${outputType}`);
-  }
+  const { outputType } = options;
 
   let res = '';
-  const Module = await loadEyeImage(swipl)({ print: (str: string) => { res += `${str}\n`; }, arguments: ['-q'] });
+  const Module = await loadEyeImage(swipl)({ print: (str: string) => { res += `${str}\n`; } });
   runQuery(
     Module,
     typeof data === 'string' ? data : write(data),
-    typeof query === 'string' ? query : query && write(query),
+    query && (typeof query === 'string' ? query : write(query)),
     options,
   );
 
-  if (outputType === 'quads') {
-    const parser = new Parser({ format: 'text/n3' });
-    return parser.parse(res);
-  }
-  return res;
+  return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string')) ? (new Parser({ format: 'text/n3' })).parse(res) : res;
 }
 
 /**
- * @deprecated Use n3reasoner instead
+ * @deprecated Use executeBasicEyeQuery instead
  *
  * @param swipl The base SWIPL module to use
  * @param data The data for the query (in N3 format)
@@ -125,8 +147,8 @@ export async function executeBasicEyeQuery(
 export async function executeBasicEyeQueryQuads(
   swipl: typeof SWIPL_TYPE,
   data: Quad[] | string,
-  query?: Quad[] | string,
-  options = { output: 'derivations', blogic: false, outputType: 'quads' },
-): Promise<Quad[] | string> {
-  return executeBasicEyeQuery(swipl, data, query, options);
+  query?: Quad[] | string | undefined,
+  options?: Omit<IQueryOptions, 'outputType'>,
+): Promise<Quad[]> {
+  return executeBasicEyeQuery(swipl, data, query, { ...options, outputType: 'quads' });
 }
