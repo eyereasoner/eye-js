@@ -111,6 +111,14 @@ export function universalTests() {
       DataFactory.namedNode('http://example.org/socrates#Mortal'),
     )]));
 
+    it('should execute the basicQuery without query quads', () => expect(
+      basicQuery(dataQuads, undefined, undefined),
+    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
+      DataFactory.namedNode('http://example.org/socrates#Human'),
+      DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
+      DataFactory.namedNode('http://example.org/socrates#Mortal'),
+    )]));
+
     it('should execute the basicQuery [quad input quad output]', () => expect<Promise<Quad[]>>(
       basicQuery(dataQuads, queryQuads),
     ).resolves.toBeRdfIsomorphic(resultQuads));
