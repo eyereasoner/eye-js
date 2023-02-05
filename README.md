@@ -117,7 +117,7 @@ const result = await n3reasoner(data, undefined, { output: 'derivations', blogic
 
 The `options` parameter is optional and can be used to configure the reasoning process. The following options are available:
 - `output`: What to output with implicit queries.
-    - `none`: no implicit query is passed (default)
+    - undefined: no implicit query is passed (default)
     - `derivations`: output only new derived triples, a.k.a `--pass-only-new`
     - `deductive_closure`: output deductive closure, a.k.a `--pass`
     - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
@@ -252,6 +252,22 @@ eyereasoner.queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--quer
 We provide some examples of using `eyereasoner`:
  - Using as an npm package and bundling using webpack ([`./examples/rollup`](https://github.com/eyereasoner/eye-js/tree/main/examples/rollup)).
  - Using a prebuilt version of `eyereasoner` ([`./examples/prebuilt`](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt)) - this example is [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
+
+## Other Notes
+
+### `MaxListenersExceededWarning`
+
+If you instantiate `SWIPL` more than 10 times in the same process, then you may see the warning:
+
+```
+(node:29436) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 uncaughtException listeners added to [process]. Use emitter.setMaxListeners() to increase limit
+```
+
+this is caused by the fact that each instantiation of SWIPL adds a new listener to the global process. To fix this problem increase the maximum number of listeners allowed on the global process.
+
+```
+process.setMaxListeners(100)
+```
 
 ## License
 ©2022–present

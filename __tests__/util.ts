@@ -24,6 +24,12 @@ export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof 
 }
 
 export function universalTests() {
+  // Each instantiation of SWIPL adds a new listener to the global
+  // process, see:
+  // - https://github.com/rla/npm-swipl-wasm/issues/22
+  // - https://github.com/emscripten-core/emscripten/issues/18659
+  process.setMaxListeners(100);
+
   describe('testing basic module utilities', () => {
     it('should execute the basicQuery [quad input quad output]', () => expect<Promise<Quad[]>>(
       basicQuery(dataQuads, queryQuads),
@@ -59,8 +65,8 @@ export function universalTests() {
       basicQuery(dataQuads),
     ).resolves.toBeRdfIsomorphic([]));
 
-    it('should execute the basicQuery without query quads [output: none]', () => expect(
-      basicQuery(dataQuads, undefined, { output: 'none' }),
+    it('should execute the basicQuery without query quads [output: undefined]', () => expect(
+      basicQuery(dataQuads, undefined, { output: undefined }),
     ).resolves.toBeRdfIsomorphic([]));
 
     it('should execute the basicQuery without query quads [output: derivations]', () => expect(

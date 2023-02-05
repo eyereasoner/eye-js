@@ -19,7 +19,7 @@ export { default as EYE_PVM } from './eye';
  * @param data The data for the query as RDF/JS quads
  * @param query The query as RDF/JS quads
  * @param options The reasoner options
- *  - output: What to output with implicit queries (default: 'none')
+ *  - output: What to output with implicit queries (default: undefined)
  *  - blogic: Whether to use blogic (default: false)
  *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
  * @returns The result of the query as RDF/JS quads

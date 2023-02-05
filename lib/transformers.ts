@@ -14,7 +14,7 @@ import { strToBuffer } from './strToBuffer';
 export interface IQueryOptions {
   blogic?: boolean;
   outputType?: 'string' | 'quads'
-  output?: 'none' | 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules'
+  output?: undefined | 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules'
 }
 
 export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
@@ -39,7 +39,7 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  * @param data The data for the query (in Notation3)
  * @param queryString The query (in Notation3)
  * @param options The reasoner options
- *  - output: What to output with implicit queries (default: 'none')
+ *  - output: What to output with implicit queries (default: undefined)
  *  - blogic: Whether to use blogic (default: false)
  * @returns The same SWIPL module
  */
@@ -49,10 +49,9 @@ export function runQuery(
   queryString?: string,
   options?: IQueryOptions,
 ): SWIPLModule {
-  let pass: string;
-  switch (options?.output || 'none') {
-    case 'none':
-      pass = '';
+  let pass: string | undefined;
+  switch (options?.output) {
+    case undefined:
       break;
     case 'derivations':
       pass = '--pass-only-new';
@@ -76,7 +75,7 @@ export function runQuery(
   if (queryString && !blogic) {
     Module.FS.writeFile('query.nq', queryString);
   }
-  queryOnce(Module, 'main', [blogic ? '--blogic' : '--nope', '--quiet', pass, 'data.nq', ...(queryString ? ['--query', './query.nq'] : [])]);
+  queryOnce(Module, 'main', [blogic ? '--blogic' : '--nope', '--quiet', ...(pass ? [pass] : []), 'data.nq', ...(queryString ? ['--query', './query.nq'] : [])]);
   return Module;
 }
 
@@ -85,7 +84,7 @@ export function runQuery(
  * @param data The data for the query (in N3 format)
  * @param query The query (in N3 format)
  * @param options The reasoner options
- *  - output: What to output with implicit queries (default: 'none')
+ *  - output: What to output with implicit queries (default: undefined)
  *  - blogic: Whether to use blogic (default: false)
  *  - outputType: The type of output, either 'string' or 'quads' (default: 'string')
  * @returns The result of the query
@@ -94,7 +93,7 @@ export async function executeBasicEyeQuery(
   swipl: typeof SWIPL_TYPE,
   data: Quad[] | string,
   query: Quad[] | string | undefined,
-  options: ({ outputType: 'string' } & IQueryOptions),
+  options: { outputType: 'string' } & IQueryOptions,
 ): Promise<string>
 export async function executeBasicEyeQuery(
   swipl: typeof SWIPL_TYPE,
@@ -124,9 +123,9 @@ export async function executeBasicEyeQuery(
   swipl: typeof SWIPL_TYPE,
   data: Quad[] | string,
   query?: Quad[] | string | undefined,
-  options: IQueryOptions = {},
+  options?: IQueryOptions,
 ): Promise<Quad[] | string> {
-  const { outputType } = options;
+  const outputType = options?.outputType;
 
   let res = '';
   const Module = await loadEyeImage(swipl)({ print: (str: string) => { res += `${str}\n`; } });
@@ -137,7 +136,9 @@ export async function executeBasicEyeQuery(
     options,
   );
 
-  return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string')) ? (new Parser({ format: 'text/n3' })).parse(res) : res;
+  return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string'))
+    ? (new Parser({ format: 'text/n3' })).parse(res)
+    : res;
 }
 
 /**
@@ -147,7 +148,7 @@ export async function executeBasicEyeQuery(
  * @param data The data for the query (in N3 format)
  * @param query The query (in N3 format)
  * @param options The reasoner options
- *  - output: What to output with implicit queries (default: 'none')
+ *  - output: What to output with implicit queries (default: undefined)
  *  - blogic: Whether to use blogic (default: false)
  *  - outputType: The type of output, either 'string' or 'quads' (default: 'quads')
  * @returns The result of the query
