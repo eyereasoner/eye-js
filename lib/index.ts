@@ -24,6 +24,39 @@ export { default as EYE_PVM } from './eye';
  *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
  * @returns The result of the query as RDF/JS quads
  */
+export function n3reasoner(
+  data: Quad[] | string,
+  query: Quad[] | string | undefined,
+  options: ({ outputType: 'string' } & IQueryOptions),
+): Promise<string>
+export function n3reasoner(
+  data: Quad[] | string,
+  query: Quad[] | string | undefined,
+  options: ({ outputType: 'quads' } & IQueryOptions),
+): Promise<Quad[]>
+export function n3reasoner(
+  data: Quad[],
+  query: Quad[] | string | undefined,
+  options?: ({ outputType?: undefined } & IQueryOptions),
+): Promise<Quad[]>
+export function n3reasoner(
+  data: string,
+  query: Quad[] | string | undefined,
+  options?: ({ outputType?: undefined } & IQueryOptions),
+): Promise<string>
+export function n3reasoner(
+  data: Quad[] | string,
+  query?: Quad[] | string | undefined,
+  options?: IQueryOptions,
+): Promise<Quad[] | string>
+export function n3reasoner(
+  data: Quad[] | string,
+  query?: Quad[] | string | undefined,
+  options?: IQueryOptions,
+): Promise<Quad[] | string> {
+  return executeBasicEyeQuery(SWIPL_BUNDLE, data, query, options);
+}
+
 export function basicQuery(
   data: Quad[] | string,
   query: Quad[] | string | undefined,
@@ -52,9 +85,7 @@ export function basicQuery(
 export function basicQuery(
   data: Quad[] | string,
   query?: Quad[] | string | undefined,
-  options?: IQueryOptions,
+  options: IQueryOptions = {},
 ): Promise<Quad[] | string> {
-  return executeBasicEyeQuery(SWIPL_BUNDLE, data, query, options);
+  return n3reasoner(data, query, { output: query ? undefined : 'deductive_closure', ...options });
 }
-
-export { basicQuery as n3reasoner };

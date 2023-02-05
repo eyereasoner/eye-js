@@ -3,7 +3,7 @@ import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser } from 'n3';
 import { data, query, result } from '../data/socrates';
-import { basicQuery } from '../dist';
+import { basicQuery, n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 
 const parser = new Parser({ format: 'text/n3' });
@@ -30,7 +30,91 @@ export function universalTests() {
   // - https://github.com/emscripten-core/emscripten/issues/18659
   process.setMaxListeners(100);
 
-  describe('testing basic module utilities', () => {
+  describe('testing n3reasoners', () => {
+    it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataQuads, queryQuads),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner [quad input explicit quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataQuads, queryQuads, { outputType: 'quads' }),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner [quad input explicit string output]', async () => {
+      const resultStr: string = await n3reasoner(dataQuads, queryQuads, { outputType: 'string' });
+      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
+    });
+
+    it('should execute the n3reasoner [string input string output]', async () => {
+      const resultStr: string = await n3reasoner(data, query);
+      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
+    });
+
+    it('should execute the n3reasoner [string input explicit string output]', async () => {
+      const resultStr: string = await n3reasoner(data, query, { outputType: 'string' });
+      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
+    });
+
+    it('should execute the n3reasoner [string input explicit quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner(data, query, { outputType: 'quads' }),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner without query quads', () => expect(
+      n3reasoner(dataQuads),
+    ).resolves.toBeRdfIsomorphic([]));
+
+    it('should execute the n3reasoner without query quads [output: undefined]', () => expect(
+      n3reasoner(dataQuads, undefined, { output: undefined }),
+    ).resolves.toBeRdfIsomorphic([]));
+
+    it('should execute the n3reasoner without query quads [output: derivations]', () => expect(
+      n3reasoner(dataQuads, undefined, { output: 'derivations' }),
+    ).resolves.toBeRdfIsomorphic([DataFactory.quad(
+      DataFactory.namedNode('http://example.org/socrates#Socrates'),
+      DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+      DataFactory.namedNode('http://example.org/socrates#Mortal'),
+    )]));
+
+    it('should execute the n3reasoner without query quads [output: deductive closure]', () => expect(
+      n3reasoner(dataQuads, undefined, { output: 'deductive_closure' }),
+    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
+      DataFactory.namedNode('http://example.org/socrates#Human'),
+      DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
+      DataFactory.namedNode('http://example.org/socrates#Mortal'),
+    )]));
+
+    it('should execute the n3reasoner using blogic', async () => {
+      const resultStr: string = await n3reasoner(blogicData, undefined, { blogic: true });
+      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultBlogicQuads);
+    });
+
+    it('should fail executing blogic using the n3reasoner without blogic enabled', async () => {
+      const resultStr: string = await n3reasoner(blogicData, undefined, { blogic: false });
+      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
+      expect<Quad[]>(quads).not.toBeRdfIsomorphic(resultBlogicQuads);
+    });
+  });
+
+  describe('testing basicQuery', () => {
+    it('should execute the basicQuery', () => expect(
+      basicQuery(dataQuads, queryQuads),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the basicQuery without query quads', () => expect(
+      basicQuery(dataQuads),
+    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
+      DataFactory.namedNode('http://example.org/socrates#Human'),
+      DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
+      DataFactory.namedNode('http://example.org/socrates#Mortal'),
+    )]));
+
+    it('should execute the basicQuery [quad input quad output]', () => expect<Promise<Quad[]>>(
+      basicQuery(dataQuads, queryQuads),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
     it('should execute the basicQuery [quad input quad output]', () => expect<Promise<Quad[]>>(
       basicQuery(dataQuads, queryQuads),
     ).resolves.toBeRdfIsomorphic(resultQuads));
@@ -61,10 +145,6 @@ export function universalTests() {
       basicQuery(data, query, { outputType: 'quads' }),
     ).resolves.toBeRdfIsomorphic(resultQuads));
 
-    it('should execute the basicQuery without query quads', () => expect(
-      basicQuery(dataQuads),
-    ).resolves.toBeRdfIsomorphic([]));
-
     it('should execute the basicQuery without query quads [output: undefined]', () => expect(
       basicQuery(dataQuads, undefined, { output: undefined }),
     ).resolves.toBeRdfIsomorphic([]));
@@ -84,17 +164,5 @@ export function universalTests() {
       DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
       DataFactory.namedNode('http://example.org/socrates#Mortal'),
     )]));
-
-    it('should execute the basicQuery using blogic', async () => {
-      const resultStr: string = await basicQuery(blogicData, undefined, { blogic: true });
-      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
-      expect<Quad[]>(quads).toBeRdfIsomorphic(resultBlogicQuads);
-    });
-
-    it('should fail executing blogic using the basicQuery without blogic enabled', async () => {
-      const resultStr: string = await basicQuery(blogicData, undefined, { blogic: false });
-      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
-      expect<Quad[]>(quads).not.toBeRdfIsomorphic(resultBlogicQuads);
-    });
   });
 }
