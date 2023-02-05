@@ -9,7 +9,7 @@ Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser 
 
 ## Usage
 
-The simplest way to use this package is to use the `n3Reasoner` to execute a query over a dataset and get the results. The input `data` should include the data and any inference rules that you wish to apply to the dataset; the optional `query` should match the pattern of data you wish the engine to return; if left undefined, all inferred facts will be returned. For example:
+The simplest way to use this package is to use the `n3reasoner` to execute a query over a dataset and get the results. The input `data` should include the data and any inference rules that you wish to apply to the dataset; the optional `query` should match the pattern of data you wish the engine to return; if left undefined, all inferred facts will be returned. For example:
 
 ```ts
 import { n3reasoner } from 'eyereasoner';
