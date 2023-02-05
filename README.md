@@ -9,93 +9,80 @@ Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser 
 
 ## Usage
 
-The simplest way to use this package is to execute a query over a dataset and get the results
-
-**Note**: the `dataQuads` should include any inference rules that you wish to apply to the dataset
+The simplest way to use this package is to use the `n3reasoner` to execute a query over a dataset and get the results. The input `data` should include the data and any inference rules that you wish to apply to the dataset; the optional `query` should match the pattern of data you wish the engine to return; if left undefined, all inferred facts will be returned. For example:
 
 ```ts
-import { basicQuery } from 'eyereasoner';
+import { n3reasoner } from 'eyereasoner';
 
-async function main() {
-  // The result of the query (as an array of quads)
-  const result = await basicQuery(dataQuads, queryQuads);
-}
+export const queryString = `
+@prefix : <http://example.org/socrates#>.
 
-main();
+{:Socrates a ?WHAT} => {:Socrates a ?WHAT}.
+`;
+
+export const dataString = `
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix : <http://example.org/socrates#>.
+
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.
+`;
+
+// The result of the query (as a string)
+const resultString = await n3reasoner(dataString, queryString);
+
+// All inferred data
+const resultString = await n3reasoner(dataString);
 ```
 
-or if you just wish to get all inferred facts
+The `n3reasoner` accepts both `string`s (formatted in Notation3 syntax) and `quad`s as input. The output will be of the same type as the input `data`. This means that we can use `n3reasoner` with RDF/JS quads as follows:
 
 ```ts
-import { basicQuery } from 'eyereasoner';
+import { Parser } from 'n3';
 
-async function main() {
-  // The result of the query (as an array of quads)
-  const result = await basicQuery(dataQuads);
-}
+const parser = new Parser({ format: 'text/n3' });
+export const queryQuads = parser.parse(queryString);
+export const resultQuads = parser.parse(dataString);
 
-main();
+// The result of the query (as an array of quads)
+const resultQuads = await n3reasoner(dataQuads, queryQuads);
 ```
 
-Here the inputs and outputs are both arrays of RDF/JS Quads; for instance
+### Options
+
+The `n3reasoner` function allows one to optionally pass along a set of options
 
 ```ts
-const queryQuads = [
-  DF.quad(
-    DF.namedNode('http://example.org/socrates#Socrates'),
-    DF.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-    DF.variable('WHAT'),
-    DF.blankNode('b1')
-  ),
-  DF.quad(
-    DF.namedNode('http://example.org/socrates#Socrates'),
-    DF.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-    DF.variable('WHAT'),
-    DF.blankNode('b2')
-  ),
-  DF.quad(
-    DF.blankNode('b1'),
-    DF.namedNode('http://www.w3.org/2000/10/swap/log#implies'),
-    DF.blankNode('b2')
-  )
-]
+import { n3reasoner } from 'eyereasoner';
 
-const dataQuads = [
-  DF.quad(
-    DF.namedNode('http://example.org/socrates#Socrates'),
-    DF.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-    DF.namedNode('http://example.org/socrates#Human'),
-  ),
-  DF.quad(
-    DF.namedNode('http://example.org/socrates#Human'),
-    DF.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
-    DF.namedNode('http://example.org/socrates#Mortal'),
-  ),
-  DF.quad(
-    DF.variable('A'),
-    DF.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
-    DF.variable('B'),
-    DF.blankNode('b1')
-  ),
-  DF.quad(
-    DF.variable('S'),
-    DF.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-    DF.variable('A'),
-    DF.blankNode('b1')
-  ),
-  DF.quad(
-    DF.variable('S'),
-    DF.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-    DF.variable('B'),
-    DF.blankNode('b2')
-  ),
-  DF.quad(
-    DF.blankNode('b1'),
-    DF.namedNode('http://www.w3.org/2000/10/swap/log#implies'),
-    DF.blankNode('b2')
-  ),
-]
+const data = `
+@prefix : <urn:example.org:> .
+:Alice a :Person .
+{ ?S a :Person } => { ?S a :Human } .
+`;
+
+const result = await n3reasoner(data, undefined, {
+  output: 'derivations',
+  blogic: false,
+  outputType: 'string'
+});
 ```
+
+The `options` parameter can be used to configure the reasoning process. The following options are available:
+- `output`: What to output with implicit queries.
+    - undefined: no implicit query is passed (default)
+    - `derivations`: output only new derived triples, a.k.a `--pass-only-new`
+    - `deductive_closure`: output deductive closure, a.k.a `--pass`
+    - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
+    - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
+- `blogic`: Whether to use the blogic or not. Used to support [RDF surfaces](https://w3c-cg.github.io/rdfsurfaces/).
+    - `true`: use blogic
+    - `false`: do not use blogic (default)
+- `outputType`: The type of output (if different from the input)
+    - `string`: output as string
+    - `quads`: output as array of RDF/JS Quads
 
 ## Advanced usage
 
@@ -222,6 +209,22 @@ eyereasoner.queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--quer
 We provide some examples of using `eyereasoner`:
  - Using as an npm package and bundling using webpack ([`./examples/rollup`](https://github.com/eyereasoner/eye-js/tree/main/examples/rollup)).
  - Using a prebuilt version of `eyereasoner` ([`./examples/prebuilt`](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt)) - this example is [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
+
+## Other Notes
+
+### `MaxListenersExceededWarning`
+
+If you instantiate `SWIPL` more than 10 times in the same process, then you may see the warning:
+
+```
+(node:29436) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 uncaughtException listeners added to [process]. Use emitter.setMaxListeners() to increase limit
+```
+
+this is caused by the fact that each instantiation of SWIPL adds a new listener to the global process. To fix this problem increase the maximum number of listeners allowed on the global process.
+
+```
+process.setMaxListeners(100)
+```
 
 ## License
 ©2022–present
