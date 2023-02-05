@@ -44,7 +44,7 @@ import { Parser } from 'n3';
 
 const parser = new Parser({ format: 'text/n3' });
 export const queryQuads = parser.parse(queryString);
-export const resultQuads = parser.parse(dataString);
+export const dataQuads = parser.parse(dataString);
 
 // The result of the query (as an array of quads)
 const resultQuads = await n3reasoner(dataQuads, queryQuads);
