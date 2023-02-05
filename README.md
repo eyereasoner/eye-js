@@ -37,7 +37,7 @@ const resultString = await n3reasoner(dataString, queryString);
 const resultString = await n3reasoner(dataString);
 ```
 
-The `n3Reasoner` accepts both `string`s (formatted in Notation3 syntax) and `quad`s as input. The output will be of the same type as the input `data`. This means that we can use `n3Reasoner` with RDF/JS quads as follows:
+The `n3reasoner` accepts both `string`s (formatted in Notation3 syntax) and `quad`s as input. The output will be of the same type as the input `data`. This means that we can use `n3reasoner` with RDF/JS quads as follows:
 
 ```ts
 import { Parser } from 'n3';
