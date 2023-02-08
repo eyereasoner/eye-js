@@ -137,7 +137,7 @@ export async function executeBasicEyeQuery(
   );
 
   return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string'))
-    ? (new Parser({ format: 'text/n3' })).parse(res)
+    ? (new Parser({ format: 'text/n3-star' })).parse(res)
     : res;
 }
 

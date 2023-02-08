@@ -172,5 +172,18 @@ export function universalTests() {
       DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
       DataFactory.namedNode('http://example.org/socrates#Mortal'),
     )]));
+
+    const q = `<<<http://example.org/a> <http://example.org/b> <http://example.org/c>>> <http://example.org/is> true . { ?S <http://example.org/is> true } => { ?S <http://example.org/certainty> 1 } .`;
+    const r = "<<<http://example.org/a> <http://example.org/b> <http://example.org/c>>> <http://example.org/is> true.\n" +
+    "{?U_0 <http://example.org/is> true} => {?U_0 <http://example.org/certainty> 1}.\n"+
+    "<<<http://example.org/a> <http://example.org/b> <http://example.org/c>>> <http://example.org/certainty> 1 .\n\n";
+
+    it('should execute the basicQuery without query quads [output: deductive closure]', () => expect(
+      basicQuery(q, undefined, { output: 'deductive_closure_plus_rules' })
+    ).resolves.toEqual(r));
+
+    it('should execute the basicQuery without query quads [output: deductive closure]', () => expect(
+      basicQuery((new Parser({ format: 'text/n3-star' })).parse(q), undefined, { output: 'deductive_closure_plus_rules' })
+    ).resolves.toBeRdfIsomorphic((new Parser({ format: 'text/n3' })).parse(r)));
   });
 }
