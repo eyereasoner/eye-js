@@ -16,6 +16,6 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "eyereasoner": "^2.1.0"
+    "eyereasoner": "^2.11.0"
   }
 }
