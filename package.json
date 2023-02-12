@@ -14,7 +14,7 @@
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "test:unit": "jest",
-    "test:memory": "node __tests__/memory/leakTest",
+    "test:memory": "node __tests_memory__/leakTest",
     "test": "npm run test:unit && npm run test:memory",
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",

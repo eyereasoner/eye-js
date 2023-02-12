@@ -1,4 +1,4 @@
-const { n3reasoner } = require('../../dist');
+const { n3reasoner } = require('../dist');
 
 const query = `
 @prefix : <http://example.org/socrates#>.
