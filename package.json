@@ -13,7 +13,7 @@
   "scripts": {
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
-    "test": "jest __tests__/**-test.ts",
+    "test": "jest",
     "lint": "eslint lib/** __tests__/** scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "build": "npm run eye:prepare && tsc",
