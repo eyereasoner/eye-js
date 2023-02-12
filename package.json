@@ -16,7 +16,7 @@
     "test:unit": "jest",
     "test:memory": "npm run test:memory:node && npm run test:memory:browser",
     "test:memory:node": "node __tests_memory__/leakTest",
-    "test:memory:browser": "npm run bundle:webpack",
+    "test:memory:browser": "npm run bundle:webpack && node __tests_memory__/browserLeakTest",
     "test": "npm run test:unit && npm run test:memory",
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
