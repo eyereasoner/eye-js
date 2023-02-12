@@ -13,5 +13,6 @@
       "lines": 0,
       "statements": 0
     }
-  }
+  },
+  "collectCoverageFrom": [ "dist/**" ]
 }
