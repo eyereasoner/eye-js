@@ -17,7 +17,6 @@
     "lint": "eslint lib/** __tests__/** scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "build": "npm run eye:prepare && tsc",
-    "prepare": "npm run build",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
     "semantic-release": "semantic-release",
