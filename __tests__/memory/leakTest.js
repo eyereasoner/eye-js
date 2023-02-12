@@ -38,7 +38,7 @@ async function main() {
     throw new Error(`Exceeded initial memory consumption of ${toMb(initial)}MB by more than 50MB, reaching ${toMb(maxStart)}MB in the first 200 iterations`)
   }
 
-  console.log(`Maximum memory usage in first 50 iterations: ${toMb(maxStart)}MB`)
+  console.log(`Maximum memory usage in first 200 iterations: ${toMb(maxStart)}MB`)
 
   console.log('\nNow testing for long term memory increase')
 
