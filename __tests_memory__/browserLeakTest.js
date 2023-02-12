@@ -2,8 +2,18 @@ const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const {run} = require('@memlab/api');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
+
+const limiter = rateLimit({
+	windowMs: 15 * 60 * 1000,
+	max: 1_000,
+	standardHeaders: true,
+	legacyHeaders: false,
+});
+
+app.use(limiter);
 
 app.get('/', (_, res) => {
   res.setHeader('content-type', 'text/html');
