@@ -19,6 +19,10 @@ jobs:
           node-version: 18.x
       - run: npm ci
       - run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
 
   test:
     needs: build
@@ -36,4 +40,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
+    - uses: actions/download-artifact@v3
+      with:
+        name: dist
+        path: dist
     - run: npm test
