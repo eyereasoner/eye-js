@@ -13,7 +13,7 @@
   "scripts": {
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
-    "test:unit": "jest",
+    "test:unit": "npm run bundle:webpack && jest",
     "test:memory": "npm run test:memory:node && npm run test:memory:browser",
     "test:memory:node": "node __tests_memory__/leakTest",
     "test:memory:browser": "npm run bundle:webpack && node __tests_memory__/browserLeakTest",
