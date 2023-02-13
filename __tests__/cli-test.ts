@@ -2,13 +2,7 @@ import path from 'path';
 import mockConsole from 'jest-mock-console';
 import { query, data, result } from '../data/socrates';
 
-// const logged: string[] = [];
-
-// jest.mock('console', () => ({
-//   log: (str: string) => logged.push(str),
-// }));
-
-import { main } from '../dist/bin/main';
+import { mainFunc } from '../dist/bin/main';
 
 const files = {
   [path.join(__dirname, 'socrates.n3')]: data,
@@ -23,7 +17,7 @@ jest.mock('fs', () => ({
 describe('Testing CLI', () => {
   it('Should run', async () => {
     const restoreConsole = mockConsole();
-    await main({
+    await mainFunc({
       argv: ['/bin/node', 'eyereasoner', '--nope', '--quiet', './socrates.n3', '--query', './socrates-query.n3'],
       cwd: () => __dirname,
     } as NodeJS.Process);

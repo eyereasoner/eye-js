@@ -1,14 +1,15 @@
 /* eslint-disable default-case */
-import type { Quad, BaseQuad } from '@rdfjs/types';
+import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
-import { data, query, result } from '../data/socrates';
-import { basicQuery, n3reasoner, executeBasicEyeQueryQuads, SWIPL } from '../dist';
+import { data, query, queryAll, result } from '../data/socrates';
+import { basicQuery, n3reasoner, executeBasicEyeQueryQuads, SWIPL, SwiplEye, query as queryFunc } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 
 const parser = new Parser({ format: 'text/n3' });
 
 export const queryQuads = parser.parse(query);
+export const queryAllQuads = parser.parse(queryAll)
 export const dataQuads = parser.parse(data);
 export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
@@ -73,6 +74,14 @@ export function universalTests() {
 
     it('should execute the n3reasoner without query quads [output: deductive closure]', () => expect(
       n3reasoner(dataQuads, undefined, { output: 'deductive_closure' }),
+    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
+      DataFactory.namedNode('http://example.org/socrates#Human'),
+      DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
+      DataFactory.namedNode('http://example.org/socrates#Mortal'),
+    )]));
+
+    it('should execute the n3reasoner without query quads [output: deductive closure]', () => expect(
+      n3reasoner(dataQuads, queryAllQuads),
     ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
       DataFactory.namedNode('http://example.org/socrates#Human'),
       DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),

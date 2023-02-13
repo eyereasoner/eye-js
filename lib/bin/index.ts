@@ -1,4 +1,6 @@
 #!/usr/bin/env node
-import { main } from './main';
 
-main(process);
+/* istanbul ignore file */
+import { mainFunc } from './main';
+
+mainFunc(process);

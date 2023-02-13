@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import { SwiplEye, queryOnce } from '..';
 
-export async function main(proc: NodeJS.Process) {
+export async function mainFunc(proc: NodeJS.Process) {
   const Module = await SwiplEye();
 
   // Make any local files available to the reasoner

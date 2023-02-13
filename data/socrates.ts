@@ -4,6 +4,12 @@ export const query = `
 {:Socrates a ?WHAT} => {:Socrates a ?WHAT}.
 `;
 
+export const queryAll = `
+@prefix : <http://example.org/socrates#>.
+
+{?S ?P ?O} => {?S ?P ?O}.
+`;
+
 export const data = `
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix : <http://example.org/socrates#>.
