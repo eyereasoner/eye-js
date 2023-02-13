@@ -1,8 +1,4 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const {run} = require('@memlab/api');
-const rateLimit = require('express-rate-limit');
+const { run } = require('@memlab/api');
 const { createTestApp } = require('../__test_utils__/serve')
 
 async function main() {
