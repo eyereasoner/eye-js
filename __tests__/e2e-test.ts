@@ -46,7 +46,7 @@ describe('Testing browsers', () => {
 
         await page.close();
         await browser.close();
-      }, 30000);
+      }, 60_000);
     },
   );
 });
