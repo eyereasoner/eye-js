@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 // This file is temporary until https://github.com/rla/npm-swipl-wasm/pull/8 is released.
 // @ts-nocheck
 var SWIPL = (() => {
