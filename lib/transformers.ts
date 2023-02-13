@@ -128,13 +128,21 @@ export async function executeBasicEyeQuery(
   const outputType = options?.outputType;
 
   let res = '';
-  const Module = await loadEyeImage(swipl)({ print: (str: string) => { res += `${str}\n`; } });
+  const err: string[] = [];
+  const Module = await loadEyeImage(swipl)({
+    print: (str: string) => { res += `${str}\n`; },
+    printErr: (str: string) => { err.push(str); },
+  });
   runQuery(
     Module,
     typeof data === 'string' ? data : write(data),
     query && (typeof query === 'string' ? query : write(query)),
     options,
   );
+
+  if (err.length > 0) {
+    throw new Error(`Error while executing query: ${err.join('\n')}`);
+  }
 
   return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string'))
     ? (new Parser({ format: 'text/n3' })).parse(res)

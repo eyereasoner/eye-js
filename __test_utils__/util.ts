@@ -30,7 +30,7 @@ export function universalTests() {
   // - https://github.com/emscripten-core/emscripten/issues/18659
   process.setMaxListeners(100);
 
-  describe('testing n3reasoners', () => {
+  describe('testing n3reasoner', () => {
     it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads),
     ).resolves.toBeRdfIsomorphic(resultQuads));
@@ -136,6 +136,10 @@ export function universalTests() {
       const resultStr: string = await n3reasoner(blogicData, undefined, { blogic: false });
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
       expect<Quad[]>(quads).not.toBeRdfIsomorphic(resultBlogicQuads);
+    });
+
+    it('should throw error when eye cannot process the query', async () => {
+      expect(n3reasoner('invalid', 'invalid')).rejects.toThrowError();
     });
   });
 
