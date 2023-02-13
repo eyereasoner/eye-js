@@ -24,12 +24,6 @@ export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof 
 }
 
 export function universalTests() {
-  // Each instantiation of SWIPL adds a new listener to the global
-  // process, see:
-  // - https://github.com/rla/npm-swipl-wasm/issues/22
-  // - https://github.com/emscripten-core/emscripten/issues/18659
-  process.setMaxListeners(100);
-
   describe('testing n3reasoner', () => {
     it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads),
