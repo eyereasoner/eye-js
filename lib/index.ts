@@ -56,36 +56,3 @@ export function n3reasoner(
 ): Promise<Quad[] | string> {
   return executeBasicEyeQuery(SWIPL_BUNDLE, data, query, options);
 }
-
-export function basicQuery(
-  data: Quad[] | string,
-  query: Quad[] | string | undefined,
-  options: ({ outputType: 'string' } & IQueryOptions),
-): Promise<string>
-export function basicQuery(
-  data: Quad[] | string,
-  query: Quad[] | string | undefined,
-  options: ({ outputType: 'quads' } & IQueryOptions),
-): Promise<Quad[]>
-export function basicQuery(
-  data: Quad[],
-  query: Quad[] | string | undefined,
-  options?: ({ outputType?: undefined } & IQueryOptions),
-): Promise<Quad[]>
-export function basicQuery(
-  data: string,
-  query: Quad[] | string | undefined,
-  options?: ({ outputType?: undefined } & IQueryOptions),
-): Promise<string>
-export function basicQuery(
-  data: Quad[] | string,
-  query?: Quad[] | string | undefined,
-  options?: IQueryOptions,
-): Promise<Quad[] | string>
-export function basicQuery(
-  data: Quad[] | string,
-  query?: Quad[] | string | undefined,
-  options: IQueryOptions = {},
-): Promise<Quad[] | string> {
-  return n3reasoner(data, query, { output: query ? undefined : 'deductive_closure', ...options });
-}

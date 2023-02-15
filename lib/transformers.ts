@@ -11,10 +11,16 @@ import EYE_PVM from './eye';
 import { queryOnce } from './query';
 import { strToBuffer } from './strToBuffer';
 
-export interface IQueryOptions {
-  blogic?: boolean;
-  outputType?: 'string' | 'quads'
-  output?: undefined | 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules'
+export type ICoreQueryOptions = {
+  blogic: true;
+  output?: undefined;
+} | {
+  blogic?: false;
+  output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules';
+}
+
+export type IQueryOptions = ICoreQueryOptions & {
+  outputType?: 'string' | 'quads';
 }
 
 export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
@@ -47,35 +53,44 @@ export function runQuery(
   Module: SWIPLModule,
   data: string,
   queryString?: string,
-  options?: IQueryOptions,
+  { blogic, output }: IQueryOptions = {},
 ): SWIPLModule {
-  let pass: string | undefined;
-  switch (options?.output) {
-    case undefined:
-      break;
-    case 'derivations':
-      pass = '--pass-only-new';
-      break;
-    case 'deductive_closure':
-      pass = '--pass';
-      break;
-    case 'deductive_closure_plus_rules':
-      pass = '--pass-all';
-      break;
-    case 'grounded_deductive_closure_plus_rules':
-      pass = '--pass-all-ground';
-      break;
-    default:
-      throw new Error(`Unknown output option: ${options?.output}`);
+  const args: string[] = ['--quiet'];
+
+  if (blogic && (output || queryString)) {
+    throw new Error('Cannot use blogic with explicit output or query');
   }
 
-  const blogic = options?.blogic;
+  if (blogic) {
+    args.push('--blogic');
+  } else {
+    args.push('--nope');
+    switch (output) {
+      case undefined:
+      case 'derivations':
+        args.push('--pass-only-new');
+        break;
+      case 'deductive_closure':
+        args.push('--pass');
+        break;
+      case 'deductive_closure_plus_rules':
+        args.push('--pass-all');
+        break;
+      case 'grounded_deductive_closure_plus_rules':
+        args.push('--pass-all-ground');
+        break;
+      default:
+        throw new Error(`Unknown output option: ${output}`);
+    }
+  }
 
   Module.FS.writeFile('data.nq', data);
-  if (queryString && !blogic) {
+  args.push('./data.nq');
+  if (queryString) {
     Module.FS.writeFile('query.nq', queryString);
+    args.push('--query', './query.nq');
   }
-  queryOnce(Module, 'main', [blogic ? '--blogic' : '--nope', '--quiet', ...(pass ? [pass] : []), 'data.nq', ...(queryString ? ['--query', './query.nq'] : [])]);
+  queryOnce(Module, 'main', args);
   return Module;
 }
 
@@ -147,25 +162,4 @@ export async function executeBasicEyeQuery(
   return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string'))
     ? (new Parser({ format: 'text/n3' })).parse(res)
     : res;
-}
-
-/**
- * @deprecated Use executeBasicEyeQuery instead
- *
- * @param swipl The base SWIPL module to use
- * @param data The data for the query (in N3 format)
- * @param query The query (in N3 format)
- * @param options The reasoner options
- *  - output: What to output with implicit queries (default: undefined)
- *  - blogic: Whether to use blogic (default: false)
- *  - outputType: The type of output, either 'string' or 'quads' (default: 'quads')
- * @returns The result of the query
- */
-export async function executeBasicEyeQueryQuads(
-  swipl: typeof SWIPL_TYPE,
-  data: Quad[] | string,
-  query?: Quad[] | string | undefined,
-  options?: Omit<IQueryOptions, 'outputType'>,
-): Promise<Quad[]> {
-  return executeBasicEyeQuery(swipl, data, query, { ...options, outputType: 'quads' });
 }
