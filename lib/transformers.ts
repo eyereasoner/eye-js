@@ -55,41 +55,45 @@ export function runQuery(
   queryString?: string,
   { blogic, output }: IQueryOptions = {},
 ): SWIPLModule {
-  const args: string[] = ['--quiet'];
-
-  if (blogic && (output || queryString)) {
-    throw new Error('Cannot use blogic with explicit output or query');
-  }
+  const args: string[] = ['--quiet', 'data.nq'];
 
   if (blogic) {
+    if (output || queryString) {
+      throw new Error('Cannot use blogic with explicit output or query');
+    }
     args.push('--blogic');
   } else {
     args.push('--nope');
-    switch (output) {
-      case undefined:
-      case 'derivations':
-        args.push('--pass-only-new');
-        break;
-      case 'deductive_closure':
-        args.push('--pass');
-        break;
-      case 'deductive_closure_plus_rules':
-        args.push('--pass-all');
-        break;
-      case 'grounded_deductive_closure_plus_rules':
-        args.push('--pass-all-ground');
-        break;
-      default:
-        throw new Error(`Unknown output option: ${output}`);
+
+    if (queryString) {
+      if (output) {
+        throw new Error('Cannot use explicit output with explicit query');
+      }
+      Module.FS.writeFile('query.nq', queryString);
+      args.push('--query', './query.nq');
+    } else {
+      switch (output) {
+        case undefined:
+        case 'derivations':
+          args.push('--pass-only-new');
+          break;
+        case 'deductive_closure':
+          args.push('--pass');
+          break;
+        case 'deductive_closure_plus_rules':
+          args.push('--pass-all');
+          break;
+        case 'grounded_deductive_closure_plus_rules':
+          args.push('--pass-all-ground');
+          break;
+        default:
+          throw new Error(`Unknown output option: ${output}`);
+      }
     }
   }
 
   Module.FS.writeFile('data.nq', data);
-  args.push('./data.nq');
-  if (queryString) {
-    Module.FS.writeFile('query.nq', queryString);
-    args.push('--query', './query.nq');
-  }
+
   queryOnce(Module, 'main', args);
   return Module;
 }
