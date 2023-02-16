@@ -2,15 +2,19 @@
 import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
-import { data, query, queryAll, result } from '../data/socrates';
+import { data, dataStar, query, queryAll, result } from '../data/socrates';
 import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 
 const parser = new Parser({ format: 'text/n3' });
+// Workaround for https://github.com/rdfjs/N3.js/issues/324
+// @ts-expect-error
+parser._supportsRDFStar = true;
 
 export const queryQuads = parser.parse(query);
 export const queryAllQuads = parser.parse(queryAll)
 export const dataQuads = parser.parse(data);
+export const dataStarQuads = parser.parse(dataStar);
 export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
 
@@ -24,11 +28,41 @@ export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof 
   throw new Error(`Unexpected URL: ${args[0]}`);
 }
 
+const socratesMortal = DataFactory.quad(
+  DataFactory.namedNode('http://example.org/socrates#Socrates'),
+  DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+  DataFactory.namedNode('http://example.org/socrates#Mortal'),
+)
+
+const socratesHuman = DataFactory.quad(
+  DataFactory.namedNode('http://example.org/socrates#Socrates'),
+  DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
+  DataFactory.namedNode('http://example.org/socrates#Human'),
+)
+
+const humanSubclassMortal = DataFactory.quad(
+  DataFactory.namedNode('http://example.org/socrates#Human'),
+  DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
+  DataFactory.namedNode('http://example.org/socrates#Mortal'),
+)
+
 export function universalTests() {
   describe('testing n3reasoner', () => {
-    it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
-      n3reasoner(dataQuads, queryQuads),
+    it('should execute the n3reasoner on rdf-star i/o', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataStarQuads),
     ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataStarQuads, queryQuads),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataStarQuads, undefined, { output: 'deductive_closure' }),
+    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
+      socratesHuman,
+      DataFactory.namedNode('http://example.org/socrates#is'),
+      DataFactory.literal('true', DataFactory.namedNode('http://www.w3.org/2001/XMLSchema#boolean')),
+    ), humanSubclassMortal]));
 
     it('should execute the n3reasoner [quad input quad output] [output: undefined]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads, { output: undefined }),
@@ -78,67 +112,35 @@ export function universalTests() {
 
     it('should execute the n3reasoner without query quads', () => expect(
       n3reasoner(dataQuads),
-    ).resolves.toBeRdfIsomorphic([DataFactory.quad(
-      DataFactory.namedNode('http://example.org/socrates#Socrates'),
-      DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      DataFactory.namedNode('http://example.org/socrates#Mortal'),
-    )]));
+    ).resolves.toBeRdfIsomorphic([socratesMortal]));
 
     it('should execute the n3reasoner and undefined query quads', () => expect(
       n3reasoner(dataQuads, undefined),
-    ).resolves.toBeRdfIsomorphic([DataFactory.quad(
-      DataFactory.namedNode('http://example.org/socrates#Socrates'),
-      DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      DataFactory.namedNode('http://example.org/socrates#Mortal'),
-    )]));
+    ).resolves.toBeRdfIsomorphic([socratesMortal]));
 
     it('should execute the n3reasoner and undefined query quads and undefined options', () => expect(
       n3reasoner(dataQuads, undefined, undefined),
-    ).resolves.toBeRdfIsomorphic([DataFactory.quad(
-      DataFactory.namedNode('http://example.org/socrates#Socrates'),
-      DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      DataFactory.namedNode('http://example.org/socrates#Mortal'),
-    )]));
+    ).resolves.toBeRdfIsomorphic([socratesMortal]));
 
     it('should execute the n3reasoner without query quads [output: undefined]', () => expect(
       n3reasoner(dataQuads, undefined, { output: undefined }),
-    ).resolves.toBeRdfIsomorphic([DataFactory.quad(
-      DataFactory.namedNode('http://example.org/socrates#Socrates'),
-      DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      DataFactory.namedNode('http://example.org/socrates#Mortal'),
-    )]));
+    ).resolves.toBeRdfIsomorphic([socratesMortal]));
 
     it('should execute the n3reasoner without query quads [output: derivations]', () => expect(
       n3reasoner(dataQuads, undefined, { output: 'derivations' }),
-    ).resolves.toBeRdfIsomorphic([DataFactory.quad(
-      DataFactory.namedNode('http://example.org/socrates#Socrates'),
-      DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-      DataFactory.namedNode('http://example.org/socrates#Mortal'),
-    )]));
+    ).resolves.toBeRdfIsomorphic([socratesMortal]));
 
     it('should execute the n3reasoner without query quads [output: deductive closure]', () => expect(
       n3reasoner(dataQuads, undefined, { output: 'deductive_closure' }),
-    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
-      DataFactory.namedNode('http://example.org/socrates#Human'),
-      DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
-      DataFactory.namedNode('http://example.org/socrates#Mortal'),
-    )]));
+    ).resolves.toBeRdfIsomorphic([...resultQuads, humanSubclassMortal]));
 
     it('should execute the n3reasoner without query quads [output: deductive closure]', () => expect(
       n3reasoner(dataQuads, queryAllQuads),
-    ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
-      DataFactory.namedNode('http://example.org/socrates#Human'),
-      DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
-      DataFactory.namedNode('http://example.org/socrates#Mortal'),
-    )]));
+    ).resolves.toBeRdfIsomorphic([...resultQuads, humanSubclassMortal]));
 
     it('should execute the n3reasoner without query quads [output: deductive closure and rules]', async () => {
       const res: Quad[] = await n3reasoner(dataQuads, undefined, { output: 'deductive_closure_plus_rules' });
-      const closure: Quad[] = [...resultQuads, DataFactory.quad(
-        DataFactory.namedNode('http://example.org/socrates#Human'),
-        DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
-        DataFactory.namedNode('http://example.org/socrates#Mortal'),
-      )];
+      const closure: Quad[] = [...resultQuads, humanSubclassMortal];
 
       const store = new Store(res);
       
@@ -152,16 +154,7 @@ export function universalTests() {
 
       const store = new Store(res);
       
-      expect(new Store(res)).toBeRdfDatasetContaining(DataFactory.quad(
-        DataFactory.namedNode('http://example.org/socrates#Human'),
-        DataFactory.namedNode('http://www.w3.org/2000/01/rdf-schema#subClassOf'),
-        DataFactory.namedNode('http://example.org/socrates#Mortal'),
-      ),
-      DataFactory.quad(
-        DataFactory.namedNode('http://example.org/socrates#Socrates'),
-        DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#type'),
-        DataFactory.namedNode('http://example.org/socrates#Human'),
-      ));
+      expect(new Store(res)).toBeRdfDatasetContaining(humanSubclassMortal, socratesHuman);
       // 4 for the rule
       expect(store.size).toEqual(2 + 4);
     });

@@ -99,6 +99,15 @@ export function runQuery(
   return Module;
 }
 
+function parse(res: string) {
+  const parser = new Parser({ format: 'text/n3' });
+  // Workaround for https://github.com/rdfjs/N3.js/issues/324
+  // @ts-expect-error
+  // eslint-disable-next-line no-underscore-dangle
+  parser._supportsRDFStar = true;
+  return parser.parse(res);
+}
+
 export type Data = Quad[] | string
 export type Query = Data | undefined
 
@@ -141,6 +150,6 @@ export async function n3reasoner(data: Data, query?: Query, options?: Options): 
   }
 
   return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string'))
-    ? (new Parser({ format: 'text/n3' })).parse(res)
+    ? parse(res)
     : res;
 }
