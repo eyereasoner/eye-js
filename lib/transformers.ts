@@ -19,8 +19,9 @@ export type ICoreQueryOptions = {
   output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules';
 }
 
-export type IQueryOptions = ICoreQueryOptions & {
+export type Options = ICoreQueryOptions & {
   outputType?: 'string' | 'quads';
+  SWIPL?: typeof SWIPL_TYPE;
 }
 
 export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
@@ -53,7 +54,7 @@ export function runQuery(
   Module: SWIPLModule,
   data: string,
   queryString?: string,
-  { blogic, output }: IQueryOptions = {},
+  { blogic, output }: Options = {},
 ): SWIPLModule {
   const args: string[] = ['--quiet', 'data.nq'];
 
@@ -98,57 +99,33 @@ export function runQuery(
   return Module;
 }
 
+export type Data = Quad[] | string
+export type Query = Data | undefined
+
 /**
- * @param swipl The base SWIPL module to use
- * @param data The data for the query (in N3 format)
- * @param query The query (in N3 format)
+ * Executes a basic query using the EYE Reasoner and default build of SWIPL
+ * @param data The data for the query as RDF/JS quads
+ * @param query The query as RDF/JS quads
  * @param options The reasoner options
  *  - output: What to output with implicit queries (default: undefined)
  *  - blogic: Whether to use blogic (default: false)
- *  - outputType: The type of output, either 'string' or 'quads' (default: 'string')
- * @returns The result of the query
+ *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
+ *  - SWIPL: The SWIPL module to use (default: bundled SWIPL)
+ * @returns The result of the query as RDF/JS quads
  */
-export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL_TYPE,
-  data: Quad[] | string,
-  query: Quad[] | string | undefined,
-  options: { outputType: 'string' } & IQueryOptions,
-): Promise<string>
-export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL_TYPE,
-  data: Quad[] | string,
-  query: Quad[] | string | undefined,
-  options: { outputType: 'quads' } & IQueryOptions,
-): Promise<Quad[]>
-export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL_TYPE,
-  data: Quad[],
-  query?: Quad[] | string | undefined,
-  options?: { outputType?: undefined } & IQueryOptions,
-): Promise<Quad[]>
-export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL_TYPE,
-  data: string,
-  query?: Quad[] | string | undefined,
-  options?: { outputType?: undefined } & IQueryOptions,
-): Promise<string>
-export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL_TYPE,
-  data: Quad[] | string,
-  query?: Quad[] | string | undefined,
-  options?: IQueryOptions,
-): Promise<Quad[] | string>;
-export async function executeBasicEyeQuery(
-  swipl: typeof SWIPL_TYPE,
-  data: Quad[] | string,
-  query?: Quad[] | string | undefined,
-  options?: IQueryOptions,
-): Promise<Quad[] | string> {
+/* eslint-disable max-len */
+export async function n3reasoner(data: Data, query: Query, options: { outputType: 'string' } & Options): Promise<string>
+export async function n3reasoner(data: Data, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
+export async function n3reasoner(data: Quad[], query?: Query, options?: { outputType?: undefined } & Options): Promise<Quad[]>
+export async function n3reasoner(data: string, query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
+export async function n3reasoner(data: Data, query?: Query, options?: Options): Promise<Quad[] | string>;
+export async function n3reasoner(data: Data, query?: Query, options?: Options): Promise<Quad[] | string> {
+/* eslint-enable max-len */
   const outputType = options?.outputType;
 
   let res = '';
   const err: string[] = [];
-  const Module = await loadEyeImage(swipl)({
+  const Module = await loadEyeImage(options?.SWIPL || SWIPL)({
     print: (str: string) => { res += `${str}\n`; },
     printErr: (str: string) => { err.push(str); },
   });
