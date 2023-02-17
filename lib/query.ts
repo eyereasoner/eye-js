@@ -9,6 +9,7 @@ import type { SWIPLModule } from 'swipl-wasm/dist/swipl/swipl';
  */
 export function query(Module: SWIPLModule, name: string, args: string[] | string) {
   const queryString = `${name}(${
+    /* istanbul ignore next */
     typeof args === 'string'
       ? `"${args}"`
       : `[${args.map((arg) => `'${arg}'`).join(', ')}]`

@@ -9,7 +9,7 @@ Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser 
 
 ## Usage
 
-The simplest way to use this package is to use the `n3reasoner` to execute a query over a dataset and get the results. The input `data` should include the data and any inference rules that you wish to apply to the dataset; the optional `query` should match the pattern of data you wish the engine to return; if left undefined, all inferred facts will be returned. For example:
+The simplest way to use this package is to use the `n3reasoner` to execute a query over a dataset and get the results. The input `data` should include the data and any inference rules that you wish to apply to the dataset; the optional `query` should match the pattern of data you wish the engine to return; if left undefined, all new inferred facts will be returned. For example:
 
 ```ts
 import { n3reasoner } from 'eyereasoner';
@@ -72,8 +72,7 @@ const result = await n3reasoner(data, undefined, {
 
 The `options` parameter can be used to configure the reasoning process. The following options are available:
 - `output`: What to output with implicit queries.
-    - undefined: no implicit query is passed (default)
-    - `derivations`: output only new derived triples, a.k.a `--pass-only-new`
+    - `derivations`: output only new derived triples, a.k.a `--pass-only-new` (default)
     - `deductive_closure`: output deductive closure, a.k.a `--pass`
     - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
     - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
@@ -209,22 +208,6 @@ eyereasoner.queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--quer
 We provide some examples of using `eyereasoner`:
  - Using as an npm package and bundling using webpack ([`./examples/rollup`](https://github.com/eyereasoner/eye-js/tree/main/examples/rollup)).
  - Using a prebuilt version of `eyereasoner` ([`./examples/prebuilt`](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt)) - this example is [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
-
-## Other Notes
-
-### `MaxListenersExceededWarning`
-
-If you instantiate `SWIPL` more than 10 times in the same process, then you may see the warning:
-
-```
-(node:29436) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 uncaughtException listeners added to [process]. Use emitter.setMaxListeners() to increase limit
-```
-
-this is caused by the fact that each instantiation of SWIPL adds a new listener to the global process. To fix this problem increase the maximum number of listeners allowed on the global process.
-
-```
-process.setMaxListeners(100)
-```
 
 ## License
 ©2022–present

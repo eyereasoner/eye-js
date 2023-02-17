@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <textarea id="data" rows="10" cols="75">
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix : <http://example.org/socrates#>.
+
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.</textarea
+    >
+    <button id="execute">Execute</button>
+    <button id="clear">Clear</button>
+    <div id="result"></div>
+  </body>
+  <script src="/index.js"></script>
+  <script>
+    document.getElementById('execute').addEventListener("click", async () => {
+      
+      document.getElementById("result").innerHTML = (await eyereasoner.n3reasoner(
+        document.getElementById("data").value,
+        undefined,
+        { output: 'derivations' }
+      )).replaceAll('\n', '<br>');
+
+    });
+
+    document.getElementById('clear').addEventListener("click", async () => {
+      
+      document.getElementById("result").innerHTML = '';
+
+    });
+  </script>
+</html>

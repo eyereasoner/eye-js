@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign,no-plusplus,no-bitwise,no-use-before-define,no-multi-assign */
+/* istanbul ignore file */
 /**
  * A function that converts a string into a buffer.
  * This is required *only* for the conversion of the inlined
