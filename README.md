@@ -9,7 +9,7 @@ Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser 
 
 ## Usage
 
-The simplest way to use this package is to use the `n3reasoner` to execute a query over a dataset and get the results. The input `data` should include the data and any inference rules that you wish to apply to the dataset; the optional `query` should match the pattern of data you wish the engine to return; if left undefined, all inferred facts will be returned. For example:
+The simplest way to use this package is to use the `n3reasoner` to execute a query over a dataset and get the results. The input `data` should include the data and any inference rules that you wish to apply to the dataset; the optional `query` should match the pattern of data you wish the engine to return; if left undefined, all new inferred facts will be returned. For example:
 
 ```ts
 import { n3reasoner } from 'eyereasoner';
@@ -72,8 +72,7 @@ const result = await n3reasoner(data, undefined, {
 
 The `options` parameter can be used to configure the reasoning process. The following options are available:
 - `output`: What to output with implicit queries.
-    - undefined: no implicit query is passed (default)
-    - `derivations`: output only new derived triples, a.k.a `--pass-only-new`
+    - `derivations`: output only new derived triples, a.k.a `--pass-only-new` (default)
     - `deductive_closure`: output deductive closure, a.k.a `--pass`
     - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
     - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
