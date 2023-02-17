@@ -21,7 +21,7 @@
     "test": "npm run test:unit && npm run test:memory",
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "build": "npm run eye:prepare && tsc",
+    "build": "npm run eye:prepare && tsc && rm dist/swipl-bundled.temp.d.ts && cp ./lib/swipl-bundled.temp.d.ts ./dist/swipl-bundled.temp.d.ts",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
     "semantic-release": "semantic-release",
