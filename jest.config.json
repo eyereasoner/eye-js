@@ -8,10 +8,10 @@
   ],
   "coverageThreshold": {
     "global": {
-      "branches": 0,
-      "functions": 0,
-      "lines": 0,
-      "statements": 0
+      "branches": 88,
+      "functions": 93,
+      "lines": 98,
+      "statements": 96
     }
   },
   "collectCoverageFrom": [ "dist/**" ]

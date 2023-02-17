@@ -13,10 +13,15 @@
   "scripts": {
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
-    "test": "jest",
-    "lint": "eslint lib/** __tests__/** scripts/** --ext .ts",
+    "test:unit": "npm run bundle:webpack && jest",
+    "test:memory": "npm run test:memory:node && npm run test:memory:node:error && npm run test:memory:browser",
+    "test:memory:node": "node __tests_memory__/leakTest",
+    "test:memory:node:error": "node __tests_memory__/leakTestOnError",
+    "test:memory:browser": "npm run bundle:webpack && node __tests_memory__/browserLeakTest",
+    "test": "npm run test:unit && npm run test:memory",
+    "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "build": "npm run eye:prepare && tsc",
+    "build": "npm run eye:prepare && tsc && rm dist/swipl-bundled.temp.d.ts && cp ./lib/swipl-bundled.temp.d.ts ./dist/swipl-bundled.temp.d.ts",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
     "semantic-release": "semantic-release",
@@ -52,8 +57,10 @@
   },
   "homepage": "https://github.com/eyereasoner/eye-js#readme",
   "devDependencies": {
+    "@memlab/api": "^1.0.20",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
     "@rollup/plugin-commonjs": "^24.0.1",
+    "@types/express": "^4.17.17",
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.4.0",
     "@types/n3": "^1.10.4",
@@ -63,11 +70,15 @@
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
     "fs-extra": "^11.1.0",
     "jest": "^29.4.2",
     "jest-environment-jsdom": "^29.4.2",
+    "jest-mock-console": "^2.0.0",
     "jest-rdf": "^1.8.0",
     "parse-url": "^8.1.0",
+    "playwright": "^1.30.0",
     "pre-commit": "^1.2.2",
     "semantic-release": "^20.1.0",
     "ts-jest": "^29.0.5",
@@ -82,7 +93,7 @@
   "pre-commit": [
     "lint",
     "build",
-    "test"
+    "test:unit"
   ],
   "release": {
     "branches": [
