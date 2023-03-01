@@ -15,6 +15,8 @@ export class N3Writer {
       switch (term.value) {
         case 'http://www.w3.org/2000/10/swap/log#implies':
           return '=>';
+        case 'http://www.w3.org/2000/10/swap/log#isImpliedBy':
+          return '<=';
         case 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type':
           return 'a'
       }
