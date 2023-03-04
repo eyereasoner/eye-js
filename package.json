@@ -29,7 +29,8 @@
     "eye:pvm:test": "ts-node scripts/run-pvm",
     "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
-    "perf": "ts-node perf/socrates"
+    "perf": "ts-node perf/socrates",
+    "clone:eye": "git clone https://github.com/eyereasoner/eye ./eye --depth 1 --branch $npm_package_config_eye_name"
   },
   "repository": {
     "type": "git",
