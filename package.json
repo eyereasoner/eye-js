@@ -30,7 +30,7 @@
     "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
     "perf": "ts-node perf/socrates",
-    "clone:eye": "git clone https://github.com/eyereasoner/eye ./eye --depth 1 --branch $npm_package_config_eye_name",
+    "clone:eye": "rm -rf ./eye && git clone https://github.com/eyereasoner/eye ./eye --depth 1 --branch $npm_package_config_eye_name",
     "postinstall": "npm run clone:eye"
   },
   "repository": {
@@ -137,8 +137,8 @@
   },
   "config": {
     "eye": {
-      "name": "v3.4.8",
-      "url": "https://api.github.com/repos/eyereasoner/eye/releases/94399177"
+      "name": "v3.4.11",
+      "url": "https://api.github.com/repos/eyereasoner/eye/releases/94525898"
     }
   },
   "dependencies": {

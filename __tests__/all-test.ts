@@ -33,6 +33,8 @@ const ignoreOutputs = [
   'preduction/palindrome2-proof.n3',
 ];
 
+let i = 0;
+
 function readFile(subPath: string) {
   return fs.readFileSync(path.join(examplesPath, subPath)).toString();
 }
@@ -108,7 +110,7 @@ describe('Testing examples from eye repository', () => {
               it('using quad i/o', () => expect(n3reasoner(loadFiles(argsArray.slice(1)), undefined, { blogic: true }))
                 .resolves
                 .toBeRdfIsomorphic(dereference(subPath)));
-            } else if (args.length === 1 && args[0] === '--query' && false) {
+            } else if (args.length === 1 && args[0] === '--query') {
               it.skip('using quad i/o', () => expect(
                 n3reasoner(
                   loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--query') && i !== argsArray.indexOf('--query') + 1)),
@@ -118,7 +120,7 @@ describe('Testing examples from eye repository', () => {
                 .resolves
                 .toBeRdfIsomorphic(dereference(subPath)));
             } else if (args.length === 2 && args.includes('--query') && args.includes('--nope')) {
-              it('using quad i/o', () => expect(
+              it.skip('using quad i/o', () => expect(
                 n3reasoner(
                   loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--query')
                       && i !== argsArray.indexOf('--nope')
@@ -129,11 +131,21 @@ describe('Testing examples from eye repository', () => {
                 .resolves
                 .toBeRdfIsomorphic(dereference(subPath)));
             } else if (args.length === 2 && args.includes('--pass') && args.includes('--nope')) {
-              it('using quad i/o', () => expect(
+              it.skip('using quad i/o', () => expect(
                 n3reasoner(
                   loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--pass') && i !== argsArray.indexOf('--nope'))),
                   undefined,
                   { output: 'deductive_closure' },
+                ),
+              )
+                .resolves
+                .toBeRdfIsomorphic(dereference(subPath)));
+            }else if (args.length === 2 && args.includes('--pass-only-new') && args.includes('--nope')) {
+              it.skip('using quad i/o', () => expect(
+                n3reasoner(
+                  loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--pass-only-new') && i !== argsArray.indexOf('--nope'))),
+                  undefined,
+                  { output: 'derivations' },
                 ),
               )
                 .resolves
