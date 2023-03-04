@@ -1,8 +1,10 @@
+/* eslint-disable */
+// TODO: Remove the above before merging
 import fs from 'fs';
 import path from 'path';
 import { Parser, Store, DataFactory as DF } from 'n3';
-import { n3reasoner } from '../dist';
 import { mapTerms } from 'rdf-terms';
+import { n3reasoner } from '../dist';
 import 'jest-rdf';
 
 const examplesPath = path.join(__dirname, '..', 'eye', 'reasoning');
@@ -14,7 +16,7 @@ const ignoreFolders = [
   // n3reasoner does not support extra images
   'dt', 'image',
   // n3reasoner does not support multiquery
-  'mq'
+  'mq',
 ];
 
 // These exceptions should eventually be removed
@@ -32,7 +34,7 @@ const ignoreOutputs = [
 ];
 
 function readFile(subPath: string) {
-  return fs.readFileSync(path.join(examplesPath, subPath)).toString()
+  return fs.readFileSync(path.join(examplesPath, subPath)).toString();
 }
 
 function dereference(subPath: string) {
@@ -43,11 +45,12 @@ function dereference(subPath: string) {
 }
 
 describe('Testing examples from eye repository', () => {
-
   for (const folder of fs.readdirSync(examplesPath)) {
     if (fs.statSync(path.join(examplesPath, folder)).isDirectory()) {
-      describe('Testing examples for ' + folder, () => {
-        for (const testCase of fs.readFileSync(path.join(examplesPath, folder, 'test')).toString().split('\n').slice(1).filter(x => x !== '')) {
+      describe(`Testing examples for ${folder}`, () => {
+        for (const testCase of fs.readFileSync(path.join(examplesPath, folder, 'test')).toString().split('\n').slice(1)
+          .filter((x) => x !== '')) {
+          // eslint-disable-next-line no-loop-func
           let fn = describe;
 
           if (ignoreFolders.includes(folder)) {
@@ -71,10 +74,11 @@ describe('Testing examples from eye repository', () => {
 
           const subPath = path.join(folder, argsArray[argsArray.length - 1]);
 
-          argsArray = argsArray.slice(0, -2)
+          argsArray = argsArray.slice(0, -2);
 
           // Skip if the output is not a valid N3 file
           if (ignoreOutputs.includes(subPath) || !subPath.endsWith('n3')) {
+            // eslint-disable-next-line no-loop-func
             fn = describe.skip;
           }
 
@@ -89,60 +93,53 @@ describe('Testing examples from eye repository', () => {
             //     .toBeRdfIsomorphic(dereference(subPath));
             // });
 
-            const args = argsArray.filter(arg => arg.startsWith('--'));
+            const args = argsArray.filter((arg) => arg.startsWith('--'));
 
             function loadFiles(files: string[]) {
-              return [...new Store(files.map(file => dereference(file)).flat())]
+              return [...new Store(files.map((file) => dereference(file)).flat())]
                 // Workaround for https://github.com/rdfjs/N3.js/issues/332
-                .map(quad => mapTerms(quad, term => term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(/^\./, '')) : term));
+                .map((quad) => mapTerms(quad, (term) => (term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(/^\./, '')) : term)));
             }
 
             if (args.length === 1 && args[0] === '--blogic'
             // Skip socrates-star because it contains '{|' and the PR to support that has not been merged in N3.js
             && !argsArray.includes('blogic/socrates-star.n3')
             ) {
-              it('using quad i/o', () => {
-              return expect(n3reasoner(loadFiles(argsArray.slice(1)), undefined, { blogic: true }))
+              it('using quad i/o', () => expect(n3reasoner(loadFiles(argsArray.slice(1)), undefined, { blogic: true }))
                 .resolves
-                .toBeRdfIsomorphic(dereference(subPath));
-              })
+                .toBeRdfIsomorphic(dereference(subPath)));
             } else if (args.length === 1 && args[0] === '--query' && false) {
-              it.skip('using quad i/o', () => {
-                return expect(
-                  n3reasoner(
-                    loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--query') && i !== argsArray.indexOf('--query') + 1)),
-                    loadFiles([argsArray[argsArray.indexOf('--query') + 1]]))
-                  )
+              it.skip('using quad i/o', () => expect(
+                n3reasoner(
+                  loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--query') && i !== argsArray.indexOf('--query') + 1)),
+                  loadFiles([argsArray[argsArray.indexOf('--query') + 1]]),
+                ),
+              )
                 .resolves
-                .toBeRdfIsomorphic(dereference(subPath));
-              })
+                .toBeRdfIsomorphic(dereference(subPath)));
             } else if (args.length === 2 && args.includes('--query') && args.includes('--nope')) {
-              it('using quad i/o', () => {
-                return expect(
-                  n3reasoner(
-                    loadFiles(argsArray.filter((_, i) => 
-                      i !== argsArray.indexOf('--query') 
-                      && i !== argsArray.indexOf('--nope') 
+              it('using quad i/o', () => expect(
+                n3reasoner(
+                  loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--query')
+                      && i !== argsArray.indexOf('--nope')
                       && i !== argsArray.indexOf('--query') + 1)),
-                    loadFiles([argsArray[argsArray.indexOf('--query') + 1]]))
-                  )
+                  loadFiles([argsArray[argsArray.indexOf('--query') + 1]]),
+                ),
+              )
                 .resolves
-                .toBeRdfIsomorphic(dereference(subPath));
-              })
+                .toBeRdfIsomorphic(dereference(subPath)));
             } else if (args.length === 2 && args.includes('--pass') && args.includes('--nope')) {
-              it('using quad i/o', () => {
-                return expect(
-                  n3reasoner(
-                    loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--pass') && i !== argsArray.indexOf('--nope'))),
-                    undefined,
-                    { output: 'deductive_closure' },
-                  )
-                )
+              it('using quad i/o', () => expect(
+                n3reasoner(
+                  loadFiles(argsArray.filter((_, i) => i !== argsArray.indexOf('--pass') && i !== argsArray.indexOf('--nope'))),
+                  undefined,
+                  { output: 'deductive_closure' },
+                ),
+              )
                 .resolves
-                .toBeRdfIsomorphic(dereference(subPath));
-              })
+                .toBeRdfIsomorphic(dereference(subPath)));
             } else {
-              test.todo('using quad i/o')
+              test.todo('using quad i/o');
             }
 
             // let ifn = it;
@@ -152,18 +149,17 @@ describe('Testing examples from eye repository', () => {
             //   ifn = it.skip;
             // }
 
-            
-          //   ifn('using quad i/o', async () => {
-          //     expect(true).toBeTruthy();
-          //     // const quads = [...new Store(argsArray.slice(1).map(file => dereference(file)).flat())]
-          //     //   // Workaround for https://github.com/rdfjs/N3.js/issues/332
-          //     //   .map(quad => mapTerms(quad, term => term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(/^\./, '')) : term));
+            //   ifn('using quad i/o', async () => {
+            //     expect(true).toBeTruthy();
+            //     // const quads = [...new Store(argsArray.slice(1).map(file => dereference(file)).flat())]
+            //     //   // Workaround for https://github.com/rdfjs/N3.js/issues/332
+            //     //   .map(quad => mapTerms(quad, term => term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(/^\./, '')) : term));
 
           //     // return expect(n3reasoner(quads, undefined, { blogic: true }))
           //     //   .resolves
           //     //   .toBeRdfIsomorphic(dereference(subPath));
           //   });
-          })
+          });
 
           // if (argsArray.includes('--pass-only-new')) {
           //   console.log(argsArray, output.length)
@@ -172,9 +168,7 @@ describe('Testing examples from eye repository', () => {
           // console.log(testCase)
           // process.exit()
         }
-      })
+      });
     }
-
   }
-
 });
