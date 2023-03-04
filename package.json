@@ -30,7 +30,8 @@
     "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
     "perf": "ts-node perf/socrates",
-    "clone:eye": "git clone https://github.com/eyereasoner/eye ./eye --depth 1 --branch $npm_package_config_eye_name"
+    "clone:eye": "git clone https://github.com/eyereasoner/eye ./eye --depth 1 --branch $npm_package_config_eye_name",
+    "postinstall": "npm run clone:eye"
   },
   "repository": {
     "type": "git",
@@ -81,6 +82,8 @@
     "parse-url": "^8.1.0",
     "playwright": "^1.30.0",
     "pre-commit": "^1.2.2",
+    "rdf-parse": "^2.3.1",
+    "rdf-terms": "^1.9.1",
     "semantic-release": "^20.1.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
@@ -139,6 +142,7 @@
     }
   },
   "dependencies": {
+    "@jeswr/pretty-turtle": "^1.4.0",
     "n3": "^1.16.3",
     "swipl-wasm": "^3.1.0"
   },
