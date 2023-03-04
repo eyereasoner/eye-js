@@ -5,6 +5,7 @@ import { DataFactory, Parser, Store } from 'n3';
 import { data, dataStar, query, queryAll, result } from '../data/socrates';
 import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
+import { write } from '../dist/n3Writer.temp';
 
 const parser = new Parser({ format: 'text/n3' });
 // Workaround for https://github.com/rdfjs/N3.js/issues/324
@@ -199,6 +200,18 @@ export function universalTests() {
 
     it('should throw error when eye cannot process the query', async () => {
       await expect(n3reasoner('invalid', 'invalid')).rejects.toThrowError('Error while executing query');
+    });
+  });
+
+  describe('writer test', () => {
+    it('should be able to write log:isImpliedBy as <=', () => {
+      expect(write([
+        DataFactory.quad(
+          DataFactory.variable('S'),
+          DataFactory.namedNode('http://www.w3.org/2000/10/swap/log#isImpliedBy'),
+          DataFactory.variable('O'),
+        ),
+      ])).toEqual('?S <= ?O . ')
     });
   });
 }
