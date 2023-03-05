@@ -32,6 +32,7 @@ const ignoreOutputs = [
   'preduction/palindrome-proof.n3',
   // This complains because of https://github.com/rdfjs/N3.js/issues/328
   'preduction/palindrome2-proof.n3',
+  // This causes isomorphism timepouts
 ];
 
 let i = 0;
@@ -115,9 +116,11 @@ describe('Testing examples from eye repository', () => {
             && !argsArray.includes('blogic/socrates-star.n3')
             ) {
               it('using quad i/o', () => expect(
-                n3reasoner(loadFiles(argsArray.slice(1), true), undefined, { blogic: true })
+                Promise.race([
+                  n3reasoner(loadFiles(argsArray.slice(1), true), undefined, { blogic: true })
                 .then(quads => normalize(quads, true)),
-                )
+                new Promise((resolve, rej) => setTimeout(() => rej(new Error('timeout')), 10)),
+              ]))
                 .resolves
                 .toBeRdfIsomorphic(normalize(dereference(subPath), true)));
             } else if (args.length === 1 && args[0] === '--query') {
