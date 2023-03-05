@@ -3,3 +3,4 @@ coverage
 dist
 bundle
 lib/eye.ts
+eye/
