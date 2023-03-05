@@ -7,6 +7,7 @@ import { mapTerms } from 'rdf-terms';
 import { n3reasoner } from '../dist';
 import type * as RDF from "@rdfjs/types";
 import { isomorphic } from 'rdf-isomorphic';
+import { write } from '../dist/n3Writer.temp';
 // import 'jest-rdf';
 
 const examplesPath = path.join(__dirname, '..', 'eye', 'reasoning');
@@ -121,17 +122,24 @@ async function main() {
             ) {
               console.log('running', argsArray.slice(1), subPath)
               i += 1;
+              let input: RDF.Quad[] | undefined
               try {
+                input = loadFiles(argsArray.slice(1), true);
+                const output = await n3reasoner(loadFiles(argsArray.slice(1), true), undefined, { blogic: true }).then(quads => normalize(quads, true));
+                const expected = normalize(dereference(subPath), true);
                 const res = isomorphic(
-                  await n3reasoner(loadFiles(argsArray.slice(1), true), undefined, { blogic: true }).then(quads => normalize(quads, true)),
-                  dereference(subPath)
+                  output,
+                  expected
                 )
                 console.log(res)
 
                 if (res) {
                   j += 1;
+                } else {
+
                 }
               } catch (e) {
+                console.log('error on input', write(input!))
                 console.error(e)
               }
               
