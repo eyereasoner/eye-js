@@ -5,6 +5,7 @@ import path from 'path';
 import { Parser, Store, DataFactory as DF } from 'n3';
 import { mapTerms } from 'rdf-terms';
 import { n3reasoner } from '../dist';
+import type * as RDF from "@rdfjs/types";
 import 'jest-rdf';
 
 const examplesPath = path.join(__dirname, '..', 'eye', 'reasoning');
@@ -96,20 +97,29 @@ describe('Testing examples from eye repository', () => {
             // });
 
             const args = argsArray.filter((arg) => arg.startsWith('--'));
+            
+            // Workaround for https://github.com/rdfjs/N3.js/issues/332
+            function normalize(quad: RDF.Quad[], descope = false): RDF.Quad[] {
+              return quad
+                .map((quad) => mapTerms(quad, (term) => (term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(descope ? /^(n3-\d+)?\./ : /^\./, '')) : term)));
+            }
 
-            function loadFiles(files: string[]) {
-              return [...new Store(files.map((file) => dereference(file)).flat())]
+            function loadFiles(files: string[], descope = false) {
+              return normalize([...new Store(files.map((file) => dereference(file)).flat())], descope)
                 // Workaround for https://github.com/rdfjs/N3.js/issues/332
-                .map((quad) => mapTerms(quad, (term) => (term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(/^\./, '')) : term)));
+                // .map((quad) => mapTerms(quad, (term) => (term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(descope ? /^(n3-\d+)?\./ : /^\./, '')) : term)));
             }
 
             if (args.length === 1 && args[0] === '--blogic'
             // Skip socrates-star because it contains '{|' and the PR to support that has not been merged in N3.js
             && !argsArray.includes('blogic/socrates-star.n3')
             ) {
-              it('using quad i/o', () => expect(n3reasoner(loadFiles(argsArray.slice(1)), undefined, { blogic: true }))
+              it('using quad i/o', () => expect(
+                n3reasoner(loadFiles(argsArray.slice(1), true), undefined, { blogic: true })
+                .then(quads => normalize(quads, true)),
+                )
                 .resolves
-                .toBeRdfIsomorphic(dereference(subPath)));
+                .toBeRdfIsomorphic(normalize(dereference(subPath), true)));
             } else if (args.length === 1 && args[0] === '--query') {
               it.skip('using quad i/o', () => expect(
                 n3reasoner(
