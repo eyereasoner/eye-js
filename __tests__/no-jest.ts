@@ -119,8 +119,8 @@ async function main() {
             // Skip socrates-star because it contains '{|' and the PR to support that has not been merged in N3.js
             && !argsArray.includes('blogic/socrates-star.n3')
             && !argsArray.includes('blogic/bmt.n3')
+            && !argsArray.includes('lubm/facts.ttl')
             ) {
-              console.log('running', argsArray.slice(1), subPath)
               i += 1;
               let input: RDF.Quad[] | undefined
               try {
@@ -131,12 +131,11 @@ async function main() {
                   output,
                   expected
                 )
-                console.log(res)
 
                 if (res) {
                   j += 1;
                 } else {
-
+                  console.log(`Expected ${output.length} quads recieved ${expected.length} for ${subPath}`)
                 }
               } catch (e) {
                 console.log('error on input', write(input!))
