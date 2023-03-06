@@ -8,6 +8,7 @@ import { n3reasoner } from '../dist';
 import type * as RDF from "@rdfjs/types";
 import { isomorphic } from 'rdf-isomorphic';
 import { write } from '../dist/n3Writer.temp';
+import { write as writePretty } from '@jeswr/pretty-turtle';
 // import 'jest-rdf';
 
 const examplesPath = path.join(__dirname, '..', 'eye', 'reasoning');
@@ -98,11 +99,23 @@ async function main() {
             // });
 
             const args = argsArray.filter((arg) => arg.startsWith('--'));
+
+            function descopeQuad(quad: RDF.Quad, descope = false): RDF.Quad {
+              return mapTerms(quad, (term) => {
+                if (term.termType === 'BlankNode') {
+                  return DF.blankNode(term.value.replace(descope ? /^(n3-\d+)?\./ : /^\./, ''));
+                }
+                if (term.termType === 'Quad') {
+                  return descopeQuad(term as RDF.Quad, descope);
+                }
+                return term;
+              });
+            }
             
             // Workaround for https://github.com/rdfjs/N3.js/issues/332
             function normalize(quad: RDF.Quad[], descope = false): RDF.Quad[] {
               return quad
-                .map((quad) => mapTerms(quad, (term) => (term.termType === 'BlankNode' ? DF.blankNode(term.value.replace(descope ? /^(n3-\d+)?\./ : /^\./, '')) : term)));
+                .map((quad) => descopeQuad(quad, descope));
             }
 
             function loadFiles(files: string[], descope = false) {
@@ -120,6 +133,7 @@ async function main() {
             && !argsArray.includes('blogic/socrates-star.n3')
             && !argsArray.includes('blogic/bmt.n3')
             && !argsArray.includes('lubm/facts.ttl')
+            // && subPath === 'blogic/equal-answer.n3'
             ) {
               i += 1;
               let input: RDF.Quad[] | undefined
@@ -136,6 +150,8 @@ async function main() {
                   j += 1;
                 } else {
                   console.log(`Expected ${output.length} quads recieved ${expected.length} for ${subPath}`)
+                  // console.log('expected', await writePretty(expected!, { format: 'text/n3' }))
+                  // console.log('recieved', await writePretty(output!, { format: 'text/n3' }))
                 }
               } catch (e) {
                 console.log('error on input', write(input!))
