@@ -1,36 +1,51 @@
-@prefix log: <http://www.w3.org/2000/10/swap/log#>.
-@prefix : <http://example.org/ns#>.
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-
-# sample data
-:n1 :p1 :n2; a :C1.
-:n1 :p2 :n3.
-:n1 :p3 :n4.
-:n2 :p2 :n3.
-:n3 :p4 :n5; a :C2.
-:n3 :p5 :n6.
-:n3 :p2 :n1.
-:n6 :p6 :n7; a :C3.
-
-# categorize
-(_:A _:B _:C _:D) log:onNegativeSurface {
-    _:A a _:B.
-    _:A _:C _:D.
-    rdf:nil log:onNegativeSurface {
-        <<_:A _:C _:D>> :category _:B.
-    }.
-}.
-
-(_:A _:B _:C _:D _:E _:F _:G _:H) log:onNegativeSurface {
-    <<_:A _:B _:C>> :category _:D.
-    _:C _:E _:F.
-    (_:G {_:C a _:G} ()) log:collectAllIn _:H.
-    () log:onNegativeSurface {
-        <<_:C _:E _:F>> :category _:D.
-    }.
-}.
-
-# query
-(_:A _:B) log:onQuerySurface {
-    _:A :category _:B.
-}.
+<http://example.org/ns#n1> <http://example.org/ns#p1> <http://example.org/ns#n2> .
+<http://example.org/ns#n1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/ns#C1> .
+<http://example.org/ns#n1> <http://example.org/ns#p2> <http://example.org/ns#n3> .
+<http://example.org/ns#n1> <http://example.org/ns#p3> <http://example.org/ns#n4> .
+<http://example.org/ns#n2> <http://example.org/ns#p2> <http://example.org/ns#n3> .
+<http://example.org/ns#n3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/ns#C2> .
+<http://example.org/ns#n3> <http://example.org/ns#p2> <http://example.org/ns#n1> .
+<http://example.org/ns#n3> <http://example.org/ns#p4> <http://example.org/ns#n5> .
+<http://example.org/ns#n3> <http://example.org/ns#p5> <http://example.org/ns#n6> .
+<http://example.org/ns#n6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://example.org/ns#C3> .
+<http://example.org/ns#n6> <http://example.org/ns#p6> <http://example.org/ns#n7> .
+_:n3-0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:A .
+_:n3-0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-1 .
+_:n3-0 <http://www.w3.org/2000/10/swap/log#onNegativeSurface> {_:A <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> _:B .
+_:A _:C _:D .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> <http://www.w3.org/2000/10/swap/log#onNegativeSurface> {<<_:A _:C _:D>> <http://example.org/ns#category> _:B . } . } .
+_:n3-1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:B .
+_:n3-1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-2 .
+_:n3-2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:C .
+_:n3-2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-3 .
+_:n3-3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:D .
+_:n3-3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:n3-6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:A .
+_:n3-6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-7 .
+_:n3-6 <http://www.w3.org/2000/10/swap/log#onNegativeSurface> {_:C _:E _:F .
+<http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> <http://www.w3.org/2000/10/swap/log#onNegativeSurface> {<<_:C _:E _:F>> <http://example.org/ns#category> _:D . } .
+<<_:A _:B _:C>> <http://example.org/ns#category> _:D .
+_:n3-15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:G .
+_:n3-15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-17 .
+_:n3-15 <http://www.w3.org/2000/10/swap/log#collectAllIn> _:H .
+_:n3-17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:n3-17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> . } .
+_:n3-7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:B .
+_:n3-7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-8 .
+_:n3-8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:C .
+_:n3-8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-9 .
+_:n3-9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:D .
+_:n3-9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-10 .
+_:n3-10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:E .
+_:n3-10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-11 .
+_:n3-11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:F .
+_:n3-11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-12 .
+_:n3-12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:G .
+_:n3-12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-13 .
+_:n3-13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:H .
+_:n3-13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:n3-19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:A .
+_:n3-19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n3-20 .
+_:n3-19 <http://www.w3.org/2000/10/swap/log#onQuerySurface> {_:A <http://example.org/ns#category> _:B . } .
+_:n3-20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:B .
+_:n3-20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .

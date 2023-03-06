@@ -133,7 +133,7 @@ async function main() {
             && !argsArray.includes('blogic/socrates-star.n3')
             && !argsArray.includes('blogic/bmt.n3')
             && !argsArray.includes('lubm/facts.ttl')
-            // && subPath === 'blogic/equal-answer.n3'
+            // && subPath === 'blogic/category-answer.n3'
             ) {
               i += 1;
               let input: RDF.Quad[] | undefined
@@ -149,7 +149,7 @@ async function main() {
                 if (res) {
                   j += 1;
                 } else {
-                  console.log(`Expected ${output.length} quads recieved ${expected.length} for ${subPath}`)
+                  console.log(`Expected ${expected.length} quads recieved ${output.length} for ${subPath}`)
                   // console.log('expected', await writePretty(expected!, { format: 'text/n3' }))
                   // console.log('recieved', await writePretty(output!, { format: 'text/n3' }))
                 }
