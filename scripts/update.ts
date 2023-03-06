@@ -2,10 +2,10 @@
 // A script for updating the version reference to eye
 import * as fs from 'fs';
 import path from 'path';
-import { fetchRetry } from './util';
+import { fetch } from 'cross-fetch';
 
 (async () => {
-  const res = (await fetchRetry('https://api.github.com/repos/eyereasoner/eye/releases/latest'));
+  const res = (await fetch('https://api.github.com/repos/eyereasoner/eye/releases/latest'));
   if (res.status === 200) {
     const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json')).toString());
     const tag = await res.json();
