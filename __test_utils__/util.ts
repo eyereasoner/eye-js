@@ -47,6 +47,22 @@ const humanSubclassMortal = DataFactory.quad(
 )
 
 export function universalTests() {
+  let log: jest.SpyInstance<void, [message?: any, ...optionalParams: any[]], any>;
+  let warn: jest.SpyInstance<void, [message?: any, ...optionalParams: any[]], any>;
+  let err: jest.SpyInstance<void, [message?: any, ...optionalParams: any[]], any>;
+
+  beforeEach(() => {
+    log = jest.spyOn(console, 'log');
+    warn = jest.spyOn(console, 'warn');
+    err = jest.spyOn(console, 'error');
+  });
+
+  afterEach(() => {
+    expect(log).not.toHaveBeenCalled();
+    expect(warn).not.toHaveBeenCalled();
+    expect(err).not.toHaveBeenCalled();
+  });
+
   describe('testing n3reasoner', () => {
     it('should execute the n3reasoner on rdf-star i/o', () => expect<Promise<Quad[]>>(
       n3reasoner(dataStarQuads),
