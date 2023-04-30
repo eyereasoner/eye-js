@@ -14,8 +14,5 @@
       "statements": 100
     }
   },
-  "collectCoverageFrom": [ "dist/**" ],
-  "testPathIgnorePatterns" : [
-    "/node_modules/"
-  ]
+  "collectCoverageFrom": [ "dist/**" ]
 }
