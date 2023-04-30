@@ -3,7 +3,7 @@ import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
 import { data, dataStar, query, queryAll, result } from '../data/socrates';
-import { n3reasoner } from '../lib';
+import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 
 const parser = new Parser({ format: 'text/n3' });

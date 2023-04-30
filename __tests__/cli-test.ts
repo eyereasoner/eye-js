@@ -2,7 +2,7 @@ import path from 'path';
 import mockConsole from 'jest-mock-console';
 import { query, data, result } from '../data/socrates';
 
-import { mainFunc } from '../lib/bin/main';
+import { mainFunc } from '../dist/bin/main';
 
 const files = {
   [path.join(__dirname, 'socrates.n3')]: data,

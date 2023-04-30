@@ -21,10 +21,6 @@ jobs:
       - run: npm run build
       - uses: actions/upload-artifact@v3
         with:
-          name: eye
-          path: lib/eye.ts
-      - uses: actions/upload-artifact@v3
-        with:
           name: dist
           path: dist
 
@@ -46,10 +42,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - uses: actions/download-artifact@v3
-      with:
-        name: eye
-        path: lib/eye.ts
     - uses: actions/download-artifact@v3
       with:
         name: dist
