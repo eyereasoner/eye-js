@@ -18,6 +18,8 @@ export const dataQuads = parser.parse(data);
 export const dataStarQuads = parser.parse(dataStar);
 export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
+export const regexQuads = parser.parse(regexData);
+export const regexResultQuads = parser.parse(regexResult);
 
 export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
   switch (args[0]) {
@@ -176,10 +178,11 @@ export function universalTests() {
       expect(store.size).toEqual(2 + 4);
     });
 
-    it('should execute the n3reasoner on a query string requiring regex', async () => {
-      const res = await n3reasoner(regexData);
-      expect(res).toEqual(regexResult);
-    });
+    it('should execute the n3reasoner on a query string requiring regex', 
+      () => expect(n3reasoner(regexData)).resolves.toEqual(regexResult));
+
+    it('should execute the n3reasoner on a query string requiring regex using RDFJS quads',
+      () => expect(n3reasoner(regexQuads)).resolves.toBeRdfIsomorphic(regexResultQuads));
 
     it('should reject n3reasoner on invalid query', async () => {
       const res = n3reasoner(dataQuads, 'invalid');
