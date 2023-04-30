@@ -21,7 +21,7 @@
     "test": "npm run test:unit && npm run test:memory",
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "build": "npm run eye:prepare && tsc && rm dist/swipl-bundled.temp.d.ts && cp ./lib/swipl-bundled.temp.d.ts ./dist/swipl-bundled.temp.d.ts",
+    "build": "npm run eye:prepare && tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
     "semantic-release": "semantic-release",
@@ -140,11 +140,10 @@
   },
   "dependencies": {
     "n3": "^1.16.3",
-    "swipl-wasm": "^3.1.0"
+    "swipl-wasm": "3.2.2"
   },
   "peerDependencies": {
-    "@rdfjs/types": "^1.1.0",
-    "@types/emscripten": "^1.39.6"
+    "@rdfjs/types": "^1.1.0"
   },
   "bin": {
     "eyereasoner": "dist/bin/index.js"

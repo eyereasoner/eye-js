@@ -1,15 +1,12 @@
 // A set of functions that take a SWIPLModule as input, apply
 // a transformation, and then return the same module
-import type { SWIPLModule } from 'swipl-wasm/dist/swipl/swipl';
 import { Quad } from '@rdfjs/types';
 import { Parser } from 'n3';
-import type SWIPL_TYPE from 'swipl-wasm/dist/common';
-// @ts-ignore
-import SWIPL from './swipl-bundled.temp';
+import SWIPL, { type SWIPLModule } from 'swipl-wasm';
+import strToBuffer from 'swipl-wasm/dist/strToBuffer';
 import { write } from './n3Writer.temp';
 import EYE_PVM from './eye';
 import { queryOnce } from './query';
-import { strToBuffer } from './strToBuffer';
 
 export type ICoreQueryOptions = {
   blogic: true;
@@ -21,10 +18,10 @@ export type ICoreQueryOptions = {
 
 export type Options = ICoreQueryOptions & {
   outputType?: 'string' | 'quads';
-  SWIPL?: typeof SWIPL_TYPE;
+  SWIPL?: typeof SWIPL;
 }
 
-export function loadEyeImage(swipl: typeof SWIPL_TYPE) {
+export function loadEyeImage(swipl: typeof SWIPL) {
   return (options?: Partial<EmscriptenModule> | undefined) => swipl({
     ...options,
     arguments: ['-q', '-x', 'eye.pvm'],
@@ -123,12 +120,12 @@ export type Query = Data | undefined
  * @returns The result of the query as RDF/JS quads
  */
 /* eslint-disable max-len */
-export async function executeBasicEyeQuery(swipl: typeof SWIPL_TYPE, data: Data, query: Query, options: { outputType: 'string' } & Options): Promise<string>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL_TYPE, data: Data, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL_TYPE, data: Quad[], query?: Query, options?: { outputType?: undefined } & Options): Promise<Quad[]>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL_TYPE, data: string, query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL_TYPE, data: Data, query?: Query, options?: Options): Promise<Quad[] | string>;
-export async function executeBasicEyeQuery(swipl: typeof SWIPL_TYPE, data: Data, query?: Query, options?: Options): Promise<Quad[] | string> {
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query: Query, options: { outputType: 'string' } & Options): Promise<string>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Quad[], query?: Query, options?: { outputType?: undefined } & Options): Promise<Quad[]>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: string, query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query?: Query, options?: Options): Promise<Quad[] | string>;
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query?: Query, options?: Options): Promise<Quad[] | string> {
 /* eslint-enable max-len */
   const outputType = options?.outputType;
 
