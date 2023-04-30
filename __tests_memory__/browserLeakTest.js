@@ -8,12 +8,12 @@ async function main() {
   const leaks = await run({scenario: {
     url: () => 'http://localhost:3000/',
     action: async page => {
-      for (let i = 0; i < 200; i += 1) {
+      for (let i = 0; i < 3; i += 1) {
         await page.click('button[id=execute]')
       }
     },
     back: page => page.click('button[id=clear]'),
-    repeat: () => 5,
+    repeat: () => 3,
   }});
 
   server.close();

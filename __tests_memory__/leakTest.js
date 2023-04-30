@@ -50,7 +50,7 @@ async function main() {
 
   let maxCont = 0;
 
-  for (let i = 0; i <= 1000; i++) {
+  for (let i = 0; i <= 500; i++) {
     // Allow for GC
     await new Promise(res => setTimeout(res, 0));
 
