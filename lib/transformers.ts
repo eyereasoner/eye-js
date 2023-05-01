@@ -2,7 +2,7 @@
 // a transformation, and then return the same module
 import { Quad } from '@rdfjs/types';
 import { Parser } from 'n3';
-import SWIPL, { type SWIPLModule } from 'swipl-wasm';
+import SWIPL, { type SWIPLModule } from 'swipl-wasm/dist/swipl/swipl-bundle-no-data';
 import strToBuffer from 'swipl-wasm/dist/strToBuffer';
 import { write } from './n3Writer.temp';
 import EYE_PVM from './eye';
