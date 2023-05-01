@@ -1,4 +1,4 @@
-import type { SWIPLModule } from 'swipl-wasm/dist/swipl/swipl';
+import type { SWIPLModule } from 'swipl-wasm';
 
 /**
  * Executes a query
