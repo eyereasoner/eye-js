@@ -13,4 +13,4 @@ jobs:
         with:
           github-token: ${{ secrets.GH_TOKEN }}
           allowed-author: "dependabot[bot]"
-          merge-method: MERGE
+          merge-method: SQUASH
