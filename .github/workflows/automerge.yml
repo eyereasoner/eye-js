@@ -7,6 +7,9 @@ jobs:
   automerge:
     name: Enable automerge on dependabot PRs
     runs-on: ubuntu-latest
+    # Don't automerge swipl-wasm (for now) as we want a new release to
+    # be cut with each new version
+    if: ! startsWith(github.ref, 'dependabot/npm_and_yarn/swipl-wasm-')
     steps:
       - name: Enable automerge on dependabot PRs
         uses: daneden/enable-automerge-action@v1
