@@ -48,6 +48,45 @@ jobs:
         path: dist
     - run: npm test
 
+  benchmark:
+    needs: build
+    strategy:
+      matrix:
+        node-version: [ 20.x ]
+        os: [ ubuntu-latest ]
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 30
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Benchmarking Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - uses: actions/download-artifact@v3
+      with:
+        name: dist
+        path: dist
+    - name: Run benchmark
+      run: npm run perf
+    - name: Store benchmark result
+      uses: benchmark-action/github-action-benchmark@v1
+      with:
+        name: EYE JS Benchmark
+        tool: 'benchmarkjs'
+        output-file-path: perf/output.txt
+        github-token: ${{ secrets.GH_TOKEN }}
+        comment-on-alert: true
+        summary-always: true
+        alert-comment-cc-users: '@jeswr'
+        alert-threshold: "110%"
+        fail-threshold: "125%"
+        gh-pages-branch: bench-pages
+        auto-push: true
+
   eslint:
     runs-on: ubuntu-latest
     steps:
@@ -64,7 +103,7 @@ jobs:
 
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [ eslint, test ]
+    needs: [ eslint, test, benchmark ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
