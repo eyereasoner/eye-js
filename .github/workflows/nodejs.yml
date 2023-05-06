@@ -84,6 +84,7 @@ jobs:
         alert-comment-cc-users: '@jeswr'
         alert-threshold: "110%"
         fail-threshold: "125%"
+        gh-pages-branch: bench-pages
 
   eslint:
     runs-on: ubuntu-latest
