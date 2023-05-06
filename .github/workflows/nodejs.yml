@@ -102,7 +102,7 @@ jobs:
 
   release:
     if: ${{ github.ref == 'refs/heads/main' }}
-    needs: [ eslint, test ]
+    needs: [ eslint, test, benchmark ]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
