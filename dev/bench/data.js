@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1683464479256,
+  "lastUpdate": 1683491841945,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -158,6 +158,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.04,
             "range": "±0.61%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0a46cc1e967f07e8b6fde8c35e31345cef60ce94",
+          "message": "chore: discuss performance tests in readme (#303)",
+          "timestamp": "2023-05-07T20:32:08Z",
+          "tree_id": "2fdbae06b2b63e1282946371295bdea299b46858",
+          "url": "https://github.com/eyereasoner/eye-js/commit/0a46cc1e967f07e8b6fde8c35e31345cef60ce94"
+        },
+        "date": 1683491828388,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 10.07,
+            "range": "±12.58%",
+            "unit": "ops/sec",
+            "extra": "51 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 8.78,
+            "range": "±11.62%",
+            "unit": "ops/sec",
+            "extra": "46 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 127216,
+            "range": "±1.93%",
+            "unit": "ops/sec",
+            "extra": "85 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 152068,
+            "range": "±1.34%",
+            "unit": "ops/sec",
+            "extra": "85 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 83.4,
+            "range": "±16.82%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 5.56,
+            "range": "±9.74%",
+            "unit": "ops/sec",
+            "extra": "30 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.32,
+            "range": "±1.62%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.05,
+            "range": "±2.35%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
