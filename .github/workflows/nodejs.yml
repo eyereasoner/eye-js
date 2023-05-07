@@ -85,7 +85,7 @@ jobs:
         alert-threshold: "110%"
         fail-threshold: "125%"
         gh-pages-branch: bench-pages
-        auto-push: github.ref == 'main'
+        auto-push: ${{ github.ref == 'main' }}
 
   eslint:
     runs-on: ubuntu-latest
