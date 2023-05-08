@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1683491841945,
+  "lastUpdate": 1683551232640,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -238,6 +238,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.05,
             "range": "±2.35%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "77c2f4dfedbbc0a6a783c9715033a6f9dbdda655",
+          "message": "chore: don't comment on dependabot PRs (#308)\n\nOtherwise we get errors like https://github.com/eyereasoner/eye-js/actions/runs/4910662407/jobs/8768023966?pr=305 because tokens are not available in that environment",
+          "timestamp": "2023-05-08T13:01:58Z",
+          "tree_id": "1cd2f5e20c59f8c30a683547bc998b202e230a4d",
+          "url": "https://github.com/eyereasoner/eye-js/commit/77c2f4dfedbbc0a6a783c9715033a6f9dbdda655"
+        },
+        "date": 1683551218589,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 8.2,
+            "range": "±13.68%",
+            "unit": "ops/sec",
+            "extra": "43 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 7.44,
+            "range": "±13.10%",
+            "unit": "ops/sec",
+            "extra": "40 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 114678,
+            "range": "±2.52%",
+            "unit": "ops/sec",
+            "extra": "87 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 138310,
+            "range": "±0.85%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 80.7,
+            "range": "±17.68%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 4.56,
+            "range": "±10.93%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.28,
+            "range": "±2.74%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±1.70%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
