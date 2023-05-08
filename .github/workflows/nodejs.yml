@@ -86,7 +86,7 @@ jobs:
         gh-pages-branch: pages
         auto-push: ${{ github.ref == 'refs/heads/main' }}
         save-data-file: ${{ github.ref == 'refs/heads/main' }}
-        comment-always: true
+        comment-always: ${{ ! contains(github.ref, 'dependabot/npm_and_yarn/') }}
 
   eslint:
     runs-on: ubuntu-latest
