@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20.x
-      - name: Containment is ${{ ! contains(github.base_ref, 'dependabot/npm_and_yarn/') }} the ref is ${{ github.base_ref }}
+      - name: Containment is ${{ ! contains(github.head_ref, 'dependabot/npm_and_yarn/') }} the ref is ${{ github.head_ref }}
         run: npm ci
       - run: npm run build
       - uses: actions/upload-artifact@v3
@@ -80,7 +80,7 @@ jobs:
         tool: 'benchmarkjs'
         output-file-path: perf/output.txt
         github-token: ${{ secrets.GH_TOKEN }}
-        comment-on-alert: ${{ ! contains(github.ref_name, 'dependabot/npm_and_yarn/') }}
+        comment-on-alert: ${{ ! contains(github.head_ref, 'dependabot/npm_and_yarn/') }}
         alert-comment-cc-users: '@jeswr'
         alert-threshold: "110%"
         fail-threshold: "125%"
