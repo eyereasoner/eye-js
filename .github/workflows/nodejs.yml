@@ -79,7 +79,7 @@ jobs:
         tool: 'benchmarkjs'
         output-file-path: perf/output.txt
         github-token: ${{ secrets.GH_TOKEN }}
-        comment-on-alert: true
+        comment-on-alert: ${{ ! contains(github.ref, 'dependabot/npm_and_yarn/') }}
         alert-comment-cc-users: '@jeswr'
         alert-threshold: "110%"
         fail-threshold: "125%"
