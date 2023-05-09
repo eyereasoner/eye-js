@@ -3,6 +3,7 @@ import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
 import { data, dataStar, query, queryAll, result } from '../data/socrates';
+import { querySemantics, dataSemantics, resultSemantics } from '../data/semantics';
 import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 
@@ -17,6 +18,9 @@ export const dataQuads = parser.parse(data);
 export const dataStarQuads = parser.parse(dataStar);
 export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
+export const querySemanticsQuads = parser.parse(querySemantics);
+export const dataSemanticsQuads = parser.parse(dataSemantics);
+export const resultSemanticsQuads = parser.parse(resultSemantics);
 
 export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
   switch (args[0]) {
@@ -83,6 +87,10 @@ export function universalTests() {
     it('should execute the n3reasoner [quad input quad output] [output: undefined]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads, { output: undefined }),
     ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner with log:semantics [quad input quad output] [output: undefined]', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataSemanticsQuads, querySemanticsQuads, { output: undefined }),
+    ).resolves.toBeRdfIsomorphic(resultSemanticsQuads));
 
     it('should execute the n3reasoner [quad input quad output] [output: deductive_closure]', () => expect<Promise<string>>(
       n3reasoner(dataQuads, '{?S a ?O} => {?S a ?O}.', { output: 'deductive_closure', outputType: 'string' }),
