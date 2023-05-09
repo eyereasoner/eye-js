@@ -17,8 +17,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20.x
-      - name: Containment is ${{ ! contains(github.head_ref, 'dependabot/npm_and_yarn/') }} the ref is ${{ github.head_ref }}
-        run: npm ci
+      - run: npm ci
       - run: npm run build
       - uses: actions/upload-artifact@v3
         with:
