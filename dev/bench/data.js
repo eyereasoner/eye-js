@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1683677673422,
+  "lastUpdate": 1683685284192,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -1038,6 +1038,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.05,
             "range": "±1.34%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "092922db7bd5754dbb7f40392ddb9b16ff4dc5c6",
+          "message": "chore(deps-dev): bump @memlab/api from 1.0.21 to 1.0.22 (#318)\n\nBumps [@memlab/api](https://github.com/facebook/memlab/tree/HEAD/packages/api) from 1.0.21 to 1.0.22.\n- [Commits](https://github.com/facebook/memlab/commits/HEAD/packages/api)\n\n---\nupdated-dependencies:\n- dependency-name: \"@memlab/api\"\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-05-10T02:16:41Z",
+          "tree_id": "32009f78f0d52a42f2d792b2cb127aae2d213c52",
+          "url": "https://github.com/eyereasoner/eye-js/commit/092922db7bd5754dbb7f40392ddb9b16ff4dc5c6"
+        },
+        "date": 1683685270810,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 10.91,
+            "range": "±10.57%",
+            "unit": "ops/sec",
+            "extra": "55 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 9.87,
+            "range": "±9.24%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 142652,
+            "range": "±0.65%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 165325,
+            "range": "±0.29%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 90.53,
+            "range": "±18.49%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.06,
+            "range": "±6.63%",
+            "unit": "ops/sec",
+            "extra": "34 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.33,
+            "range": "±1.45%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.05,
+            "range": "±1.49%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
