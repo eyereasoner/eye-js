@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1684325542235,
+  "lastUpdate": 1684360426930,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -1838,6 +1838,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.05,
             "range": "±2.71%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "84786f03ef0919161468a49db4153ac995fa9734",
+          "message": "fix: update to eye v3.23.2 (#330)\n\nIn the latest release of eye (https://github.com/eyereasoner/eye/releases/tag/v3.23.2) a bug was fixed where `--nope` was incorrectly enabled by default in `--blogic` mode.\r\n\r\nSince this is not longer enabled by default we now need to ensure that this flag *is* enabled in `--blogic` mode.",
+          "timestamp": "2023-05-17T21:48:45Z",
+          "tree_id": "fa37b307c61fef2517df024f5c19238f811ada00",
+          "url": "https://github.com/eyereasoner/eye-js/commit/84786f03ef0919161468a49db4153ac995fa9734"
+        },
+        "date": 1684360412410,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 9.86,
+            "range": "±12.92%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 9.07,
+            "range": "±11.81%",
+            "unit": "ops/sec",
+            "extra": "47 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 138978,
+            "range": "±0.82%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 170343,
+            "range": "±0.61%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 85.32,
+            "range": "±18.97%",
+            "unit": "ops/sec",
+            "extra": "24 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 5.62,
+            "range": "±9.49%",
+            "unit": "ops/sec",
+            "extra": "32 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.33,
+            "range": "±1.12%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.05,
+            "range": "±1.68%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
