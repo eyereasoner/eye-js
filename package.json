@@ -21,7 +21,8 @@
     "test": "npm run test:unit && npm run test:memory",
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "build": "npm run eye:prepare && tsc",
+    "build": "npm run eye:prepare && npm run build:tsc",
+    "build:tsc": "tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
     "semantic-release": "semantic-release",
@@ -136,8 +137,8 @@
   },
   "config": {
     "eye": {
-      "name": "v3.23.1",
-      "url": "https://api.github.com/repos/eyereasoner/eye/releases/103201352"
+      "name": "v3.23.2",
+      "url": "https://api.github.com/repos/eyereasoner/eye/releases/103302955"
     }
   },
   "dependencies": {

@@ -53,40 +53,36 @@ export function runQuery(
   queryString?: string,
   { blogic, output }: Options = {},
 ): SWIPLModule {
-  const args: string[] = ['--quiet', 'data.nq'];
+  const args: string[] = ['--nope', '--quiet', 'data.nq'];
 
   if (blogic) {
     if (output || queryString) {
       throw new Error('Cannot use blogic with explicit output or query');
     }
     args.push('--blogic');
+  } else if (queryString) {
+    if (output) {
+      throw new Error('Cannot use explicit output with explicit query');
+    }
+    Module.FS.writeFile('query.nq', queryString);
+    args.push('--query', './query.nq');
   } else {
-    args.push('--nope');
-
-    if (queryString) {
-      if (output) {
-        throw new Error('Cannot use explicit output with explicit query');
-      }
-      Module.FS.writeFile('query.nq', queryString);
-      args.push('--query', './query.nq');
-    } else {
-      switch (output) {
-        case undefined:
-        case 'derivations':
-          args.push('--pass-only-new');
-          break;
-        case 'deductive_closure':
-          args.push('--pass');
-          break;
-        case 'deductive_closure_plus_rules':
-          args.push('--pass-all');
-          break;
-        case 'grounded_deductive_closure_plus_rules':
-          args.push('--pass-all-ground');
-          break;
-        default:
-          throw new Error(`Unknown output option: ${output}`);
-      }
+    switch (output) {
+      case undefined:
+      case 'derivations':
+        args.push('--pass-only-new');
+        break;
+      case 'deductive_closure':
+        args.push('--pass');
+        break;
+      case 'deductive_closure_plus_rules':
+        args.push('--pass-all');
+        break;
+      case 'grounded_deductive_closure_plus_rules':
+        args.push('--pass-all-ground');
+        break;
+      default:
+        throw new Error(`Unknown output option: ${output}`);
     }
   }
 
