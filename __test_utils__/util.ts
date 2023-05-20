@@ -5,6 +5,7 @@ import { DataFactory, Parser, Store } from 'n3';
 import { data, dataStar, query, queryAll, result } from '../data/socrates';
 import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
+import { data as regexData, result as regexResult } from '../data/regex';
 
 const parser = new Parser({ format: 'text/n3' });
 // Workaround for https://github.com/rdfjs/N3.js/issues/324
@@ -174,6 +175,9 @@ export function universalTests() {
       // 4 for the rule
       expect(store.size).toEqual(2 + 4);
     });
+
+    it('should execute the n3reasoner on a query string requiring regex', 
+      () => expect(n3reasoner(regexData)).resolves.toEqual(regexResult));
 
     it('should reject n3reasoner on invalid query', async () => {
       const res = n3reasoner(dataQuads, 'invalid');
