@@ -21,6 +21,16 @@ const deepTaxonomyBenchmark100 = [
   ...(new Parser({ format: 'n3' })).parse('{ ?s a ?o . ?o <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?o2 . } => { ?s a ?o2 . } .'),
 ]
 
+const deepTaxonomyBenchmark1000 = [
+  ...generateDeepTaxonomy(1000, true),
+  ...(new Parser({ format: 'n3' })).parse('{ ?s a ?o . ?o <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?o2 . } => { ?s a ?o2 . } .'),
+]
+
+const deepTaxonomyBenchmark10000 = [
+  ...generateDeepTaxonomy(10000, true),
+  ...(new Parser({ format: 'n3' })).parse('{ ?s a ?o . ?o <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?o2 . } => { ?s a ?o2 . } .'),
+]
+
 function deferred(fn: () => Promise<any>): Benchmark.Options {
   return {
     defer: true,
@@ -63,6 +73,12 @@ async function main() {
     ).add(
       'Run deep taxonomy benchmark [100]',
       deferred(() => n3reasoner(deepTaxonomyBenchmark100)),
+    ).add(
+      'Run deep taxonomy benchmark [1000]',
+      deferred(() => n3reasoner(deepTaxonomyBenchmark1000)),
+    ).add(
+      'Run deep taxonomy benchmark [10000]',
+      deferred(() => n3reasoner(deepTaxonomyBenchmark10000)),
     ).on('cycle', (event: Event) => {
       console.log(event.target.toString());
     }).run();
