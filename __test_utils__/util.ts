@@ -85,6 +85,27 @@ export function universalTests() {
       n3reasoner(dataQuads, queryQuads, { output: undefined }),
     ).resolves.toBeRdfIsomorphic(resultQuads));
 
+    it('should execute the built-in "log:uuid".', async () =>  {
+      const queryString = `@prefix : <urn:example:> .
+      @prefix log: <http://www.w3.org/2000/10/swap/log#> .
+      {   
+          :test log:uuid ?Y .
+      }
+      => 
+      { 
+          :Result :uuid ?Y .
+      } .`
+
+      const output = await n3reasoner('', queryString);
+      const outputQuads = parser.parse(output);
+      expect(outputQuads.length).toBe(1);
+      const createdUUID = outputQuads[0].object.value;
+      const uuidRegexMatch = createdUUID.match(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gm)
+      expect(uuidRegexMatch).not.toBe(null)
+      expect(uuidRegexMatch![0]).toBe(createdUUID)
+
+    })
+
     it('should execute the n3reasoner [quad input quad output] [output: deductive_closure]', () => expect<Promise<string>>(
       n3reasoner(dataQuads, '{?S a ?O} => {?S a ?O}.', { output: 'deductive_closure', outputType: 'string' }),
     ).rejects.toThrowError());
