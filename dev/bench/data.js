@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1684981739965,
+  "lastUpdate": 1684983564117,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -3358,6 +3358,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±2.26%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0eb6ece13d06fd9d6bec66ac3bb33af8445addc5",
+          "message": "chore(deps-dev): bump playwright from 1.34.2 to 1.34.3 (#354)\n\nBumps [playwright](https://github.com/Microsoft/playwright) from 1.34.2 to 1.34.3.\n- [Release notes](https://github.com/Microsoft/playwright/releases)\n- [Commits](https://github.com/Microsoft/playwright/compare/v1.34.2...v1.34.3)\n\n---\nupdated-dependencies:\n- dependency-name: playwright\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-05-25T02:51:33Z",
+          "tree_id": "19b6176c1b424455949b91bfbe39ababa8e0d069",
+          "url": "https://github.com/eyereasoner/eye-js/commit/0eb6ece13d06fd9d6bec66ac3bb33af8445addc5"
+        },
+        "date": 1684983548884,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 8.81,
+            "range": "±11.57%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 8.52,
+            "range": "±11.09%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 144574,
+            "range": "±0.45%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 177432,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 51.12,
+            "range": "±18.21%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.9,
+            "range": "±7.47%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.14,
+            "range": "±3.02%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±4.34%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
