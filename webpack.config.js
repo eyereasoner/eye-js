@@ -15,6 +15,7 @@ module.exports = {
       path: false,
       fs: false,
       crypto: false,
+      perf_hooks: false,
     }
   },
 };
