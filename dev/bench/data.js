@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1686018854802,
+  "lastUpdate": 1686020296713,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -4880,6 +4880,86 @@ window.BENCHMARK_DATA = {
             "range": "±1.83%",
             "unit": "ops/sec",
             "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b3eb6b7dfd719d1a2494411028a8fe6cddfdc964",
+          "message": "chore(deps-dev): bump @typescript-eslint/eslint-plugin (#374)\n\nBumps [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin) from 5.59.8 to 5.59.9.\n- [Release notes](https://github.com/typescript-eslint/typescript-eslint/releases)\n- [Changelog](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/CHANGELOG.md)\n- [Commits](https://github.com/typescript-eslint/typescript-eslint/commits/v5.59.9/packages/eslint-plugin)\n\n---\nupdated-dependencies:\n- dependency-name: \"@typescript-eslint/eslint-plugin\"\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-06-06T02:55:26Z",
+          "tree_id": "91c93f2f35065fb49874ec4f4c99bc0f98facbc2",
+          "url": "https://github.com/eyereasoner/eye-js/commit/b3eb6b7dfd719d1a2494411028a8fe6cddfdc964"
+        },
+        "date": 1686020280730,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 11.35,
+            "range": "±10.99%",
+            "unit": "ops/sec",
+            "extra": "57 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 11.1,
+            "range": "±10.63%",
+            "unit": "ops/sec",
+            "extra": "56 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 140175,
+            "range": "±0.52%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 163805,
+            "range": "±0.45%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 1955,
+            "range": "±2.57%",
+            "unit": "ops/sec",
+            "extra": "88 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 10.98,
+            "range": "±10.47%",
+            "unit": "ops/sec",
+            "extra": "57 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 11.2,
+            "range": "±10.55%",
+            "unit": "ops/sec",
+            "extra": "56 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 11.1,
+            "range": "±10.64%",
+            "unit": "ops/sec",
+            "extra": "56 samples"
           }
         ]
       }
