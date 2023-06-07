@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1686021675713,
+  "lastUpdate": 1686112375812,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -5038,6 +5038,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±5.43%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "a6025dcfd8fab661c447d0bb83d8eccaade4f71c",
+          "message": "fix: bump swipl-wasm from 3.4.1 to 3.4.2 (#375)\n\nBumps [swipl-wasm](https://github.com/SWI-Prolog/npm-swipl-wasm) from 3.4.1 to 3.4.2.\r\n- [Release notes](https://github.com/SWI-Prolog/npm-swipl-wasm/releases)\r\n- [Commits](https://github.com/SWI-Prolog/npm-swipl-wasm/compare/v3.4.1...v3.4.2)\r\n\r\n---\r\nupdated-dependencies:\r\n- dependency-name: swipl-wasm\r\n  dependency-type: direct:production\r\n  update-type: version-update:semver-patch\r\n...\r\n\r\nSigned-off-by: dependabot[bot] <support@github.com>\r\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-06-07T14:24:25+10:00",
+          "tree_id": "1d737db4a8a56df7ab2eedf990fcf3f04bffac80",
+          "url": "https://github.com/eyereasoner/eye-js/commit/a6025dcfd8fab661c447d0bb83d8eccaade4f71c"
+        },
+        "date": 1686112360611,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 9.07,
+            "range": "±9.81%",
+            "unit": "ops/sec",
+            "extra": "47 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 8.79,
+            "range": "±9.93%",
+            "unit": "ops/sec",
+            "extra": "46 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 141271,
+            "range": "±0.37%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 166945,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 49.44,
+            "range": "±18.45%",
+            "unit": "ops/sec",
+            "extra": "24 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.75,
+            "range": "±6.16%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.12,
+            "range": "±3.54%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±2.82%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
