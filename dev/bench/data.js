@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1688353618913,
+  "lastUpdate": 1688434861344,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -8398,6 +8398,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±3.38%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "bdf6cc41ab6d7fd3341b323444ad063f9869b77b",
+          "message": "chore(deps-dev): bump cross-fetch from 3.1.8 to 4.0.0 (#420)\n\nBumps [cross-fetch](https://github.com/lquixada/cross-fetch) from 3.1.8 to 4.0.0.\n- [Release notes](https://github.com/lquixada/cross-fetch/releases)\n- [Changelog](https://github.com/lquixada/cross-fetch/blob/v4.x/CHANGELOG.md)\n- [Commits](https://github.com/lquixada/cross-fetch/compare/v3.1.8...v4.0.0)\n\n---\nupdated-dependencies:\n- dependency-name: cross-fetch\n  dependency-type: direct:development\n  update-type: version-update:semver-major\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-07-04T01:32:16Z",
+          "tree_id": "d4e700c942768f473c5dff170a182e5bc5bb0ab0",
+          "url": "https://github.com/eyereasoner/eye-js/commit/bdf6cc41ab6d7fd3341b323444ad063f9869b77b"
+        },
+        "date": 1688434845363,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 8.72,
+            "range": "±11.93%",
+            "unit": "ops/sec",
+            "extra": "44 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 8.1,
+            "range": "±11.09%",
+            "unit": "ops/sec",
+            "extra": "43 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 133551,
+            "range": "±0.88%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 166995,
+            "range": "±0.62%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 51.14,
+            "range": "±18.74%",
+            "unit": "ops/sec",
+            "extra": "24 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.57,
+            "range": "±7.41%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.14,
+            "range": "±1.01%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±0.57%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
