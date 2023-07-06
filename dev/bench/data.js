@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1688526378517,
+  "lastUpdate": 1688609784997,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -9038,6 +9038,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±1.29%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "43f9542b028b6838d2a2b881e737dca5dd1bedcd",
+          "message": "chore(deps-dev): bump @types/n3 from 1.10.4 to 1.16.0 (#428)\n\nBumps [@types/n3](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/HEAD/types/n3) from 1.10.4 to 1.16.0.\n- [Release notes](https://github.com/DefinitelyTyped/DefinitelyTyped/releases)\n- [Commits](https://github.com/DefinitelyTyped/DefinitelyTyped/commits/HEAD/types/n3)\n\n---\nupdated-dependencies:\n- dependency-name: \"@types/n3\"\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-07-06T02:09:20Z",
+          "tree_id": "4493df6fdae9f6118870e64474b7bf7064472f07",
+          "url": "https://github.com/eyereasoner/eye-js/commit/43f9542b028b6838d2a2b881e737dca5dd1bedcd"
+        },
+        "date": 1688609767368,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 9.3,
+            "range": "±11.95%",
+            "unit": "ops/sec",
+            "extra": "48 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 8.68,
+            "range": "±11.55%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 148181,
+            "range": "±1.26%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 176441,
+            "range": "±1.41%",
+            "unit": "ops/sec",
+            "extra": "87 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 53.53,
+            "range": "±17.57%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 4.1,
+            "range": "±7.93%",
+            "unit": "ops/sec",
+            "extra": "24 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.15,
+            "range": "±2.39%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±3.09%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
