@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1689565966004,
+  "lastUpdate": 1689567572511,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -10718,6 +10718,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±2.09%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "30fa8390c1481ceec4a2c3ba4b7a1f49c6e13e05",
+          "message": "chore(deps-dev): bump @qiwi/semantic-release-gh-pages-plugin (#452)\n\nBumps [@qiwi/semantic-release-gh-pages-plugin](https://github.com/qiwi/semantic-release-gh-pages-plugin) from 5.2.4 to 5.2.6.\n- [Release notes](https://github.com/qiwi/semantic-release-gh-pages-plugin/releases)\n- [Changelog](https://github.com/qiwi/semantic-release-gh-pages-plugin/blob/master/CHANGELOG.md)\n- [Commits](https://github.com/qiwi/semantic-release-gh-pages-plugin/compare/v5.2.4...v5.2.6)\n\n---\nupdated-dependencies:\n- dependency-name: \"@qiwi/semantic-release-gh-pages-plugin\"\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-07-17T04:11:18Z",
+          "tree_id": "3765bdb47387d6a515b184e3effe9255bbfc36fc",
+          "url": "https://github.com/eyereasoner/eye-js/commit/30fa8390c1481ceec4a2c3ba4b7a1f49c6e13e05"
+        },
+        "date": 1689567556033,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 7.76,
+            "range": "±12.76%",
+            "unit": "ops/sec",
+            "extra": "41 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 7.41,
+            "range": "±11.42%",
+            "unit": "ops/sec",
+            "extra": "39 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 127727,
+            "range": "±0.98%",
+            "unit": "ops/sec",
+            "extra": "85 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 159752,
+            "range": "±0.94%",
+            "unit": "ops/sec",
+            "extra": "86 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 48.54,
+            "range": "±18.39%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.56,
+            "range": "±8.75%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.12,
+            "range": "±2.62%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±1.70%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
