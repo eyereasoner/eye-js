@@ -8,6 +8,7 @@ export const data = `
 
 export const result = `@prefix : <urn:example:>.
 @prefix string: <http://www.w3.org/2000/10/swap/string#>.
+
 <urn:example:test1> <urn:example:is> <urn:example:ok>.
 <urn:example:test2> <urn:example:is> <urn:example:ok>.
 
