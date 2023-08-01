@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import fs from 'fs-extra';
 import path from 'path';
+import fs from 'fs-extra';
 
 let version = process.argv.find((name) => name.startsWith('--name='))?.slice(8).split('.');
 
