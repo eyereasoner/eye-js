@@ -66,7 +66,6 @@ const data = `
 
 const result = await n3reasoner(data, undefined, {
   output: 'derivations',
-  blogic: false,
   outputType: 'string'
 });
 ```
@@ -77,9 +76,6 @@ The `options` parameter can be used to configure the reasoning process. The foll
     - `deductive_closure`: output deductive closure, a.k.a `--pass`
     - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
     - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
-- `blogic`: Whether to use the blogic or not. Used to support [RDF surfaces](https://w3c-cg.github.io/rdfsurfaces/).
-    - `true`: use blogic
-    - `false`: do not use blogic (default)
 - `outputType`: The type of output (if different from the input)
     - `string`: output as string
     - `quads`: output as array of RDF/JS Quads
