@@ -215,27 +215,21 @@ export function universalTests() {
 
     it('should reject n3reasoner on blogic and any output', async () => {
       // @ts-expect-error
-      const res = n3reasoner(dataQuads, undefined, { output: 'dervations', blogic: true });
+      const res = n3reasoner(dataQuads, undefined, { output: 'dervations' });
       
       expect(res).rejects.toThrowError()
     });
 
 
     it('should reject n3reasoner on query string and blogic', async () => {
-      const res = n3reasoner(dataQuads, '{?S ?P ?O} => {?S ?P ?O}', { blogic: true });
+      const res = n3reasoner(dataQuads, '{?S ?P ?O} => {?S ?P ?O}');
       
       expect(res).rejects.toThrowError()
     });
     it('should execute the n3reasoner using blogic', async () => {
-      const resultStr: string = await n3reasoner(blogicData, undefined, { blogic: true });
+      const resultStr: string = await n3reasoner(blogicData);
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
       expect<Quad[]>(quads).toBeRdfIsomorphic(resultBlogicQuads);
-    });
-
-    it('should fail executing blogic using the n3reasoner without blogic enabled', async () => {
-      const resultStr: string = await n3reasoner(blogicData, undefined, { blogic: false });
-      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
-      expect<Quad[]>(quads).not.toBeRdfIsomorphic(resultBlogicQuads);
     });
 
     it('should throw error when eye cannot process the query', async () => {

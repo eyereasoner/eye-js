@@ -9,10 +9,6 @@ import EYE_PVM from './eye';
 import { queryOnce } from './query';
 
 export type ICoreQueryOptions = {
-  blogic: true;
-  output?: undefined;
-} | {
-  blogic?: false;
   output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules';
 }
 
@@ -44,23 +40,17 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  * @param queryString The query (in Notation3)
  * @param options The reasoner options
  *  - output: What to output with implicit queries (default: undefined)
- *  - blogic: Whether to use blogic (default: false)
  * @returns The same SWIPL module
  */
 export function runQuery(
   Module: SWIPLModule,
   data: string,
   queryString?: string,
-  { blogic, output }: Options = {},
+  { output }: Options = {},
 ): SWIPLModule {
   const args: string[] = ['--nope', '--quiet', 'data.nq'];
 
-  if (blogic) {
-    if (output || queryString) {
-      throw new Error('Cannot use blogic with explicit output or query');
-    }
-    args.push('--blogic');
-  } else if (queryString) {
+  if (queryString) {
     if (output) {
       throw new Error('Cannot use explicit output with explicit query');
     }
@@ -110,7 +100,6 @@ export type Query = Data | undefined
  * @param query The query as RDF/JS quads
  * @param options The reasoner options
  *  - output: What to output with implicit queries (default: undefined)
- *  - blogic: Whether to use blogic (default: false)
  *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
  *  - SWIPL: The SWIPL module to use (default: bundled SWIPL)
  * @returns The result of the query as RDF/JS quads
@@ -154,7 +143,6 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, quer
  * @param query The query as RDF/JS quads
  * @param options The reasoner options
  *  - output: What to output with implicit queries (default: undefined)
- *  - blogic: Whether to use blogic (default: false)
  *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
  * @returns The result of the query as RDF/JS quads
  */
