@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1692671163684,
+  "lastUpdate": 1692673819859,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -16398,6 +16398,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±2.00%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "f4becf681eb7792247e7f79ea6b63b2d451956c6",
+          "message": "chore(deps-dev): bump jest from 29.6.2 to 29.6.3 (#528)\n\nBumps [jest](https://github.com/jestjs/jest/tree/HEAD/packages/jest) from 29.6.2 to 29.6.3.\n- [Release notes](https://github.com/jestjs/jest/releases)\n- [Changelog](https://github.com/jestjs/jest/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/jestjs/jest/commits/v29.6.3/packages/jest)\n\n---\nupdated-dependencies:\n- dependency-name: jest\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-08-22T03:02:39Z",
+          "tree_id": "85de5d4fe957f77df93842733d617132fd229731",
+          "url": "https://github.com/eyereasoner/eye-js/commit/f4becf681eb7792247e7f79ea6b63b2d451956c6"
+        },
+        "date": 1692673800378,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 8.61,
+            "range": "±11.95%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 7.8,
+            "range": "±11.66%",
+            "unit": "ops/sec",
+            "extra": "40 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 139188,
+            "range": "±0.72%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 168010,
+            "range": "±0.72%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 51.87,
+            "range": "±17.67%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.71,
+            "range": "±8.68%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.14,
+            "range": "±2.19%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±2.82%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
