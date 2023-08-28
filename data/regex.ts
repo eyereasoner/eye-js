@@ -6,10 +6,7 @@ export const data = `
 {"2023" string:matches "[0-9]{4}"} => {:test2 :is :ok}.
 `;
 
-export const result = `@prefix : <urn:example:>.
-@prefix string: <http://www.w3.org/2000/10/swap/string#>.
-
+export const result = `
 <urn:example:test1> <urn:example:is> <urn:example:ok>.
 <urn:example:test2> <urn:example:is> <urn:example:ok>.
-
 `;
