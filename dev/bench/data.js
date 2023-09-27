@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1695780359014,
+  "lastUpdate": 1695782249861,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -21758,6 +21758,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±3.37%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3626c1353a7c69d8dc0f2c2dfaab2e2c49b592c8",
+          "message": "build(deps-dev): bump express-rate-limit from 7.0.1 to 7.0.2 (#602)\n\nBumps [express-rate-limit](https://github.com/express-rate-limit/express-rate-limit) from 7.0.1 to 7.0.2.\n- [Release notes](https://github.com/express-rate-limit/express-rate-limit/releases)\n- [Changelog](https://github.com/express-rate-limit/express-rate-limit/blob/main/changelog.md)\n- [Commits](https://github.com/express-rate-limit/express-rate-limit/compare/v7.0.1...v7.0.2)\n\n---\nupdated-dependencies:\n- dependency-name: express-rate-limit\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2023-09-27T02:29:11Z",
+          "tree_id": "b4f3e6aee091175125eb5ccb0b3bfaf46087476c",
+          "url": "https://github.com/eyereasoner/eye-js/commit/3626c1353a7c69d8dc0f2c2dfaab2e2c49b592c8"
+        },
+        "date": 1695782225186,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 9.29,
+            "range": "±9.60%",
+            "unit": "ops/sec",
+            "extra": "48 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 8.32,
+            "range": "±9.55%",
+            "unit": "ops/sec",
+            "extra": "44 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 143933,
+            "range": "±0.49%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 167304,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 49.83,
+            "range": "±16.33%",
+            "unit": "ops/sec",
+            "extra": "30 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.34,
+            "range": "±6.02%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.12,
+            "range": "±0.56%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±1.49%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
