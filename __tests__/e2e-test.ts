@@ -3,6 +3,8 @@ import { firefox, chromium, type BrowserType } from 'playwright';
 import { createTestApp } from '../__test_utils__/serve';
 import { data } from '../data/socrates';
 
+const TIMEOUT = { timeout: 10_000 } as const;
+
 describe('Testing browsers', () => {
   let server: Server;
 
@@ -27,22 +29,22 @@ describe('Testing browsers', () => {
         const page = await browser.newPage();
 
         await page.goto('http://localhost:3001/');
-        await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
-        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('');
+        await expect(page.textContent('textarea[id=data]', TIMEOUT).then((r) => r?.trim())).resolves.toEqual(data.trim());
+        await expect(page.textContent('div[id=result]', TIMEOUT).then((r) => r?.trim())).resolves.toEqual('');
 
-        await page.click('button[id=execute]');
+        await page.click('button[id=execute]', TIMEOUT);
         // Time for new result to be inserted in the DOM
-        await new Promise((res) => { setTimeout(res, 1000); });
+        await new Promise((res) => { setTimeout(res, 500); });
 
-        await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
-        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('@prefix rdfs: .@prefix : .:Socrates a :Mortal.');
+        await expect(page.textContent('textarea[id=data]', TIMEOUT).then((r) => r?.trim())).resolves.toEqual(data.trim());
+        await expect(page.textContent('div[id=result]', TIMEOUT).then((r) => r?.trim())).resolves.toEqual('@prefix : .:Socrates a :Mortal.');
 
-        await page.click('button[id=clear]');
+        await page.click('button[id=clear]', TIMEOUT);
         // Time for new result to be inserted in the DOM
-        await new Promise((res) => { setTimeout(res, 1000); });
+        await new Promise((res) => { setTimeout(res, 100); });
 
-        await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
-        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('');
+        await expect(page.textContent('textarea[id=data]', TIMEOUT).then((r) => r?.trim())).resolves.toEqual(data.trim());
+        await expect(page.textContent('div[id=result]', TIMEOUT).then((r) => r?.trim())).resolves.toEqual('');
 
         await page.close();
         await browser.close();

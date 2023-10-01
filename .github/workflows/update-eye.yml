@@ -7,8 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH_TOKEN }}
       - name: Commit latest release version
         run: |
           npm ci
@@ -37,19 +35,21 @@ jobs:
 
           # The name of the new branch if we need to create one
           branch=$branchHead/update-eye-${current:1:-1}
-          msg="$version: update to eye ${current:1:-1}"
+
+          # Create a message that conforms to semantic release
+          # note that we repeat this in the message body as semantic
+          # release requires breaking changes to include BREAKING CHANGE
+          # in the text body as well
+          msg="$version: update to eye ${current:1:-1}
+          
+          $version: update to eye ${current:1:-1}
+          "
 
           if [ $branchHead ]; then
-            git config --global user.name 'Jesse Wright'
-            git config --global user.email '63333554+jeswr@users.noreply.github.com'
             git checkout -b $branch
             git commit -am "$msg"
             git push --set-upstream origin $branch
+            # FIXME: Check this with a dry run
             gh pr create -t "$msg" -b "$msg"
-            
-            if [ ! $branchHead == "breaking" ]; then
-              gh pr merge $branch --auto --squash
-            fi
+            gh pr merge $branch --auto --squash
           fi
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
