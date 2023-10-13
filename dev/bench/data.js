@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1697011821658,
+  "lastUpdate": 1697213817565,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -23998,6 +23998,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±2.45%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "5df70a7e509c3ba8216dc143fffbf5b0fab83e88",
+          "message": "feat: add support for multiple input strings (#634)\n\n* feat: add support for multiple input strings\r\n\r\n* fix: fix file name\r\n\r\n* chore: test data split over multiple files",
+          "timestamp": "2023-10-13T16:08:29Z",
+          "tree_id": "c5c2161b53a8979e2109ebade54665d0a0a7f506",
+          "url": "https://github.com/eyereasoner/eye-js/commit/5df70a7e509c3ba8216dc143fffbf5b0fab83e88"
+        },
+        "date": 1697213789200,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 7.59,
+            "range": "±12.93%",
+            "unit": "ops/sec",
+            "extra": "39 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 7.23,
+            "range": "±11.45%",
+            "unit": "ops/sec",
+            "extra": "38 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 111068,
+            "range": "±1.74%",
+            "unit": "ops/sec",
+            "extra": "80 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 135545,
+            "range": "±1.79%",
+            "unit": "ops/sec",
+            "extra": "81 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 49.33,
+            "range": "±14.18%",
+            "unit": "ops/sec",
+            "extra": "32 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.01,
+            "range": "±7.73%",
+            "unit": "ops/sec",
+            "extra": "20 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.11,
+            "range": "±1.70%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±0.97%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
