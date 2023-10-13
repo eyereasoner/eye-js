@@ -21,7 +21,8 @@
     "test": "npm run test:unit && npm run test:memory",
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "build": "npm run eye:prepare && tsc",
+    "build": "npm run eye:prepare && npm run build:tsc",
+    "build:tsc": "tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
     "semantic-release": "semantic-release",
@@ -59,22 +60,22 @@
   "devDependencies": {
     "@memlab/api": "^1.0.20",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
-    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-commonjs": "^25.0.0",
     "@types/benchmark": "^2.1.2",
     "@types/express": "^4.17.17",
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.4.0",
     "@types/n3": "^1.10.4",
-    "@typescript-eslint/eslint-plugin": "^5.51.0",
-    "@typescript-eslint/parser": "^5.51.0",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
     "benchmark": "^2.1.4",
-    "cross-fetch": "^3.1.5",
+    "cross-fetch": "^4.0.0",
     "deep-taxonomy-benchmark": "^1.1.1",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
     "express": "^4.18.2",
-    "express-rate-limit": "^6.7.0",
+    "express-rate-limit": "^7.0.0",
     "fs-extra": "^11.1.0",
     "jest": "^29.4.2",
     "jest-environment-jsdom": "^29.4.2",
@@ -83,7 +84,7 @@
     "parse-url": "^8.1.0",
     "playwright": "^1.30.0",
     "pre-commit": "^1.2.2",
-    "semantic-release": "^21.0.0",
+    "semantic-release": "^22.0.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
@@ -136,13 +137,13 @@
   },
   "config": {
     "eye": {
-      "name": "v3.22.5",
-      "url": "https://api.github.com/repos/eyereasoner/eye/releases/102191797"
+      "name": "v5.0.7",
+      "url": "https://api.github.com/repos/eyereasoner/eye/releases/124317416"
     }
   },
   "dependencies": {
     "n3": "^1.16.3",
-    "swipl-wasm": "3.3.0"
+    "swipl-wasm": "3.5.5"
   },
   "peerDependencies": {
     "@rdfjs/types": "^1.1.0"

@@ -35,7 +35,7 @@ describe('Testing browsers', () => {
         await new Promise((res) => { setTimeout(res, 1000); });
 
         await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
-        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('@prefix rdfs: .@prefix : .:Socrates a :Mortal.');
+        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('@prefix : .:Socrates a :Mortal.');
 
         await page.click('button[id=clear]');
         // Time for new result to be inserted in the DOM

@@ -21,12 +21,10 @@ export const data = `
 `;
 
 export const result = `
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix : <http://example.org/socrates#>.
 
 :Socrates a :Human.
-:Socrates a :Mortal.
-`;
+:Socrates a :Mortal.`;
 
 export const dataStar = `
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.

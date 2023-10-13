@@ -6,6 +6,7 @@ import { data, dataStar, query, queryAll, result } from '../data/socrates';
 import { querySemantics, dataSemantics, resultSemantics } from '../data/semantics';
 import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
+import { data as regexData, result as regexResult } from '../data/regex';
 
 const parser = new Parser({ format: 'text/n3' });
 // Workaround for https://github.com/rdfjs/N3.js/issues/324
@@ -91,6 +92,26 @@ export function universalTests() {
     it('should execute the n3reasoner with log:semantics [quad input quad output] [output: undefined]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataSemanticsQuads, querySemanticsQuads, { output: undefined }),
     ).resolves.toBeRdfIsomorphic(resultSemanticsQuads));
+
+    it('should execute the built-in "log:uuid".', async () =>  {
+      const queryString = `@prefix : <urn:example:> .
+      @prefix log: <http://www.w3.org/2000/10/swap/log#> .
+      {   
+          :test log:uuid ?Y .
+      }
+      => 
+      { 
+          :Result :uuid ?Y .
+      } .`
+
+      const output = await n3reasoner('', queryString);
+      const outputQuads = parser.parse(output);
+      expect(outputQuads.length).toBe(1);
+      const createdUUID = outputQuads[0].object.value;
+      const uuidRegexMatch = createdUUID.match(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gm);
+      expect(uuidRegexMatch).not.toBe(null);
+      expect(uuidRegexMatch![0]).toBe(createdUUID);
+    })
 
     it('should execute the n3reasoner [quad input quad output] [output: deductive_closure]', () => expect<Promise<string>>(
       n3reasoner(dataQuads, '{?S a ?O} => {?S a ?O}.', { output: 'deductive_closure', outputType: 'string' }),
@@ -183,6 +204,9 @@ export function universalTests() {
       expect(store.size).toEqual(2 + 4);
     });
 
+    it('should execute the n3reasoner on a query string requiring regex', 
+      () => expect(n3reasoner(regexData)).resolves.toEqual(regexResult));
+
     it('should reject n3reasoner on invalid query', async () => {
       const res = n3reasoner(dataQuads, 'invalid');
       
@@ -198,27 +222,21 @@ export function universalTests() {
 
     it('should reject n3reasoner on blogic and any output', async () => {
       // @ts-expect-error
-      const res = n3reasoner(dataQuads, undefined, { output: 'dervations', blogic: true });
+      const res = n3reasoner(dataQuads, undefined, { output: 'dervations' });
       
       expect(res).rejects.toThrowError()
     });
 
 
     it('should reject n3reasoner on query string and blogic', async () => {
-      const res = n3reasoner(dataQuads, '{?S ?P ?O} => {?S ?P ?O}', { blogic: true });
+      const res = n3reasoner(dataQuads, '{?S ?P ?O} => {?S ?P ?O}');
       
       expect(res).rejects.toThrowError()
     });
     it('should execute the n3reasoner using blogic', async () => {
-      const resultStr: string = await n3reasoner(blogicData, undefined, { blogic: true });
+      const resultStr: string = await n3reasoner(blogicData);
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
       expect<Quad[]>(quads).toBeRdfIsomorphic(resultBlogicQuads);
-    });
-
-    it('should fail executing blogic using the n3reasoner without blogic enabled', async () => {
-      const resultStr: string = await n3reasoner(blogicData, undefined, { blogic: false });
-      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
-      expect<Quad[]>(quads).not.toBeRdfIsomorphic(resultBlogicQuads);
     });
 
     it('should throw error when eye cannot process the query', async () => {
