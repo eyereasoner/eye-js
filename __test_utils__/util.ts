@@ -3,6 +3,7 @@ import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
 import { data, dataStar, query, queryAll, result } from '../data/socrates';
+import { querySemantics, dataSemantics, resultSemantics } from '../data/semantics';
 import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
@@ -18,6 +19,9 @@ export const dataQuads = parser.parse(data);
 export const dataStarQuads = parser.parse(dataStar);
 export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
+export const querySemanticsQuads = parser.parse(querySemantics);
+export const dataSemanticsQuads = parser.parse(dataSemantics);
+export const resultSemanticsQuads = parser.parse(resultSemantics);
 
 export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
   switch (args[0]) {
@@ -85,6 +89,10 @@ export function universalTests() {
       n3reasoner(dataQuads, queryQuads, { output: undefined }),
     ).resolves.toBeRdfIsomorphic(resultQuads));
 
+    it('should execute the n3reasoner with log:semantics [quad input quad output] [output: undefined]', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataSemanticsQuads, querySemanticsQuads, { output: undefined }),
+    ).resolves.toBeRdfIsomorphic(resultSemanticsQuads));
+
     it('should execute the built-in "log:uuid".', async () =>  {
       const queryString = `@prefix : <urn:example:> .
       @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -100,10 +108,9 @@ export function universalTests() {
       const outputQuads = parser.parse(output);
       expect(outputQuads.length).toBe(1);
       const createdUUID = outputQuads[0].object.value;
-      const uuidRegexMatch = createdUUID.match(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gm)
-      expect(uuidRegexMatch).not.toBe(null)
-      expect(uuidRegexMatch![0]).toBe(createdUUID)
-
+      const uuidRegexMatch = createdUUID.match(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gm);
+      expect(uuidRegexMatch).not.toBe(null);
+      expect(uuidRegexMatch![0]).toBe(createdUUID);
     })
 
     it('should execute the n3reasoner [quad input quad output] [output: deductive_closure]', () => expect<Promise<string>>(
