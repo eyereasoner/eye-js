@@ -2,5 +2,6 @@ node_modules
 coverage
 dist
 bundle
+eye
 lib/eye.ts
 perf/output.txt

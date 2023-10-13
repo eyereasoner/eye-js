@@ -48,14 +48,14 @@ export function runQuery(
   queryString?: string,
   { output }: Options = {},
 ): SWIPLModule {
-  const args: string[] = ['--nope', '--quiet', 'data.nq'];
+  const args: string[] = ['--nope', '--quiet', 'data.n3s'];
 
   if (queryString) {
     if (output) {
       throw new Error('Cannot use explicit output with explicit query');
     }
-    Module.FS.writeFile('query.nq', queryString);
-    args.push('--query', './query.nq');
+    Module.FS.writeFile('query.n3s', queryString);
+    args.push('--query', './query.n3s');
   } else {
     switch (output) {
       case undefined:
@@ -76,7 +76,7 @@ export function runQuery(
     }
   }
 
-  Module.FS.writeFile('data.nq', data);
+  Module.FS.writeFile('data.n3s', data);
 
   queryOnce(Module, 'main', args);
   return Module;
@@ -122,8 +122,8 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, quer
   });
   runQuery(
     Module,
-    typeof data === 'string' ? data : write(data),
-    query && (typeof query === 'string' ? query : write(query)),
+    typeof data === 'string' ? data : await write(data, { format: 'text/n3' }),
+    query && (typeof query === 'string' ? query : await write(query, { format: 'text/n3' })),
     options,
   );
 
