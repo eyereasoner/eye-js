@@ -30,6 +30,7 @@
     "eye:pvm:test": "ts-node scripts/run-pvm",
     "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
+    "clone:eye": "rm -rf ./eye && git clone https://github.com/eyereasoner/eye ./eye --depth 1 --branch $npm_package_config_eye_name",
     "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt"
   },
   "repository": {
@@ -58,6 +59,7 @@
   },
   "homepage": "https://github.com/eyereasoner/eye-js#readme",
   "devDependencies": {
+    "@jeswr/pretty-turtle": "^1.4.0",
     "@memlab/api": "^1.0.20",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
     "@rollup/plugin-commonjs": "^25.0.0",
