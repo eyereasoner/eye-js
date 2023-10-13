@@ -44,18 +44,23 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  */
 export function runQuery(
   Module: SWIPLModule,
-  data: string,
+  data: [string, ...string[]],
   queryString?: string,
   { output }: Options = {},
 ): SWIPLModule {
-  const args: string[] = ['--nope', '--quiet', 'data.nq'];
+  const args = ['--nope', '--quiet'];
+
+  for (let i = 0; i < data.length; i += 1) {
+    args.push(`data_${i}.n3s`);
+    Module.FS.writeFile(`data_${i}.n3s`, data[i]);
+  }
 
   if (queryString) {
     if (output) {
       throw new Error('Cannot use explicit output with explicit query');
     }
-    Module.FS.writeFile('query.nq', queryString);
-    args.push('--query', './query.nq');
+    Module.FS.writeFile('query.n3s', queryString);
+    args.push('--query', './query.n3s');
   } else {
     switch (output) {
       case undefined:
@@ -76,8 +81,6 @@ export function runQuery(
     }
   }
 
-  Module.FS.writeFile('data.nq', data);
-
   queryOnce(Module, 'main', args);
   return Module;
 }
@@ -92,7 +95,18 @@ function parse(res: string) {
 }
 
 export type Data = Quad[] | string
+export type InputData = Data | [string, ...string[]]
 export type Query = Data | undefined
+
+function inputDataToStrings(data: InputData): [string, ...string[]] {
+  if (typeof data === 'string') {
+    return [data];
+  }
+  if (typeof data[0] === 'string') {
+    return data as [string, ...string[]];
+  }
+  return [write(data as Quad[])];
+}
 
 /**
  * Executes a basic query using the EYE Reasoner and default build of SWIPL
@@ -105,12 +119,12 @@ export type Query = Data | undefined
  * @returns The result of the query as RDF/JS quads
  */
 /* eslint-disable max-len */
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query: Query, options: { outputType: 'string' } & Options): Promise<string>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query: Query, options: { outputType: 'string' } & Options): Promise<string>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
 export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Quad[], query?: Query, options?: { outputType?: undefined } & Options): Promise<Quad[]>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: string, query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query?: Query, options?: Options): Promise<Quad[] | string>;
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, query?: Query, options?: Options): Promise<Quad[] | string> {
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: string | [string, ...string[]], query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query?: Query, options?: Options): Promise<Quad[] | string>;
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query?: Query, options?: Options): Promise<Quad[] | string> {
 /* eslint-enable max-len */
   const outputType = options?.outputType;
 
@@ -122,7 +136,7 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, quer
   });
   runQuery(
     Module,
-    typeof data === 'string' ? data : write(data),
+    inputDataToStrings(data),
     query && (typeof query === 'string' ? query : write(query)),
     options,
   );
@@ -131,7 +145,7 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, quer
     throw new Error(`Error while executing query: ${err.join('\n')}`);
   }
 
-  return (outputType === 'quads' || (typeof data !== 'string' && outputType !== 'string'))
+  return (outputType === 'quads' || (typeof data !== 'string' && typeof data[0] !== 'string' && outputType !== 'string'))
     ? parse(res)
     : res;
 }
@@ -147,12 +161,12 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Data, quer
  * @returns The result of the query as RDF/JS quads
  */
 /* eslint-disable max-len */
-export async function n3reasoner(data: Data, query: Query, options: { outputType: 'string' } & Options): Promise<string>
-export async function n3reasoner(data: Data, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
+export async function n3reasoner(data: InputData, query: Query, options: { outputType: 'string' } & Options): Promise<string>
+export async function n3reasoner(data: InputData, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
 export async function n3reasoner(data: Quad[], query?: Query, options?: { outputType?: undefined } & Options): Promise<Quad[]>
-export async function n3reasoner(data: string, query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
-export async function n3reasoner(data: Data, query?: Query, options?: Options): Promise<Quad[] | string>;
-export async function n3reasoner(data: Data, query?: Query, options?: Options): Promise<Quad[] | string> {
+export async function n3reasoner(data: string | [string, ...string[]], query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
+export async function n3reasoner(data: InputData, query?: Query, options?: Options): Promise<Quad[] | string>;
+export async function n3reasoner(data: InputData, query?: Query, options?: Options): Promise<Quad[] | string> {
 /* eslint-enable max-len */
   return executeBasicEyeQuery(options?.SWIPL || SWIPL, data, query, options);
 }
