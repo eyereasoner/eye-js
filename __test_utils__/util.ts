@@ -2,7 +2,7 @@
 import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
-import { data, dataStar, query, queryAll, result } from '../data/socrates';
+import { data, dataSplit, dataStar, query, queryAll, result } from '../data/socrates';
 import { n3reasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
@@ -162,6 +162,10 @@ export function universalTests() {
 
     it('should execute the n3reasoner [string single list input explicit quad output]', () => expect<Promise<Quad[]>>(
       n3reasoner([data], query, { outputType: 'quads' }),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner [string single list input explicit quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner(dataSplit, query, { outputType: 'quads' }),
     ).resolves.toBeRdfIsomorphic(resultQuads));
 
     it('should execute the n3reasoner without query quads', () => expect(

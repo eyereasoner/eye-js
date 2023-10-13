@@ -10,15 +10,27 @@ export const queryAll = `
 {?S ?P ?O} => {?S ?P ?O}.
 `;
 
-export const data = `
+export const socratesPrefixes = `
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix : <http://example.org/socrates#>.
+`
 
-:Socrates a :Human.
-:Human rdfs:subClassOf :Mortal.
+export const socratesHuman = ':Socrates a :Human.';
+export const humanMortal = ':Human rdfs:subClassOf :Mortal.';
+export const subClassOf = '{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.'
 
-{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.
+export const data = `${socratesPrefixes}
+${socratesHuman}
+${humanMortal}
+
+${subClassOf}
 `;
+
+export const dataSplit: [string, ...string[]] = [
+  socratesPrefixes + socratesHuman,
+  socratesPrefixes + humanMortal,
+  socratesPrefixes + subClassOf,
+]
 
 export const result = `
 @prefix : <http://example.org/socrates#>.
