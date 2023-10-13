@@ -52,7 +52,7 @@ export function runQuery(
 
   for (let i = 0; i < data.length; i += 1) {
     args.push(`data_${i}.n3s`);
-    Module.FS.writeFile(`data${i}.n3s`, data[i]);
+    Module.FS.writeFile(`data_${i}.n3s`, data[i]);
   }
 
   if (queryString) {

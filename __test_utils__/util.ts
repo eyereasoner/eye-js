@@ -138,7 +138,19 @@ export function universalTests() {
       expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
     });
 
+    it('should execute the n3reasoner [string single list input string output]', async () => {
+      const resultStr: string = await n3reasoner([data], query);
+      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
+    });
+
     it('should execute the n3reasoner [string input explicit string output]', async () => {
+      const resultStr: string = await n3reasoner(data, query, { outputType: 'string' });
+      const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
+      expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
+    });
+
+    it('should execute the n3reasoner [string single list input explicit string output]', async () => {
       const resultStr: string = await n3reasoner(data, query, { outputType: 'string' });
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
       expect<Quad[]>(quads).toBeRdfIsomorphic(resultQuads);
@@ -146,6 +158,10 @@ export function universalTests() {
 
     it('should execute the n3reasoner [string input explicit quad output]', () => expect<Promise<Quad[]>>(
       n3reasoner(data, query, { outputType: 'quads' }),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner [string single list input explicit quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner([data], query, { outputType: 'quads' }),
     ).resolves.toBeRdfIsomorphic(resultQuads));
 
     it('should execute the n3reasoner without query quads', () => expect(
