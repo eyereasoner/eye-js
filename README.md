@@ -38,6 +38,8 @@ const resultString = await n3reasoner(dataString, queryString);
 const resultString = await n3reasoner(dataString);
 ```
 
+*Note:* One can also supply an array of `dataString`s rather than a single `dataString` if one has multiple input data files.
+
 The `n3reasoner` accepts both `string`s (formatted in Notation3 syntax) and `quad`s as input. The output will be of the same type as the input `data`. This means that we can use `n3reasoner` with RDF/JS quads as follows:
 
 ```ts
