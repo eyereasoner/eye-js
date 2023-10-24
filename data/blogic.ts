@@ -4,15 +4,15 @@ export const data = `
 
 :Alice a :Person .
 
-(_:x) log:onNegativeSurface {
-    _:x a :Person .
+(_x) log:onNegativeSurface {
+    _x a :Person .
    () log:onNegativeSurface {
-       _:x a :Human .
+       _x a :Human .
    } .
 } .
 
-(_:x _:y) log:onQuerySurface {
-   _:x a _:y .
+(_x _y) log:onQuerySurface {
+   _x a _y .
 } .
 `;
 
@@ -20,6 +20,5 @@ export const result = `
 @prefix : <urn:example:>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 
-<urn:example:Alice> a <urn:example:Person>.
 <urn:example:Alice> a <urn:example:Human>.
 `;
