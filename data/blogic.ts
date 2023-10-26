@@ -4,15 +4,15 @@ export const data = `
 
 :Alice a :Person .
 
-(_x) log:onNegativeSurface {
-    _x a :Person .
+(_:x) log:onNegativeSurface {
+    _:x a :Person .
    () log:onNegativeSurface {
-       _x a :Human .
+       _:x a :Human .
    } .
 } .
 
-(_x _y) log:onQuerySurface {
-   _x a _y .
+(_:x _:y) log:onQuerySurface {
+   _:x a _:y .
 } .
 `;
 
