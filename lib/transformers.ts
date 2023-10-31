@@ -116,7 +116,7 @@ function inputDataToStrings(data: InputData): [string, ...string[]] {
  *  - output: What to output with implicit queries (default: undefined)
  *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
  *  - SWIPL: The SWIPL module to use (default: bundled SWIPL)
- * @returns The result of the query as RDF/JS quads
+ * @returns The result of the query as a string or RDF/JS quads
  */
 /* eslint-disable max-len */
 export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query: Query, options: { outputType: 'string' } & Options): Promise<string>
@@ -158,7 +158,7 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
  * @param options The reasoner options
  *  - output: What to output with implicit queries (default: undefined)
  *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
- * @returns The result of the query as RDF/JS quads
+ * @returns The result of the query as a string or RDF/JS quads
  */
 /* eslint-disable max-len */
 export async function n3reasoner(data: InputData, query: Query, options: { outputType: 'string' } & Options): Promise<string>
