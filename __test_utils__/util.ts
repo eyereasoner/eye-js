@@ -168,6 +168,10 @@ export function universalTests() {
       n3reasoner(dataSplit, query, { outputType: 'quads' }),
     ).resolves.toBeRdfIsomorphic(resultQuads));
 
+    it('should execute the n3reasoner [string single list input including empty files explicit quad output]', () => expect<Promise<Quad[]>>(
+      n3reasoner(["\n", ...dataSplit, "\n"], query, { outputType: 'quads' }),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
+
     it('should execute the n3reasoner without query quads', () => expect(
       n3reasoner(dataQuads),
     ).resolves.toBeRdfIsomorphic([socratesMortal]));
