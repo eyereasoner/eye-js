@@ -7,13 +7,13 @@ jobs:
   automerge:
     name: Enable automerge on dependabot PRs
     runs-on: ubuntu-latest
-    # Don't automerge swipl-wasm (for now) as we want a new release to
-    # be cut with each new version
-    if: ${{ ! contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-') }}
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    if: github.actor == 'dependabot[bot]' && !contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')
     steps:
-      - name: Enable automerge on dependabot PRs
-        uses: daneden/enable-automerge-action@v1
-        with:
-          github-token: ${{ secrets.GH_TOKEN }}
-          allowed-author: "dependabot[bot]"
-          merge-method: SQUASH
+      - uses: actions/checkout@v4
+      - run: gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash
+    env:
+      GH_TOKEN: ${{ github.token }}
