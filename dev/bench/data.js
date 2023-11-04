@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1699107113208,
+  "lastUpdate": 1699122636598,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -28478,6 +28478,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.03,
             "range": "±2.83%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "0c546287ad1b37e454aa49077bc5e9d6687708fd",
+          "message": "build(deps-dev): bump playwright from 1.37.1 to 1.39.0 (#631)\n\n* build(deps-dev): bump playwright from 1.37.1 to 1.39.0\n\nBumps [playwright](https://github.com/microsoft/playwright) from 1.37.1 to 1.39.0.\n- [Release notes](https://github.com/microsoft/playwright/releases)\n- [Commits](https://github.com/microsoft/playwright/compare/v1.37.1...v1.39.0)\n\n---\nupdated-dependencies:\n- dependency-name: playwright\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\n\n* chore: add playwright installation step before test\n\n* chore: add playwright install step\n\n* chore: remove unused CI step\n\n---------\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>\nCo-authored-by: Jesse Wright <63333554+jeswr@users.noreply.github.com>",
+          "timestamp": "2023-11-04T18:21:40Z",
+          "tree_id": "d2a889b8326f559d35c8af6d18a5d1b77a5c9b8c",
+          "url": "https://github.com/eyereasoner/eye-js/commit/0c546287ad1b37e454aa49077bc5e9d6687708fd"
+        },
+        "date": 1699122608394,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 7.61,
+            "range": "±12.56%",
+            "unit": "ops/sec",
+            "extra": "38 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 6.8,
+            "range": "±11.79%",
+            "unit": "ops/sec",
+            "extra": "37 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 108562,
+            "range": "±0.97%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 146609,
+            "range": "±0.71%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 45.97,
+            "range": "±15.36%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 2.95,
+            "range": "±7.40%",
+            "unit": "ops/sec",
+            "extra": "19 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.11,
+            "range": "±2.14%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±1.51%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
