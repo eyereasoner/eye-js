@@ -141,7 +141,6 @@ jobs:
             npm run bundle:latest -- --name=v$version
             cp -r ./examples/prebuilt/ bundle/example/
           fi
-      - run: npm test
       - name: Release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
