@@ -46,6 +46,7 @@ jobs:
       with:
         name: dist
         path: dist
+    - run: npx playwright install
     - run: npx playwright install firefox
     - run: npm test
 
