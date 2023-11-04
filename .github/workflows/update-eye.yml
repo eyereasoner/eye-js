@@ -5,10 +5,14 @@ on:
 jobs:
   get-version:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_TOKEN }}
+          token: ${{ github.token }}
       - name: Commit latest release version
         run: |
           npm ci
@@ -52,4 +56,4 @@ jobs:
             fi
           fi
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
