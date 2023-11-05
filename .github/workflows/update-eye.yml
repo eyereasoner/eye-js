@@ -47,7 +47,7 @@ jobs:
             git config --global user.name 'Jesse Wright'
             git config --global user.email '63333554+jeswr@users.noreply.github.com'
             git checkout -b $branch
-            git commit -am "$msg"
+            git commit -am "$msg" -n
             git push --set-upstream origin $branch
             gh pr create -t "$msg" -b "$msg"
             
