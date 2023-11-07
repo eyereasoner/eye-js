@@ -9,6 +9,7 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
+      checks: write
     steps:
       - uses: actions/checkout@v4
         with:
