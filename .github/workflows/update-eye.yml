@@ -6,10 +6,9 @@ jobs:
   get-version:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
-      repository-projects: write
-      checks: write
+      contents: read
+      pull-requests: read
+      repository-projects: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -57,4 +56,4 @@ jobs:
             fi
           fi
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
