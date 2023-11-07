@@ -5,14 +5,8 @@ on:
 jobs:
   get-version:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: read
-      repository-projects: read
     steps:
       - uses: actions/checkout@v4
-        with:
-          token: ${{ github.token }}
       - name: Commit latest release version
         run: |
           npm ci
