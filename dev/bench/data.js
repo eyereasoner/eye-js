@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1699386030992,
+  "lastUpdate": 1699405859629,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -29118,6 +29118,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.02,
             "range": "±1.67%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "fb6ef29f06e4129642c04ad32640faae9bf37016",
+          "message": "fix: re-enable PAT where needed (#705)\n\n* fix: re-enable PAT where needed\n\n* chore: use PAT again\n\n* chore: re-enable PAT where needed",
+          "timestamp": "2023-11-08T01:02:20Z",
+          "tree_id": "7ffcd2c77dcc48deb471fbc747dd97635803bbd9",
+          "url": "https://github.com/eyereasoner/eye-js/commit/fb6ef29f06e4129642c04ad32640faae9bf37016"
+        },
+        "date": 1699405835753,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 6.51,
+            "range": "±12.75%",
+            "unit": "ops/sec",
+            "extra": "35 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 6.8,
+            "range": "±11.13%",
+            "unit": "ops/sec",
+            "extra": "34 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 101393,
+            "range": "±1.77%",
+            "unit": "ops/sec",
+            "extra": "86 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 138325,
+            "range": "±1.31%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 44.39,
+            "range": "±14.33%",
+            "unit": "ops/sec",
+            "extra": "30 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 2.84,
+            "range": "±8.40%",
+            "unit": "ops/sec",
+            "extra": "18 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.11,
+            "range": "±1.02%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±3.37%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
