@@ -137,8 +137,8 @@
   },
   "config": {
     "eye": {
-      "name": "v8.6.3",
-      "url": "https://api.github.com/repos/eyereasoner/eye/releases/129026575"
+      "name": "v8.6.4",
+      "url": "https://api.github.com/repos/eyereasoner/eye/releases/129131006"
     }
   },
   "dependencies": {
