@@ -1,6 +1,6 @@
 // A set of functions that take a SWIPLModule as input, apply
 // a transformation, and then return the same module
-import { Quad } from '@rdfjs/types';
+import { Quad, DatasetCore } from '@rdfjs/types';
 import { Parser } from 'n3';
 import SWIPL, { type SWIPLModule } from 'swipl-wasm/dist/swipl/swipl-bundle-no-data';
 import strToBuffer from 'swipl-wasm/dist/strToBuffer';
@@ -95,12 +95,15 @@ function parse(res: string) {
 }
 
 export type Data = Quad[] | string
-export type InputData = Data | [string, ...string[]]
+export type InputData = Data | [string, ...string[]] | DatasetCore
 export type Query = Data | undefined
 
 function inputDataToStrings(data: InputData): [string, ...string[]] {
   if (typeof data === 'string') {
     return [data];
+  }
+  if (typeof data === 'object' && !Array.isArray(data) && typeof data.match === 'function') {
+    return [write([...data])];
   }
   if (typeof data[0] === 'string') {
     return data as [string, ...string[]];
