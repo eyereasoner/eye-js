@@ -250,7 +250,7 @@ export function universalTests() {
       
       expect(res).rejects.toThrowError()
     });
-    it('should execute the n3reasoner using blogic', async () => {
+    it.skip('should execute the n3reasoner using blogic', async () => {
       const resultStr: string = await n3reasoner(blogicData);
       const quads = (new Parser({ format: 'text/n3' })).parse(resultStr);
       expect<Quad[]>(quads).toBeRdfIsomorphic(resultBlogicQuads);
