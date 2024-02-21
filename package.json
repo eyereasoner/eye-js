@@ -67,7 +67,7 @@
     "@types/jest": "^29.4.0",
     "@types/n3": "^1.10.4",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^6.1.0",
+    "@typescript-eslint/parser": "^7.0.2",
     "benchmark": "^2.1.4",
     "cross-fetch": "^4.0.0",
     "deep-taxonomy-benchmark": "^1.1.1",
