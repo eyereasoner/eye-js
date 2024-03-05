@@ -19,15 +19,18 @@ export type Options = ICoreQueryOptions & {
 }
 
 type IOptions = Options & {
-  imageLoader?: (swipl: typeof SWIPL) => (options?: Partial<EmscriptenModule> | undefined) => Promise<SWIPLModule>;
+  /* eslint-disable-next-line max-len */
+  imageLoader?(swipl: typeof SWIPL): (options?: Partial<EmscriptenModule> | undefined) => Promise<SWIPLModule>;
 }
 
-export const loadImage = (image: string) => (swipl: typeof SWIPL) => (options?: Partial<EmscriptenModule> | undefined) => swipl({
-  ...options,
-  arguments: ['-q', '-x', 'eye.pvm'],
-  // @ts-ignore
-  preRun: (module: SWIPLModule) => module.FS.writeFile('eye.pvm', strToBuffer(image)),
-});
+export function loadImage(image: string) {
+  return (swipl: typeof SWIPL) => (options?: Partial<EmscriptenModule> | undefined) => swipl({
+    ...options,
+    arguments: ['-q', '-x', 'eye.pvm'],
+    // @ts-ignore
+    preRun: (module: SWIPLModule) => module.FS.writeFile('eye.pvm', strToBuffer(image)),
+  });
+}
 
 export const loadEyeImage = loadImage(EYE_PVM);
 
@@ -146,7 +149,7 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
     inputDataToStrings(data),
     query && (typeof query === 'string' ? query : write(query)),
     options,
-    !!options?.imageLoader
+    !!options?.imageLoader,
   );
 
   if (err.length > 0) {
@@ -179,7 +182,6 @@ export async function n3reasoner(data: InputData, query?: Query, options?: Optio
   return executeBasicEyeQuery(options?.SWIPL || SWIPL, data, query, options);
 }
 
-
 /**
  * Executes a basic lingua query using the SEE Reasoner and default build of SWIPL
  * @param swipl The base SWIPL module to use
@@ -197,6 +199,6 @@ export async function linguareasoner(data: Quad[], query?: Query, options?: { ou
 export async function linguareasoner(data: string | [string, ...string[]], query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
 export async function linguareasoner(data: InputData, query?: Query, options?: Options): Promise<Quad[] | string>;
 export async function linguareasoner(data: InputData, query?: Query, options?: Options): Promise<Quad[] | string> {
-/* eslint-enable max-len */
   return executeBasicEyeQuery(options?.SWIPL || SWIPL, data, query, { ...options, imageLoader: loadImage(SEE_PVM) });
 }
+/* eslint-enable max-len */
