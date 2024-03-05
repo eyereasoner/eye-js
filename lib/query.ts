@@ -18,5 +18,6 @@ export function query(Module: SWIPLModule, name: string, args: string[] | string
 }
 
 export function queryOnce(Module: SWIPLModule, name: string, args: string[] | string) {
+  console.log(name, args)
   return query(Module, name, args).once();
 }

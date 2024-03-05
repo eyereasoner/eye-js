@@ -6,6 +6,7 @@ import SWIPL, { type SWIPLModule } from 'swipl-wasm/dist/swipl/swipl-bundle-no-d
 import strToBuffer from 'swipl-wasm/dist/strToBuffer';
 import { write } from './n3Writer.temp';
 import EYE_PVM from './eye';
+import SEE_PVM from './see';
 import { queryOnce } from './query';
 
 export type ICoreQueryOptions = {
@@ -17,14 +18,18 @@ export type Options = ICoreQueryOptions & {
   SWIPL?: typeof SWIPL;
 }
 
-export function loadEyeImage(swipl: typeof SWIPL) {
-  return (options?: Partial<EmscriptenModule> | undefined) => swipl({
-    ...options,
-    arguments: ['-q', '-x', 'eye.pvm'],
-    // @ts-ignore
-    preRun: (module: SWIPLModule) => module.FS.writeFile('eye.pvm', strToBuffer(EYE_PVM)),
-  });
+type IOptions = Options & {
+  imageLoader?: (swipl: typeof SWIPL) => (options?: Partial<EmscriptenModule> | undefined) => Promise<SWIPLModule>;
 }
+
+export const loadImage = (image: string) => (swipl: typeof SWIPL) => (options?: Partial<EmscriptenModule> | undefined) => swipl({
+  ...options,
+  arguments: ['-q', '-x', 'eye.pvm'],
+  // @ts-ignore
+  preRun: (module: SWIPLModule) => module.FS.writeFile('eye.pvm', strToBuffer(image)),
+});
+
+export const loadEyeImage = loadImage(EYE_PVM);
 
 /**
  * Creates default SWIPL image loaded with EYE
@@ -47,11 +52,13 @@ export function runQuery(
   data: [string, ...string[]],
   queryString?: string,
   { output }: Options = {},
+  noOptions = false,
 ): SWIPLModule {
-  const args = ['--nope', '--quiet'];
+  const args = noOptions ? [] : ['--nope', '--quiet'];
 
   for (let i = 0; i < data.length; i += 1) {
     args.push(`data_${i}.n3s`);
+    console.log(`data_${i}.n3s`, data[i]);
     Module.FS.writeFile(`data_${i}.n3s`, data[i]);
   }
 
@@ -61,7 +68,7 @@ export function runQuery(
     }
     Module.FS.writeFile('query.n3s', queryString);
     args.push('--query', './query.n3s');
-  } else {
+  } else if (!noOptions) {
     switch (output) {
       case undefined:
       case 'derivations':
@@ -119,18 +126,18 @@ function inputDataToStrings(data: InputData): [string, ...string[]] {
  * @returns The result of the query as a string or RDF/JS quads
  */
 /* eslint-disable max-len */
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query: Query, options: { outputType: 'string' } & Options): Promise<string>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Quad[], query?: Query, options?: { outputType?: undefined } & Options): Promise<Quad[]>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: string | [string, ...string[]], query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query?: Query, options?: Options): Promise<Quad[] | string>;
-export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query?: Query, options?: Options): Promise<Quad[] | string> {
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query: Query, options: { outputType: 'string' } & IOptions): Promise<string>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query: Query, options: { outputType: 'quads' } & IOptions): Promise<Quad[]>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: Quad[], query?: Query, options?: { outputType?: undefined } & IOptions): Promise<Quad[]>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: string | [string, ...string[]], query?: Query, options?: { outputType?: undefined } & IOptions): Promise<string>
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query?: Query, options?: IOptions): Promise<Quad[] | string>;
+export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData, query?: Query, options?: IOptions): Promise<Quad[] | string> {
 /* eslint-enable max-len */
   const outputType = options?.outputType;
 
   let res = '';
   const err: string[] = [];
-  const Module = await loadEyeImage(swipl)({
+  const Module = await (options?.imageLoader ?? loadEyeImage)(swipl)({
     print: (str: string) => { res += `${str}\n`; },
     printErr: (str: string) => { err.push(str); },
   });
@@ -139,6 +146,7 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
     inputDataToStrings(data),
     query && (typeof query === 'string' ? query : write(query)),
     options,
+    !!options?.imageLoader
   );
 
   if (err.length > 0) {
@@ -169,4 +177,26 @@ export async function n3reasoner(data: InputData, query?: Query, options?: Optio
 export async function n3reasoner(data: InputData, query?: Query, options?: Options): Promise<Quad[] | string> {
 /* eslint-enable max-len */
   return executeBasicEyeQuery(options?.SWIPL || SWIPL, data, query, options);
+}
+
+
+/**
+ * Executes a basic lingua query using the SEE Reasoner and default build of SWIPL
+ * @param swipl The base SWIPL module to use
+ * @param data The data for the query as RDF/JS quads
+ * @param query The query as RDF/JS quads
+ * @param options The reasoner options
+ *  - output: What to output with implicit queries (default: undefined)
+ *  - outputType: The type of output, either 'string' or 'quads' (default: type of input data)
+ * @returns The result of the query as a string or RDF/JS quads
+ */
+/* eslint-disable max-len */
+export async function linguareasoner(data: InputData, query: Query, options: { outputType: 'string' } & Options): Promise<string>
+export async function linguareasoner(data: InputData, query: Query, options: { outputType: 'quads' } & Options): Promise<Quad[]>
+export async function linguareasoner(data: Quad[], query?: Query, options?: { outputType?: undefined } & Options): Promise<Quad[]>
+export async function linguareasoner(data: string | [string, ...string[]], query?: Query, options?: { outputType?: undefined } & Options): Promise<string>
+export async function linguareasoner(data: InputData, query?: Query, options?: Options): Promise<Quad[] | string>;
+export async function linguareasoner(data: InputData, query?: Query, options?: Options): Promise<Quad[] | string> {
+/* eslint-enable max-len */
+  return executeBasicEyeQuery(options?.SWIPL || SWIPL, data, query, { ...options, imageLoader: loadImage(SEE_PVM) });
 }

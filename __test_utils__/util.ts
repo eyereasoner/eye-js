@@ -2,12 +2,13 @@
 import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
-import { data, dataSplit, dataStar, query, queryAll, result } from '../data/socrates';
-import { n3reasoner } from '../dist';
+import { data, dataSplit, dataStar, query, queryAll, result, trig as socratesTrig } from '../data/socrates';
+import { n3reasoner, linguareasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
 
 const parser = new Parser({ format: 'text/n3' });
+const trigparser = new Parser({ format: 'trig' });
 // Workaround for https://github.com/rdfjs/N3.js/issues/324
 // @ts-expect-error
 parser._supportsRDFStar = true;
@@ -62,6 +63,12 @@ export function universalTests() {
     expect(log).not.toHaveBeenCalled();
     expect(warn).not.toHaveBeenCalled();
     expect(err).not.toHaveBeenCalled();
+  });
+
+  describe.only('testing linguareasoner', () => {
+    it.only('should execute the n3reasoner on rdf-star i/o', () => expect<Promise<Quad[]>>(
+      linguareasoner(socratesTrig, undefined, {  outputType: 'quads' }),
+    ).resolves.toBeRdfIsomorphic(resultQuads));
   });
 
   describe('testing n3reasoner', () => {

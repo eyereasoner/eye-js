@@ -48,3 +48,39 @@ export const dataStar = `
 {<<?S ?P ?O>> :is true} => {?S ?P ?O}.
 {?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.
 `;
+
+export const trig = `
+# ------------------
+# Socrates Inference
+# ------------------
+#
+# Infer that Socrates is mortal.
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix lingua: <http://www.w3.org/2000/10/swap/lingua#>.
+@prefix var: <http://www.w3.org/2000/10/swap/var#>.
+@prefix : <#>.
+
+# facts
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+# rdfs subclass
+:rdfs_subclass_rule lingua:premise _:rdfs_subclass_rule_premise;
+    lingua:conclusion _:rdfs_subclass_rule_conclusion.
+
+_:rdfs_subclass_rule_premise {
+    var:A rdfs:subClassOf var:B.
+    var:S a var:A.
+}
+
+_:rdfs_subclass_rule_conclusion {
+    var:S a var:B.
+}
+
+# query
+:socrates_query lingua:question _:socrates_question.
+
+_:socrates_question {
+    var:S a :Mortal.
+}`

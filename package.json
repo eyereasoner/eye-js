@@ -1,7 +1,7 @@
 {
   "name": "eyereasoner",
   "version": "0.0.0",
-  "description": "Distributing the [EYE](https://github.com/josd/eye) reasoner for browser and node using WebAssembly.",
+  "description": "Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser and node using WebAssembly.",
   "main": "dist/index.js",
   "types": "dist/index.d.js",
   "directories": {
@@ -21,7 +21,7 @@
     "test": "npm run test:unit && npm run test:memory",
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "build": "npm run eye:prepare && npm run build:tsc",
+    "build": "npm run eye:prepare && npm run see:pvm && npm run build:tsc",
     "build:tsc": "tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
@@ -30,6 +30,8 @@
     "eye:pvm:test": "ts-node scripts/run-pvm",
     "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
+    "see:pvm": "ts-node scripts/generate-pvm --name=see",
+    "see:update": "ts-node scripts/update --name=see",
     "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt"
   },
   "repository": {
@@ -139,6 +141,10 @@
     "eye": {
       "name": "v9.11.4",
       "url": "https://api.github.com/repos/eyereasoner/eye/releases/144688812"
+    },
+    "see": {
+      "name": "v0.0.4",
+      "url": "https://api.github.com/repos/eyereasoner/see/releases/144953577"
     }
   },
   "dependencies": {
