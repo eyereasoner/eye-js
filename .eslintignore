@@ -1,3 +1,4 @@
 lib/eye.ts
+lib/see.ts
 **/*.temp.ts
 *.sh
