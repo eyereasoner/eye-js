@@ -5,8 +5,9 @@ on:
 jobs:
   get-version:
     runs-on: ubuntu-latest
-    matrix:
-      dep: [eye, see]
+    strategy:
+      matrix:
+        dep: [eye, see]
     steps:
       - uses: actions/checkout@v4
       - name: Commit latest release version
