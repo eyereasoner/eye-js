@@ -54,8 +54,8 @@ export function runQuery(
   Module: SWIPLModule,
   data: [string, ...string[]],
   queryString?: string,
-  { output }: Options = {},
-  noOptions = false,
+  { output }: Options = {}, // eslint-disable-line default-param-last
+  noOptions?: boolean,
 ): SWIPLModule {
   const args = noOptions ? [] : ['--nope', '--quiet'];
 
