@@ -3,4 +3,5 @@ coverage
 dist
 bundle
 lib/eye.ts
+lib/see.ts
 perf/output.txt

@@ -2,12 +2,13 @@
 import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
-import { data, dataSplit, dataStar, query, queryAll, result } from '../data/socrates';
-import { n3reasoner } from '../dist';
+import { data, dataSplit, dataStar, query, queryAll, result, trig as socratesTrig } from '../data/socrates';
+import { n3reasoner, linguareasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
 
 const parser = new Parser({ format: 'text/n3' });
+const trigparser = new Parser({ format: 'trig' });
 // Workaround for https://github.com/rdfjs/N3.js/issues/324
 // @ts-expect-error
 parser._supportsRDFStar = true;
@@ -62,6 +63,16 @@ export function universalTests() {
     expect(log).not.toHaveBeenCalled();
     expect(warn).not.toHaveBeenCalled();
     expect(err).not.toHaveBeenCalled();
+  });
+
+  describe('testing linguareasoner', () => {
+    it('should execute the socrates example', () => expect<Promise<Store>>(
+      linguareasoner(socratesTrig)
+        .then(res => new Store(new Parser({ format: 'trig' }).parse(res))),
+    ).resolves.toBeRdfDatasetContaining(socratesMortal));
+    it('should execute the socrates example with quads', () => expect<Promise<Store>>(
+      linguareasoner(socratesTrig, undefined, {  outputType: 'quads' }).then(res => new Store(res)),
+    ).resolves.toBeRdfDatasetContaining(socratesMortal));
   });
 
   describe('testing n3reasoner', () => {
