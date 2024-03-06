@@ -59,7 +59,7 @@ export const trig = `
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix lingua: <http://www.w3.org/2000/10/swap/lingua#>.
 @prefix var: <http://www.w3.org/2000/10/swap/var#>.
-@prefix : <#>.
+@prefix : <http://example.org/socrates#>.
 
 # facts
 :Socrates a :Human.

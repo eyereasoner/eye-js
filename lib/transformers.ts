@@ -155,8 +155,9 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
     throw new Error(`Error while executing query: ${err.join('\n')}`);
   }
 
+  // eslint-disable-next-line no-nested-ternary
   return (outputType === 'quads' || (typeof data !== 'string' && typeof data[0] !== 'string' && outputType !== 'string'))
-    ? (options?.imageLoader ? (new Parser({ format: 'trig' })).parse : parse)(res)
+    ? (options?.imageLoader ? ((new Parser({ format: 'trig' })).parse(res)) : parse(res))
     : res;
 }
 

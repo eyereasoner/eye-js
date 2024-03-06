@@ -66,12 +66,13 @@ export function universalTests() {
   });
 
   describe('testing linguareasoner', () => {
-    // it.only('should execute the n3reasoner on rdf-star i/o', () => expect<Promise<Quad[]>>(
-    //   linguareasoner(socratesTrig, undefined, {  outputType: 'quads' }),
-    // ).resolves.toBeRdfIsomorphic(resultQuads));
-    it('should execute the socrates example', () => expect<Promise<string>>(
-      linguareasoner(socratesTrig),
-    ).resolves.toContain(":Socrates a :Mortal."));
+    it('should execute the socrates example', () => expect<Promise<Store>>(
+      linguareasoner(socratesTrig)
+        .then(res => new Store(new Parser({ format: 'trig' }).parse(res))),
+    ).resolves.toBeRdfDatasetContaining(socratesMortal));
+    it('should execute the socrates example with quads', () => expect<Promise<Store>>(
+      linguareasoner(socratesTrig, undefined, {  outputType: 'quads' }).then(res => new Store(res)),
+    ).resolves.toBeRdfDatasetContaining(socratesMortal));
   });
 
   describe('testing n3reasoner', () => {
