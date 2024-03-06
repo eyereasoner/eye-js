@@ -212,6 +212,50 @@ We provide some examples of using `eyereasoner`:
 
 We use [benchmark.js](https://benchmarkjs.com/) to collect the performance results of some basic operations. Those results are published [here](https://eyereasoner.github.io/eye-js/dev/bench/).
 
+## Experimental `linguareasoner`
+
+We have experimental support for RDF Lingua using the `linguareasoner`; similarly to `n3reasoner` it can be used with both string and quad input/output. For instance:
+
+```ts
+import { linguareasoner } from 'eyereasoner';
+
+const result = await linguareasoner(`
+# ------------------
+# Socrates Inference
+# ------------------
+#
+# Infer that Socrates is mortal.
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix lingua: <http://www.w3.org/2000/10/swap/lingua#>.
+@prefix var: <http://www.w3.org/2000/10/swap/var#>.
+@prefix : <http://example.org/socrates#>.
+
+# facts
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+# rdfs subclass
+:rdfs_subclass_rule lingua:premise _:rdfs_subclass_rule_premise;
+    lingua:conclusion _:rdfs_subclass_rule_conclusion.
+
+_:rdfs_subclass_rule_premise {
+    var:A rdfs:subClassOf var:B.
+    var:S a var:A.
+}
+
+_:rdfs_subclass_rule_conclusion {
+    var:S a var:B.
+}
+
+# query
+:socrates_query lingua:question _:socrates_question.
+
+_:socrates_question {
+    var:S a :Mortal.
+}`)
+```
+
 ## License
 ©2022–present
 [Jesse Wright](https://github.com/jeswr),
