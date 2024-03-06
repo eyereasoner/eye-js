@@ -5,6 +5,8 @@ on:
 jobs:
   get-version:
     runs-on: ubuntu-latest
+    matrix:
+      dep: [eye, see]
     steps:
       - uses: actions/checkout@v4
       - name: Commit latest release version
@@ -12,12 +14,12 @@ jobs:
           npm ci
 
           # Get version of EYE before any updates are run
-          before=$(cat ./package.json | jq .config.eye.name)
+          before=$(cat ./package.json | jq .config.${{ matrix.dep }}.name)
           
-          npm run eye:update
+          npm run ${{ matrix.dep }}:update
 
           # Version of EYE after getting updates
-          current=$(cat ./package.json | jq .config.eye.name)
+          current=$(cat ./package.json | jq .config.${{ matrix.dep }}.name)
 
           readarray -d . -t before <<<"${before:2:-1}"
           readarray -d . -t after <<<"${current:2:-1}"
@@ -34,8 +36,8 @@ jobs:
           fi
 
           # The name of the new branch if we need to create one
-          branch=$branchHead/update-eye-${current:1:-1}
-          msg="$version: update to eye ${current:1:-1}"
+          branch=$branchHead/update-${{ matrix.dep }}-${current:1:-1}
+          msg="$version: update to ${{ matrix.dep }} ${current:1:-1}"
 
           if [ $branchHead ]; then
             git config --global user.name 'Jesse Wright'
