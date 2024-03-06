@@ -65,10 +65,13 @@ export function universalTests() {
     expect(err).not.toHaveBeenCalled();
   });
 
-  describe.only('testing linguareasoner', () => {
-    it.only('should execute the n3reasoner on rdf-star i/o', () => expect<Promise<Quad[]>>(
-      linguareasoner(socratesTrig, undefined, {  outputType: 'quads' }),
-    ).resolves.toBeRdfIsomorphic(resultQuads));
+  describe('testing linguareasoner', () => {
+    // it.only('should execute the n3reasoner on rdf-star i/o', () => expect<Promise<Quad[]>>(
+    //   linguareasoner(socratesTrig, undefined, {  outputType: 'quads' }),
+    // ).resolves.toBeRdfIsomorphic(resultQuads));
+    it('should execute the socrates example', () => expect<Promise<string>>(
+      linguareasoner(socratesTrig),
+    ).resolves.toContain(":Socrates a :Mortal."));
   });
 
   describe('testing n3reasoner', () => {

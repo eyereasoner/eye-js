@@ -61,7 +61,6 @@ export function runQuery(
 
   for (let i = 0; i < data.length; i += 1) {
     args.push(`data_${i}.n3s`);
-    console.log(`data_${i}.n3s`, data[i]);
     Module.FS.writeFile(`data_${i}.n3s`, data[i]);
   }
 
@@ -157,7 +156,7 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
   }
 
   return (outputType === 'quads' || (typeof data !== 'string' && typeof data[0] !== 'string' && outputType !== 'string'))
-    ? parse(res)
+    ? (options?.imageLoader ? (new Parser({ format: 'trig' })).parse : parse)(res)
     : res;
 }
 
