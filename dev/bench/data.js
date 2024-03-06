@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1709727802034,
+  "lastUpdate": 1709737430018,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -38638,6 +38638,86 @@ window.BENCHMARK_DATA = {
             "name": "Run deep taxonomy benchmark [100]",
             "value": 0.03,
             "range": "±1.72%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "3aa80a56f00789fab9ce04113f6469ccc1f3de7d",
+          "message": "feat: linguareasoner (#932)\n\n* WIP: linguareasoner\r\n\r\n* chore: fix lint errors\r\n\r\n* chore: update see version\r\n\r\n* chore: update .eslintignore\r\n\r\n* chore; update see in CI\r\n\r\n* chore: update swipl-wasm\r\n\r\n* chore: update see\r\n\r\n* chore: basic string -> string working\r\n\r\n* chore: fix parsing error\r\n\r\n* chore: add linguareasoner docs\r\n\r\n* chore: fix lint errors",
+          "timestamp": "2024-03-06T14:57:28Z",
+          "tree_id": "a13c3dff2a8adec57f0f36bc8c03895f89ebd816",
+          "url": "https://github.com/eyereasoner/eye-js/commit/3aa80a56f00789fab9ce04113f6469ccc1f3de7d"
+        },
+        "date": 1709737401116,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 12.87,
+            "range": "±6.63%",
+            "unit": "ops/sec",
+            "extra": "63 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 11.75,
+            "range": "±6.34%",
+            "unit": "ops/sec",
+            "extra": "58 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 188468,
+            "range": "±1.16%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 232869,
+            "range": "±0.64%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 62.2,
+            "range": "±17.22%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 5.43,
+            "range": "±4.49%",
+            "unit": "ops/sec",
+            "extra": "30 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.2,
+            "range": "±3.86%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.03,
+            "range": "±22.92%",
             "unit": "ops/sec",
             "extra": "5 samples"
           }
