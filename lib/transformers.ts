@@ -6,7 +6,7 @@ import SWIPL, { type SWIPLModule } from 'swipl-wasm/dist/swipl/swipl-bundle-no-d
 import strToBuffer from 'swipl-wasm/dist/strToBuffer';
 import { write } from './n3Writer.temp';
 import EYE_PVM from './eye';
-import SEE_PVM from './see';
+import SEE_PVM from './see-lingua';
 import { queryOnce } from './query';
 
 export type ICoreQueryOptions = {
