@@ -15,12 +15,12 @@ jobs:
           npm ci
 
           # Get version of EYE before any updates are run
-          before=$(cat ./package.json | jq .config.${{ matrix.dep }}.name)
+          before=$(cat ./package.json | jq '.config."${{ matrix.dep }}".name')
           
           npm run ${{ matrix.dep }}:update
 
           # Version of EYE after getting updates
-          current=$(cat ./package.json | jq .config.${{ matrix.dep }}.name)
+          current=$(cat ./package.json | jq '.config."${{ matrix.dep }}".name')
 
           readarray -d . -t before <<<"${before:2:-1}"
           readarray -d . -t after <<<"${current:2:-1}"
