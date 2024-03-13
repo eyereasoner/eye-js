@@ -31,7 +31,7 @@
     "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
     "see:pvm": "ts-node scripts/generate-pvm --name=see-lingua",
-    "see:update": "ts-node scripts/update --name=see-lingua",
+    "see-lingua:update": "ts-node scripts/update --name=see-lingua",
     "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt"
   },
   "repository": {
