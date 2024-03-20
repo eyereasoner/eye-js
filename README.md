@@ -236,22 +236,21 @@ const result = await linguareasoner(`
 :Human rdfs:subClassOf :Mortal.
 
 # rdfs subclass
-:rdfs_subclass_rule lingua:premise _:rdfs_subclass_rule_premise;
-    lingua:conclusion _:rdfs_subclass_rule_conclusion.
+_:ng1 lingua:implication _:ng2.
 
-_:rdfs_subclass_rule_premise {
+_:ng1 {
     var:A rdfs:subClassOf var:B.
     var:S a var:A.
 }
 
-_:rdfs_subclass_rule_conclusion {
+_:ng2 {
     var:S a var:B.
 }
 
 # query
-:socrates_query lingua:question _:socrates_question.
+_:ng3 lingua:query _:ng3.
 
-_:socrates_question {
+_:ng3 {
     var:S a :Mortal.
 }`)
 ```
