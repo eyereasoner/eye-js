@@ -100,7 +100,11 @@ function parse(res: string) {
   // @ts-expect-error
   // eslint-disable-next-line no-underscore-dangle
   parser._supportsRDFStar = true;
-  return parser.parse(res);
+  try {
+    return parser.parse(res);
+  } catch (e) {
+    throw new Error(`Error while parsing query result: [${e}]. Query result: [${res}]`);
+  }
 }
 
 export type Data = Quad[] | string
