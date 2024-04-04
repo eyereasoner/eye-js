@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        dep: [eye, see-lingua]
+        dep: [eye, lingua]
     steps:
       - uses: actions/checkout@v4
       - name: Commit latest release version

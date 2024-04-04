@@ -30,8 +30,8 @@
     "eye:pvm:test": "ts-node scripts/run-pvm",
     "eye:prepare": "npm run eye:pvm",
     "eye:update": "ts-node scripts/update",
-    "see:pvm": "ts-node scripts/generate-pvm --name=see-lingua",
-    "see-lingua:update": "ts-node scripts/update --name=see-lingua",
+    "see:pvm": "ts-node scripts/generate-pvm --name=lingua",
+    "see-lingua:update": "ts-node scripts/update --name=lingua",
     "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt"
   },
   "repository": {
@@ -142,9 +142,9 @@
       "name": "v10.0.5",
       "url": "https://api.github.com/repos/eyereasoner/eye/releases/149090692"
     },
-    "see-lingua": {
-      "name": "v1.1.5",
-      "url": "https://api.github.com/repos/eyereasoner/see-lingua/releases/148920317"
+    "lingua": {
+      "name": "v1.0.0",
+      "url": "https://api.github.com/repos/eyereasoner/lingua/releases/149743330"
     }
   },
   "dependencies": {
