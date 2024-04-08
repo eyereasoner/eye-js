@@ -111,7 +111,7 @@ export function universalTests() {
       const outputQuads = parser.parse(output);
       expect(outputQuads.length).toBe(1);
       const createdUUID = outputQuads[0].object.value;
-      const uuidRegexMatch = createdUUID.match(/^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gm)
+      const uuidRegexMatch = createdUUID.match(/^[0-9a-fA-F]{8}(\b-[0-9a-fA-F]{4}){3}\b-[0-9a-fA-F]{12}$/gm)
       expect(uuidRegexMatch).not.toBe(null)
       expect(uuidRegexMatch![0]).toBe(createdUUID)
 

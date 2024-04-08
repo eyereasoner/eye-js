@@ -1,4 +1,4 @@
 lib/eye.ts
-lib/see-lingua.ts
+lib/lingua.ts
 **/*.temp.ts
 *.sh
