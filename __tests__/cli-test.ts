@@ -16,6 +16,16 @@ const files = {
   
   { :Let :output ?out } => { 1 log:outputString ?out } .
   `,
+  [path.join(__dirname, 'calc.n3')]: `
+  @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+  @prefix : <#>.
+
+  {
+      "calc 1+1" log:shell ?Y.
+  } log:query {
+      :result :is ?Y.
+  }.
+  `,
 };
 
 jest.mock('fs', () => ({
@@ -46,5 +56,17 @@ describe('Testing CLI', () => {
 
   it('Should get output for strings query', async () => {
     expect(await getConsoleOutput(['--quiet', '--strings', './strings.n3'])).toEqual('abc');
+  });
+});
+
+const calcOutput = `@prefix : <file:///home/jdroo/temp/calc.n3#>.
+
+:result :is "   2
+".`;
+
+describe('Testing CLI with Q/A loop', () => {
+  it('Should run', async () => {
+    const output = await getConsoleOutput(['--nope', '--quiet', './calc.n3']);
+    expect(`\n${output}`).toEqual(calcOutput);
   });
 });
