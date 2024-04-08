@@ -43,8 +43,16 @@ async function getConsoleOutput(args: string[]) {
   // @ts-ignore
   // eslint-disable-next-line no-console
   const { calls }: { calls: string[][] } = console.log.mock;
+  // @ts-ignore
+  // eslint-disable-next-line no-console
+  const { calls: warnMock }: { calls: string[][] } = console.warn.mock;
+  // @ts-ignore
+  // eslint-disable-next-line no-console
+  const { calls: errorMock }: { calls: string[][] } = console.error.mock;
   restoreConsole();
 
+  expect(warnMock).toEqual([]);
+  expect(errorMock).toEqual([]);
   return calls.map((call) => call.join(' ')).join('\n');
 }
 
