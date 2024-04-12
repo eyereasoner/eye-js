@@ -7,7 +7,7 @@ import strToBuffer from 'swipl-wasm/dist/strToBuffer';
 import { write } from './n3Writer.temp';
 import EYE_PVM from './eye';
 import SEE_PVM from './lingua';
-import { queryOnce } from './query';
+import { qaQuery, queryOnce } from './query';
 
 export type ICoreQueryOptions = {
   output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules';
@@ -16,6 +16,7 @@ export type ICoreQueryOptions = {
 export type Options = ICoreQueryOptions & {
   outputType?: 'string' | 'quads';
   SWIPL?: typeof SWIPL;
+  cb?: (res: string) => Promise<string>;
 }
 
 type IOptions = Options & {
@@ -48,15 +49,30 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  * @param queryString The query (in Notation3)
  * @param options The reasoner options
  *  - output: What to output with implicit queries (default: undefined)
+ *  - cb: An EXPERIMENTAL callback to be used for question/answering (default: undefined)
  * @returns The same SWIPL module
  */
 export function runQuery(
   Module: SWIPLModule,
-  data: [string, ...string[]],
-  queryString?: string,
-  { output }: Options = {}, // eslint-disable-line default-param-last
+  data: string[],
+  queryString: string | undefined,
+  { output, cb }: Options & { cb?: undefined },
   noOptions?: boolean,
-): SWIPLModule {
+): SWIPLModule
+export function runQuery(
+  Module: SWIPLModule,
+  data: string[],
+  queryString?: string,
+  options?: Options, // eslint-disable-line default-param-last
+  noOptions?: boolean,
+): SWIPLModule | Promise<SWIPLModule>
+export function runQuery(
+  Module: SWIPLModule,
+  data: string[],
+  queryString?: string,
+  { output, cb }: Options = {}, // eslint-disable-line default-param-last
+  noOptions?: boolean,
+): SWIPLModule | Promise<SWIPLModule> {
   const args = noOptions ? [] : ['--nope', '--quiet'];
 
   for (let i = 0; i < data.length; i += 1) {
@@ -90,7 +106,11 @@ export function runQuery(
     }
   }
 
+  if (cb) {
+    return qaQuery(Module, 'main', args, cb).then(() => Module);
+  }
   queryOnce(Module, 'main', args);
+
   return Module;
 }
 
@@ -111,14 +131,14 @@ export type Data = Quad[] | string
 export type InputData = Data | [string, ...string[]]
 export type Query = Data | undefined
 
-function inputDataToStrings(data: InputData): [string, ...string[]] {
+function inputDataToStrings(data: InputData): string[] {
   if (typeof data === 'string') {
     return [data];
   }
   if (typeof data[0] === 'string') {
     return data as [string, ...string[]];
   }
-  return [write(data as Quad[])];
+  return data.length > 0 ? [write(data as Quad[])] : [];
 }
 
 /**
@@ -147,7 +167,7 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
     print: (str: string) => { res += `${str}\n`; },
     printErr: (str: string) => { err.push(str); },
   });
-  runQuery(
+  await runQuery(
     Module,
     inputDataToStrings(data),
     query && (typeof query === 'string' ? query : write(query)),

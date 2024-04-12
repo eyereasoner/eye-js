@@ -1,8 +1,11 @@
 import path from 'path';
 import mockConsole from 'jest-mock-console';
+import { Parser } from 'n3';
+import { EventEmitter } from 'events';
+import 'jest-rdf';
 import { query, data, result } from '../data/socrates';
-
 import { mainFunc } from '../dist/bin/main';
+import { askCallback, askQuery, askResult } from '../data/ask';
 
 const files = {
   [path.join(__dirname, 'socrates.n3')]: data,
@@ -16,6 +19,7 @@ const files = {
   
   { :Let :output ?out } => { 1 log:outputString ?out } .
   `,
+  [path.join(__dirname, 'ask.n3')]: askQuery,
 };
 
 jest.mock('fs', () => ({
@@ -23,11 +27,31 @@ jest.mock('fs', () => ({
   readFileSync: (pth: string) => Buffer.from(files[pth]),
 }));
 
+class ReadStream extends EventEmitter {
+  /* eslint-disable class-methods-use-this */
+  setEncoding() {}
+
+  pause() {}
+
+  resume() {}
+  /* eslint-enable class-methods-use-this */
+}
+
 async function getConsoleOutput(args: string[]) {
   const restoreConsole = mockConsole();
+  const stdin = new ReadStream();
+
   await mainFunc({
     argv: ['/bin/node', 'eyereasoner', ...args],
     cwd: () => __dirname,
+    stdin,
+    stdout: {
+      write: (buffer: string | Uint8Array) => {
+        if (typeof buffer === 'string' && buffer.startsWith('calc ')) {
+          askCallback(buffer).then((res) => stdin.emit('data', Buffer.from(`${res}\n`)));
+        }
+      },
+    },
   } as NodeJS.Process);
 
   // @ts-ignore
@@ -46,5 +70,9 @@ describe('Testing CLI', () => {
 
   it('Should get output for strings query', async () => {
     expect(await getConsoleOutput(['--quiet', '--strings', './strings.n3'])).toEqual('abc');
+  });
+
+  it('Should get output for strings ask', async () => {
+    expect(new Parser().parse(await getConsoleOutput(['--nope', '--quiet', './ask.n3']))).toBeRdfIsomorphic(new Parser().parse(askResult));
   });
 });
