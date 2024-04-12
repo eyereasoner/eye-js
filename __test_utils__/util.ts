@@ -6,6 +6,7 @@ import { data, dataSplit, dataStar, query, queryAll, result, trig as socratesTri
 import { n3reasoner, linguareasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
+import { askCallback, askQuery, askResult } from '../data/ask';
 
 const parser = new Parser({ format: 'text/n3' });
 const trigparser = new Parser({ format: 'trig' });
@@ -19,6 +20,7 @@ export const dataQuads = parser.parse(data);
 export const dataStarQuads = parser.parse(dataStar);
 export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
+export const askResultQuads = parser.parse(askResult);
 
 export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
   switch (args[0]) {
@@ -79,6 +81,10 @@ export function universalTests() {
     it('should execute the n3reasoner on rdf-star i/o', () => expect<Promise<Quad[]>>(
       n3reasoner(dataStarQuads),
     ).resolves.toBeRdfIsomorphic(resultQuads));
+
+    it('should execute the n3reasoner on ask queries', () => expect<Promise<Quad[]>>(
+      n3reasoner([], askQuery, { cb: askCallback }),
+    ).resolves.toBeRdfIsomorphic(askResultQuads));
 
     it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataStarQuads, queryQuads),
