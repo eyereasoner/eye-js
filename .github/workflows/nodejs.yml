@@ -53,12 +53,7 @@ jobs:
 
   test-memory-browser:
     needs: build
-    strategy:
-      matrix:
-        node-version: 20
-        os: [ ubuntu-latest ]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     timeout-minutes: 60
 
@@ -67,7 +62,7 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
       uses: actions/setup-node@v4
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: 20
         cache: 'npm'
     - run: npm ci
     - uses: actions/download-artifact@v4
