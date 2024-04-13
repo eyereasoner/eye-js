@@ -49,6 +49,54 @@ jobs:
     - run: npx playwright install
     - run: npm test
 
+  test-memory-browser:
+    needs: build
+    strategy:
+      matrix:
+        node-version: 20
+        os: [ ubuntu-latest ]
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 60
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - uses: actions/download-artifact@v4
+      with:
+        name: dist
+        path: dist
+    - run: npm run test:memory:browser
+
+  test-memory:
+    needs: build
+    strategy:
+      matrix:
+        node-version: [18.x, 19.x, 20.x, 21.x]
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 60
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - uses: actions/download-artifact@v4
+      with:
+        name: dist
+        path: dist
+    - run: npm run test:memory:node
+
   benchmark:
     needs: build
     strategy:
