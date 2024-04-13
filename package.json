@@ -22,6 +22,7 @@
     "lint": "eslint lib/** __tests__/**.ts scripts/** --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "build": "npm run eye:prepare && npm run see:pvm && npm run build:tsc",
+    "prepare": "npm run build",
     "build:tsc": "tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
