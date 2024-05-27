@@ -281,10 +281,12 @@ export function universalTests() {
 
     it('should execute the n3reasoner on surface query', async () => {
       await expect(n3reasoner(surfaceQueryQuads)).rejects.toThrow(/inference_fuse/);
+      await expect(n3reasoner(surfaceQuery)).rejects.toThrow(/inference_fuse/);
     });
 
     it('should execute the n3reasoner on surface query [bnodeRelabeling: false]', async () => {
       await expect(n3reasoner(surfaceQueryQuads, undefined, { bnodeRelabeling: false })).rejects.toThrow(/inference_fuse/);
+      await expect(n3reasoner(surfaceQuery, undefined, { bnodeRelabeling: false })).rejects.toThrow(/inference_fuse/);
     });
   });
 }
