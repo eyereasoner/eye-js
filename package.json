@@ -87,6 +87,7 @@
     "parse-url": "^9.0.1",
     "playwright": "^1.30.0",
     "pre-commit": "^1.2.2",
+    "rdf-terms": "^1.11.0",
     "semantic-release": "^23.0.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
