@@ -23,7 +23,9 @@ export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
 export const askResultQuads = parser.parse(askResult);
 export const surfaceQueryQuads = parser.parse(surfaceQuery);
-export const surfaceRelabelingQueryQuads = parser.parse(surfaceRelabelingQuery);
+export const surfaceRelabelingQueryQuads = parser.parse(surfaceRelabelingQuery)
+  // see https://github.com/rdfjs/N3.js/issues/332
+  .map(quad => mapTerms(quad, term => term.termType === 'BlankNode' ? DataFactory.blankNode(term.value.replace(/\./g, '__dot__')) : term));
 export const surfaceRelabelingResultQuads = parser.parse(surfaceRelabelingResult);
 
 export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
@@ -300,11 +302,7 @@ export function universalTests() {
     it('should execute the n3reasoner on surface query that doesnt fuse [bnodeRelabeling: true]', async () => {
       await expect(n3reasoner(surfaceRelabelingQuery, undefined, { outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
       await expect(n3reasoner(surfaceRelabelingQuery, undefined, { bnodeRelabeling: true, outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
-      await expect(n3reasoner(
-        surfaceRelabelingQueryQuads
-          // see https://github.com/rdfjs/N3.js/issues/332
-          .map(quad => mapTerms(quad, term => term.termType === 'BlankNode' ? DataFactory.blankNode(term.value.replace(/\./g, '__dot__')) : term))
-        , undefined, { bnodeRelabeling: true })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
+      await expect(n3reasoner(surfaceRelabelingQueryQuads, undefined, { bnodeRelabeling: true })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
     });
   });
 }
