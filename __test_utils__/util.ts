@@ -7,9 +7,10 @@ import { n3reasoner, linguareasoner } from '../dist';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
 import { askCallback, askQuery, askResult } from '../data/ask';
+import { query as surfaceQuery } from '../data/surface';
+
 
 const parser = new Parser({ format: 'text/n3' });
-const trigparser = new Parser({ format: 'trig' });
 // Workaround for https://github.com/rdfjs/N3.js/issues/324
 // @ts-expect-error
 parser._supportsRDFStar = true;
@@ -21,6 +22,7 @@ export const dataStarQuads = parser.parse(dataStar);
 export const resultQuads = parser.parse(result);
 export const resultBlogicQuads = parser.parse(blogicResult);
 export const askResultQuads = parser.parse(askResult);
+export const surfaceQueryQuads = parser.parse(surfaceQuery);
 
 export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
   switch (args[0]) {
@@ -275,6 +277,14 @@ export function universalTests() {
 
     it('should throw error when eye cannot process the query', async () => {
       await expect(n3reasoner('invalid', 'invalid')).rejects.toThrowError('Error while executing query');
+    });
+
+    it('should execute the n3reasoner on surface query', async () => {
+      await expect(n3reasoner(surfaceQueryQuads)).rejects.toThrow(/inference_fuse/);
+    });
+
+    it('should execute the n3reasoner on surface query [bnodeRelabeling: false]', async () => {
+      await expect(n3reasoner(surfaceQueryQuads, undefined, { bnodeRelabeling: false })).rejects.toThrow(/inference_fuse/);
     });
   });
 }
