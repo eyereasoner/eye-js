@@ -10,6 +10,11 @@ import SEE_PVM from './lingua';
 import { qaQuery, queryOnce } from './query';
 
 export type ICoreQueryOptions = {
+  /**
+   * Whether or not to perform bnodeRelabelling
+   * @default true
+   */
+  bnodeRelabelling?: boolean;
   output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules';
 }
 
@@ -56,7 +61,7 @@ export function runQuery(
   Module: SWIPLModule,
   data: string[],
   queryString: string | undefined,
-  { output, cb }: Options & { cb?: undefined },
+  options: Options & { cb?: undefined },
   noOptions?: boolean,
 ): SWIPLModule
 export function runQuery(
@@ -70,7 +75,7 @@ export function runQuery(
   Module: SWIPLModule,
   data: string[],
   queryString?: string,
-  { output, cb }: Options = {}, // eslint-disable-line default-param-last
+  { output, cb, bnodeRelabelling }: Options = {}, // eslint-disable-line default-param-last
   noOptions?: boolean,
 ): SWIPLModule | Promise<SWIPLModule> {
   const args = noOptions ? [] : ['--nope', '--quiet'];
@@ -104,6 +109,10 @@ export function runQuery(
       default:
         throw new Error(`Unknown output option: ${output}`);
     }
+  }
+
+  if (bnodeRelabelling === false) {
+    args.push('--no-bnode-relabelling');
   }
 
   if (cb) {
