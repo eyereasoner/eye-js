@@ -29,3 +29,24 @@ export const relabelingQuery = `
     _:WHAT a :ResearcherPreference .
 } .
 `
+
+export const relabelingResult = `
+@prefix : <https://example.org/ns#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
+
+{
+    _:WHAT a :DepartmentPreference.
+} => {
+    ([]) log:onNegativeSurface {
+        [] a :ResearcherPreference.
+    }.
+}.
+
+{
+    _:WHAT a :ResearcherPreference.
+} => {
+    ([]) log:onNegativeSurface {
+        [] a :DepartmentPreference.
+    }.
+}.
+`
