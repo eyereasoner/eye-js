@@ -287,21 +287,18 @@ export function universalTests() {
 
       await expect(n3reasoner(surfaceQuery, undefined, { bnodeRelabeling: true })).rejects.toThrow(/inference_fuse/);
       await expect(n3reasoner(surfaceQueryQuads, undefined, { bnodeRelabeling: true })).rejects.toThrow(/inference_fuse/);
-
-
-      // await expect(n3reasoner(surfaceRelabelingQuery)).rejects.toThrow(/inference_fuse/);
-      // await expect(n3reasoner(surfaceRelabelingQueryQuads)).rejects.toThrow(/inference_fuse/);
-
-      // await expect(n3reasoner(surfaceRelabelingQuery, undefined, { bnodeRelabeling: true })).rejects.toThrow(/inference_fuse/);
-      // await expect(n3reasoner(surfaceRelabelingQueryQuads, undefined, { bnodeRelabeling: true })).rejects.toThrow(/inference_fuse/);
     });
 
     it('should execute the n3reasoner on surface query [bnodeRelabeling: false]', async () => {
       await expect(n3reasoner(surfaceQuery, undefined, { bnodeRelabeling: false })).rejects.toThrow(/inference_fuse/);
       await expect(n3reasoner(surfaceQueryQuads, undefined, { bnodeRelabeling: false })).rejects.toThrow(/inference_fuse/);
+
+      await expect(n3reasoner(surfaceRelabelingQuery, undefined, { bnodeRelabeling: false })).rejects.toThrow(/inference_fuse/);
+      await expect(n3reasoner(surfaceRelabelingQueryQuads, undefined, { bnodeRelabeling: false })).rejects.toThrow(/inference_fuse/);
     });
 
-    it('should execute the n3reasoner on surface query that doesnt fuse [bnodeRelabeling: false]', async () => {
+    it('should execute the n3reasoner on surface query that doesnt fuse [bnodeRelabeling: true]', async () => {
+      await expect(n3reasoner(surfaceRelabelingQuery, undefined, { outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
       await expect(n3reasoner(surfaceRelabelingQuery, undefined, { bnodeRelabeling: true, outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
       await expect(n3reasoner(
         surfaceRelabelingQueryQuads
