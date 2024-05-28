@@ -310,7 +310,7 @@ export function universalTests() {
     });
 
     it('should execute the n3reasoner on socrates surface query that sets [output: "none"]', async () => {
-      await expect(n3reasoner(surfaceSocratesQuery, undefined, { output: 'none', bnodeRelabeling: falset , outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceSocratesResultQuads); 
+      await expect(n3reasoner(surfaceSocratesQuery, undefined, { output: 'none', bnodeRelabeling: false , outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceSocratesResultQuads); 
     });
   });
 }
