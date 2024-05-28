@@ -15,7 +15,7 @@ export type ICoreQueryOptions = {
    * @default true
    */
   bnodeRelabeling?: boolean;
-  output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules';
+  output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules' | 'none';
 }
 
 export type Options = ICoreQueryOptions & {
@@ -105,6 +105,8 @@ export function runQuery(
         break;
       case 'grounded_deductive_closure_plus_rules':
         args.push('--pass-all-ground');
+        break;
+      case 'none':
         break;
       default:
         throw new Error(`Unknown output option: ${output}`);
