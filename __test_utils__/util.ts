@@ -8,6 +8,7 @@ import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
 import { askCallback, askQuery, askResult } from '../data/ask';
 import { query as surfaceQuery, relabelingQuery as surfaceRelabelingQuery, relabelingResult as surfaceRelabelingResult } from '../data/surface';
+import { query as surfaceSocratesQuery, queryResult as surfaceSocratesResult } from '../data/surface_socrates';
 import { mapTerms } from 'rdf-terms';
 
 const parser = new Parser({ format: 'text/n3' });
@@ -27,6 +28,7 @@ export const surfaceRelabelingQueryQuads = parser.parse(surfaceRelabelingQuery)
   // see https://github.com/rdfjs/N3.js/issues/332
   .map(quad => mapTerms(quad, term => term.termType === 'BlankNode' ? DataFactory.blankNode(term.value.replace(/\./g, '__dot__')) : term));
 export const surfaceRelabelingResultQuads = parser.parse(surfaceRelabelingResult);
+export const surfaceSocratesResultQuads = parser.parse(surfaceSocratesResult);
 
 export function mockFetch(...args: Parameters<typeof fetch>): ReturnType<typeof fetch> {
   switch (args[0]) {
@@ -305,6 +307,10 @@ export function universalTests() {
       await expect(n3reasoner(surfaceRelabelingQuery, undefined, { outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
       await expect(n3reasoner(surfaceRelabelingQuery, undefined, { bnodeRelabeling: true, outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
       await expect(n3reasoner(surfaceRelabelingQueryQuads, undefined, { bnodeRelabeling: true })).resolves.toBeRdfIsomorphic(surfaceRelabelingResultQuads);
+    });
+
+    it('should execute the n3reasoner on socrates surface query that sets [output: "none"]', async () => {
+      await expect(n3reasoner(surfaceSocratesQuery, undefined, { output: 'none', bnodeRelabeling: falset , outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceSocratesResultQuads); 
     });
   });
 }
