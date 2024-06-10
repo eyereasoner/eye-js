@@ -151,7 +151,7 @@
   },
   "dependencies": {
     "n3": "^1.16.3",
-    "swipl-wasm": "3.7.15"
+    "swipl-wasm": "3.8.0"
   },
   "peerDependencies": {
     "@rdfjs/types": "^1.1.0"
