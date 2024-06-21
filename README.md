@@ -7,6 +7,7 @@ Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser 
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![bundlephobia](https://img.shields.io/bundlephobia/min/eyereasoner.svg)](https://www.npmjs.com/package/eyereasoner)
+[![DOI](https://zenodo.org/badge/581706557.svg)](https://zenodo.org/doi/10.5281/zenodo.12211023)
 
 ## Usage
 
@@ -255,6 +256,10 @@ _:ng3 {
     var:S a :Mortal.
 }`)
 ```
+
+## Cite
+
+If you are using or extending eye-js as part of a scientific publication, we would appreciate a citation of our [zenodo artefact](https://zenodo.org/doi/10.5281/zenodo.12211023).
 
 ## License
 ©2022–present
