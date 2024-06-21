@@ -257,6 +257,10 @@ _:ng3 {
 }`)
 ```
 
+## Cite
+
+If you are using or extending eye-js as part of a scientific publication, we would appreciate a citation of our [zenodo artefact](https://zenodo.org/doi/10.5281/zenodo.12211023).
+
 ## License
 ©2022–present
 [Jesse Wright](https://github.com/jeswr),
