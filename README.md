@@ -78,6 +78,7 @@ The `options` parameter can be used to configure the reasoning process. The foll
     - `deductive_closure`: output deductive closure, a.k.a `--pass`
     - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
     - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
+    - `none`: provides no `-pass-*` arguments to eye, often used when doing RDF Surface reasoning
 - `outputType`: The type of output (if different from the input)
     - `string`: output as string
     - `quads`: output as array of RDF/JS Quads
