@@ -1,7 +1,8 @@
 import Benchmark, { type Event } from 'benchmark';
 import { data, query } from '../data/socrates';
 import { queryOnce, SwiplEye, n3reasoner } from '../dist';
-import { generateDeepTaxonomy } from 'deep-taxonomy-benchmark/dist';
+import { write } from '../dist/n3Writer.temp';
+import { generateDeepTaxonomy, getTimblAndFoaf, getOwl, getRdfs, getTimbl } from 'deep-taxonomy-benchmark';
 import { Parser } from 'n3';
 
 const suite = new Benchmark.Suite;
@@ -37,6 +38,16 @@ async function main() {
   LoadedModule.FS.writeFile('data.n3', data);
   LoadedModule.FS.writeFile('query.n3', query);
 
+  const timblRdfs = [...await getTimblAndFoaf(), ...await getRdfs()];
+  const timblOwl2rl = [...await getTimbl(), ...await getOwl()];
+
+  const LoadedDeep10 = await SwiplEye({ print: () => { } });
+  LoadedDeep10.FS.writeFile('data.n3', write(deepTaxonomyBenchmark10));
+  const LoadedDeep50 = await SwiplEye({ print: () => { } });
+  LoadedDeep50.FS.writeFile('data.n3', write(deepTaxonomyBenchmark50));
+  const LoadedDeep100 = await SwiplEye({ print: () => { } });
+  LoadedDeep100.FS.writeFile('data.n3', write(deepTaxonomyBenchmark100));
+
   // add tests
   suite
     .add(
@@ -63,6 +74,21 @@ async function main() {
     ).add(
       'Run deep taxonomy benchmark [100]',
       deferred(() => n3reasoner(deepTaxonomyBenchmark100)),
+    ).add(
+      'Run deep taxonomy benchmark [10] [reasoning only]',
+      () => queryOnce(LoadedDeep10, 'main', ['--nope', '--quiet', './data.n3', '--pass-only-new']),
+    ).add(
+      'Run deep taxonomy benchmark [50] [reasoning only]',
+      () => queryOnce(LoadedDeep50, 'main', ['--nope', '--quiet', './data.n3', '--pass-only-new']),
+    ).add(
+      'Run deep taxonomy benchmark [100] [reasoning only]',
+      () => queryOnce(LoadedDeep100, 'main', ['--nope', '--quiet', './data.n3', '--pass-only-new']),
+    ).add(
+      'Run timbl + rdfs rules',
+      deferred(() => n3reasoner(timblRdfs)),
+    ).add(
+      'Run timbl + owl2rl rules',
+      deferred(() => n3reasoner(timblOwl2rl)),
     ).on('cycle', (event: Event) => {
       console.log(event.target.toString());
     }).run();
