@@ -33,7 +33,8 @@
     "eye:update": "ts-node scripts/update",
     "see:pvm": "ts-node scripts/generate-pvm --name=lingua",
     "lingua:update": "ts-node scripts/update --name=lingua",
-    "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt"
+    "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt",
+    "benchmark:deepTaxonomy": "node perf/deepTaxonomyBenchmarkNode.mjs"
   },
   "repository": {
     "type": "git",
