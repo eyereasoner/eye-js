@@ -42,6 +42,11 @@ async function main() {
   const timblFoafOwl2rl = [...await getTimblAndFoaf(), ...await getOwl()];
   const timblRdfs = [...await getTimbl(), ...await getRdfs()];
   const timblOwl2rl = [...await getTimbl(), ...await getOwl()];
+
+  const timblFoafRdfsString = write(timblFoafRdfs);
+  const timblFoafOwl2rlString = write(timblFoafOwl2rl);
+  const timblRdfsString = write(timblRdfs);
+  const timblOwl2rlString = write(timblOwl2rl);
  
   const LoadedDeep10 = await SwiplEye({ print: () => { } });
   LoadedDeep10.FS.writeFile('data.n3', write(deepTaxonomyBenchmark10));
@@ -97,6 +102,18 @@ async function main() {
     ).add(
       'Run timbl + owl2rl rules',
       deferred(() => n3reasoner(timblOwl2rl, undefined, { outputType: 'string' })),
+    ).add(
+      'Run timbl + foaf + rdfs rules [string]',
+      deferred(() => n3reasoner(timblFoafRdfsString,  undefined, { outputType: 'string' })),
+    ).add(
+      'Run timbl + foaf + owl2rl rules [string]',
+      deferred(() => n3reasoner(timblFoafOwl2rlString, undefined, { outputType: 'string' })),
+    ).add(
+      'Run timbl + rdfs rules [string]',
+      deferred(() => n3reasoner(timblRdfsString,  undefined, { outputType: 'string' })),
+    ).add(
+      'Run timbl + owl2rl rules [string]',
+      deferred(() => n3reasoner(timblOwl2rlString, undefined, { outputType: 'string' })),
     ).on('cycle', (event: Event) => {
       console.log(event.target.toString());
     }).run();
