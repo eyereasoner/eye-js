@@ -5,3 +5,4 @@ bundle
 lib/eye.ts
 lib/lingua.ts
 perf/output.txt
+perf/dynamic.mjs
