@@ -7,6 +7,7 @@ Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser 
 [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![bundlephobia](https://img.shields.io/bundlephobia/min/eyereasoner.svg)](https://www.npmjs.com/package/eyereasoner)
+[![DOI](https://zenodo.org/badge/581706557.svg)](https://zenodo.org/doi/10.5281/zenodo.12211023)
 
 ## Usage
 
@@ -78,6 +79,7 @@ The `options` parameter can be used to configure the reasoning process. The foll
     - `deductive_closure`: output deductive closure, a.k.a `--pass`
     - `deductive_closure_plus_rules`: output deductive closure plus rules, a.k.a `--pass-all`
     - `grounded_deductive_closure_plus_rules`: ground the rules and output deductive closure plus rules, a.k.a `--pass-all-ground`
+    - `none`: provides no `-pass-*` arguments to eye, often used when doing RDF Surface reasoning
 - `outputType`: The type of output (if different from the input)
     - `string`: output as string
     - `quads`: output as array of RDF/JS Quads
@@ -254,6 +256,10 @@ _:ng3 {
     var:S a :Mortal.
 }`)
 ```
+
+## Cite
+
+If you are using or extending eye-js as part of a scientific publication, we would appreciate a citation of our [zenodo artefact](https://zenodo.org/doi/10.5281/zenodo.12211023).
 
 ## License
 ©2022–present

@@ -33,7 +33,8 @@
     "eye:update": "ts-node scripts/update",
     "see:pvm": "ts-node scripts/generate-pvm --name=lingua",
     "lingua:update": "ts-node scripts/update --name=lingua",
-    "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt"
+    "perf": "ts-node perf/bench 2>&1 | tee perf/output.txt",
+    "benchmark:deepTaxonomy": "node perf/deepTaxonomyBenchmarkNode.mjs"
   },
   "repository": {
     "type": "git",
@@ -63,7 +64,7 @@
   "devDependencies": {
     "@memlab/api": "^1.0.20",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
-    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@types/benchmark": "^2.1.2",
     "@types/express": "^4.17.17",
     "@types/fs-extra": "^11.0.1",
@@ -73,7 +74,7 @@
     "@typescript-eslint/parser": "^7.0.2",
     "benchmark": "^2.1.4",
     "cross-fetch": "^4.0.0",
-    "deep-taxonomy-benchmark": "^1.1.1",
+    "deep-taxonomy-benchmark": "^1.2.0",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -87,7 +88,8 @@
     "parse-url": "^9.0.1",
     "playwright": "^1.30.0",
     "pre-commit": "^1.2.2",
-    "semantic-release": "^23.0.0",
+    "rdf-terms": "^1.11.0",
+    "semantic-release": "^24.0.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
@@ -140,8 +142,8 @@
   },
   "config": {
     "eye": {
-      "name": "v10.2.24",
-      "url": "https://api.github.com/repos/eyereasoner/eye/releases/152044835"
+      "name": "v10.16.25",
+      "url": "https://api.github.com/repos/eyereasoner/eye/releases/166485526"
     },
     "lingua": {
       "name": "v1.0.2",
@@ -150,7 +152,7 @@
   },
   "dependencies": {
     "n3": "^1.16.3",
-    "swipl-wasm": "3.7.7"
+    "swipl-wasm": "3.8.2"
   },
   "peerDependencies": {
     "@rdfjs/types": "^1.1.0"

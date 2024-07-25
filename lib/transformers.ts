@@ -10,7 +10,12 @@ import SEE_PVM from './lingua';
 import { qaQuery, queryOnce } from './query';
 
 export type ICoreQueryOptions = {
-  output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules';
+  /**
+   * Whether or not to perform bnodeRelabeling
+   * @default true
+   */
+  bnodeRelabeling?: boolean;
+  output?: 'derivations' | 'deductive_closure' | 'deductive_closure_plus_rules' | 'grounded_deductive_closure_plus_rules' | 'none';
 }
 
 export type Options = ICoreQueryOptions & {
@@ -56,7 +61,7 @@ export function runQuery(
   Module: SWIPLModule,
   data: string[],
   queryString: string | undefined,
-  { output, cb }: Options & { cb?: undefined },
+  options: Options & { cb?: undefined },
   noOptions?: boolean,
 ): SWIPLModule
 export function runQuery(
@@ -70,7 +75,7 @@ export function runQuery(
   Module: SWIPLModule,
   data: string[],
   queryString?: string,
-  { output, cb }: Options = {}, // eslint-disable-line default-param-last
+  { output, cb, bnodeRelabeling }: Options = {}, // eslint-disable-line default-param-last
   noOptions?: boolean,
 ): SWIPLModule | Promise<SWIPLModule> {
   const args = noOptions ? [] : ['--nope', '--quiet'];
@@ -101,9 +106,15 @@ export function runQuery(
       case 'grounded_deductive_closure_plus_rules':
         args.push('--pass-all-ground');
         break;
+      case 'none':
+        break;
       default:
         throw new Error(`Unknown output option: ${output}`);
     }
+  }
+
+  if (bnodeRelabeling === false) {
+    args.push('--no-bnode-relabeling');
   }
 
   if (cb) {
