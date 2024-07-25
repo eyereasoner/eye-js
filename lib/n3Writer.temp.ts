@@ -54,11 +54,11 @@ export class N3Writer {
       .join(' . ') + ' . ';
   }
 
-  quadsToString(quads: Quad[]): string {
-    return this.quadsStoreToString(new Store(quads))
+  quadsToString(quads: Quad[] | Store): string {
+    return this.quadsStoreToString(Array.isArray(quads) ? new Store(quads) : quads)
   }
 }
 
-export function write(quads: Quad[]) {
+export function write(quads: Quad[] | Store) {
   return (new N3Writer).quadsToString(quads);
 }

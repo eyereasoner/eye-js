@@ -1,7 +1,9 @@
 // A set of functions that take a SWIPLModule as input, apply
 // a transformation, and then return the same module
 import { Quad } from '@rdfjs/types';
-import { Parser } from 'n3';
+import {
+  BaseQuad, Parser, Store, Writer,
+} from 'n3';
 import SWIPL, { type SWIPLModule } from 'swipl-wasm/dist/swipl/swipl-bundle-no-data';
 import strToBuffer from 'swipl-wasm/dist/strToBuffer';
 import { write } from './n3Writer.temp';
@@ -28,6 +30,8 @@ type IOptions = Options & {
   /* eslint-disable-next-line max-len */
   imageLoader?(swipl: typeof SWIPL): (options?: Partial<EmscriptenModule> | undefined) => Promise<SWIPLModule>;
 }
+
+type IData = (string | { data: string; triplesOnly: boolean })[]
 
 export function loadImage(image: string) {
   return (swipl: typeof SWIPL) => (options?: Partial<EmscriptenModule> | undefined) => swipl({
@@ -59,21 +63,21 @@ export function SwiplEye(options?: Partial<EmscriptenModule> | undefined) {
  */
 export function runQuery(
   Module: SWIPLModule,
-  data: string[],
+  data: IData,
   queryString: string | undefined,
   options: Options & { cb?: undefined },
   noOptions?: boolean,
 ): SWIPLModule
 export function runQuery(
   Module: SWIPLModule,
-  data: string[],
+  data: IData,
   queryString?: string,
   options?: Options, // eslint-disable-line default-param-last
   noOptions?: boolean,
 ): SWIPLModule | Promise<SWIPLModule>
 export function runQuery(
   Module: SWIPLModule,
-  data: string[],
+  data: IData,
   queryString?: string,
   { output, cb, bnodeRelabeling }: Options = {}, // eslint-disable-line default-param-last
   noOptions?: boolean,
@@ -81,8 +85,13 @@ export function runQuery(
   const args = noOptions ? [] : ['--nope', '--quiet'];
 
   for (let i = 0; i < data.length; i += 1) {
+    const elem = data[i];
+    const turtle = typeof elem === 'object' && elem.triplesOnly;
+    if (turtle) {
+      args.push('--turtle');
+    }
     args.push(`data_${i}.n3s`);
-    Module.FS.writeFile(`data_${i}.n3s`, data[i]);
+    Module.FS.writeFile(`data_${i}.n3s`, typeof elem === 'object' ? elem.data : elem);
   }
 
   if (queryString) {
@@ -142,14 +151,36 @@ export type Data = Quad[] | string
 export type InputData = Data | [string, ...string[]]
 export type Query = Data | undefined
 
-function inputDataToStrings(data: InputData): string[] {
+function inputDataToStrings(data: InputData): IData {
   if (typeof data === 'string') {
     return [data];
   }
   if (typeof data[0] === 'string') {
     return data as [string, ...string[]];
   }
-  return data.length > 0 ? [write(data as Quad[])] : [];
+  const triples = [];
+  const quads = new Store();
+
+  for (const elem of (data as BaseQuad[])) {
+    if (elem.graph.termType === 'DefaultGraph'
+        && elem.subject.termType === 'NamedNode'
+        && elem.predicate.termType === 'NamedNode'
+        && elem.object.termType === 'NamedNode') {
+      triples.push(elem as Quad);
+    } else {
+      quads.addQuad(elem as Quad);
+    }
+  }
+
+  const strings: IData = [];
+  if (triples.length > 0) {
+    strings.push({ triplesOnly: true, data: (new Writer()).quadsToString(triples) });
+  }
+  if (data.length > 0 && triples.length !== data.length) {
+    strings.push(write(quads));
+  }
+
+  return strings;
 }
 
 /**
