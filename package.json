@@ -70,8 +70,8 @@
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.4.0",
     "@types/n3": "^1.10.4",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.2",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
     "benchmark": "^2.1.4",
     "deep-taxonomy-benchmark": "^1.2.0",
     "eslint": "^8.34.0",
@@ -151,7 +151,7 @@
   },
   "dependencies": {
     "n3": "^1.16.3",
-    "swipl-wasm": "3.8.2"
+    "swipl-wasm": "4.0.0"
   },
   "peerDependencies": {
     "@rdfjs/types": "^1.1.0"
