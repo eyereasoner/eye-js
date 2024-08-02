@@ -73,7 +73,6 @@
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.2",
     "benchmark": "^2.1.4",
-    "cross-fetch": "^4.0.0",
     "deep-taxonomy-benchmark": "^1.2.0",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
