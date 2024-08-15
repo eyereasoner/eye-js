@@ -16,6 +16,8 @@ updates:
         update-types:
         - "minor"
         - "patch"
+        exclude-patterns:
+        - "swipl-wasm"
   - package-ecosystem: "github-actions"
     directory: "/" # Location of package manifests
     schedule:
