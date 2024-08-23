@@ -66,7 +66,7 @@ export const trig = `
 :Human rdfs:subClassOf :Mortal.
 
 # rdfs subclass
-_:ng1 lingua:implication _:ng2.
+_:ng1 lingua:forward _:ng2.
 
 _:ng1 {
     var:A rdfs:subClassOf var:B.
@@ -78,7 +78,7 @@ _:ng2 {
 }
 
 # query
-_:ng3 lingua:query _:ng3.
+_:ng3 lingua:answer _:ng3.
 
 _:ng3 {
     var:S a :Mortal.
