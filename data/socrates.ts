@@ -57,7 +57,7 @@ export const trig = `
 # Infer that Socrates is mortal.
 
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix lingua: <http://www.w3.org/2000/10/swap/lingua#>.
+@prefix log: <http://www.w3.org/2000/10/swap/log#>.
 @prefix var: <http://www.w3.org/2000/10/swap/var#>.
 @prefix : <http://example.org/socrates#>.
 
@@ -66,7 +66,7 @@ export const trig = `
 :Human rdfs:subClassOf :Mortal.
 
 # rdfs subclass
-_:ng1 lingua:forward _:ng2.
+_:ng1 log:implies _:ng2.
 
 _:ng1 {
     var:A rdfs:subClassOf var:B.
@@ -78,7 +78,7 @@ _:ng2 {
 }
 
 # query
-_:ng3 lingua:answer _:ng3.
+_:ng3 log:query _:ng3.
 
 _:ng3 {
     var:S a :Mortal.
