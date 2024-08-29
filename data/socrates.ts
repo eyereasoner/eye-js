@@ -56,30 +56,30 @@ export const trig = `
 #
 # Infer that Socrates is mortal.
 
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-@prefix lingua: <http://www.w3.org/2000/10/swap/lingua#>.
-@prefix var: <http://www.w3.org/2000/10/swap/var#>.
-@prefix : <http://example.org/socrates#>.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX log: <http://www.w3.org/2000/10/swap/log#>
+PREFIX var: <http://www.w3.org/2000/10/swap/var#>
+PREFIX : <#>
 
 # facts
 :Socrates a :Human.
 :Human rdfs:subClassOf :Mortal.
 
 # rdfs subclass
-_:ng1 lingua:forward _:ng2.
+_:bng_1 log:implies _:bng_2.
 
-_:ng1 {
+GRAPH _:bng_1 {
     var:A rdfs:subClassOf var:B.
     var:S a var:A.
 }
 
-_:ng2 {
+GRAPH _:bng_2 {
     var:S a var:B.
 }
 
 # query
-_:ng3 lingua:answer _:ng3.
+_:bng_3 log:query _:bng_3.
 
-_:ng3 {
+GRAPH _:bng_3 {
     var:S a :Mortal.
 }`
