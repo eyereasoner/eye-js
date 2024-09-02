@@ -73,7 +73,7 @@
     "@typescript-eslint/eslint-plugin": "^8.0.0",
     "@typescript-eslint/parser": "^8.0.0",
     "benchmark": "^2.1.4",
-    "deep-taxonomy-benchmark": "^1.2.0",
+    "deep-taxonomy-benchmark": "^2.0.0",
     "eslint": "^8.34.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
@@ -141,8 +141,8 @@
   },
   "config": {
     "eye": {
-      "name": "v10.19.8",
-      "url": "https://api.github.com/repos/eyereasoner/eye/releases/172833078"
+      "name": "v10.19.9",
+      "url": "https://api.github.com/repos/eyereasoner/eye/releases/172953635"
     },
     "lingua": {
       "name": "v1.4.1",
