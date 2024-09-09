@@ -141,8 +141,8 @@
   },
   "config": {
     "eye": {
-      "name": "v10.22.3",
-      "url": "https://api.github.com/repos/eyereasoner/eye/releases/174174265"
+      "name": "v10.22.4",
+      "url": "https://api.github.com/repos/eyereasoner/eye/releases/174204687"
     },
     "lingua": {
       "name": "v1.6.3",
@@ -151,7 +151,7 @@
   },
   "dependencies": {
     "n3": "^1.16.3",
-    "swipl-wasm": "4.0.3"
+    "swipl-wasm": "4.0.4"
   },
   "peerDependencies": {
     "@rdfjs/types": "^1.1.0"
