@@ -25,7 +25,7 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
-    if: contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')
+    if: github.actor == 'dependabot[bot]' && contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')
     steps:
       - uses: actions/checkout@v4
       - run: |
