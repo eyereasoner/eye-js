@@ -29,8 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          branch_name=${{ github.head_ref }}
-          version=$(echo $branch_name | grep -oP '(?<=swipl-wasm-)[^/]+')
+          version=$(echo "$BRANCH_NAME" | grep -oP '(?<=swipl-wasm-)[^/]+')
           major=$(echo $version | cut -d. -f1)
           minor=$(echo $version | cut -d. -f2)
           patch=$(echo $version | cut -d. -f3)
@@ -46,3 +45,4 @@ jobs:
           gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash --subject "$commit_message"
     env:
       GH_TOKEN: ${{ github.token }}
+      BRANCH_NAME: ${{ github.head_ref }}
