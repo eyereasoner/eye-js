@@ -38,7 +38,11 @@ jobs:
 
           # The name of the new branch if we need to create one
           branch=$branchHead/update-${{ matrix.dep }}-${current:1:-1}
-          msg="$version: update to ${{ matrix.dep }} ${current:1:-1}"
+            if [ $branchHead == "breaking" ]; then
+              msg="BREAKING CHANGE: update to ${{ matrix.dep }} ${current:1:-1}\n\nBREAKING CHANGE: This update includes breaking changes to ${{ matrix.dep }}."
+            else
+              msg="$version: update to ${{ matrix.dep }} ${current:1:-1}"
+            fi
 
           if [ $branchHead ]; then
             git config --global user.name 'Jesse Wright'
