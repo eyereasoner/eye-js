@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1735591630958,
+  "lastUpdate": 1735665829214,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -76113,6 +76113,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 2.61,
             "range": "±0.43%",
+            "unit": "ops/sec",
+            "extra": "16 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d30fa957eb980553e680342727c95c151d88e14e",
+          "message": "Update nodejs.yml (#1460)",
+          "timestamp": "2024-12-31T17:12:03Z",
+          "tree_id": "04a8ec826da561fca2eda95d6228ffc3ec2d0a89",
+          "url": "https://github.com/eyereasoner/eye-js/commit/d30fa957eb980553e680342727c95c151d88e14e"
+        },
+        "date": 1735665788195,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 15.72,
+            "range": "±3.66%",
+            "unit": "ops/sec",
+            "extra": "74 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 13.79,
+            "range": "±4.46%",
+            "unit": "ops/sec",
+            "extra": "67 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 203262,
+            "range": "±0.49%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 276966,
+            "range": "±0.66%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 63.55,
+            "range": "±16.77%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 3.95,
+            "range": "±2.15%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.14,
+            "range": "±1.94%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±1.50%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 4.64,
+            "range": "±13.14%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.29,
+            "range": "±16.46%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.08,
+            "range": "±17.63%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 0.94,
+            "range": "±2.39%",
+            "unit": "ops/sec",
+            "extra": "9 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 0.51,
+            "range": "±1.76%",
+            "unit": "ops/sec",
+            "extra": "7 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 2.09,
+            "range": "±2.12%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 2.46,
+            "range": "±2.56%",
+            "unit": "ops/sec",
+            "extra": "17 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 0.96,
+            "range": "±0.91%",
+            "unit": "ops/sec",
+            "extra": "9 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 0.52,
+            "range": "±1.08%",
+            "unit": "ops/sec",
+            "extra": "7 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 2.18,
+            "range": "±0.63%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 2.58,
+            "range": "±2.26%",
             "unit": "ops/sec",
             "extra": "16 samples"
           }
