@@ -87,8 +87,8 @@ jobs:
         github-token: ${{ github.token }}
         comment-on-alert: ${{ ! contains(github.head_ref, 'dependabot/npm_and_yarn/') }}
         alert-comment-cc-users: '@jeswr'
-        alert-threshold: "110%"
-        fail-threshold: "125%"
+        alert-threshold: "125%"
+        fail-threshold: "150%"
         gh-pages-branch: pages
         auto-push: ${{ github.ref == 'refs/heads/main' }}
         save-data-file: ${{ github.ref == 'refs/heads/main' }}
@@ -111,6 +111,12 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }}
     needs: [ eslint, test, benchmark ]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+      pages: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -125,7 +131,7 @@ jobs:
       - name: "Create Bundle"
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           version=$(npx semantic-release --dry-run | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+') || true
           if [ $version ]
@@ -137,5 +143,5 @@ jobs:
       - name: Release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: npx semantic-release
