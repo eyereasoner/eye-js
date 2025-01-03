@@ -8,6 +8,9 @@ jobs:
     strategy:
       matrix:
         dep: [eye, lingua]
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - name: Commit latest release version
@@ -57,4 +60,4 @@ jobs:
             fi
           fi
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
