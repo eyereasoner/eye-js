@@ -14,6 +14,7 @@
     "test:coverage": "npm test -- --coverage",
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "test:unit": "npm run bundle:webpack && jest",
+    "test:cli": "npm run bundle:webpack && jest cli-test",
     "test:memory": "npm run test:memory:node && npm run test:memory:node:error && npm run test:memory:browser",
     "test:memory:node": "node __tests_memory__/leakTest",
     "test:memory:node:error": "node __tests_memory__/leakTestOnError",
