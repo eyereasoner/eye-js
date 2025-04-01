@@ -24,7 +24,12 @@ function createAnySubdirs(Module: any, filePath: string): void {
   for (const dir of dirs) {
     if (dir !== '') {
       currentPath += (currentPath ? '/' : '') + dir;
-      Module.FS.mkdir(currentPath);
+      try {
+        Module.FS.stat(currentPath);
+      } catch {
+        // Directory doesn't exist, create it
+        Module.FS.mkdir(currentPath);
+      }
     }
   }
 }
