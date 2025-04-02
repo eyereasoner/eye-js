@@ -20,9 +20,6 @@ export async function mainFunc(proc: NodeJS.Process) {
       // Create any subdirectories needed for this file path
       const dirname = path.dirname(arg);
       // @ts-ignore: mkdirTree exists in Emscripten FS but is not typed.
-      // Note that the implementation of mkdirTree looks for `/` path separators
-      // so we need to convert it to a posix path first for use
-      // in the emscripten FS module.
       Module.FS.mkdirTree(dirname);
 
       // Now write the file to the correct path
