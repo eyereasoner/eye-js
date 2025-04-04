@@ -9,7 +9,9 @@ import { askCallback, askQuery, askResult } from '../data/ask';
 
 const files = {
   [path.join(__dirname, 'socrates.n3')]: data,
+  [path.join(__dirname, 'sub-dir', 'socrates.n3')]: data,
   [path.join(__dirname, 'socrates-query.n3')]: query,
+  [path.join(__dirname, 'sub-dir', 'socrates-query.n3')]: query,
   [path.join(__dirname, 'strings.n3')]: `
   @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
   @prefix log: <http://www.w3.org/2000/10/swap/log#> .
@@ -57,22 +59,38 @@ async function getConsoleOutput(args: string[]) {
   // @ts-ignore
   // eslint-disable-next-line no-console
   const { calls }: { calls: string[][] } = console.log.mock;
+  // @ts-ignore
+  // eslint-disable-next-line no-console
+  const stderrCalls: string[][] = console.error.mock.calls || [];
+
   restoreConsole();
 
-  return calls.map((call) => call.join(' ')).join('\n');
+  const stdout = calls.map((call) => call.join(' ')).join('\n');
+  const stderr = stderrCalls.map((call) => call.join(' ')).join('\n');
+
+  return { stdout, stderr };
 }
 
 describe('Testing CLI', () => {
   it('Should run', async () => {
-    const output = await getConsoleOutput(['--nope', '--quiet', './socrates.n3', '--query', './socrates-query.n3']);
-    expect(`\n${output}`).toEqual(result);
+    const { stdout } = await getConsoleOutput(['--nope', '--quiet', './socrates.n3', '--query', './socrates-query.n3']);
+    expect(`\n${stdout}`).toEqual(result);
+  });
+
+  it('Should handle files in other directories', async () => {
+    const { stdout, stderr } = await getConsoleOutput(['--nope', '--quiet', './sub-dir/socrates.n3', '--query', './sub-dir/socrates-query.n3']);
+
+    expect(stderr).toEqual('');
+    expect(`\n${stdout}`).toEqual(result);
   });
 
   it('Should get output for strings query', async () => {
-    expect(await getConsoleOutput(['--quiet', '--strings', './strings.n3'])).toEqual('abc');
+    const { stdout } = await getConsoleOutput(['--quiet', '--strings', './strings.n3']);
+    expect(stdout).toEqual('abc');
   });
 
   it('Should get output for strings ask', async () => {
-    expect(new Parser().parse(await getConsoleOutput(['--nope', '--quiet', './ask.n3']))).toBeRdfIsomorphic(new Parser().parse(askResult));
+    const { stdout } = await getConsoleOutput(['--nope', '--quiet', './ask.n3']);
+    expect(new Parser().parse(stdout)).toBeRdfIsomorphic(new Parser().parse(askResult));
   });
 });
