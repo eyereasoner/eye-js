@@ -4,7 +4,6 @@ import readline from 'readline';
 import { SwiplEye } from '..';
 import { qaQuery } from '../query';
 
-
 export async function mainFunc(proc: NodeJS.Process) {
   const rl = readline.promises.createInterface({
     input: proc.stdin,
