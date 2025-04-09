@@ -1,19 +1,19 @@
-import path from 'path';
+import path, { PlatformPath } from 'path';
 import fs from 'fs';
 import readline from 'readline';
 import { SwiplEye } from '..';
 import { qaQuery } from '../query';
 
-export function convertToPosixPath(filePath: string): string {
+export function convertToPosixPath(filePath: string, pathLib: PlatformPath = path): string {
   // For the Emscripten FS, we need to ensure posix separators
   // for any relative sub-path that may have been typed in
   // on w32 as subdir\socrates.n3
 
   // First normalize the path to handle any path oddities
-  const normalizedPath = path.normalize(filePath);
+  const normalizedPath = pathLib.normalize(filePath);
 
   // Then split by platform-specific separator and join with POSIX separator
-  return normalizedPath.split(path.sep).join(path.posix.sep);
+  return normalizedPath.split(pathLib.sep).join(pathLib.posix.sep);
 }
 
 export async function mainFunc(proc: NodeJS.Process) {

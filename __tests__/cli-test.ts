@@ -29,19 +29,6 @@ jest.mock('fs', () => ({
   readFileSync: (pth: string) => Buffer.from(files[pth]),
 }));
 
-// Mock path module to control path.sep for testing
-jest.mock('path', () => {
-  const originalPath = jest.requireActual('path');
-  return {
-    ...originalPath,
-    sep: originalPath.sep, // Default to original separator
-    posix: originalPath.posix,
-    join: originalPath.join,
-    dirname: originalPath.dirname,
-    normalize: originalPath.normalize,
-  };
-});
-
 class ReadStream extends EventEmitter {
   /* eslint-disable class-methods-use-this */
   setEncoding() { }
@@ -87,34 +74,31 @@ async function getConsoleOutput(args: string[]) {
 describe('Testing convertToPosixPath', () => {
   const testCases = [
     {
-      input: 'path/to/file.n3', expected: 'path/to/file.n3', description: 'Unix path unchanged', separator: '/',
+      input: 'path/to/file.n3', expected: 'path/to/file.n3', description: 'Unix path unchanged', pathLib: path.posix,
     },
     {
-      input: 'path\\to\\file.n3', expected: 'path/to/file.n3', description: 'Windows path converted', separator: '\\',
+      input: 'path\\to\\file.n3', expected: 'path/to/file.n3', description: 'Windows path converted', pathLib: path.win32,
     },
     {
-      input: 'path/with/mixed\\separators.n3', expected: 'path/with/mixed/separators.n3', description: 'Mixed separators', separator: '\\',
+      input: 'path/with/mixed\\separators.n3', expected: 'path/with/mixed/separators.n3', description: 'Mixed separators on w32', pathLib: path.win32,
     },
     {
-      input: './relative/path.n3', expected: 'relative/path.n3', description: 'Relative Unix path', separator: '/',
+      input: './relative/path.n3', expected: 'relative/path.n3', description: 'Relative Unix path', pathLib: path.posix,
     },
     {
-      input: '.\\relative\\path.n3', expected: './relative/path.n3', description: 'Relative Windows path', separator: '\\',
+      input: '.\\relative\\path.n3', expected: 'relative/path.n3', description: 'Relative Windows path', pathLib: path.win32,
     },
     {
-      input: '../parent/dir.n3', expected: '../parent/dir.n3', description: 'Parent Unix path', separator: '/',
+      input: '../parent/dir.n3', expected: '../parent/dir.n3', description: 'Parent Unix path', pathLib: path.posix,
     },
     {
-      input: '..\\parent\\dir.n3', expected: '../parent/dir.n3', description: 'Parent Windows path', separator: '\\',
+      input: '..\\parent\\dir.n3', expected: '../parent/dir.n3', description: 'Parent Windows path', pathLib: path.win32,
     },
   ];
 
-  test.each(testCases)('$description: $input -> $expected', ({ input, expected, separator }) => {
-    // Set path.sep for this test using Object.defineProperty since it's read-only
-    Object.defineProperty(path, 'sep', { value: separator, configurable: true });
-
+  test.each(testCases)('$description: $input -> $expected', ({ input, expected, pathLib }) => {
     // Test the actual implementation
-    const actual = convertToPosixPath(input);
+    const actual = convertToPosixPath(input, pathLib);
 
     expect(actual).toBe(expected);
   });
