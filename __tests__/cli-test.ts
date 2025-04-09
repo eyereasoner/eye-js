@@ -4,7 +4,7 @@ import { Parser } from 'n3';
 import { EventEmitter } from 'events';
 import 'jest-rdf';
 import { query, data, result } from '../data/socrates';
-import { mainFunc } from '../dist/bin/main';
+import { mainFunc, convertToPosixPath } from '../dist/bin/main';
 import { askCallback, askQuery, askResult } from '../data/ask';
 
 const files = {
@@ -16,9 +16,9 @@ const files = {
   @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
   @prefix log: <http://www.w3.org/2000/10/swap/log#> .
   @prefix : <http://example.org/>.
-  
+
   :Let :output "abc" .
-  
+
   { :Let :output ?out } => { 1 log:outputString ?out } .
   `,
   [path.join(__dirname, 'ask.n3')]: askQuery,
@@ -29,13 +29,26 @@ jest.mock('fs', () => ({
   readFileSync: (pth: string) => Buffer.from(files[pth]),
 }));
 
+// Mock path module to control path.sep for testing
+jest.mock('path', () => {
+  const originalPath = jest.requireActual('path');
+  return {
+    ...originalPath,
+    sep: originalPath.sep, // Default to original separator
+    posix: originalPath.posix,
+    join: originalPath.join,
+    dirname: originalPath.dirname,
+    normalize: originalPath.normalize,
+  };
+});
+
 class ReadStream extends EventEmitter {
   /* eslint-disable class-methods-use-this */
-  setEncoding() {}
+  setEncoding() { }
 
-  pause() {}
+  pause() { }
 
-  resume() {}
+  resume() { }
   /* eslint-enable class-methods-use-this */
 }
 
@@ -70,6 +83,42 @@ async function getConsoleOutput(args: string[]) {
 
   return { stdout, stderr };
 }
+
+describe('Testing convertToPosixPath', () => {
+  const testCases = [
+    {
+      input: 'path/to/file.n3', expected: 'path/to/file.n3', description: 'Unix path unchanged', separator: '/',
+    },
+    {
+      input: 'path\\to\\file.n3', expected: 'path/to/file.n3', description: 'Windows path converted', separator: '\\',
+    },
+    {
+      input: 'path/with/mixed\\separators.n3', expected: 'path/with/mixed/separators.n3', description: 'Mixed separators', separator: '\\',
+    },
+    {
+      input: './relative/path.n3', expected: 'relative/path.n3', description: 'Relative Unix path', separator: '/',
+    },
+    {
+      input: '.\\relative\\path.n3', expected: './relative/path.n3', description: 'Relative Windows path', separator: '\\',
+    },
+    {
+      input: '../parent/dir.n3', expected: '../parent/dir.n3', description: 'Parent Unix path', separator: '/',
+    },
+    {
+      input: '..\\parent\\dir.n3', expected: '../parent/dir.n3', description: 'Parent Windows path', separator: '\\',
+    },
+  ];
+
+  test.each(testCases)('$description: $input -> $expected', ({ input, expected, separator }) => {
+    // Set path.sep for this test using Object.defineProperty since it's read-only
+    Object.defineProperty(path, 'sep', { value: separator, configurable: true });
+
+    // Test the actual implementation
+    const actual = convertToPosixPath(input);
+
+    expect(actual).toBe(expected);
+  });
+});
 
 describe('Testing CLI', () => {
   it('Should run', async () => {
