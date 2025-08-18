@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser and node using WebAssembly.",
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "types": "dist/index.d.ts",
   "directories": {
     "lib": "lib"
   },
