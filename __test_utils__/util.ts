@@ -133,19 +133,19 @@ export function universalTests() {
 
     it('should execute the n3reasoner [quad input quad output] [output: deductive_closure]', () => expect<Promise<string>>(
       n3reasoner(dataQuads, '{?S a ?O} => {?S a ?O}.', { output: 'deductive_closure', outputType: 'string' }),
-    ).rejects.toThrowError());
+    ).rejects.toThrow());
 
     it('should execute the n3reasoner [quad input quad output] [output: derivations]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads, { output: 'derivations' }),
-    ).rejects.toThrowError());
+    ).rejects.toThrow());
 
     it('should execute the n3reasoner [quad input quad output] [output: deductive_closure_plus_rules]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads, { output: 'deductive_closure_plus_rules' }),
-    ).rejects.toThrowError());
+    ).rejects.toThrow());
 
     it('should execute the n3reasoner [quad input quad output] [output: grounded_deductive_closure_plus_rules]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads, { output: 'grounded_deductive_closure_plus_rules' }),
-    ).rejects.toThrowError());
+    ).rejects.toThrow());
 
     it('should execute the n3reasoner [quad input explicit quad output]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads, { outputType: 'quads' }),
@@ -252,28 +252,28 @@ export function universalTests() {
     it('should reject n3reasoner on invalid query', async () => {
       const res = n3reasoner(dataQuads, 'invalid');
       
-      expect(res).rejects.toThrowError()
+      expect(res).rejects.toThrow()
     });
 
     it('should reject n3reasoner on invalid output', async () => {
       // @ts-expect-error
       const res = n3reasoner(dataQuads, undefined, { output: '' });
       
-      expect(res).rejects.toThrowError()
+      expect(res).rejects.toThrow()
     });
 
     it('should reject n3reasoner on blogic and any output', async () => {
       // @ts-expect-error
       const res = n3reasoner(dataQuads, undefined, { output: 'dervations' });
       
-      expect(res).rejects.toThrowError()
+      expect(res).rejects.toThrow()
     });
 
 
     it('should reject n3reasoner on query string and blogic', async () => {
       const res = n3reasoner(dataQuads, '{?S ?P ?O} => {?S ?P ?O}');
       
-      expect(res).rejects.toThrowError()
+      expect(res).rejects.toThrow()
     });
     it.skip('should execute the n3reasoner using blogic', async () => {
       const resultStr: string = await n3reasoner(blogicData);
@@ -282,7 +282,7 @@ export function universalTests() {
     });
 
     it('should throw error when eye cannot process the query', async () => {
-      await expect(n3reasoner('invalid', 'invalid')).rejects.toThrowError('Error while executing query');
+      await expect(n3reasoner('invalid', 'invalid')).rejects.toThrow('Error while executing query');
     });
 
     it('should execute the n3reasoner on surface query', async () => {
