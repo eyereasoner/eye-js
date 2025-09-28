@@ -11,9 +11,52 @@ jobs:
       contents: write
       pull-requests: write
       repository-projects: write
-    if: github.actor == 'dependabot[bot]' && !contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')
+    if: github.actor == 'dependabot[bot]'
     steps:
       - uses: actions/checkout@v5
-      - run: gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      
+      - name: Handle swipl-wasm updates with semantic commits
+        if: contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')
+        run: |
+          # Get the old version from the base branch
+          git checkout ${{ github.event.pull_request.base.sha }}
+          OLD_VERSION=$(node -pe "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).dependencies['swipl-wasm']")
+          
+          # Get the new version from the PR branch
+          git checkout ${{ github.event.pull_request.head.sha }}
+          NEW_VERSION=$(node -pe "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).dependencies['swipl-wasm']")
+          
+          # Parse version numbers (remove any ^ or ~ prefixes)
+          OLD_CLEAN=$(echo $OLD_VERSION | sed 's/[^0-9.]//g')
+          NEW_CLEAN=$(echo $NEW_VERSION | sed 's/[^0-9.]//g')
+          
+          OLD_MAJOR=$(echo $OLD_CLEAN | cut -d. -f1)
+          OLD_MINOR=$(echo $OLD_CLEAN | cut -d. -f2)
+          OLD_PATCH=$(echo $OLD_CLEAN | cut -d. -f3)
+          
+          NEW_MAJOR=$(echo $NEW_CLEAN | cut -d. -f1)
+          NEW_MINOR=$(echo $NEW_CLEAN | cut -d. -f2)
+          NEW_PATCH=$(echo $NEW_CLEAN | cut -d. -f3)
+          
+          # Determine semantic commit type
+          if [ "$NEW_MAJOR" -gt "$OLD_MAJOR" ]; then
+            COMMIT_MESSAGE="BREAKING CHANGE: update swipl-wasm to $NEW_VERSION"
+            COMMIT_BODY="BREAKING CHANGE: Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION. This major version update may contain breaking changes."
+          elif [ "$NEW_MINOR" -gt "$OLD_MINOR" ]; then
+            COMMIT_MESSAGE="feat: update swipl-wasm to $NEW_VERSION"
+            COMMIT_BODY="Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION with new features."
+          else
+            COMMIT_MESSAGE="fix: update swipl-wasm to $NEW_VERSION"
+            COMMIT_BODY="Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION with bug fixes."
+          fi
+          
+          gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash --subject "$COMMIT_MESSAGE" --body "$COMMIT_BODY"
+          
+      - name: Auto-merge regular dependabot PRs
+        if: "!contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')"
+        run: gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash
     env:
       GH_TOKEN: ${{ github.token }}
