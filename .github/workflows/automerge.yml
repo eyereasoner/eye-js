@@ -50,7 +50,6 @@ jobs:
             COMMIT_MESSAGE="feat: update swipl-wasm to $NEW_VERSION"
             COMMIT_BODY="Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION with new features."
           else
-            COMMIT_TYPE="fix"
             COMMIT_MESSAGE="fix: update swipl-wasm to $NEW_VERSION"
             COMMIT_BODY="Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION with bug fixes."
             echo "BREAKING_CHANGE=false" >> $GITHUB_ENV
