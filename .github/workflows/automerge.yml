@@ -43,7 +43,6 @@ jobs:
           
           # Determine semantic commit type
           if [ "$NEW_MAJOR" -gt "$OLD_MAJOR" ]; then
-            COMMIT_TYPE="feat"
             COMMIT_MESSAGE="feat!: update swipl-wasm to $NEW_VERSION"
             COMMIT_BODY="BREAKING CHANGE: Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION. This major version update may contain breaking changes."
             echo "BREAKING_CHANGE=true" >> $GITHUB_ENV
