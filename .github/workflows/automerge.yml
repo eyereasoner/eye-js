@@ -29,9 +29,6 @@ jobs:
           git checkout ${{ github.event.pull_request.head.sha }}
           NEW_VERSION=$(node -pe "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).dependencies['swipl-wasm']")
           
-          echo "Old version: $OLD_VERSION"
-          echo "New version: $NEW_VERSION"
-          
           # Parse version numbers (remove any ^ or ~ prefixes)
           OLD_CLEAN=$(echo $OLD_VERSION | sed 's/[^0-9.]//g')
           NEW_CLEAN=$(echo $NEW_VERSION | sed 's/[^0-9.]//g')
