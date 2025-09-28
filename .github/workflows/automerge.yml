@@ -59,19 +59,7 @@ jobs:
             echo "BREAKING_CHANGE=false" >> $GITHUB_ENV
           fi
           
-          echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_ENV
-          echo "COMMIT_BODY=$COMMIT_BODY" >> $GITHUB_ENV
-          
-      - name: Auto-merge with semantic commit message for swipl-wasm
-        if: contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')
-        run: |
-          if [ "$BREAKING_CHANGE" = "true" ]; then
-            # For breaking changes, use commit body
-            gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash --subject "$COMMIT_MESSAGE" --body "$COMMIT_BODY"
-          else
-            # For non-breaking changes, simple subject
-            gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash --subject "$COMMIT_MESSAGE"
-          fi
+          gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash --subject "$COMMIT_MESSAGE" --body "$COMMIT_BODY"
           
       - name: Auto-merge regular dependabot PRs
         if: "!contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')"
