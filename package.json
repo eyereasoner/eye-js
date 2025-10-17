@@ -89,7 +89,7 @@
     "playwright": "^1.30.0",
     "pre-commit": "^1.2.2",
     "rdf-terms": "^2.0.0",
-    "semantic-release": "^24.0.0",
+    "semantic-release": "^25.0.0",
     "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
