@@ -62,7 +62,7 @@ async function main() {
   console.log(`The minimum value found in the tail was ${toMb(minTail)}MB`)
 
   if ((minTail - maxStart) > 1 * (1024 ** 2)) {
-    throw new Error(`${toMb(maxCont - maxStart)}MB increase encountered after ${i} iterations, max allowed: 1MB`)
+    throw new Error(`${toMb(minTail - maxStart)}MB increase encountered, max allowed: 1MB`)
   }
 
   if ((maxCont - initial) > 50 * (1024 ** 2)) {
