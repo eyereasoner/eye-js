@@ -65,7 +65,7 @@
   "devDependencies": {
     "@memlab/api": "^1.0.20",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
-    "@rollup/plugin-commonjs": "^28.0.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
     "@types/benchmark": "^2.1.2",
     "@types/express": "^5.0.0",
     "@types/fs-extra": "^11.0.1",
