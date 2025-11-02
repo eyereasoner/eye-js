@@ -59,4 +59,8 @@ jobs:
         if: "!contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')"
         run: gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash
     env:
-      GH_TOKEN: ${{ github.token }}
+      # You may be tempted to make this github.token, this won't work
+      # because GH Actions does not trigger workflows on github.token
+      # in order to avoid recursive workflows.
+      # See: https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
