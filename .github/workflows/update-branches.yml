@@ -27,7 +27,7 @@ jobs:
           git fetch --all
 
           # Get the default branch (main)
-          default_branch=$(git remote show origin | grep 'HEAD branch' | cut -d' ' -f5)
+          default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
           echo "Default branch: $default_branch"
 
           # Ensure we're on the default branch
@@ -46,18 +46,23 @@ jobs:
           echo "Found update branches:"
           echo "$update_branches"
 
+          # Get all open PRs once to reduce API calls
+          open_prs=$(gh pr list --state open --json number,headRefName)
+
           # For each update branch, check if it's out of date and update it
           for branch in $update_branches; do
             echo ""
             echo "Processing branch: $branch"
 
             # Check if there's an open PR for this branch
-            pr_count=$(gh pr list --head "$branch" --state open --json number --jq '. | length')
+            pr_number=$(echo "$open_prs" | jq -r ".[] | select(.headRefName == \"$branch\") | .number")
 
-            if [ "$pr_count" -eq "0" ]; then
+            if [ -z "$pr_number" ]; then
               echo "No open PR for branch $branch, skipping"
               continue
             fi
+
+            echo "Found PR #$pr_number for branch $branch"
 
             # Checkout the branch
             git checkout "$branch"
@@ -74,7 +79,7 @@ jobs:
             echo "Branch $branch is $behind_count commits behind $default_branch"
 
             # Try to merge the default branch into the update branch
-            if git merge origin/$default_branch --no-edit; then
+            if git merge origin/$default_branch --no-edit --message "Merge $default_branch into $branch"; then
               echo "Successfully merged $default_branch into $branch"
 
               # Push the updated branch
@@ -89,7 +94,7 @@ jobs:
               git merge --abort
 
               # Add a comment to the PR about the conflict
-              gh pr comment "$branch" --body "⚠️ This branch has merge conflicts with \`$default_branch\` and cannot be automatically updated. Please resolve the conflicts manually."
+              gh pr comment "$pr_number" --body "⚠️ This branch has merge conflicts with \`$default_branch\` and cannot be automatically updated. Please resolve the conflicts manually."
             fi
           done
 
