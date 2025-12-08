@@ -31,8 +31,8 @@ jobs:
           echo "Default branch: $default_branch"
 
           # Ensure we're on the default branch
-          git checkout $default_branch
-          git pull origin $default_branch
+          git checkout "$default_branch"
+          git pull origin "$default_branch"
 
           # Find all branches created by the update-eye action
           # Patterns: fix/update-*, feat/update-*, breaking/update-*
@@ -65,13 +65,19 @@ jobs:
             echo "Found PR #$pr_number for branch $branch"
 
             # Checkout the branch
-            git checkout "$branch"
-            git pull origin "$branch"
+            if ! git checkout "$branch"; then
+              echo "Failed to checkout branch $branch, skipping"
+              continue
+            fi
+            if ! git pull origin "$branch"; then
+              echo "Failed to pull branch $branch, skipping"
+              continue
+            fi
 
             # Check if the branch is behind the default branch
-            behind_count=$(git rev-list --count HEAD..$default_branch)
+            behind_count=$(git rev-list --count HEAD..origin/$default_branch)
 
-            if [ "$behind_count" -eq "0" ]; then
+            if [ "$behind_count" -eq 0 ]; then
               echo "Branch $branch is up to date"
               continue
             fi
@@ -79,7 +85,7 @@ jobs:
             echo "Branch $branch is $behind_count commits behind $default_branch"
 
             # Try to merge the default branch into the update branch
-            if git merge origin/$default_branch --no-edit --message "Merge $default_branch into $branch"; then
+            if git merge origin/$default_branch --no-edit --message "Merge origin/$default_branch into $branch"; then
               echo "Successfully merged $default_branch into $branch"
 
               # Push the updated branch
