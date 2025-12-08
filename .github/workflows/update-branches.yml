@@ -99,7 +99,7 @@ jobs:
           done
 
           # Return to the default branch
-          git checkout $default_branch
+          git checkout "$default_branch"
         env:
           # Using GH_TOKEN secret to trigger workflows
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
