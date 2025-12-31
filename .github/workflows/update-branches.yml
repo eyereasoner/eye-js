@@ -1,0 +1,111 @@
+name: Update out-of-date branches
+on:
+  schedule:
+    # Run daily at 3 AM UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # Fetch all history for all branches
+
+      - name: Configure Git
+        run: |
+          git config --global user.name 'Jesse Wright'
+          git config --global user.email '63333554+jeswr@users.noreply.github.com'
+
+      - name: Update out-of-date branches
+        run: |
+          # Fetch all branches
+          git fetch --all
+
+          # Get the default branch (main)
+          default_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+          echo "Default branch: $default_branch"
+
+          # Ensure we're on the default branch
+          git checkout "$default_branch"
+          git pull origin "$default_branch"
+
+          # Find all branches created by the update-eye action
+          # Patterns: fix/update-*, feat/update-*, breaking/update-*
+          update_branches=$(git branch -r | grep -E 'origin/(fix|feat|breaking)/update-' | sed 's/origin\///' | sed 's/^[[:space:]]*//')
+
+          if [ -z "$update_branches" ]; then
+            echo "No update branches found"
+            exit 0
+          fi
+
+          echo "Found update branches:"
+          echo "$update_branches"
+
+          # Get all open PRs once to reduce API calls
+          open_prs=$(gh pr list --state open --json number,headRefName)
+
+          # For each update branch, check if it's out of date and update it
+          for branch in $update_branches; do
+            echo ""
+            echo "Processing branch: $branch"
+
+            # Check if there's an open PR for this branch
+            pr_number=$(echo "$open_prs" | jq -r ".[] | select(.headRefName == \"$branch\") | .number")
+
+            if [ -z "$pr_number" ]; then
+              echo "No open PR for branch $branch, skipping"
+              continue
+            fi
+
+            echo "Found PR #$pr_number for branch $branch"
+
+            # Checkout the branch
+            if ! git checkout "$branch"; then
+              echo "Failed to checkout branch $branch, skipping"
+              continue
+            fi
+            if ! git pull origin "$branch"; then
+              echo "Failed to pull branch $branch, skipping"
+              continue
+            fi
+
+            # Check if the branch is behind the default branch
+            behind_count=$(git rev-list --count HEAD..origin/$default_branch)
+
+            if [ "$behind_count" -eq 0 ]; then
+              echo "Branch $branch is up to date"
+              continue
+            fi
+
+            echo "Branch $branch is $behind_count commits behind $default_branch"
+
+            # Try to merge the default branch into the update branch
+            if git merge origin/$default_branch --no-edit --message "Merge origin/$default_branch into $branch"; then
+              echo "Successfully merged $default_branch into $branch"
+
+              # Push the updated branch
+              if git push origin "$branch"; then
+                echo "Successfully pushed updated branch $branch"
+              else
+                echo "Failed to push branch $branch"
+              fi
+            else
+              echo "Merge conflict detected for branch $branch"
+              echo "Aborting merge and skipping this branch"
+              git merge --abort
+
+              # Add a comment to the PR about the conflict
+              gh pr comment "$pr_number" --body "⚠️ This branch has merge conflicts with \`$default_branch\` and cannot be automatically updated. Please resolve the conflicts manually."
+            fi
+          done
+
+          # Return to the default branch
+          git checkout "$default_branch"
+        env:
+          # Using GH_TOKEN secret to trigger workflows
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
