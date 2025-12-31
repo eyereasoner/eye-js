@@ -188,6 +188,20 @@ Github also serves these files with a `gzip` content encoding which compresses t
 
 ![](./github-transfer.png)
 
+### Serving Files
+
+When self-hosting the bundled files, ensure your server includes `charset=utf-8` in the `Content-Type` header for JavaScript files:
+
+```
+Content-Type: text/javascript; charset=utf-8
+```
+
+Without the charset, WASM streaming instantiation may fail in headless browsers with errors like:
+- Firefox: `CompileError: wasm validation error: at offset 642: byte size mismatch in type section`
+- Chromium: `CompileError: WebAssembly.instantiate(): section was shorter than expected size`
+
+Most static file servers (e.g., `express.static()`) set this automatically, but custom streaming handlers using `createReadStream().pipe(res)` may not.
+
 ### Dynamic imports
 
 We also distribute bundles that can be dynamically imported on github pages; for example
