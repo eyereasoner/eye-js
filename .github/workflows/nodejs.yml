@@ -55,8 +55,6 @@ jobs:
         retry_on: error
         shell: bash
         command: npm test
-      env:
-        NODE_OPTIONS: --experimental-webstorage
 
   benchmark:
     needs: build
