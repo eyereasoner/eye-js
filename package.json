@@ -63,7 +63,7 @@
   },
   "homepage": "https://github.com/eyereasoner/eye-js#readme",
   "devDependencies": {
-    "@memlab/api": "^1.0.20",
+    "@memlab/api": "^2.0.0",
     "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@types/benchmark": "^2.1.2",
