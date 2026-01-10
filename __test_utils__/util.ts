@@ -98,13 +98,23 @@ export function universalTests() {
       n3reasoner(dataStarQuads, queryQuads),
     ).resolves.toBeRdfIsomorphic(resultQuads));
 
-    it('should execute the n3reasoner [quad input quad output]', () => expect<Promise<Quad[]>>(
+    it('should execute the n3reasoner [quad input quad output] [output: deductive_closure]', () => {
+      const bn = DataFactory.blankNode();
+      
+      expect<Promise<Quad[]>>(
       n3reasoner(dataStarQuads, undefined, { output: 'deductive_closure' }),
     ).resolves.toBeRdfIsomorphic([...resultQuads, DataFactory.quad(
-      socratesHuman,
+      bn,
       DataFactory.namedNode('http://example.org/socrates#is'),
       DataFactory.literal('true', DataFactory.namedNode('http://www.w3.org/2001/XMLSchema#boolean')),
-    ), humanSubclassMortal]));
+    ), 
+    DataFactory.quad(
+      bn,
+      DataFactory.namedNode('http://www.w3.org/1999/02/22-rdf-syntax-ns#reifies'),
+      socratesHuman,
+    ),
+    humanSubclassMortal])
+  });
 
     it('should execute the n3reasoner [quad input quad output] [output: undefined]', () => expect<Promise<Quad[]>>(
       n3reasoner(dataQuads, queryQuads, { output: undefined }),
