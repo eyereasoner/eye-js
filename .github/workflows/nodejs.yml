@@ -149,7 +149,6 @@ jobs:
           fi
       - name: Release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           # You may be tempted to make this github.token, this won't work
           # because GH Actions does not trigger workflows INCLUDING GITHUB PAGES RELEASES on github.token
           # to avoid recursive workflows.
