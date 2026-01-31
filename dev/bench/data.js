@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1768562391727,
+  "lastUpdate": 1769874452954,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -105472,6 +105472,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 5.93,
             "range": "±0.26%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7c40ab8e7178e08b11277c99a8ac440e76d65a6e",
+          "message": "build(deps): bump lodash from 4.17.21 to 4.17.23 (#1861)\n\nBumps [lodash](https://github.com/lodash/lodash) from 4.17.21 to 4.17.23.\n- [Release notes](https://github.com/lodash/lodash/releases)\n- [Commits](https://github.com/lodash/lodash/compare/4.17.21...4.17.23)\n\n---\nupdated-dependencies:\n- dependency-name: lodash\n  dependency-version: 4.17.23\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-01-31T15:39:08Z",
+          "tree_id": "22b1ad73d59fb39eb2da13f2d997f2ca7f79f618",
+          "url": "https://github.com/eyereasoner/eye-js/commit/7c40ab8e7178e08b11277c99a8ac440e76d65a6e"
+        },
+        "date": 1769874398001,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 17.37,
+            "range": "±5.87%",
+            "unit": "ops/sec",
+            "extra": "56 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 17.46,
+            "range": "±1.32%",
+            "unit": "ops/sec",
+            "extra": "54 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 179984,
+            "range": "±0.96%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 248607,
+            "range": "±0.70%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 115,
+            "range": "±21.46%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.71,
+            "range": "±3.74%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.25,
+            "range": "±0.32%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.73%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.47,
+            "range": "±16.43%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.61,
+            "range": "±21.44%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±23.48%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.02,
+            "range": "±2.31%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.17,
+            "range": "±0.39%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.62,
+            "range": "±0.35%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.75,
+            "range": "±0.47%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.07,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.18,
+            "range": "±0.26%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.66,
+            "range": "±0.36%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.91,
+            "range": "±0.47%",
             "unit": "ops/sec",
             "extra": "26 samples"
           }
