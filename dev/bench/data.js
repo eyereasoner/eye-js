@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1770446999496,
+  "lastUpdate": 1771004465964,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -106257,6 +106257,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 5.94,
             "range": "±0.25%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "dfc9009221f36c85b353cf6fce1c0b0c9e544f10",
+          "message": "build(deps): bump tar and npm (#1868)\n\nRemoves [tar](https://github.com/isaacs/node-tar). It's no longer used after updating ancestor dependency [npm](https://github.com/npm/cli). These dependencies need to be updated together.\n\n\nRemoves `tar`\n\nUpdates `npm` from 11.6.4 to 11.10.0\n- [Release notes](https://github.com/npm/cli/releases)\n- [Changelog](https://github.com/npm/cli/blob/latest/CHANGELOG.md)\n- [Commits](https://github.com/npm/cli/compare/v11.6.4...v11.10.0)\n\n---\nupdated-dependencies:\n- dependency-name: tar\n  dependency-version: \n  dependency-type: indirect\n- dependency-name: npm\n  dependency-version: 11.10.0\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-02-13T17:32:34Z",
+          "tree_id": "34b419431590bdad3a7574b8ec1c277b2175bc81",
+          "url": "https://github.com/eyereasoner/eye-js/commit/dfc9009221f36c85b353cf6fce1c0b0c9e544f10"
+        },
+        "date": 1771004411638,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 17.06,
+            "range": "±6.78%",
+            "unit": "ops/sec",
+            "extra": "57 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.88,
+            "range": "±5.15%",
+            "unit": "ops/sec",
+            "extra": "54 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 171919,
+            "range": "±1.22%",
+            "unit": "ops/sec",
+            "extra": "86 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 247666,
+            "range": "±0.84%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 110,
+            "range": "±21.69%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.71,
+            "range": "±0.40%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.24,
+            "range": "±0.63%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±1.21%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.37,
+            "range": "±15.99%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.6,
+            "range": "±21.41%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±23.71%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2,
+            "range": "±2.50%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.15,
+            "range": "±0.17%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.54,
+            "range": "±0.51%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.68,
+            "range": "±0.62%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.06,
+            "range": "±0.36%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.17,
+            "range": "±0.31%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.65,
+            "range": "±0.40%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.86,
+            "range": "±0.39%",
             "unit": "ops/sec",
             "extra": "26 samples"
           }
