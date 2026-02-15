@@ -218,6 +218,39 @@ Module.FS.writeFile('query.n3', query);
 // Execute main(['--nope', '--quiet', './data.n3', '--query', './query.n3']).
 eyereasoner.queryOnce(Module, 'main', ['--nope', '--quiet', './data.n3', '--query', './query.n3']);
 ```
+## Using with Webpack
+
+When bundling `eyereasoner` with Webpack for the browser, the underlying Emscripten-generated code may import Node.js built-in modules using the `node:` scheme (e.g. `node:fs`, `node:crypto`). Webpack does not handle the `node:` scheme by default and will produce errors like:
+
+```
+Module build failed: UnhandledSchemeError: Reading from "node:fs" is not handled by plugins (Unhandled scheme).
+```
+
+To fix this, add the following to your `webpack.config.js`:
+
+```js
+const { NormalModuleReplacementPlugin } = require('webpack');
+
+module.exports = {
+  // ...your existing config
+  resolve: {
+    fallback: {
+      path: false,
+      fs: false,
+      crypto: false,
+      perf_hooks: false,
+    },
+  },
+  plugins: [
+    new NormalModuleReplacementPlugin(/^node:/, (resource) => {
+      resource.request = resource.request.replace(/^node:/, '');
+    }),
+  ],
+};
+```
+
+The `NormalModuleReplacementPlugin` strips the `node:` prefix so that the imports are resolved by the `resolve.fallback` entries, which map them to `false` (i.e. empty modules) since they are not needed in the browser.
+
 ## Examples
 
 We provide some examples of using `eyereasoner`:
