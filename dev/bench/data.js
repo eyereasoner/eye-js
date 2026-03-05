@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1772676266719,
+  "lastUpdate": 1772677870839,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -108455,6 +108455,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 5.94,
             "range": "±0.38%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "93239a389b7ed18ac51ddfe0a8324308efcb4d6e",
+          "message": "chore(deps): bump serialize-javascript and terser-webpack-plugin (#1885)\n\nRemoves [serialize-javascript](https://github.com/yahoo/serialize-javascript). It's no longer used after updating ancestor dependency [terser-webpack-plugin](https://github.com/webpack/terser-webpack-plugin). These dependencies need to be updated together.\n\n\nRemoves `serialize-javascript`\n\nUpdates `terser-webpack-plugin` from 5.3.16 to 5.3.17\n- [Release notes](https://github.com/webpack/terser-webpack-plugin/releases)\n- [Changelog](https://github.com/webpack/terser-webpack-plugin/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/webpack/terser-webpack-plugin/compare/v5.3.16...v5.3.17)\n\n---\nupdated-dependencies:\n- dependency-name: serialize-javascript\n  dependency-version: \n  dependency-type: indirect\n- dependency-name: terser-webpack-plugin\n  dependency-version: 5.3.17\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-03-05T02:22:38Z",
+          "tree_id": "d66ad8823dd670ee86df64caa13f47c72cfaed9c",
+          "url": "https://github.com/eyereasoner/eye-js/commit/93239a389b7ed18ac51ddfe0a8324308efcb4d6e"
+        },
+        "date": 1772677813181,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 15.84,
+            "range": "±6.80%",
+            "unit": "ops/sec",
+            "extra": "70 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.95,
+            "range": "±3.77%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 173997,
+            "range": "±0.90%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 250818,
+            "range": "±0.47%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 116,
+            "range": "±22.04%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.58,
+            "range": "±4.74%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.26,
+            "range": "±0.38%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.89%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.42,
+            "range": "±16.10%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.59,
+            "range": "±20.82%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±23.17%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2,
+            "range": "±2.37%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.16,
+            "range": "±0.41%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.58,
+            "range": "±0.37%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.75,
+            "range": "±0.29%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.05,
+            "range": "±0.21%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.18,
+            "range": "±0.67%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.6,
+            "range": "±0.59%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.91,
+            "range": "±0.39%",
             "unit": "ops/sec",
             "extra": "26 samples"
           }
