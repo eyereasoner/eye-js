@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1774229718655,
+  "lastUpdate": 1774504896155,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -109556,6 +109556,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.35%",
             "unit": "ops/sec",
             "extra": "27 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "7c4f1d729d49309cf26b6f60ecb18618519d7e40",
+          "message": "chore(deps-dev): bump picomatch from 2.3.1 to 2.3.2 (#1895)\n\nBumps [picomatch](https://github.com/micromatch/picomatch) from 2.3.1 to 2.3.2.\n- [Release notes](https://github.com/micromatch/picomatch/releases)\n- [Changelog](https://github.com/micromatch/picomatch/blob/master/CHANGELOG.md)\n- [Commits](https://github.com/micromatch/picomatch/compare/2.3.1...2.3.2)\n\n---\nupdated-dependencies:\n- dependency-name: picomatch\n  dependency-version: 2.3.2\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-03-26T05:52:56Z",
+          "tree_id": "6aefeb35dc13c285a661f59907ad93e133f103c3",
+          "url": "https://github.com/eyereasoner/eye-js/commit/7c4f1d729d49309cf26b6f60ecb18618519d7e40"
+        },
+        "date": 1774504836860,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 16.88,
+            "range": "±5.50%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 15.09,
+            "range": "±7.11%",
+            "unit": "ops/sec",
+            "extra": "66 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 159621,
+            "range": "±0.85%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 230960,
+            "range": "±0.66%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 113,
+            "range": "±21.47%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.99,
+            "range": "±0.68%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.25,
+            "range": "±0.94%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±2.21%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.69,
+            "range": "±16.41%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.61,
+            "range": "±22.51%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±23.14%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.05,
+            "range": "±2.18%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.18,
+            "range": "±0.41%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.65,
+            "range": "±0.33%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.74,
+            "range": "±0.67%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.08,
+            "range": "±0.27%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.19,
+            "range": "±0.48%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.65,
+            "range": "±0.31%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.85,
+            "range": "±0.32%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
           }
         ]
       }
