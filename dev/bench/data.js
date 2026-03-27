@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1774570081380,
+  "lastUpdate": 1774619854461,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -109870,6 +109870,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.38%",
             "unit": "ops/sec",
             "extra": "27 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "988731a300d6432593852e416d81b7c2358244d0",
+          "message": "chore(deps): bump the minor group across 1 directory with 10 updates (#1888)\n\n* chore(deps): bump the minor group across 1 directory with 10 updates\n\nBumps the minor group with 9 updates in the / directory:\n\n| Package | From | To |\n| --- | --- | --- |\n| [n3](https://github.com/rdfjs/N3.js) | `2.0.1` | `2.0.3` |\n| [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/HEAD/packages/commonjs) | `29.0.0` | `29.0.2` |\n| [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint/tree/HEAD/packages/eslint-plugin) | `8.53.0` | `8.57.0` |\n| [express-rate-limit](https://github.com/express-rate-limit/express-rate-limit) | `8.2.1` | `8.3.1` |\n| [fs-extra](https://github.com/jprichardson/node-fs-extra) | `11.3.3` | `11.3.4` |\n| [jest](https://github.com/jestjs/jest/tree/HEAD/packages/jest) | `30.2.0` | `30.3.0` |\n| [jest-environment-jsdom](https://github.com/jestjs/jest/tree/HEAD/packages/jest-environment-jsdom) | `30.2.0` | `30.3.0` |\n| [playwright](https://github.com/microsoft/playwright) | `1.57.0` | `1.58.2` |\n| [webpack](https://github.com/webpack/webpack) | `5.104.1` | `5.105.4` |\n\n\n\nUpdates `n3` from 2.0.1 to 2.0.3\n- [Release notes](https://github.com/rdfjs/N3.js/releases)\n- [Commits](https://github.com/rdfjs/N3.js/compare/v2.0.1...v2.0.3)\n\nUpdates `@rollup/plugin-commonjs` from 29.0.0 to 29.0.2\n- [Changelog](https://github.com/rollup/plugins/blob/master/packages/commonjs/CHANGELOG.md)\n- [Commits](https://github.com/rollup/plugins/commits/commonjs-v29.0.2/packages/commonjs)\n\nUpdates `@typescript-eslint/eslint-plugin` from 8.53.0 to 8.57.0\n- [Release notes](https://github.com/typescript-eslint/typescript-eslint/releases)\n- [Changelog](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/CHANGELOG.md)\n- [Commits](https://github.com/typescript-eslint/typescript-eslint/commits/v8.57.0/packages/eslint-plugin)\n\nUpdates `@typescript-eslint/parser` from 8.53.0 to 8.57.0\n- [Release notes](https://github.com/typescript-eslint/typescript-eslint/releases)\n- [Changelog](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/parser/CHANGELOG.md)\n- [Commits](https://github.com/typescript-eslint/typescript-eslint/commits/v8.57.0/packages/parser)\n\nUpdates `express-rate-limit` from 8.2.1 to 8.3.1\n- [Release notes](https://github.com/express-rate-limit/express-rate-limit/releases)\n- [Commits](https://github.com/express-rate-limit/express-rate-limit/compare/v8.2.1...v8.3.1)\n\nUpdates `fs-extra` from 11.3.3 to 11.3.4\n- [Changelog](https://github.com/jprichardson/node-fs-extra/blob/master/CHANGELOG.md)\n- [Commits](https://github.com/jprichardson/node-fs-extra/compare/11.3.3...11.3.4)\n\nUpdates `jest` from 30.2.0 to 30.3.0\n- [Release notes](https://github.com/jestjs/jest/releases)\n- [Changelog](https://github.com/jestjs/jest/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/jestjs/jest/commits/v30.3.0/packages/jest)\n\nUpdates `jest-environment-jsdom` from 30.2.0 to 30.3.0\n- [Release notes](https://github.com/jestjs/jest/releases)\n- [Changelog](https://github.com/jestjs/jest/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/jestjs/jest/commits/v30.3.0/packages/jest-environment-jsdom)\n\nUpdates `playwright` from 1.57.0 to 1.58.2\n- [Release notes](https://github.com/microsoft/playwright/releases)\n- [Commits](https://github.com/microsoft/playwright/compare/v1.57.0...v1.58.2)\n\nUpdates `webpack` from 5.104.1 to 5.105.4\n- [Release notes](https://github.com/webpack/webpack/releases)\n- [Changelog](https://github.com/webpack/webpack/blob/main/CHANGELOG.md)\n- [Commits](https://github.com/webpack/webpack/compare/v5.104.1...v5.105.4)\n\n---\nupdated-dependencies:\n- dependency-name: n3\n  dependency-version: 2.0.3\n  dependency-type: direct:production\n  update-type: version-update:semver-patch\n  dependency-group: minor\n- dependency-name: \"@rollup/plugin-commonjs\"\n  dependency-version: 29.0.2\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n  dependency-group: minor\n- dependency-name: \"@typescript-eslint/eslint-plugin\"\n  dependency-version: 8.57.0\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n  dependency-group: minor\n- dependency-name: \"@typescript-eslint/parser\"\n  dependency-version: 8.57.0\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n  dependency-group: minor\n- dependency-name: express-rate-limit\n  dependency-version: 8.3.1\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n  dependency-group: minor\n- dependency-name: fs-extra\n  dependency-version: 11.3.4\n  dependency-type: direct:development\n  update-type: version-update:semver-patch\n  dependency-group: minor\n- dependency-name: jest\n  dependency-version: 30.3.0\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n  dependency-group: minor\n- dependency-name: jest-environment-jsdom\n  dependency-version: 30.3.0\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n  dependency-group: minor\n- dependency-name: playwright\n  dependency-version: 1.58.2\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n  dependency-group: minor\n- dependency-name: webpack\n  dependency-version: 5.105.4\n  dependency-type: direct:development\n  update-type: version-update:semver-minor\n  dependency-group: minor\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\n\n* fix: add --experimental-vm-modules to jest invocations for Playwright 1.58 compatibility\n\nAgent-Logs-Url: https://github.com/eyereasoner/eye-js/sessions/344b5f9d-c841-45fa-92af-9a1c4ed631e3\n\nCo-authored-by: jeswr <63333554+jeswr@users.noreply.github.com>\n\n---------\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>\nCo-authored-by: copilot-swe-agent[bot] <198982749+Copilot@users.noreply.github.com>\nCo-authored-by: jeswr <63333554+jeswr@users.noreply.github.com>",
+          "timestamp": "2026-03-27T13:49:03Z",
+          "tree_id": "ebc7971dc9493d41e34a906d9e66b23cfe7981bb",
+          "url": "https://github.com/eyereasoner/eye-js/commit/988731a300d6432593852e416d81b7c2358244d0"
+        },
+        "date": 1774619798914,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 16,
+            "range": "±6.81%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.75,
+            "range": "±3.75%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 163866,
+            "range": "±0.93%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 234123,
+            "range": "±0.62%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 113,
+            "range": "±21.76%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.71,
+            "range": "±4.18%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.26,
+            "range": "±0.88%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.67%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.56,
+            "range": "±16.66%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.6,
+            "range": "±22.16%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±23.37%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.03,
+            "range": "±2.27%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.18,
+            "range": "±0.18%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.6,
+            "range": "±0.46%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.77,
+            "range": "±0.31%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.08,
+            "range": "±0.45%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.19,
+            "range": "±0.63%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.68,
+            "range": "±0.42%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.94,
+            "range": "±0.27%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
           }
         ]
       }
