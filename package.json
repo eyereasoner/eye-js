@@ -94,7 +94,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2",
     "webpack": "^5.75.0",
-    "webpack-cli": "^6.0.0"
+    "webpack-cli": "^7.0.2"
   },
   "overrides": {
     "parse-url": "$parse-url"
