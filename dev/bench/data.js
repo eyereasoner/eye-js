@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1778296638835,
+  "lastUpdate": 1778298147786,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -113950,6 +113950,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 5.97,
             "range": "±0.31%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "318b6f14334d2d2fec00499df0a4c68745a30888",
+          "message": "fix: bump follow-redirects from 1.15.6 to 1.16.0 in /examples/rollup (#1917)\n\nBumps [follow-redirects](https://github.com/follow-redirects/follow-redirects) from 1.15.6 to 1.16.0.\n- [Release notes](https://github.com/follow-redirects/follow-redirects/releases)\n- [Commits](https://github.com/follow-redirects/follow-redirects/compare/v1.15.6...v1.16.0)\n\n---\nupdated-dependencies:\n- dependency-name: follow-redirects\n  dependency-version: 1.16.0\n  dependency-type: indirect\n...\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-05-09T03:33:52Z",
+          "tree_id": "408e10ec8009ac06edd033a6b37e6a0dfe194fe5",
+          "url": "https://github.com/eyereasoner/eye-js/commit/318b6f14334d2d2fec00499df0a4c68745a30888"
+        },
+        "date": 1778298086969,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 15.89,
+            "range": "±6.95%",
+            "unit": "ops/sec",
+            "extra": "69 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 15.62,
+            "range": "±7.11%",
+            "unit": "ops/sec",
+            "extra": "68 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 170299,
+            "range": "±5.08%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 239563,
+            "range": "±1.13%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 115,
+            "range": "±22.15%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.87,
+            "range": "±0.49%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.25,
+            "range": "±0.92%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±1.19%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.52,
+            "range": "±16.71%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.6,
+            "range": "±22.26%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±24.41%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2,
+            "range": "±2.14%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.17,
+            "range": "±0.29%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.6,
+            "range": "±0.72%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.81,
+            "range": "±0.36%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.04,
+            "range": "±0.41%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.18,
+            "range": "±0.45%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.62,
+            "range": "±0.71%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.94,
+            "range": "±0.27%",
             "unit": "ops/sec",
             "extra": "26 samples"
           }
