@@ -12,9 +12,6 @@ import { query as surfaceSocratesQuery, queryResult as surfaceSocratesResult } f
 import { mapTerms } from 'rdf-terms';
 
 const parser = new Parser({ format: 'text/n3' });
-// Workaround for https://github.com/rdfjs/N3.js/issues/324
-// @ts-expect-error
-parser._supportsRDFStar = true;
 
 export const queryQuads = parser.parse(query);
 export const queryAllQuads = parser.parse(queryAll)

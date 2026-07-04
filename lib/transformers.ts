@@ -117,15 +117,18 @@ export function runQuery(
 }
 
 function parse(res: string) {
-  const parser = new Parser({ format: 'text/n3' });
-  // Workaround for https://github.com/rdfjs/N3.js/issues/324
-  // @ts-expect-error
-  // eslint-disable-next-line no-underscore-dangle
-  parser._supportsRDFStar = true;
   try {
-    return parser.parse(res);
+    return new Parser({ format: 'text/n3' }).parse(res);
   } catch (e) {
-    throw new Error(`Error while parsing query result: [${e}]. Query result: [${res}]`);
+    // The reasoner emits N-Quads style statements when the input contains quads
+    // (see https://github.com/eyereasoner/eye-js/issues/1642), and the N3.js parser
+    // rejects the 4th (graph) term in text/n3 mode; retry in the permissive default
+    // mode, which accepts quads, before giving up.
+    try {
+      return new Parser().parse(res);
+    } catch {
+      throw new Error(`Error while parsing query result: [${e}]. Query result: [${res}]`);
+    }
   }
 }
 
