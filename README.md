@@ -1,4 +1,10 @@
 # EYE JS
+
+> [!NOTE]
+> **[@jeswr](https://github.com/jeswr) is now actively developing [sparq](https://github.com/sparq-org/sparq) — a Rust-native RDF triplestore and SPARQL 1.1/1.2 engine with N3 reasoning support** (RDFS / OWL 2 RL / Notation3 forward rules, available natively and as a WebAssembly bundle), plus SHACL validation and more.
+> sparq's browser reasoning bundle is smaller than eye-js's (≈2.6 MB wasm, ≈0.9 MB gzipped, vs eye-js's ≈3.8 MB wasm + data image / ≈4.1 MB browser bundle), and in [sparq's same-machine benchmarks](https://github.com/sparq-org/sparq/blob/main/bench/inference/eye-comparison.md) its N3 forward-closure materialisation runs orders of magnitude faster than the native EYE reasoner (the engine eye-js distributes) on rule-heavy workloads — ≈62× on DeepTaxonomy-1k, widening with depth — while computing identical closures.
+> sparq is pre-1.0 and evolving quickly; an eye-js-compatible npm package to ease migration is tracked in [sparq-org/sparq#1499](https://github.com/sparq-org/sparq/issues/1499).
+
 Distributing the [EYE](https://github.com/eyereasoner/eye) reasoner for browser and node using WebAssembly.
 
 [![GitHub license](https://img.shields.io/github/license/eyereasoner/eye-js.svg)](https://github.com/eyereasoner/eye-js/blob/master/LICENSE)
