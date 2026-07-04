@@ -1,8 +1,15 @@
 /*! eyereasoner CDN redirect shim (ESM) — `dynamic-import.js`.
  *
+ * ONE-TIME HISTORICAL BACKFILL: this stub only exists to keep the Pages URLs
+ * of versions that were already published answering `200 + JS`. New releases
+ * do not add Pages files — consumers should import from the CDN directly
+ * (see README "Browser Builds").
+ *
  * Byte-identical at every `dynamic-import.js` path on the `pages` site (any
  * depth). It derives the requested version from its OWN url and re-exports the
- * matching CDN build as the `eyereasoner` named export, preserving the original
+ * matching CDN build (the self-contained, WebAssembly-inlined one — legacy
+ * pages cannot be assumed to carry an import map) as the `eyereasoner` named
+ * export, preserving the original
  * `const { eyereasoner } = await import('.../dynamic-import.js')` contract.
  *
  * Canonical source: https://github.com/eyereasoner/eye-js (redirects/dynamic-import.js)

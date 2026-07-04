@@ -171,9 +171,52 @@ eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
 
 ## Browser Builds
 
-`eyereasoner` can be used directly in the browser — with no build step and no self-hosting — straight from a public ESM CDN such as [esm.sh](https://esm.sh) or [jsDelivr](https://www.jsdelivr.com/). The published package is fully self-contained: the SWI-Prolog WebAssembly and the EYE image are inlined in the JavaScript, so there are no separate `.wasm`/`.data` assets to host. See [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html), which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
+`eyereasoner` can be used directly in the browser — with no build step and no self-hosting — straight from a public ESM CDN such as [esm.sh](https://esm.sh) or [jsDelivr](https://www.jsdelivr.com/). See [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html), which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
 
-### ESM `import` (recommended)
+There are two ways to load it:
+
+- **Separate WebAssembly assets (recommended).** The SWI-Prolog engine is fetched as a real `.wasm` binary (plus its `.data` archive) next to a small JS driver: the browser compiles the WebAssembly while it streams from the network, the binaries are cached independently of the `eyereasoner` release, and the main thread never parses a multi-megabyte JavaScript file with the WASM inlined as a string.
+- **Zero-config single URL.** The npm package is fully self-contained — the SWI-Prolog WASM and the EYE image are inlined in the JavaScript — so a single `import` works with no further setup, at the cost of shipping the WebAssembly inside JavaScript.
+
+Measured over the wire (brotli-compressed): the single-URL graph transfers ≈1.9 MB of JavaScript; the separate-asset delivery transfers ≈2.7 MB in total (the split `.wasm` itself is ~0.4 MB *smaller* than its JS-inlined form, but the split SWIPL build also downloads the 1.6 MB SWI-Prolog `.data` archive, which the inlined `no-data` build replaces with the EYE image). The separate-asset delivery trades those extra bytes for streaming compilation, less main-thread JS parsing, and cross-release caching.
+
+### Separate WebAssembly assets (recommended)
+
+The package's own `SWIPL` build inlines the WASM, so this recipe does two things: an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) swaps that inlined dependency for `swipl-wasm`'s split web build (`?external=swipl-wasm` is what makes the dependency mappable), and a small wrapper tells the split build where its `.wasm`/`.data` live on the CDN:
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "swipl-wasm/dist/swipl/swipl-bundle-no-data": "https://esm.sh/swipl-wasm@7.0.10/dist/swipl/swipl-web.js",
+      "swipl-wasm/dist/strToBuffer": "https://esm.sh/swipl-wasm@7.0.10/dist/strToBuffer.js"
+    }
+  }
+</script>
+<script type="module">
+  import SWIPL from 'https://esm.sh/swipl-wasm@7.0.10/dist/swipl/swipl-web.js';
+  import { n3reasoner } from 'https://esm.sh/eyereasoner@21.1.10?external=swipl-wasm';
+
+  // swipl-web.wasm (streaming-compiled) and swipl-web.data are fetched from here
+  const assets = 'https://cdn.jsdelivr.net/npm/swipl-wasm@7.0.10/dist/swipl/';
+  const SwiplWeb = (options) => SWIPL({
+    ...options,
+    preRun: [options.preRun].flat().filter(Boolean), // this build needs preRun to be an array
+    locateFile: (file) => assets + file,
+  });
+
+  const result = await n3reasoner(
+    ':Socrates a :Man. {?s a :Man} => {?s a :Mortal}.',
+    undefined,
+    { SWIPL: SwiplWeb },
+  );
+  console.log(result); // :Socrates a :Mortal.
+</script>
+```
+
+> **Keep the versions in lockstep.** The EYE image inside each `eyereasoner` release is built against the *exact* `swipl-wasm` version that release pins (`eyereasoner@21.1.10` pins `swipl-wasm@7.0.10` — see the `dependencies` in [its package.json](https://cdn.jsdelivr.net/npm/eyereasoner@21.1.10/package.json)). When you bump `eyereasoner`, update the `swipl-wasm` version in the import map and asset URLs to match.
+
+### Zero-config single URL
 
 ```html
 <script type="module">
@@ -193,7 +236,7 @@ You can pin a version or version range with the usual npm semver syntax, which t
 
 ### Classic `<script>` global
 
-For code that expects a global rather than an ES module, import inside a module script and assign the exports you need:
+No CDN can turn the published CommonJS build of an already-released version into a *synchronous* classic-script global, so a global has to be populated from inside a module script (and is therefore only available asynchronously). Import the exports you need and assign them:
 
 ```html
 <script type="module">
@@ -202,9 +245,11 @@ For code that expects a global rather than an ES module, import inside a module 
 </script>
 ```
 
+This works with either delivery above.
+
 ### Migrating from the GitHub Pages bundles
 
-Earlier releases were served as webpack bundles from `https://eyereasoner.github.io/eye-js/vMajor/vMinor/vPatch/index.js` (for instance `https://eyereasoner.github.io/eye-js/2/3/14/index.js`), along with `latest`, `vMajor/latest` and `vMajor/vMinor/latest` shortcuts. **Those URLs keep working** — they now transparently redirect to the equivalent CDN version — but new code should use the CDN URLs above directly. Every published version also remains available forever from the npm package (`dist/` ships with the package).
+Earlier releases were served as webpack bundles from `https://eyereasoner.github.io/eye-js/vMajor/vMinor/vPatch/index.js` (for instance `https://eyereasoner.github.io/eye-js/2/3/14/index.js`), along with `latest`, `vMajor/latest` and `vMajor/vMinor/latest` shortcuts. **The URLs of already-published versions keep working**: a one-time backfill replaced the bundles with tiny stubs that transparently load the equivalent version from the CDN (the classic `index.js` global becomes *asynchronously* populated — a Proxy keeps `await eyereasoner.n3reasoner(...)` working). New releases do not publish anything to GitHub Pages, so new code should use the CDN URLs above directly. Every published version also remains available forever from the npm package (`dist/` ships with the package).
 
 ### Dynamic imports
 

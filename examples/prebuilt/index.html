@@ -13,15 +13,38 @@
     <button id="execute">Execute</button>
     <div id="result"></div>
   </body>
+  <!-- The import map swaps eyereasoner's internal WASM-inlined SWIPL build for
+       swipl-wasm's split web build, so the SWI-Prolog engine is fetched as a
+       real (streaming-compiled, separately cached) .wasm binary instead of
+       being inlined in JavaScript. See README "Browser Builds".
+       NB: the swipl-wasm version must match the one pinned by the eyereasoner
+       release in use (eyereasoner@21.1.10 pins swipl-wasm@7.0.10). -->
+  <script type="importmap">
+    {
+      "imports": {
+        "swipl-wasm/dist/swipl/swipl-bundle-no-data": "https://esm.sh/swipl-wasm@7.0.10/dist/swipl/swipl-web.js",
+        "swipl-wasm/dist/strToBuffer": "https://esm.sh/swipl-wasm@7.0.10/dist/strToBuffer.js"
+      }
+    }
+  </script>
   <script type="module">
-    import { n3reasoner } from 'https://esm.sh/eyereasoner';
+    import SWIPL from 'https://esm.sh/swipl-wasm@7.0.10/dist/swipl/swipl-web.js';
+    import { n3reasoner } from 'https://esm.sh/eyereasoner@21.1.10?external=swipl-wasm';
+
+    // swipl-web.wasm and swipl-web.data are fetched from here at runtime
+    const assets = 'https://cdn.jsdelivr.net/npm/swipl-wasm@7.0.10/dist/swipl/';
+    const SwiplWeb = (options) => SWIPL({
+      ...options,
+      preRun: [options.preRun].flat().filter(Boolean), // this build needs preRun to be an array
+      locateFile: (file) => assets + file,
+    });
 
     document.getElementById('execute').addEventListener("click", async () => {
 
       document.getElementById("result").innerHTML = (await n3reasoner(
         document.getElementById("data").value,
         undefined,
-        { output: 'derivations' }
+        { output: 'derivations', SWIPL: SwiplWeb }
       )).replaceAll('\n', '<br>');
 
     });
