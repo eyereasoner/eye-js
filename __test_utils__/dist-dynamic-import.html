@@ -5,7 +5,13 @@
     <div id="error"></div>
   </body>
   <!-- Consume the published bundle exactly like the "Dynamic imports" section
-       of the README: an ES module dynamically importing latest/dynamic-import.js -->
+       of the README: an ES module dynamically importing latest/dynamic-import.js.
+
+       Unlike the script-tag case (which drives examples/prebuilt/index.html
+       directly), no example in examples/ consumes latest/dynamic-import.js --
+       the rollup example bundles the npm package instead -- so this minimal
+       page is the only consumer of that entrypoint. It reuses the same socrates
+       data and derived-triple assertion as the prebuilt example. -->
   <script type="module">
     const data = `@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix : <http://example.org/socrates#>.
