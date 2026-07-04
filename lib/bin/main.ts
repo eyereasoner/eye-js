@@ -2,6 +2,7 @@ import path, { PlatformPath } from 'path';
 import fs from 'fs';
 import readline from 'readline';
 import { SwiplEye } from '..';
+import { bridgeCallback } from '../bridge';
 import { qaQuery } from '../query';
 
 export function convertToPosixPath(filePath: string, pathLib: PlatformPath = path): string {
@@ -46,6 +47,12 @@ export async function mainFunc(proc: NodeJS.Process) {
     }
   }
 
-  await qaQuery(Module, 'main', posixArgv, (q) => rl.question(`${q}\n|: `));
+  // The bridge answers the sub-reasoner requests of graph-scoped builtins
+  // (https://github.com/eyereasoner/eye-js/issues/873); remaining yields are
+  // log:ask questions answered over stdin
+  await qaQuery(Module, 'main', posixArgv, bridgeCallback(Module, {
+    spawn: SwiplEye,
+    cb: (q) => rl.question(`${q}\n|: `),
+  }));
   rl.close();
 }

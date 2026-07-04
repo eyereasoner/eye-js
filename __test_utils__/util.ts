@@ -3,7 +3,14 @@ import type { Quad } from '@rdfjs/types';
 import 'jest-rdf';
 import { DataFactory, Parser, Store } from 'n3';
 import { data, dataSplit, dataStar, query, queryAll, result, trig as socratesTrig } from '../data/socrates';
-import { n3reasoner, linguareasoner } from '../dist';
+import { n3reasoner, linguareasoner, runQuery, SwiplEye, bridgeCallback, qaQuery } from '../dist';
+import {
+  collectAllData, collectAllResult,
+  conclusionData, conclusionResult,
+  nestedScopeData, nestedScopeResult,
+  satisfiableData, satisfiableResult,
+  execData,
+} from '../data/scoped';
 import { data as blogicData, result as blogicResult } from '../data/blogic';
 import { data as regexData, result as regexResult } from '../data/regex';
 import { askCallback, askQuery, askResult } from '../data/ask';
@@ -320,5 +327,68 @@ export function universalTests() {
     it('should execute the n3reasoner on socrates surface query that sets [output: "none"]', async () => {
       await expect(n3reasoner(surfaceSocratesQuery, undefined, { output: 'none' , outputType: 'quads' })).resolves.toBeRdfIsomorphic(surfaceSocratesResultQuads); 
     });
+  });
+
+  // The graph-scoped builtins are evaluated by running a fresh sub-reasoner
+  // over the scope graph (https://github.com/eyereasoner/eye-js/issues/873)
+  describe('testing graph-scoped builtins', () => {
+    it('should execute log:collectAllIn on an explicit scope graph (#873)', () => expect(
+      n3reasoner(collectAllData, undefined, { outputType: 'string' }),
+    ).resolves.toContain(collectAllResult), 90_000);
+
+    it('should execute log:conclusion', () => expect(
+      n3reasoner(conclusionData, undefined, { outputType: 'string' }),
+    ).resolves.toContain(conclusionResult), 90_000);
+
+    it('should execute a scoped builtin nested inside a scope graph', () => expect(
+      n3reasoner(nestedScopeData, undefined, { outputType: 'string' }),
+    ).resolves.toContain(nestedScopeResult), 90_000);
+
+    it('should execute log:satisfiable, including on unsatisfiable scopes', () => expect(
+      n3reasoner(satisfiableData, undefined, { outputType: 'string' }),
+    ).resolves.toContain(satisfiableResult), 90_000);
+
+    it('should reject e:exec with a descriptive error', () => expect(
+      n3reasoner(execData('echo hello'), undefined, { outputType: 'string' }),
+    ).rejects.toThrow(/not supported in the WASM build/), 90_000);
+
+    it('should reject exec requests without an output redirect', () => expect(
+      n3reasoner(execData('eye missing-redirect.n3s'), undefined, { outputType: 'string' }),
+    ).rejects.toThrow(/not supported in the WASM build/), 90_000);
+
+    it('should reject exec requests without an output redirect target', () => expect(
+      n3reasoner(execData('eye missing-target.n3s >'), undefined, { outputType: 'string' }),
+    ).rejects.toThrow(/not supported in the WASM build/), 90_000);
+
+    it('should reject question yields when no cb option is provided', () => expect(
+      n3reasoner([], askQuery),
+    ).rejects.toThrow(/no cb option was provided/), 90_000);
+
+    it('should cache the two identical sub-reasoner invocations of a scope evaluation', async () => {
+      let res = '';
+      let spawns = 0;
+      const module = await SwiplEye({ print: (str: string) => { res += `${str}\n`; }, printErr: () => {} });
+      const spawn = (opts?: Parameters<typeof SwiplEye>[0]) => { spawns += 1; return SwiplEye(opts); };
+      module.FS.writeFile('data_0.n3s', collectAllData);
+      await qaQuery(module, 'main', ['--nope', '--quiet', 'data_0.n3s', '--pass-only-new'], bridgeCallback(module, { spawn }));
+      expect(res).toContain(collectAllResult);
+      expect(spawns).toBe(1);
+    }, 90_000);
+
+    it('should answer with an error when the sub-reasoner cannot be spawned', async () => {
+      const module = await SwiplEye({ print: () => {}, printErr: () => {} });
+      module.FS.writeFile('scope.n3s', '');
+      const cb = bridgeCallback(module, { spawn: () => Promise.reject(new Error('spawning disabled')) });
+      await expect(cb('eyejs:exec eye --nope --quiet scope.n3s > out.n3s')).resolves.toMatch(/sub-reasoner run failed.*spawning disabled/);
+    }, 90_000);
+  });
+
+  describe('testing runQuery', () => {
+    it('should keep the synchronous cb-less path working', async () => {
+      let res = '';
+      const module = await SwiplEye({ print: (str: string) => { res += `${str}\n`; }, printErr: () => {} });
+      expect(runQuery(module, [data], undefined)).toBe(module);
+      expect(res).toContain(':Socrates a :Mortal.');
+    }, 90_000);
   });
 }
