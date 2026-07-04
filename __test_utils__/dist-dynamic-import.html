@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="result"></div>
+    <div id="error"></div>
+  </body>
+  <!-- Consume the published bundle exactly like the "Dynamic imports" section
+       of the README: an ES module dynamically importing latest/dynamic-import.js -->
+  <script type="module">
+    const data = `@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix : <http://example.org/socrates#>.
+
+:Socrates a :Human.
+:Human rdfs:subClassOf :Mortal.
+
+{?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.`;
+
+    try {
+      const { eyereasoner } = await import('/latest/dynamic-import.js');
+      document.getElementById('result').textContent = await eyereasoner.n3reasoner(
+        data,
+        undefined,
+        { output: 'derivations' },
+      );
+    } catch (error) {
+      document.getElementById('error').textContent = String(error);
+    }
+  </script>
+</html>
