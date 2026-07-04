@@ -13,6 +13,7 @@ name: "CodeQL"
 
 on:
   pull_request:
+  merge_group:
   schedule:
     - cron: '35 10 * * 2'
 
