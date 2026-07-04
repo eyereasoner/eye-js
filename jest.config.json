@@ -1,5 +1,6 @@
 {
   "preset": "ts-jest",
+  "testPathIgnorePatterns": ["/node_modules/", "<rootDir>/__tests__/spec/"],
   "collectCoverage": true,
   "coverageReporters": [
     "json-summary", 
