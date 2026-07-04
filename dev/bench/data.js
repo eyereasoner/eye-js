@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783200706352,
+  "lastUpdate": 1783207149024,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -115208,6 +115208,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.26%",
             "unit": "ops/sec",
             "extra": "27 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "d129aee2d819b18cd8198e18ee5cada9897745d6",
+          "message": "ci: mark major dependabot bumps as breaking and run CI on merge groups (#1958)\n\n### What\n\n- **`automerge.yml`**: use `dependabot/fetch-metadata` to inspect the\nsemver level of each dependabot update instead of hand-parsing\nswipl-wasm versions out of `package.json`.\n- Major bumps of production npm dependencies now append a `BREAKING\nCHANGE:` footer to the PR body, so the squash commit triggers a\nsemantic-release **major**. Previously a major bump such as swipl-wasm 7\n-> 8 (#1945) kept its `fix:` title and would ship as a patch; the old\n`gh pr merge --subject \"BREAKING CHANGE: ...\"` approach also put the\nnote in the squash *subject*, which the angular commit parser cannot\nread (verified: it yields **no** release), and `--subject`/`--body`\nflags are ignored by merge queues anyway.\n- Minor swipl-wasm updates keep their `feat:` mapping (now via a PR\nretitle); patch bumps, dev-dependency bumps and github-actions bumps\nkeep their current `fix:`/`chore:` behaviour.\n- The old flow checked out the PR head under `pull_request_target`; the\nnew flow does not check out any code.\n- **`nodejs.yml`**, **`codeql-analysis.yml`**: add `merge_group:`\ntriggers so all required checks also run for merge-queue entries.\n\n### Why\n\nsemantic-release's default (angular) commit-analyzer treats a commit as\na major only when a line of the commit *body* starts with `BREAKING\nCHANGE:`. It does not understand the `type!:` shorthand — verified\nagainst `@semantic-release/commit-analyzer@13.0.1` as pinned in the\nlockfile, where `fix!: ...` produces *no* release at all.\n\nRepository squash settings were switched to\n`squash_merge_commit_title=PR_TITLE` /\n`squash_merge_commit_message=PR_BODY`, so the PR title and body\ndeterministically become the squash commit message (previously a\nsingle-commit PR used the commit's own message, ignoring PR title\nedits). This is what both the reworked automerge flow and the merge\nqueue rely on.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-authored-by: Claude Opus 4.8 <noreply@anthropic.com>",
+          "timestamp": "2026-07-04T23:14:52Z",
+          "tree_id": "89b168b91c4b15a72c8f182dc80d01e228d6addc",
+          "url": "https://github.com/eyereasoner/eye-js/commit/d129aee2d819b18cd8198e18ee5cada9897745d6"
+        },
+        "date": 1783207092773,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 18.9,
+            "range": "±6.59%",
+            "unit": "ops/sec",
+            "extra": "49 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 22.2,
+            "range": "±2.39%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 164439,
+            "range": "±0.85%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 229820,
+            "range": "±0.84%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 3890,
+            "range": "±1.67%",
+            "unit": "ops/sec",
+            "extra": "83 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 18.83,
+            "range": "±6.56%",
+            "unit": "ops/sec",
+            "extra": "49 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 19.63,
+            "range": "±7.26%",
+            "unit": "ops/sec",
+            "extra": "43 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 18.67,
+            "range": "±6.95%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 4107,
+            "range": "±1.65%",
+            "unit": "ops/sec",
+            "extra": "78 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 4147,
+            "range": "±1.85%",
+            "unit": "ops/sec",
+            "extra": "80 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 4136,
+            "range": "±1.60%",
+            "unit": "ops/sec",
+            "extra": "82 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 17.23,
+            "range": "±6.18%",
+            "unit": "ops/sec",
+            "extra": "44 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 17.03,
+            "range": "±3.91%",
+            "unit": "ops/sec",
+            "extra": "43 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 18.28,
+            "range": "±6.60%",
+            "unit": "ops/sec",
+            "extra": "46 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 17.1,
+            "range": "±6.85%",
+            "unit": "ops/sec",
+            "extra": "45 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 18.45,
+            "range": "±7.08%",
+            "unit": "ops/sec",
+            "extra": "46 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 18.54,
+            "range": "±6.64%",
+            "unit": "ops/sec",
+            "extra": "47 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 18.77,
+            "range": "±6.77%",
+            "unit": "ops/sec",
+            "extra": "48 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 18.98,
+            "range": "±6.47%",
+            "unit": "ops/sec",
+            "extra": "49 samples"
           }
         ]
       }
