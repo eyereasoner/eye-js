@@ -13,54 +13,53 @@ jobs:
       repository-projects: write
     if: github.actor == 'dependabot[bot]'
     steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.sha }}
-      
-      - name: Handle swipl-wasm updates with semantic commits
-        if: contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')
+      - name: Fetch dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+
+      # Squash merges take their commit message from the PR title and body
+      # (squash_merge_commit_title=PR_TITLE, squash_merge_commit_message=PR_BODY),
+      # which semantic-release then analyses on main to pick the release type.
+      # The angular preset does NOT understand the "type!:" shorthand, so a major
+      # release has to be signalled with a "BREAKING CHANGE:" footer in the body.
+
+      - name: Retitle minor swipl-wasm updates as features
+        if: |
+          contains(steps.metadata.outputs.dependency-names, 'swipl-wasm') &&
+          steps.metadata.outputs.update-type == 'version-update:semver-minor'
         run: |
-          # Get the old version from the base branch
-          git checkout ${{ github.event.pull_request.base.sha }}
-          OLD_VERSION=$(node -pe "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).dependencies['swipl-wasm']")
-          
-          # Get the new version from the PR branch
-          git checkout ${{ github.event.pull_request.head.sha }}
-          NEW_VERSION=$(node -pe "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).dependencies['swipl-wasm']")
-          
-          # Parse version numbers (remove any ^ or ~ prefixes)
-          OLD_CLEAN=$(echo $OLD_VERSION | sed 's/[^0-9.]//g')
-          NEW_CLEAN=$(echo $NEW_VERSION | sed 's/[^0-9.]//g')
-          
-          OLD_MAJOR=$(echo $OLD_CLEAN | cut -d. -f1)
-          OLD_MINOR=$(echo $OLD_CLEAN | cut -d. -f2)
-          OLD_PATCH=$(echo $OLD_CLEAN | cut -d. -f3)
-          
-          NEW_MAJOR=$(echo $NEW_CLEAN | cut -d. -f1)
-          NEW_MINOR=$(echo $NEW_CLEAN | cut -d. -f2)
-          NEW_PATCH=$(echo $NEW_CLEAN | cut -d. -f3)
-          
-          # Determine semantic commit type
-          if [ "$NEW_MAJOR" -gt "$OLD_MAJOR" ]; then
-            COMMIT_MESSAGE="BREAKING CHANGE: update swipl-wasm to $NEW_VERSION"
-            COMMIT_BODY="BREAKING CHANGE: Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION. This major version update may contain breaking changes."
-          elif [ "$NEW_MINOR" -gt "$OLD_MINOR" ]; then
-            COMMIT_MESSAGE="feat: update swipl-wasm to $NEW_VERSION"
-            COMMIT_BODY="Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION with new features."
-          else
-            COMMIT_MESSAGE="fix: update swipl-wasm to $NEW_VERSION"
-            COMMIT_BODY="Updated swipl-wasm from $OLD_VERSION to $NEW_VERSION with bug fixes."
+          gh pr edit "$PR_URL" --title "feat: update swipl-wasm to $NEW_VERSION"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          NEW_VERSION: ${{ steps.metadata.outputs.new-version }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Mark major production dependency updates as breaking
+        if: |
+          contains(github.head_ref, 'dependabot/npm_and_yarn/') &&
+          steps.metadata.outputs.dependency-type == 'direct:production' &&
+          steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: |
+          gh pr view "$PR_URL" --json body --jq .body > body.md
+          # Guard so re-runs (e.g. on synchronize) do not append the footer twice
+          if ! grep -q '^BREAKING CHANGE:' body.md; then
+            printf '\n\nBREAKING CHANGE: %s updated from %s to %s (new major version). This update may contain breaking changes.\n' \
+              "$DEPENDENCY_NAMES" "$PREVIOUS_VERSION" "$NEW_VERSION" >> body.md
+            gh pr edit "$PR_URL" --body-file body.md
           fi
-          
-          gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash --subject "$COMMIT_MESSAGE" --body "$COMMIT_BODY"
-          
-      - name: Auto-merge regular dependabot PRs
-        if: "!contains(github.head_ref, 'dependabot/npm_and_yarn/swipl-wasm-')"
-        run: gh pr merge ${{ github.event.pull_request.html_url }} --auto --squash
-    env:
-      # You may be tempted to make this github.token, this won't work
-      # because GH Actions does not trigger workflows on github.token
-      # in order to avoid recursive workflows.
-      # See: https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          DEPENDENCY_NAMES: ${{ steps.metadata.outputs.dependency-names }}
+          PREVIOUS_VERSION: ${{ steps.metadata.outputs.previous-version }}
+          NEW_VERSION: ${{ steps.metadata.outputs.new-version }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+      - name: Enable automerge
+        run: gh pr merge "$PR_URL" --auto --squash
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          # You may be tempted to make this github.token, this won't work
+          # because GH Actions does not trigger workflows on github.token
+          # in order to avoid recursive workflows.
+          # See: https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
