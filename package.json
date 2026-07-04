@@ -26,7 +26,7 @@
     "prepare": "npm run build",
     "build:tsc": "tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
-    "bundle:latest": "ts-node scripts/post-webpack",
+    "bundle:redirects": "ts-node scripts/generate-redirects",
     "semantic-release": "semantic-release",
     "eye:pvm": "ts-node scripts/generate-pvm",
     "eye:pvm:test": "ts-node scripts/run-pvm",
@@ -129,9 +129,10 @@
       [
         "@qiwi/semantic-release-gh-pages-plugin",
         {
-          "msg": "add version <%= nextRelease.gitTag %>",
+          "msg": "add redirect stubs for <%= nextRelease.gitTag %>",
           "branch": "pages",
           "add": true,
+          "dotfiles": true,
           "src": "bundle"
         }
       ]

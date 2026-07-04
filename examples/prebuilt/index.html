@@ -13,11 +13,12 @@
     <button id="execute">Execute</button>
     <div id="result"></div>
   </body>
-  <script src="https://eyereasoner.github.io/eye-js/2/latest/index.js"></script>
-  <script>
+  <script type="module">
+    import { n3reasoner } from 'https://esm.sh/eyereasoner';
+
     document.getElementById('execute').addEventListener("click", async () => {
-      
-      document.getElementById("result").innerHTML = (await eyereasoner.n3reasoner(
+
+      document.getElementById("result").innerHTML = (await n3reasoner(
         document.getElementById("data").value,
         undefined,
         { output: 'derivations' }

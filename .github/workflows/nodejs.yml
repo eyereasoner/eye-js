@@ -137,15 +137,18 @@ jobs:
           name: dist
           path: dist
       - run: mkdir ./bundle
-      - name: "Create Bundle"
+      - name: "Create pages redirect stubs"
+        # We no longer build+publish the ~4MB webpack bundle per release (that
+        # grew the `pages` branch to ~7.5GB). Instead we publish two tiny,
+        # self-deriving redirect stubs that load the release from the CDN.
+        # See scripts/generate-redirects.ts and redirects/*.js.
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           version=$(npx semantic-release --dry-run | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+') || true
           if [ $version ]
           then
-            npm run bundle:webpack -- --name=v$version
-            npm run bundle:latest -- --name=v$version
+            npm run bundle:redirects -- --name=v$version
             cp -r ./examples/prebuilt/ bundle/example/
           fi
       - name: Release

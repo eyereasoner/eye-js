@@ -171,40 +171,49 @@ eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
 
 ## Browser Builds
 
-For convenience we provide deploy bundled versions of the eyereasoner on github pages which can be directly used in an HTML document as shown in [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html) which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
+`eyereasoner` can be used directly in the browser — with no build step and no self-hosting — straight from a public ESM CDN such as [esm.sh](https://esm.sh) or [jsDelivr](https://www.jsdelivr.com/). The published package is fully self-contained: the SWI-Prolog WebAssembly and the EYE image are inlined in the JavaScript, so there are no separate `.wasm`/`.data` assets to host. See [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html), which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
 
-There is a bundled version for each release - which can be found at the url:
-<p align=center>
-https://eyereasoner.github.io/eye-js/vMajor/vMinor/vPatch/index.js
+### ESM `import` (recommended)
 
-for instance v2.3.14 has the url https://eyereasoner.github.io/eye-js/2/3/14/index.js. We also have shortcuts for:
- - the latest version https://eyereasoner.github.io/eye-js/latest/index.js,
- - the latest of each major version https://eyereasoner.github.io/eye-js/vMajor/latest/index.js, and
- - the latest of each minor version https://eyereasoner.github.io/eye-js/vMajor/vMinor/latest/index.js
-
-Available versions can be browsed at https://github.com/eyereasoner/eye-js/tree/pages.
-
-Github also serves these files with a `gzip` content encoding which compresses the script to ~1.4MB when being served.
-
-![](./github-transfer.png)
-
-### Serving Files
-
-When self-hosting the bundled files, ensure your server includes `charset=utf-8` in the `Content-Type` header for JavaScript files:
-
-```
-Content-Type: text/javascript; charset=utf-8
+```html
+<script type="module">
+  import { n3reasoner } from 'https://esm.sh/eyereasoner';
+  const result = await n3reasoner(':Socrates a :Man. {?s a :Man} => {?s a :Mortal}.');
+  console.log(result); // :Socrates a :Mortal.
+</script>
 ```
 
-Without the charset, WASM streaming instantiation may fail in headless browsers with errors like:
-- Firefox: `CompileError: wasm validation error: at offset 642: byte size mismatch in type section`
-- Chromium: `CompileError: WebAssembly.instantiate(): section was shorter than expected size`
+You can pin a version or version range with the usual npm semver syntax, which the CDN resolves for you:
+ - the latest version: `https://esm.sh/eyereasoner`
+ - the latest of a major version: `https://esm.sh/eyereasoner@2`
+ - the latest of a minor version: `https://esm.sh/eyereasoner@2.3`
+ - an exact patch version: `https://esm.sh/eyereasoner@2.3.14`
 
-Most static file servers (e.g., `express.static()`) set this automatically, but custom streaming handlers using `createReadStream().pipe(res)` may not.
+[jsDelivr](https://www.jsdelivr.com/) works as a drop-in alternative, e.g. `https://cdn.jsdelivr.net/npm/eyereasoner@2/+esm`.
+
+### Classic `<script>` global
+
+For code that expects a global rather than an ES module, import inside a module script and assign the exports you need:
+
+```html
+<script type="module">
+  import { n3reasoner } from 'https://esm.sh/eyereasoner';
+  window.n3reasoner = n3reasoner; // now callable from non-module scripts
+</script>
+```
+
+### Migrating from the GitHub Pages bundles
+
+Earlier releases were served as webpack bundles from `https://eyereasoner.github.io/eye-js/vMajor/vMinor/vPatch/index.js` (for instance `https://eyereasoner.github.io/eye-js/2/3/14/index.js`), along with `latest`, `vMajor/latest` and `vMajor/vMinor/latest` shortcuts. **Those URLs keep working** — they now transparently redirect to the equivalent CDN version — but new code should use the CDN URLs above directly. Every published version also remains available forever from the npm package (`dist/` ships with the package).
 
 ### Dynamic imports
 
-We also distribute bundles that can be dynamically imported on github pages; for example
+The CDN modules can also be dynamically imported at runtime:
+```ts
+const { n3reasoner } = await import('https://esm.sh/eyereasoner@2');
+```
+
+The previous `https://eyereasoner.github.io/eye-js/vMajor/latest/dynamic-import.js` URLs keep working too — they redirect to the CDN and re-export the module as `eyereasoner`:
 ```ts
 const { eyereasoner } = await import('https://eyereasoner.github.io/eye-js/2/latest/dynamic-import.js');
 
