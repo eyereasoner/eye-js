@@ -21,5 +21,10 @@ export const result = `
 @prefix : <urn:example:>.
 @prefix log: <http://www.w3.org/2000/10/swap/log#>.
 
+{
+    _:x a :Person.
+} => {
+    _:x a :Human.
+}.
 <urn:example:Alice> a <urn:example:Human>.
 `;
