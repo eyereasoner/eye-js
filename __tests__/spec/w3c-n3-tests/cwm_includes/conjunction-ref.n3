@@ -1,3 +1,0 @@
-@prefix : <foo.n3#> .
-
-{:sky :color :blue, :green } a :result .

@@ -1,3 +1,0 @@
-@prefix : <langlit.n3#> .
-
-"hello"@en a :Answer .

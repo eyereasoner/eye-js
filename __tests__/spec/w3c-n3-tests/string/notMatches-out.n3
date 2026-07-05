@@ -1,5 +1,0 @@
-@prefix : <notMatches.n3#> .
-
-:test1b    a :success .
-:test1f    a :success .
-:test2a    a :success .

@@ -1,3 +1,0 @@
-@prefix : <t4.n3#> .
-
-:test4 a :success .

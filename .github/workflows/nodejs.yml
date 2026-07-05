@@ -56,10 +56,12 @@ jobs:
         shell: bash
         command: npm test
 
-  # W3C N3 reasoning spec tests (vendored snapshot under __tests__/spec/w3c-n3-tests).
-  # This job is intentionally NOT in the release job's `needs`: known EYE deviations
-  # are tracked in __tests__/spec/skip-list.json, and any newly surfacing deviation
-  # should be triaged there rather than blocking unrelated releases.
+  # W3C N3 reasoning spec tests. The upstream test suite is NOT committed to
+  # this repo: it is fetched at a pinned commit by scripts/fetch-n3-tests.ts
+  # and cached below with actions/cache so runs stay deterministic and fast.
+  # This job is intentionally NOT in the release job's `needs`: known EYE
+  # deviations are tracked in __tests__/spec/skip-list.json, and any newly
+  # surfacing deviation should be triaged there rather than blocking releases.
   spec-tests:
     needs: build
     runs-on: ubuntu-latest
@@ -74,6 +76,12 @@ jobs:
       with:
         name: dist
         path: dist
+    # Cache the fetched W3C N3 test suite, keyed on the fetch script (which
+    # pins the upstream commit) so bumping the pin busts the cache.
+    - uses: actions/cache@v4
+      with:
+        path: __tests__/spec/.w3c-n3-tests
+        key: w3c-n3-tests-${{ hashFiles('scripts/fetch-n3-tests.ts') }}
     - run: npm run test:spec
 
   benchmark:

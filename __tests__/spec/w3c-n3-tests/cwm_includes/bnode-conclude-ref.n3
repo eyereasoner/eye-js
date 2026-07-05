@@ -1,4 +1,0 @@
-@prefix : <bnodeConclude.n3#> .
-
-[ a :Result ].
-

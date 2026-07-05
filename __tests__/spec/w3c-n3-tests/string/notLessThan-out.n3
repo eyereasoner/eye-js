@@ -1,4 +1,0 @@
-@prefix : <notLessThan.n3#> .
-
-:testh5     a :success .
-:testh6     a :success .

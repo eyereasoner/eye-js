@@ -1,10 +1,15 @@
 /**
  * W3C N3 reasoning spec tests.
  *
- * Runs every entry of the vendored `manifest-reasoner.ttl` from the W3C N3
- * test suite (https://github.com/w3c/N3, snapshot under ./w3c-n3-tests)
- * through `n3reasoner` and compares the derived graph against the reference
- * results using RDF isomorphism.
+ * Runs every entry of `manifest-reasoner.ttl` from the W3C N3 test suite
+ * (https://github.com/w3c/N3) through `n3reasoner` and compares the derived
+ * graph against the reference results using RDF isomorphism.
+ *
+ * The test suite is NOT committed to this repo — it is fetched at a pinned
+ * commit into a git-ignored cache directory by `scripts/fetch-n3-tests.ts`
+ * (run via `npm run spec:fetch`, which `npm run test:spec` invokes first, and
+ * cached in CI with actions/cache). If the suite is missing, this file throws
+ * with a pointer to that script.
  *
  * Known deviations between EYE and the reference results are recorded in
  * ./skip-list.json (with a reason each) so that this suite stays green while
@@ -17,13 +22,14 @@ import type { Quad, Term } from '@rdfjs/types';
 import 'jest-rdf';
 import { n3reasoner } from '../../dist';
 import type { ICoreQueryOptions } from '../../dist';
+import { cacheDir } from '../../scripts/fetch-n3-tests';
 
 const { namedNode, quad } = DataFactory;
 
-const TESTS_DIR = path.join(__dirname, 'w3c-n3-tests');
+const TESTS_DIR = cacheDir;
 const MANIFEST = 'manifest-reasoner.ttl';
 // The base against which the manifest is published; used to resolve the
-// mf:action / mf:result IRIs back to files in the local snapshot.
+// mf:action / mf:result IRIs back to files in the fetched suite.
 const MANIFEST_BASE = 'https://w3c.github.io/N3/tests/N3Tests/';
 // `n3reasoner` loads string input into the reasoner as `data_0.n3s`, so this
 // is the base that EYE resolves relative IRIs in the input against. Parsing
@@ -70,10 +76,29 @@ interface SpecTest {
 }
 
 function loadManifest(): SpecTest[] {
+  const manifestPath = path.join(TESTS_DIR, MANIFEST);
+  if (!fs.existsSync(manifestPath)) {
+    throw new Error(
+      `W3C N3 test suite not found at ${TESTS_DIR}. `
+      + 'Run `npm run spec:fetch` first (`npm run test:spec` does this automatically).',
+    );
+  }
+
+  let manifestText = fs.readFileSync(manifestPath, 'utf-8');
+  // Upstream typo (filed as w3c-cg/N3#232): two entries are concatenated
+  // without whitespace in the mf:entries list — `:cwm_includes_t4:cwm_includes_t6`
+  // — which Turtle parses as a single, undefined prefixed name rather than two
+  // list items, so both tests silently vanish. Patch it here on the fetched
+  // copy until upstream lands the fix; self-healing (a no-op once fixed).
+  manifestText = manifestText.replace(
+    ':cwm_includes_t4:cwm_includes_t6',
+    ':cwm_includes_t4 :cwm_includes_t6',
+  );
+
   const store = new Store(new Parser({
     format: 'text/n3',
     baseIRI: `${MANIFEST_BASE}${MANIFEST}`,
-  }).parse(fs.readFileSync(path.join(TESTS_DIR, MANIFEST), 'utf-8')));
+  }).parse(manifestText));
 
   function one(subject: Term | undefined, predicate: string): Term | undefined {
     return subject && store.getObjects(subject as Parameters<Store['getObjects']>[0], namedNode(predicate), null)[0];
