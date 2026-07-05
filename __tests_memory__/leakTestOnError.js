@@ -4,10 +4,30 @@ function toMb(value) {
   return Math.floor(value / 1024 / 1024)
 }
 
+// This test is run with --expose-gc so that a full garbage collection can be
+// forced before taking each memory sample. Without this, the samples mostly
+// measure garbage that is merely awaiting collection (e.g. discarded SWIPL
+// WASM instances), rather than memory that is actually retained, which makes
+// the thresholds below flaky.
+async function sampleMemory() {
+  // Allow for GC
+  await new Promise(res => setTimeout(res, 0));
+
+  if (typeof global.gc === 'function') {
+    // Two passes with a small delay in between, so that any finalizers queued
+    // by the first pass have run before the second one.
+    global.gc();
+    await new Promise(res => setTimeout(res, 5));
+    global.gc();
+  }
+  return process.memoryUsage();
+}
+
 async function main() {
-  const initial = process.memoryUsage().heapUsed;
+  const { heapUsed: initial } = await sampleMemory();
   let maxStart = 0;
-  
+  let maxStartExternal = 0;
+
   // Warmup
   for (let i = 0; i < 100; i++) {
     // Allow for GC
@@ -17,10 +37,9 @@ async function main() {
   }
 
   for (let i = 0; i < 200; i++) {
-    // Allow for GC
-    await new Promise(res => setTimeout(res, 0));
-
-    maxStart = Math.max(process.memoryUsage().heapUsed, maxStart)
+    const { heapUsed, external } = await sampleMemory();
+    maxStart = Math.max(heapUsed, maxStart)
+    maxStartExternal = Math.max(external, maxStartExternal)
     await n3reasoner('invalid', 'invalid').catch(() => {});
   }
 
@@ -28,17 +47,14 @@ async function main() {
     throw new Error(`Exceeded initial memory consumption of ${toMb(initial)}MB by more than 50MB, reaching ${toMb(maxStart)}MB in the first 100 iterations`)
   }
 
-  console.log(`Maximum memory usage in first 200 iterations: ${toMb(maxStart)}MB`)
+  console.log(`Maximum memory usage in first 200 iterations: ${toMb(maxStart)}MB (external: ${toMb(maxStartExternal)}MB)`)
 
   console.log('\nNow testing for long term memory increase')
 
   let maxCont = 0;
 
   for (let i = 0; i <= 500; i++) {
-    // Allow for GC
-    await new Promise(res => setTimeout(res, 0));
-
-    maxCont = Math.max(process.memoryUsage().heapUsed, maxCont);
+    maxCont = Math.max((await sampleMemory()).heapUsed, maxCont);
 
     if (i !== 0 && (i % 50 === 0)) {
       console.log(`Max usage after ${i} iterations: ${toMb(maxCont)}MB`);
@@ -48,18 +64,19 @@ async function main() {
   }
 
   let minTail = maxCont;
+  let minTailExternal = Infinity;
 
   // To avoid test flakiness from general variability in tests
   // compare the highest value on the first 50 tests to the lowest value
   // in the last 50 tests
   for (let i = 0; i <= 50; i++) {
-    await new Promise(res => setTimeout(res, 0));
-
-    minTail = Math.min(process.memoryUsage().heapUsed, minTail);
+    const { heapUsed, external } = await sampleMemory();
+    minTail = Math.min(heapUsed, minTail);
+    minTailExternal = Math.min(external, minTailExternal);
     await n3reasoner('invalid', 'invalid').catch(() => {});;
   }
 
-  console.log(`The minimum value found in the tail was ${toMb(minTail)}MB`)
+  console.log(`The minimum value found in the tail was ${toMb(minTail)}MB (external: ${toMb(minTailExternal)}MB)`)
 
   if ((minTail - maxStart) > 1 * (1024 ** 2)) {
     throw new Error(`${toMb(minTail - maxStart)}MB increase encountered, max allowed: 1MB`)
@@ -67,6 +84,13 @@ async function main() {
 
   if ((maxCont - initial) > 50 * (1024 ** 2)) {
     throw new Error(`Exceeded initial memory consumption of ${toMb(initial)}MB by more than 50MB, reaching ${toMb(minTail)}MB`)
+  }
+
+  // External memory covers the ArrayBuffers backing the SWIPL WASM instances,
+  // which heapUsed cannot see; after a forced GC it should return to its
+  // baseline, so sustained growth here means instances are actually retained.
+  if ((minTailExternal - maxStartExternal) > 25 * (1024 ** 2)) {
+    throw new Error(`${toMb(minTailExternal - maxStartExternal)}MB increase in external (WASM) memory encountered, max allowed: 25MB`)
   }
 }
 
