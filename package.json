@@ -27,6 +27,7 @@
     "build:tsc": "tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
     "bundle:latest": "ts-node scripts/post-webpack",
+    "pages:prune": "ts-node scripts/prune-pages",
     "semantic-release": "semantic-release",
     "eye:pvm": "ts-node scripts/generate-pvm",
     "eye:pvm:test": "ts-node scripts/run-pvm",
@@ -132,6 +133,7 @@
           "msg": "add version <%= nextRelease.gitTag %>",
           "branch": "pages",
           "add": true,
+          "dotfiles": true,
           "src": "bundle"
         }
       ]

@@ -139,10 +139,12 @@ jobs:
           path: dist
       - run: mkdir ./bundle
       - name: "Create Bundle"
+        id: bundle
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           version=$(npx semantic-release --dry-run | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+') || true
+          echo "version=$version" >> "$GITHUB_OUTPUT"
           if [ $version ]
           then
             npm run bundle:webpack -- --name=v$version
@@ -157,3 +159,43 @@ jobs:
           # See: https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: npx semantic-release
+      - name: Prune superseded patch bundles from pages
+        # Keeps per-minor storage on the pages branch bounded: after x.y.z is
+        # published, remove the other per-patch dirs of minor x.y (their
+        # `latest` copies stay). See https://github.com/eyereasoner/eye-js/issues/1845
+        if: steps.bundle.outputs.version != ''
+        env:
+          # Same token as Release: pushes made with github.token do not
+          # trigger the GitHub Pages build, so the pruned tree would never be
+          # deployed.
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          set -euo pipefail
+          version="${{ steps.bundle.outputs.version }}"
+          major="${version%%.*}"
+          rest="${version#*.}"
+          minor="${rest%%.*}"
+          pages="$RUNNER_TEMP/pages-prune"
+          # Blobless + sparse clone: only the released minor's directory is
+          # materialised, so the (large) pages branch never has to fit on the
+          # runner in full. dev/bench and everything else stay untouched.
+          git clone --no-checkout --depth 1 --filter=blob:none --branch pages \
+            "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "$pages"
+          git -C "$pages" sparse-checkout set --cone "$major/$minor"
+          git -C "$pages" checkout pages
+          npm run pages:prune -- --name="v$version" --root="$pages"
+          if [ -n "$(git -C "$pages" status --porcelain)" ]
+          then
+            git -C "$pages" config user.name "github-actions[bot]"
+            git -C "$pages" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git -C "$pages" add -A -- "$major/$minor"
+            git -C "$pages" commit -m "prune patch bundles superseded by v$version"
+            # The benchmark workflow also pushes to this branch (dev/bench);
+            # rebase and retry on a lost race.
+            for attempt in 1 2 3
+            do
+              if git -C "$pages" push origin HEAD:pages; then break; fi
+              git -C "$pages" fetch --depth=50 origin pages
+              git -C "$pages" rebase origin/pages
+            done
+          fi
