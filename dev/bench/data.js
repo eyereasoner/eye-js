@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783207149024,
+  "lastUpdate": 1783293007695,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -115365,6 +115365,163 @@ window.BENCHMARK_DATA = {
             "range": "±6.47%",
             "unit": "ops/sec",
             "extra": "49 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "128efa65e2817f3c213b8ff4e60cd8bdf68f24fb",
+          "message": "fix: Parse quad results from the reasoner and drop the obsolete RDF-star workaround (#1950)\n\n🚧 DRAFT — for @jeswr to review first\n\n> **Note:** This change is agent-generated (Claude Fable 5) from the\nverified triage of the linked issues.\n\nCloses #1642\nCloses #122\n\n## Problem\n\n`n3reasoner(..., { outputType: 'quads' })` throws `Error while parsing\nquery result: [...]` whenever the reasoner output contains a quad\n(named-graph / 4th term) — reproduced with the exact snippet from #1642.\nRoot cause: `parse()` in `lib/transformers.ts` parses results with `new\nParser({ format: 'text/n3' })`, and N3.js rejects the 4th term in\n`text/n3` mode.\n\n## Fix\n\n- Keep the `text/n3` parser as the primary parse — it is still required\nfor rules/formulae in the output (the permissive default parser rejects\n`{...} => {...}`).\n- On parse failure, retry once with a default-format `new N3.Parser()`\n(permissive mode), verified to accept the N-Quads-style statements EYE\nemits for quad input, preserving the graph term.\n- If both parsers fail, rethrow with the original (text/n3) error\nmessage, so behaviour for genuinely invalid output is unchanged.\n- Remove the dead `parser._supportsRDFStar = true` workaround here and\nin `__test_utils__/util.ts`: N3.js v2 removed that flag (rdfjs/N3.js#324\nwas closed as obsolete) and this repo is on `n3 ^2.0.1`, so the\nassignment is a no-op. The existing rdf-star tests exercise this path\nand still pass.\n\nNote from the triage: forcing `_supportsNamedGraphs = true` on the\nn3-mode parser instead does **not** work — it breaks `{...} => {...}`\nparsing. The fallback-parser approach handles both.\n\n## Tests\n\nAdded the exact repro from #1642 to `__tests__/node-test.ts`: quad data\n+ `{ ?s ?p ?o ?g } => { ?s ?p ?o ?g }.`, asserting the result quad's\ngraph term is preserved for `outputType: 'quads'`, plus an `outputType:\n'string'` case.\n\n## Validation (local, Linux x64, node-only)\n\n- `npx tsc` + the repo eslint script: exit 0 (only pre-existing\nignore-pattern warnings)\n- `jest __tests__/node-test.ts --coverage=false`: **43 passed, 1 skipped\n(pre-existing blogic skip), 44 total**, exit 0\n- `jest __tests__/cli-test.ts --coverage=false`: **11 passed**, exit 0\n\nBrowser/e2e suites are left to CI.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-authored-by: Jesse Wright <jesse@jeswr.org>\nCo-authored-by: Claude Fable 5 <noreply@anthropic.com>",
+          "timestamp": "2026-07-05T22:47:00Z",
+          "tree_id": "6fbc483f64e7cbf34e534ba90e477b9c139381b6",
+          "url": "https://github.com/eyereasoner/eye-js/commit/128efa65e2817f3c213b8ff4e60cd8bdf68f24fb"
+        },
+        "date": 1783292950198,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 17.06,
+            "range": "±4.25%",
+            "unit": "ops/sec",
+            "extra": "47 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 15.73,
+            "range": "±5.58%",
+            "unit": "ops/sec",
+            "extra": "58 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 163713,
+            "range": "±1.22%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 230977,
+            "range": "±0.69%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 115,
+            "range": "±19.20%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.84,
+            "range": "±4.50%",
+            "unit": "ops/sec",
+            "extra": "30 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.26,
+            "range": "±0.78%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.25%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.79,
+            "range": "±16.83%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.63,
+            "range": "±23.40%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±24.80%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.15,
+            "range": "±2.54%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.23,
+            "range": "±2.29%",
+            "unit": "ops/sec",
+            "extra": "11 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.79,
+            "range": "±2.70%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 6.04,
+            "range": "±0.59%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.2,
+            "range": "±0.88%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.27,
+            "range": "±0.58%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.91,
+            "range": "±0.40%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 6.21,
+            "range": "±0.44%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
           }
         ]
       }
