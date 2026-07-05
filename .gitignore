@@ -6,3 +6,4 @@ lib/eye.ts
 lib/lingua.ts
 perf/output.txt
 perf/dynamic.mjs
+__tests__/spec/.w3c-n3-tests
