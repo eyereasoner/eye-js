@@ -137,18 +137,12 @@ jobs:
         with:
           name: dist
           path: dist
-      - run: mkdir ./bundle
-      - name: "Create Bundle"
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          version=$(npx semantic-release --dry-run | grep -oP 'The next release version is \K[0-9]+\.[0-9]+\.[0-9]+') || true
-          if [ $version ]
-          then
-            npm run bundle:webpack -- --name=v$version
-            npm run bundle:latest -- --name=v$version
-            cp -r ./examples/prebuilt/ bundle/example/
-          fi
+      # Releases no longer publish anything to the `pages` branch. The old
+      # per-release ~4MB webpack bundle grew that branch to ~7.5GB; the docs
+      # now point browser consumers directly at a CDN, so new versions need no
+      # Pages files at all. URLs of previously published versions are covered
+      # by a ONE-TIME backfill of redirect stubs — see
+      # scripts/generate-redirects.ts (deliberately not wired into CI).
       - name: Release
         env:
           # You may be tempted to make this github.token, this won't work

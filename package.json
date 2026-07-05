@@ -26,7 +26,7 @@
     "prepare": "npm run build",
     "build:tsc": "tsc",
     "bundle:webpack": "webpack --config webpack.config.js",
-    "bundle:latest": "ts-node scripts/post-webpack",
+    "backfill:redirects": "ts-node scripts/generate-redirects",
     "semantic-release": "semantic-release",
     "eye:pvm": "ts-node scripts/generate-pvm",
     "eye:pvm:test": "ts-node scripts/run-pvm",
@@ -64,7 +64,6 @@
   "homepage": "https://github.com/eyereasoner/eye-js#readme",
   "devDependencies": {
     "@memlab/api": "^2.0.0",
-    "@qiwi/semantic-release-gh-pages-plugin": "^5.2.4",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@types/benchmark": "^2.1.2",
     "@types/express": "^5.0.0",
@@ -120,21 +119,11 @@
     ],
     "verifyConditions": [
       "@semantic-release/npm",
-      "@semantic-release/github",
-      "@qiwi/semantic-release-gh-pages-plugin"
+      "@semantic-release/github"
     ],
     "publish": [
       "@semantic-release/npm",
-      "@semantic-release/github",
-      [
-        "@qiwi/semantic-release-gh-pages-plugin",
-        {
-          "msg": "add version <%= nextRelease.gitTag %>",
-          "branch": "pages",
-          "add": true,
-          "src": "bundle"
-        }
-      ]
+      "@semantic-release/github"
     ]
   },
   "publishConfig": {
