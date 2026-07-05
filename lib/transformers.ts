@@ -5,6 +5,7 @@ import { Parser } from 'n3';
 import SWIPL, { type SWIPLModule } from 'swipl-wasm/dist/swipl/swipl-bundle-no-data';
 import strToBuffer from 'swipl-wasm/dist/strToBuffer';
 import { write } from './n3Writer.temp';
+import { bridgeCallback } from './bridge';
 import EYE_PVM from './eye';
 import SEE_PVM from './lingua';
 import { qaQuery, queryOnce } from './query';
@@ -165,7 +166,8 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
 
   let res = '';
   const err: string[] = [];
-  const Module = await (options?.imageLoader ?? loadEyeImage)(swipl)({
+  const loader = (options?.imageLoader ?? loadEyeImage)(swipl);
+  const Module = await loader({
     print: (str: string) => { res += `${str}\n`; },
     printErr: (str: string) => { err.push(str); },
   });
@@ -173,7 +175,12 @@ export async function executeBasicEyeQuery(swipl: typeof SWIPL, data: InputData,
     Module,
     inputDataToStrings(data),
     query && (typeof query === 'string' ? query : write(query)),
-    options,
+    // Run the reasoner through the async yield loop so that the sub-reasoner
+    // requests of graph-scoped builtins (log:collectAllIn, log:conclusion,
+    // ...) can be answered by booting fresh modules with the same image; any
+    // remaining yields (log:ask) are still answered by the provided cb.
+    // See https://github.com/eyereasoner/eye-js/issues/873.
+    { ...options, cb: bridgeCallback(Module, { spawn: loader, cb: options?.cb }) },
     !!options?.imageLoader,
   );
 
