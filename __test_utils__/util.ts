@@ -295,6 +295,20 @@ export function universalTests() {
       await expect(n3reasoner('invalid', 'invalid')).rejects.toThrow('Error while executing query');
     });
 
+    it('should throw error when the query result cannot be parsed', async () => {
+      // A stub SWIPL build whose reasoner emits output that is not valid N3
+      const swipl = (async (opts: { print: (str: string) => void }) => {
+        opts.print('this is not valid N3 {{{');
+        return {
+          FS: { writeFile: () => {} },
+          prolog: { query: () => ({ once: () => {} }) },
+        };
+      }) as any;
+
+      await expect(n3reasoner(dataQuads, undefined, { SWIPL: swipl }))
+        .rejects.toThrow('Error while parsing query result');
+    });
+
     it('should execute the n3reasoner on surface query', async () => {
       await expect(n3reasoner(surfaceQuery)).rejects.toThrow(/inference_fuse/);
       await expect(n3reasoner(surfaceQueryQuads)).rejects.toThrow(/inference_fuse/);
