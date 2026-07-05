@@ -59,7 +59,7 @@ export async function mainFunc(proc: NodeJS.Process) {
   try {
     const res = await qaQuery(Module, 'main', posixArgv, (q) => rl.question(`${q}\n|: `));
     failed = res.error === true;
-  } /* istanbul ignore next: defensive — EYE reports its errors on stderr instead */ catch (e) {
+  } catch (e) {
     // eslint-disable-next-line no-console
     console.error(e instanceof Error ? e.message : String(e));
     failed = true;
