@@ -70,6 +70,8 @@ export async function mainFunc(proc: NodeJS.Process) {
   // stderr with an `** ERROR **` marker while the underlying Prolog goal
   // still succeeds, so a marker on stderr must also fail the process.
   if (failed || errorLines.some((line) => line.includes('** ERROR **'))) {
+    // `proc` is dependency-injected so tests can observe the exit code
+    // eslint-disable-next-line no-param-reassign
     proc.exitCode = 1;
   }
 }
