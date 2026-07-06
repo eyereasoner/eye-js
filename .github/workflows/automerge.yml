@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Fetch dependabot metadata
         id: metadata
-        uses: dependabot/fetch-metadata@v2
+        uses: dependabot/fetch-metadata@v3
 
       # Squash merges take their commit message from the PR title and body
       # (squash_merge_commit_title=PR_TITLE, squash_merge_commit_message=PR_BODY),
