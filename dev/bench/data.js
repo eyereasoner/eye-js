@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783296808197,
+  "lastUpdate": 1783298933287,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -115836,6 +115836,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.19%",
             "unit": "ops/sec",
             "extra": "22 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "61cdbcbe87e1be6ec9c8d18047fab498b7b3d828",
+          "message": "chore: remove dead eye:pvm:test script and fix the lint scope (#1964)\n\n🚧 **Draft — agent-generated PR.** Written by an AI agent working on the\nissue backlog; please review before considering it for merge.\n\nTwo zero-risk `package.json` script cleanups (no issue attached — repo\nhygiene):\n\n1. **Remove the dead `eye:pvm:test` script.** It runs `ts-node\nscripts/run-pvm`, but `scripts/run-pvm` does not exist (`scripts/` only\ncontains `generate-pvm.ts`, `post-webpack.ts`, `update.ts`), and nothing\nin the repo references the script apart from its own definition.\n\n2. **Fix the malformed `lint` scope.** The previous invocation\n\n   ```\n   eslint lib/** __tests__/**.ts scripts/** --ext .ts\n   ```\n\nrelied on shell glob expansion — without `globstar`, `__tests__/**.ts`\nonly matches top-level files, and `.js` sources were never linted at\nall. It now lints the directories directly and lets `--ext` do the\nfiltering:\n\n   ```\n   eslint lib __tests__ scripts --ext .ts,.js\n   ```\n\nThis keeps `npm run lint` green today while making the scope recursive\n(new nested test dirs are now covered) and extending it to `.js`.\n`.eslintignore` continues to exclude the generated `lib/eye.ts` /\n`lib/lingua.ts` and `*.temp.ts`.\n\n**Deliberately not yet included:** `__test_utils__` (58 pre-existing\nerrors) and `perf` (32 pre-existing errors) — both almost entirely\nauto-fixable with `--fix`, but fixing them means touching code, and\n`perf/bench.ts` is being modified by #1962 right now. Suggested\nfollow-up once #1962 lands: add both directories to the scope and run\n`npm run lint -- --fix` in the same commit.\n\n## Validation\n\n- `npm run lint` passes with the new scope (exit 0).\n- `package.json` parses as valid JSON; `npm run` lists the expected\nscripts; the dead script is gone, all other scripts untouched.\n\n## Notes\n\n- Touches only `package.json`. #1951 edits the neighbouring\n`test:memory:*` script lines and #1945 the dependencies — the changed\nlines are disjoint, so merges stay clean whichever lands first.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-authored-by: Claude Fable 5 <noreply@anthropic.com>",
+          "timestamp": "2026-07-05T23:37:52Z",
+          "tree_id": "feade7923d2f16a101c443dcf9a9e98c37195168",
+          "url": "https://github.com/eyereasoner/eye-js/commit/61cdbcbe87e1be6ec9c8d18047fab498b7b3d828"
+        },
+        "date": 1783298885728,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 15.93,
+            "range": "±7.00%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 15.69,
+            "range": "±6.59%",
+            "unit": "ops/sec",
+            "extra": "68 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 175168,
+            "range": "±0.87%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 240286,
+            "range": "±0.59%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 113,
+            "range": "±21.80%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.84,
+            "range": "±2.64%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.25,
+            "range": "±1.10%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±1.35%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.54,
+            "range": "±16.85%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.6,
+            "range": "±22.47%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±25.97%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.02,
+            "range": "±2.40%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.16,
+            "range": "±1.36%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.54,
+            "range": "±2.67%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.75,
+            "range": "±1.84%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.08,
+            "range": "±0.39%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.18,
+            "range": "±0.61%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.66,
+            "range": "±0.32%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.91,
+            "range": "±0.47%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
           }
         ]
       }
