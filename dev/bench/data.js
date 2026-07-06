@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783295718426,
+  "lastUpdate": 1783296808197,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -115679,6 +115679,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.51%",
             "unit": "ops/sec",
             "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "63333554+jeswr@users.noreply.github.com",
+            "name": "Jesse Wright",
+            "username": "jeswr"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "ccbaa3a91bc26143233b89881bef5193dc4022ad",
+          "message": "test: Sample memory after forced GC in the leak tests (#1951)\n\n🚧 DRAFT — for @jeswr to review first\n\n> **Note:** This change is agent-generated (Claude Fable 5) from the\nverified triage of the linked issue.\n\nCloses #1843\n\n## Triage finding\n\nThere is **no product memory leak**. A 30-iteration profile of\n`n3reasoner` shows heap usage flat after forced GC; `external` memory\noscillates between ~21MB and ~61MB *pre-GC* as discarded SWIPL WASM\ninstances await collection. The guard tests sample\n`process.memoryUsage()` at arbitrary points in the GC cycle, so they\nmostly measure garbage awaiting collection rather than retained memory —\nwhich is what made the CI run in #1843 look like a leak.\n\n## Change\n\n- Run `test:memory:node` / `test:memory:node:error` with `--expose-gc`.\n- In `__tests_memory__/leakTest.js` and\n`__tests_memory__/leakTestOnError.js`, force a double `global.gc()`\n(with a small delay so finalizers queued by the first pass run) before\nevery `process.memoryUsage()` sample. Existing thresholds are unchanged.\nThe scripts still degrade gracefully (old behaviour) if run without the\nflag.\n- Additionally assert that `external` memory — the ArrayBuffers backing\nthe SWIPL WASM instances, which `heapUsed` cannot see — returns to its\nearly-run baseline in the tail (25MB allowance, well under one ~40MB\ninstance accumulating). This catches real WASM instance retention\ndeterministically.\n\n## Validation (local, Linux x64, 2-core, nice -n 18)\n\n- `node --expose-gc __tests_memory__/leakTest`: **2 runs, both exit 0**\n— heap flat at 10MB and external flat at 21MB across all 850+ iterations\nof both runs (~2m20s each)\n- `node --expose-gc __tests_memory__/leakTestOnError`: **2 runs, both\nexit 0** — same flat 10MB heap / 21MB external profile\n\nThe post-GC external value sitting rock-steady at the 21MB baseline (the\nlow end of the pre-GC 21↔61MB oscillation) confirms the\ndiscarded-instances explanation.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-authored-by: Jesse Wright <jesse@jeswr.org>\nCo-authored-by: Claude Fable 5 <noreply@anthropic.com>",
+          "timestamp": "2026-07-05T23:22:48Z",
+          "tree_id": "5b06353c723d142591748cacf8045cdeda399d83",
+          "url": "https://github.com/eyereasoner/eye-js/commit/ccbaa3a91bc26143233b89881bef5193dc4022ad"
+        },
+        "date": 1783296761556,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 15.99,
+            "range": "±6.88%",
+            "unit": "ops/sec",
+            "extra": "73 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 15.47,
+            "range": "±6.85%",
+            "unit": "ops/sec",
+            "extra": "69 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 169990,
+            "range": "±0.78%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 235420,
+            "range": "±0.64%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 117,
+            "range": "±20.75%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 5.37,
+            "range": "±2.78%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.16,
+            "range": "±0.17%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.02,
+            "range": "±0.18%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.19,
+            "range": "±17.40%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.63,
+            "range": "±22.66%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.17,
+            "range": "±24.62%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 1.48,
+            "range": "±1.88%",
+            "unit": "ops/sec",
+            "extra": "12 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 0.79,
+            "range": "±0.77%",
+            "unit": "ops/sec",
+            "extra": "8 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 3.38,
+            "range": "±2.84%",
+            "unit": "ops/sec",
+            "extra": "19 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 4.27,
+            "range": "±0.21%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 1.51,
+            "range": "±0.15%",
+            "unit": "ops/sec",
+            "extra": "11 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 0.8,
+            "range": "±0.20%",
+            "unit": "ops/sec",
+            "extra": "8 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 3.47,
+            "range": "±0.15%",
+            "unit": "ops/sec",
+            "extra": "19 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 4.36,
+            "range": "±0.19%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
           }
         ]
       }
