@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1783303276715,
+  "lastUpdate": 1784080511303,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -116305,6 +116305,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 5.92,
             "range": "±0.21%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "ddd919d35981762f70ba229704ee50ff933369af",
+          "message": "fix: bump actions/setup-node from 6 to 7 (#1968)\n\nBumps [actions/setup-node](https://github.com/actions/setup-node) from 6\nto 7.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/actions/setup-node/releases\">actions/setup-node's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v7.0.0</h2>\n<h2>What's Changed</h2>\n<h3>Enhancements:</h3>\n<ul>\n<li>Add cache-primary-key and cache-matched-key as outputs by <a\nhref=\"https://github.com/gowridurgad\"><code>@​gowridurgad</code></a> in\n<a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1577\">actions/setup-node#1577</a></li>\n<li>Migrate to ESM and upgrade dependencies by <a\nhref=\"https://github.com/gowridurgad\"><code>@​gowridurgad</code></a> in\n<a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1574\">actions/setup-node#1574</a></li>\n</ul>\n<h3>Bug fixes:</h3>\n<ul>\n<li>Remove dummy NODE_AUTH_TOKEN export by <a\nhref=\"https://github.com/gowridurgad\"><code>@​gowridurgad</code></a> in\n<a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1558\">actions/setup-node#1558</a></li>\n<li>Only use <code>mirrorToken</code> in <code>getManifest</code> if\nit's provided by <a\nhref=\"https://github.com/deiga\"><code>@​deiga</code></a> in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1548\">actions/setup-node#1548</a></li>\n</ul>\n<h3>Documentation updates:</h3>\n<ul>\n<li>Add documentation for publishing to npm with Trusted Publisher\n(OIDC) by <a\nhref=\"https://github.com/chiranjib-swain\"><code>@​chiranjib-swain</code></a>\nin <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1536\">actions/setup-node#1536</a></li>\n<li>docs: Update restore-only cache documentation by <a\nhref=\"https://github.com/priya-kinthali\"><code>@​priya-kinthali</code></a>\nin <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1550\">actions/setup-node#1550</a></li>\n<li>docs: Update caching recommendations to mitigate cache poisoning\nrisks by <a\nhref=\"https://github.com/chiranjib-swain\"><code>@​chiranjib-swain</code></a>\nin <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1567\">actions/setup-node#1567</a></li>\n</ul>\n<h3>Dependency update:</h3>\n<ul>\n<li>Upgrade <code>@​actions/cache</code> to 5.1.0, log cache write\ndenied by <a\nhref=\"https://github.com/jasongin\"><code>@​jasongin</code></a> in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1569\">actions/setup-node#1569</a></li>\n</ul>\n<h2>New Contributors</h2>\n<ul>\n<li><a\nhref=\"https://github.com/chiranjib-swain\"><code>@​chiranjib-swain</code></a>\nmade their first contribution in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1536\">actions/setup-node#1536</a></li>\n<li><a href=\"https://github.com/deiga\"><code>@​deiga</code></a> made\ntheir first contribution in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1548\">actions/setup-node#1548</a></li>\n<li><a href=\"https://github.com/jasongin\"><code>@​jasongin</code></a>\nmade their first contribution in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1569\">actions/setup-node#1569</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/actions/setup-node/compare/v6...v7.0.0\">https://github.com/actions/setup-node/compare/v6...v7.0.0</a></p>\n<h2>v6.5.0</h2>\n<h2>What's Changed</h2>\n<ul>\n<li>Update <code>@​actions/cache</code> to 5.1.0 and add security\noverrides for undici and fast-xml-parser by <a\nhref=\"https://github.com/HarithaVattikuti\"><code>@​HarithaVattikuti</code></a>\nin <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1579\">actions/setup-node#1579</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/actions/setup-node/compare/v6.4.0...v6.5.0\">https://github.com/actions/setup-node/compare/v6.4.0...v6.5.0</a></p>\n<h2>v6.4.0</h2>\n<h2>What's Changed</h2>\n<h3>Dependency updates:</h3>\n<ul>\n<li>Upgrade <a\nhref=\"https://github.com/actions\"><code>@​actions</code></a>\ndependencies by <a\nhref=\"https://github.com/Copilot\"><code>@​Copilot</code></a> in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1525\">actions/setup-node#1525</a></li>\n<li>Update Node.js versions in versions.yml and bump package to v6.4.0\nby <a\nhref=\"https://github.com/priya-kinthali\"><code>@​priya-kinthali</code></a>\nin <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1533\">actions/setup-node#1533</a></li>\n</ul>\n<h2>New Contributors</h2>\n<ul>\n<li><a href=\"https://github.com/Copilot\"><code>@​Copilot</code></a> made\ntheir first contribution in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1525\">actions/setup-node#1525</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/actions/setup-node/compare/v6...v6.4.0\">https://github.com/actions/setup-node/compare/v6...v6.4.0</a></p>\n<h2>v6.3.0</h2>\n<h2>What's Changed</h2>\n<h3>Enhancements:</h3>\n<ul>\n<li>Support parsing <code>devEngines</code> field by <a\nhref=\"https://github.com/susnux\"><code>@​susnux</code></a> in <a\nhref=\"https://redirect.github.com/actions/setup-node/pull/1283\">actions/setup-node#1283</a></li>\n</ul>\n<!-- raw HTML omitted -->\n</blockquote>\n<p>... (truncated)</p>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/820762786026740c76f36085b0efc47a31fe5020\"><code>8207627</code></a>\nMigrate to ESM and upgrade dependencies (<a\nhref=\"https://redirect.github.com/actions/setup-node/issues/1574\">#1574</a>)</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/04be95cf3511ea51ebf9f224ddfb99cc7ab87cd4\"><code>04be95c</code></a>\nAdd cache-primary-key and cache-matched-key as outputs (<a\nhref=\"https://redirect.github.com/actions/setup-node/issues/1577\">#1577</a>)</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/7c2c68d20d402ed6a201ada70a81341941093140\"><code>7c2c68d</code></a>\ndocs: Update caching recommendations to mitigate cache poisoning risks\n(<a\nhref=\"https://redirect.github.com/actions/setup-node/issues/1567\">#1567</a>)</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/6a61c0375d66246de94630495909f12cf8dac84d\"><code>6a61c03</code></a>\nMerge pull request <a\nhref=\"https://redirect.github.com/actions/setup-node/issues/1569\">#1569</a>\nfrom jasongin/update-actions-cache-5.1.0</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/30eb73b41ded577900c1ebf968ef95cdf8f7434f\"><code>30eb73b</code></a>\nResolve high-severity audit issues</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/4e1a87a501d0302f99e30e2748568adcb388d09f\"><code>4e1a87a</code></a>\nUpdate dist</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/360237f0c01778d0c17291f75c56d6feae4f7574\"><code>360237f</code></a>\nStrict equality</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/4f8aac5beb2f0854bc79651567a18c67eb0b9de3\"><code>4f8aac5</code></a>\nBump <code>@​actions/cache</code> to 5.1.0, log cache write denied</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/f4a67bbeca970f103397d3d2b9462cf787cd2980\"><code>f4a67bb</code></a>\nOnly use <code>mirrorToken</code> in <code>getManifest</code> if it's\nprovided (<a\nhref=\"https://redirect.github.com/actions/setup-node/issues/1548\">#1548</a>)</li>\n<li><a\nhref=\"https://github.com/actions/setup-node/commit/0355742c943ddb13ca8a6b700f824231caa91e75\"><code>0355742</code></a>\nRemove dummy NODE_AUTH_TOKEN export (<a\nhref=\"https://redirect.github.com/actions/setup-node/issues/1558\">#1558</a>)</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/actions/setup-node/compare/v6...v7\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=actions/setup-node&package-manager=github_actions&previous-version=6&new-version=7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\n\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-07-15T01:28:08Z",
+          "tree_id": "32367deae701b217f1ffd7ab0f248c7a9a38c72b",
+          "url": "https://github.com/eyereasoner/eye-js/commit/ddd919d35981762f70ba229704ee50ff933369af"
+        },
+        "date": 1784080461458,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 16.52,
+            "range": "±4.83%",
+            "unit": "ops/sec",
+            "extra": "46 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.56,
+            "range": "±1.26%",
+            "unit": "ops/sec",
+            "extra": "47 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 168126,
+            "range": "±1.00%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 229276,
+            "range": "±0.98%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 117,
+            "range": "±21.50%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 7.05,
+            "range": "±0.40%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.26,
+            "range": "±0.11%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.25%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.19,
+            "range": "±20.48%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.65,
+            "range": "±23.94%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.17,
+            "range": "±25.71%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.14,
+            "range": "±2.83%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.19,
+            "range": "±1.99%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.75,
+            "range": "±2.84%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.9,
+            "range": "±0.25%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.22,
+            "range": "±0.16%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.23,
+            "range": "±0.16%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.9,
+            "range": "±0.18%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 6.06,
+            "range": "±0.29%",
             "unit": "ops/sec",
             "extra": "26 samples"
           }
