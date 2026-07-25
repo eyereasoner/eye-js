@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1784080511303,
+  "lastUpdate": 1784995400657,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -116461,6 +116461,163 @@ window.BENCHMARK_DATA = {
           {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 6.06,
+            "range": "±0.29%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "3726bd83decc26923ad133da8c0fe6d74a629300",
+          "message": "fix: bump fast-uri from 3.1.2 to 3.1.4 in /examples/rollup (#1970)\n\nBumps [fast-uri](https://github.com/fastify/fast-uri) from 3.1.2 to\n3.1.4.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/fastify/fast-uri/releases\">fast-uri's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v3.1.4</h2>\n<h2>⚠️ Security Release</h2>\n<p>Fix for <a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-v2hh-gcrm-f6hx\">https://github.com/fastify/fast-uri/security/advisories/GHSA-v2hh-gcrm-f6hx</a></p>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.3...v3.1.4\">https://github.com/fastify/fast-uri/compare/v3.1.3...v3.1.4</a></p>\n<h2>v3.1.3</h2>\n<h2>⚠️ Security Release</h2>\n<ul>\n<li>Fixes: <a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-4c8g-83qw-93j6\">https://github.com/fastify/fast-uri/security/advisories/GHSA-4c8g-83qw-93j6</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.2...v3.1.3\">https://github.com/fastify/fast-uri/compare/v3.1.2...v3.1.3</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/6aeece669e4166b2446a89f17c07a3b15dfb7ed4\"><code>6aeece6</code></a>\nBumped v3.1.4</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/2d50fbabc80e4d0884fe0f6a98fe118ce6faa353\"><code>2d50fba</code></a>\nfix: reject literal backslash in URI authority</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/0549fe35b0d482233f3be2816439f3ec803603fa\"><code>0549fe3</code></a>\nBumped v3.1.3</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/2a6d357a18a68e6d812824379fd3388a1ae50d05\"><code>2a6d357</code></a>\nMerge commit from fork</li>\n<li>See full diff in <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.2...v3.1.4\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=fast-uri&package-manager=npm_and_yarn&previous-version=3.1.2&new-version=3.1.4)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-07-25T15:33:33Z",
+          "tree_id": "25147e039691dd6c44f0191438a7a170a45c8418",
+          "url": "https://github.com/eyereasoner/eye-js/commit/3726bd83decc26923ad133da8c0fe6d74a629300"
+        },
+        "date": 1784995350700,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 15.84,
+            "range": "±6.61%",
+            "unit": "ops/sec",
+            "extra": "55 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 14.94,
+            "range": "±6.31%",
+            "unit": "ops/sec",
+            "extra": "62 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 163914,
+            "range": "±0.97%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 226274,
+            "range": "±0.77%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 114,
+            "range": "±20.30%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.57,
+            "range": "±2.90%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.24,
+            "range": "±0.63%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.79%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.35,
+            "range": "±17.24%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.59,
+            "range": "±22.74%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±24.86%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 1.96,
+            "range": "±2.36%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.13,
+            "range": "±1.58%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.4,
+            "range": "±2.78%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.58,
+            "range": "±0.29%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.02,
+            "range": "±0.50%",
+            "unit": "ops/sec",
+            "extra": "13 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.15,
+            "range": "±0.81%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.54,
+            "range": "±0.35%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.77,
             "range": "±0.29%",
             "unit": "ops/sec",
             "extra": "26 samples"
