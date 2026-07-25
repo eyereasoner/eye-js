@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1784999835079,
+  "lastUpdate": 1785000261976,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -116935,6 +116935,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.33%",
             "unit": "ops/sec",
             "extra": "25 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "581cbaafda7a5dc0a635fc39b4f12aaac67b2815",
+          "message": "fix: bump ip-address and express-rate-limit (#1972)\n\nBumps [ip-address](https://github.com/beaugunderson/ip-address) to\n10.3.1 and updates ancestor dependency\n[express-rate-limit](https://github.com/express-rate-limit/express-rate-limit).\nThese dependencies need to be updated together.\n\nUpdates `ip-address` from 10.1.0 to 10.3.1\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/beaugunderson/ip-address/releases\">ip-address's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v10.3.1</h2>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/beaugunderson/ip-address/compare/v10.3.0...v10.3.1\">https://github.com/beaugunderson/ip-address/compare/v10.3.0...v10.3.1</a></p>\n<h2>v10.3.0</h2>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/beaugunderson/ip-address/compare/v10.2.2...v10.3.0\">https://github.com/beaugunderson/ip-address/compare/v10.2.2...v10.3.0</a></p>\n<h2>v10.2.2</h2>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/beaugunderson/ip-address/compare/v10.2.1...v10.2.2\">https://github.com/beaugunderson/ip-address/compare/v10.2.1...v10.2.2</a></p>\n<h2>v10.2.1</h2>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/beaugunderson/ip-address/compare/v10.2.0...v10.2.1\">https://github.com/beaugunderson/ip-address/compare/v10.2.0...v10.2.1</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/be7e626c0d49fccb518899f520a3fb64ee189741\"><code>be7e626</code></a>\n10.3.1</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/56368cb3d66c73ba0ee9b6b834fd31b22c2fd71e\"><code>56368cb</code></a>\nReject octal-ambiguous IPv4 octets and stacked subnet suffixes\n(GHSA-mwp4-54f...</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/9ed7949438f3f522ad95daebc0bccc8c20c07d6d\"><code>9ed7949</code></a>\n10.3.0</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/fd0687ef7fb9ad50a95d99496af140a56de48889\"><code>fd0687e</code></a>\nfix: pad Address6#toByteArray to a full 16 bytes</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/c697eaac6045b11ccb3fdf674f4b49b1f8123ddd\"><code>c697eaa</code></a>\nfix: Address6.fromURL squelches port 65536 as valid</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/d46eb4353dcca8f32367c2171114a39b1f5df8ba\"><code>d46eb43</code></a>\nFix repository URL protocol</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/4da4295ce7363c35141beec8fe07cfad4f7a6919\"><code>4da4295</code></a>\nBump vulnerable transitive dev dependencies</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/f7314db5dd313c211bdc9036901bb67e9b6eafdd\"><code>f7314db</code></a>\n10.2.2</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/488fe9bc7c35363b4b090494fc38c266d217740d\"><code>488fe9b</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/beaugunderson/ip-address/commit/e86ab3e19588761ce18caf4820b26f01ac25043b\"><code>e86ab3e</code></a>\n10.2.1</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/beaugunderson/ip-address/compare/v10.1.0...v10.3.1\">compare\nview</a></li>\n</ul>\n</details>\n<details>\n<summary>Maintainer changes</summary>\n<p>This version was pushed to npm by <a\nhref=\"https://www.npmjs.com/~GitHub%20Actions\">GitHub Actions</a>, a new\nreleaser for ip-address since your current version.</p>\n</details>\n<br />\n\nUpdates `express-rate-limit` from 8.3.2 to 8.6.0\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/releases\">express-rate-limit's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v8.6.0</h2>\n<p>You can view the changelog <a\nhref=\"https://express-rate-limit.mintlify.app/reference/changelog\">here</a>.</p>\n<h2>v8.5.2</h2>\n<p>You can view the changelog <a\nhref=\"https://express-rate-limit.mintlify.app/reference/changelog\">here</a>.</p>\n<h2>v8.5.1</h2>\n<p>You can view the changelog <a\nhref=\"https://express-rate-limit.mintlify.app/reference/changelog\">here</a>.</p>\n<h2>v8.5.0</h2>\n<p>You can view the changelog <a\nhref=\"https://express-rate-limit.mintlify.app/reference/changelog\">here</a>.</p>\n<h2>v8.4.1</h2>\n<p>You can view the changelog <a\nhref=\"https://express-rate-limit.mintlify.app/reference/changelog\">here</a>.</p>\n<h2>v8.4.0</h2>\n<p>You can view the changelog <a\nhref=\"https://express-rate-limit.mintlify.app/reference/changelog\">here</a>.</p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/fffb3c4d6e614e79fcb5a6617c06cc57fd587ef0\"><code>fffb3c4</code></a>\n8.6.0</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/f366b2d3602abace7e053cfb5a7e80d1f664f094\"><code>f366b2d</code></a>\ndocs: debugging guide, time constants, &amp; v8.6.0 changelog (<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/652\">#652</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/593ddd2f4fdf9111034ff81aef404d89cb07ad09\"><code>593ddd2</code></a>\nfix: make debug output easier to read (<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/653\">#653</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/ef8c1295ff7f500717c9c0ceb099bbd873f8e9c2\"><code>ef8c129</code></a>\nfix: Pin safe version of <code>@​asyncapi/specs</code> dev dep (<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/659\">#659</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/7b05e0dbd8b838075498af4fee7eccff4bd6c8a5\"><code>7b05e0d</code></a>\nfeat: add time constants to support more readable values for windowMs\n(<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/655\">#655</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/863e730c2f61e97e45315a7db8be42fc088d5234\"><code>863e730</code></a>\nchore(deps-dev): bump the development-dependencies group with 3 updates\n(<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/657\">#657</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/e0e711e4c05b98d136203147cb811129fba79f81\"><code>e0e711e</code></a>\nfix: correct wording in usage documentation for express-rate-limit (<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/656\">#656</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/fcd3aa7d5eef9d78a3609142491e9dbb4ba7d338\"><code>fcd3aa7</code></a>\nchore(deps-dev): bump the development-dependencies group with 3 updates\n(<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/651\">#651</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/99d4298bda0d9cd11ba4a1d518cabc22ec74d241\"><code>99d4298</code></a>\nfeat: use <code>debug</code> for debug logging (<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/641\">#641</a>)</li>\n<li><a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/commit/23e4ddef557f300a3a6d759ab7af7de44f21ab4f\"><code>23e4dde</code></a>\nfeat: Run validations once each (<a\nhref=\"https://redirect.github.com/express-rate-limit/express-rate-limit/issues/650\">#650</a>)</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/express-rate-limit/express-rate-limit/compare/v8.3.2...v8.6.0\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-07-25T16:53:19Z",
+          "tree_id": "886091dc613341e2b856f27f057ec33cc062966f",
+          "url": "https://github.com/eyereasoner/eye-js/commit/581cbaafda7a5dc0a635fc39b4f12aaac67b2815"
+        },
+        "date": 1785000212605,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 17.64,
+            "range": "±3.91%",
+            "unit": "ops/sec",
+            "extra": "52 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 17.12,
+            "range": "±1.21%",
+            "unit": "ops/sec",
+            "extra": "50 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 174930,
+            "range": "±1.18%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 241034,
+            "range": "±0.48%",
+            "unit": "ops/sec",
+            "extra": "95 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 117,
+            "range": "±19.25%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.62,
+            "range": "±4.00%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.24,
+            "range": "±1.46%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.64%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.41,
+            "range": "±16.92%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.6,
+            "range": "±22.81%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±23.51%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 1.94,
+            "range": "±2.60%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.13,
+            "range": "±1.26%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.47,
+            "range": "±2.61%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.62,
+            "range": "±0.60%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.01,
+            "range": "±0.31%",
+            "unit": "ops/sec",
+            "extra": "13 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.15,
+            "range": "±0.65%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.57,
+            "range": "±0.28%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.79,
+            "range": "±0.26%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
           }
         ]
       }
