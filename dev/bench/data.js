@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1784995908661,
+  "lastUpdate": 1784999835079,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -116778,6 +116778,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.29%",
             "unit": "ops/sec",
             "extra": "27 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "3de0b061c7c8864b1cb5351a2dee0037236cdecc",
+          "message": "fix: bump ws from 8.18.3 to 8.21.1 (#1969)\n\nBumps [ws](https://github.com/websockets/ws) from 8.18.3 to 8.21.1.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/websockets/ws/releases\">ws's\nreleases</a>.</em></p>\n<blockquote>\n<h2>8.21.1</h2>\n<h1>Bug fixes</h1>\n<ul>\n<li>Empty fragments are now counted toward the limit (a2f4e7c0).</li>\n<li>The default values of the <code>maxBufferedChunks</code> and\n<code>maxFragments</code> options have\nbeen reduced (f197ac65).</li>\n</ul>\n<h2>8.21.0</h2>\n<h1>Features</h1>\n<ul>\n<li>Introduced the <code>maxBufferedChunks</code> and\n<code>maxFragments</code> options (2b2abd45).</li>\n</ul>\n<h1>Bug fixes</h1>\n<ul>\n<li>Fixed a remote memory exhaustion DoS vulnerability (2b2abd45).</li>\n</ul>\n<p>A high volume of tiny fragments and data chunks could be sent by a\npeer, using\nmodest network traffic, to crash a <code>ws</code> server or client due\nto OOM.</p>\n<pre lang=\"js\"><code>import { WebSocket, WebSocketServer } from 'ws';\n<p>const wss = new WebSocketServer({ port: 0 }, function () {\nconst data = Buffer.alloc(1);\nconst options = { fin: false };\nconst { port } = wss.address();\nconst ws = new WebSocket(<code>ws://localhost:${port}</code>);</p>\n<p>ws.on('open', function () {\n(function send() {\nws.send(data, options, function (err) {\nif (err) return;\nsend();\n});\n})();\n});</p>\n<p>ws.on('error', console.error);\nws.on('close', function (code, reason) {\nconsole.log(<code>client close - code: ${code} reason:\n${reason.toString()}</code>);\n});\n});</p>\n<p>wss.on('connection', function (ws) {\nws.on('error', console.error);\nws.on('close', function (code, reason) {\nconsole.log(<code>server close - code: ${code} reason:\n${reason.toString()}</code>);\n});\n});\n</code></pre></p>\n<!-- raw HTML omitted -->\n</blockquote>\n<p>... (truncated)</p>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/ae1de54330cef77e487548890fabfeb9aae1d83d\"><code>ae1de54</code></a>\n[dist] 8.21.1</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/8e9511b86b3fc6deebbd97dd9af7c9056deea8d1\"><code>8e9511b</code></a>\n[ci] Trust Coveralls Homebrew tap</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/f197ac65140920bdcecdab74bfc69c2d7858e55d\"><code>f197ac6</code></a>\n[fix] Lower default values of <code>maxBufferedChunks</code> and\n<code>maxFragments</code></li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/8df8265c2f63fd44af3193a98e23cf38888cd991\"><code>8df8265</code></a>\n[ci] Update actions/checkout action to v7</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/a2f4e7c046c2112bbce6fef39a083dac77d6f0d2\"><code>a2f4e7c</code></a>\n[fix] Count empty fragments toward the limit (<a\nhref=\"https://redirect.github.com/websockets/ws/issues/2329\">#2329</a>)</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/e79f912cb3f492ae04c28feb9459a209e186b0ad\"><code>e79f912</code></a>\n[pkg] Approve install scripts for bufferutil and utf-8-validate</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/4ea355d6d3069394994f82ca1b6d38c32ba208fb\"><code>4ea355d</code></a>\n[doc] Document 32-bit signed integer coercion for option values</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/2120f4c8c625a76316792680a231496e1b615252\"><code>2120f4c</code></a>\n[example] Remove uuid dependency</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/4c534a6b8a5224a563af116e85c6ced7d4ca60cf\"><code>4c534a6</code></a>\n[security] Add latest vulnerability to SECURITY.md</li>\n<li><a\nhref=\"https://github.com/websockets/ws/commit/bca91adf15677e47dbe4f959653452727be28b94\"><code>bca91ad</code></a>\n[dist] 8.21.0</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/websockets/ws/compare/8.18.3...8.21.1\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-07-25T16:45:35Z",
+          "tree_id": "af10f6f739e49ed6d9f4ff2c21445acfc8b17cb4",
+          "url": "https://github.com/eyereasoner/eye-js/commit/3de0b061c7c8864b1cb5351a2dee0037236cdecc"
+        },
+        "date": 1784999784350,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 16.44,
+            "range": "±6.16%",
+            "unit": "ops/sec",
+            "extra": "53 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.31,
+            "range": "±1.58%",
+            "unit": "ops/sec",
+            "extra": "46 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 164672,
+            "range": "±1.01%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 233352,
+            "range": "±0.79%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 114,
+            "range": "±20.55%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.04,
+            "range": "±4.33%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.22,
+            "range": "±1.06%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.03,
+            "range": "±1.70%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.36,
+            "range": "±16.64%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.59,
+            "range": "±23.02%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±24.23%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 1.84,
+            "range": "±2.43%",
+            "unit": "ops/sec",
+            "extra": "13 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.07,
+            "range": "±1.66%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.13,
+            "range": "±2.75%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.45,
+            "range": "±0.23%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 1.91,
+            "range": "±0.37%",
+            "unit": "ops/sec",
+            "extra": "13 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.08,
+            "range": "±0.70%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.22,
+            "range": "±0.47%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.58,
+            "range": "±0.33%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
           }
         ]
       }
