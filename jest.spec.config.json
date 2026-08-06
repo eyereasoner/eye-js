@@ -1,0 +1,6 @@
+{
+  "preset": "ts-jest",
+  "testMatch": ["<rootDir>/__tests__/spec/**/*-test.ts"],
+  "testTimeout": 90000,
+  "maxWorkers": 1
+}
