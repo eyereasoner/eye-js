@@ -1,7 +1,14 @@
 import type { SWIPLModule } from 'swipl-wasm';
 
-interface CallOutput {
+export interface CallResult {
   done: boolean;
+  /** Set when the query terminated with an uncaught Prolog exception */
+  error?: boolean;
+  /** The exception message, when `error` is set */
+  message?: string;
+}
+
+interface CallOutput extends CallResult {
   resume: (res: string) => void; yield: string;
 }
 
@@ -19,19 +26,20 @@ export function buildQuery(name: string, args: string | string[]) {
  * @param name The name of the query function
  * @param args The arguments of the query function
  * @param cb The callback for question/answering
- * @returns The result of the query
+ * @returns The final result of the query
  */
 export async function qaQuery(
   module: SWIPLModule,
   queryString: string,
   args: string | string[],
   cb: (res: string) => Promise<string>,
-) {
+): Promise<CallResult> {
   let res = module.prolog.call(buildQuery(queryString, args), { async: true }) as CallOutput;
   while (!res.done) {
     // eslint-disable-next-line no-await-in-loop
     res = res.resume(await cb(res.yield)) as unknown as CallOutput;
   }
+  return res;
 }
 
 /**
