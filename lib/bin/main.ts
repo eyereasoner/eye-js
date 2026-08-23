@@ -22,7 +22,16 @@ export async function mainFunc(proc: NodeJS.Process) {
     output: proc.stdout,
   });
 
-  const Module = await SwiplEye();
+  // Capture the reasoner's stderr (in addition to echoing it) so that
+  // failures can be propagated to the process exit code below.
+  const errorLines: string[] = [];
+  const Module = await SwiplEye({
+    printErr: (str: string) => {
+      errorLines.push(str);
+      // eslint-disable-next-line no-console
+      console.error(str);
+    },
+  });
 
   const posixArgv: string[] = [];
   // Make any local files available to the reasoner
@@ -46,6 +55,23 @@ export async function mainFunc(proc: NodeJS.Process) {
     }
   }
 
-  await qaQuery(Module, 'main', posixArgv, (q) => rl.question(`${q}\n|: `));
+  let failed = false;
+  try {
+    const res = await qaQuery(Module, 'main', posixArgv, (q) => rl.question(`${q}\n|: `));
+    failed = res.error === true;
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e instanceof Error ? e.message : String(e));
+    failed = true;
+  }
   rl.close();
+
+  // EYE reports reasoning failures (parse errors, resource errors, ...) on
+  // stderr with an `** ERROR **` marker while the underlying Prolog goal
+  // still succeeds, so a marker on stderr must also fail the process.
+  if (failed || errorLines.some((line) => line.includes('** ERROR **'))) {
+    // `proc` is dependency-injected so tests can observe the exit code
+    // eslint-disable-next-line no-param-reassign
+    proc.exitCode = 1;
+  }
 }

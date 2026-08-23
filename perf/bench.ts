@@ -22,6 +22,36 @@ const deepTaxonomyBenchmark100 = [
   ...(new Parser({ format: 'n3' })).parse('{ ?s a ?o . ?o <http://www.w3.org/2000/01/rdf-schema#subClassOf> ?o2 . } => { ?s a ?o2 . } .'),
 ]
 
+// The extended deep taxonomy benchmark in its canonical shape (from the
+// deep taxonomy benchmark at https://eulersharp.sourceforge.net/2009/12dtb/,
+// see also #337/#338): an individual at the bottom of an N-level
+// rdfs:subClassOf chain with 3-way branching, a single *backward* rule, and
+// the target class membership asked via --query. EYE proves this in linear
+// time, so even N=1000 reasons well under a second and the CI benchmark
+// remains bounded.
+//
+// NOTE: unlike the forward-rule deep taxonomy cases above, this case must
+// not reuse a pre-loaded module across runs: re-running main() re-asserts
+// the backward rule, and the duplicated rule clauses make the backward
+// search explode (a second run on the same module does not terminate in
+// minutes, where the first takes <1s). n3reasoner boots a fresh module per
+// call, which keeps every iteration independent.
+function generateExtendedDeepTaxonomy(size: number): { data: string, query: string } {
+  const prefixes = '@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.\n'
+    + '@prefix : <http://eulersharp.sourceforge.net/2009/12dtb/test#>.\n';
+  const lines = [prefixes, `:i${size} a :N0.`];
+  for (let i = 0; i < size; i += 1) {
+    lines.push(`:N${i} rdfs:subClassOf :N${i + 1}, :I${i + 1}, :J${i + 1}.`);
+  }
+  lines.push('{?X a ?D} <= {?C rdfs:subClassOf ?D. ?X a ?C}.');
+  return {
+    data: lines.join('\n'),
+    query: `${prefixes}{:i${size} a :N${size}} => {:i${size} a :N${size}}.\n`,
+  };
+}
+
+const extendedDeepTaxonomy1000 = generateExtendedDeepTaxonomy(1000);
+
 function deferred(fn: () => Promise<any>): Benchmark.Options {
   return {
     defer: true,
@@ -90,6 +120,9 @@ async function main() {
     ).add(
       'Run deep taxonomy benchmark [100] [reasoning only]',
       () => queryOnce(LoadedDeep100, 'main', ['--nope', '--quiet', './data.n3', '--pass-only-new']),
+    ).add(
+      'Run extended deep taxonomy benchmark [1000]',
+      deferred(() => n3reasoner(extendedDeepTaxonomy1000.data, extendedDeepTaxonomy1000.query)),
     ).add(
       'Run timbl + foaf + rdfs rules',
       deferred(() => n3reasoner(timblFoafRdfs,  undefined, { outputType: 'string' })),
