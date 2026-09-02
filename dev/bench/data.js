@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788389410921,
+  "lastUpdate": 1788390308120,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -117718,6 +117718,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 6.24,
             "range": "±0.36%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "44bcc92537e350803f3d1a0231093422769e20a5",
+          "message": "fix: bump browserslist from 4.28.1 to 4.28.8 in /examples/rollup (#1978)\n\nBumps [browserslist](https://github.com/browserslist/browserslist) from\n4.28.1 to 4.28.8.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/browserslist/browserslist/releases\">browserslist's\nreleases</a>.</em></p>\n<blockquote>\n<h2>4.28.8</h2>\n<ul>\n<li>Fixed <code>including kaios</code> in baseline queries (by <a\nhref=\"https://github.com/Jaybhade\"><code>@​Jaybhade</code></a>).</li>\n</ul>\n<h2>4.28.7</h2>\n<ul>\n<li>Improved parsing performance.</li>\n<li>Fixed unbounded memory growth (by <a\nhref=\"https://github.com/alanturing881\"><code>@​alanturing881</code></a>).</li>\n<li>Fixed prototype write issue (by <a\nhref=\"https://github.com/alanturing881\"><code>@​alanturing881</code></a>).</li>\n</ul>\n<h2>4.28.6</h2>\n<ul>\n<li>Fixed Electron version queries (by <a\nhref=\"https://github.com/spokodev\"><code>@​spokodev</code></a>).</li>\n</ul>\n<h2>4.28.5</h2>\n<ul>\n<li>Fixed <code>&gt;</code> and <code>&gt;=</code> queries (by <a\nhref=\"https://github.com/spokodev\"><code>@​spokodev</code></a>).</li>\n</ul>\n<h2>4.28.4</h2>\n<ul>\n<li>Fixed <code>SyntaxError</code> regression of 4.28.3.</li>\n</ul>\n<h2>4.28.3</h2>\n<ul>\n<li>Fixed baseline query case-insensitivity (by <a\nhref=\"https://github.com/swwind\"><code>@​swwind</code></a>).</li>\n</ul>\n<h2>4.28.2</h2>\n<ul>\n<li>Fix prototype pollution (by <a\nhref=\"https://github.com/chluo1997\"><code>@​chluo1997</code></a>).</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Changelog</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/browserslist/browserslist/blob/main/CHANGELOG.md\">browserslist's\nchangelog</a>.</em></p>\n<blockquote>\n<h2>4.28.8</h2>\n<ul>\n<li>Fixed <code>including kaios</code> in baseline queries (by <a\nhref=\"https://github.com/Jaybhade\"><code>@​Jaybhade</code></a>).</li>\n</ul>\n<h2>4.28.7</h2>\n<ul>\n<li>Improved parsing performance.</li>\n<li>Fixed unbounded memory growth (by <a\nhref=\"https://github.com/alanturing881\"><code>@​alanturing881</code></a>).</li>\n<li>Fixed prototype write issue (by <a\nhref=\"https://github.com/alanturing881\"><code>@​alanturing881</code></a>).</li>\n</ul>\n<h2>4.28.6</h2>\n<ul>\n<li>Fixed Electron version queries (by <a\nhref=\"https://github.com/spokodev\"><code>@​spokodev</code></a>).</li>\n</ul>\n<h2>4.28.5</h2>\n<ul>\n<li>Fixed <code>&gt;</code> and <code>&gt;=</code> queries (by <a\nhref=\"https://github.com/spokodev\"><code>@​spokodev</code></a>).</li>\n</ul>\n<h2>4.28.4</h2>\n<ul>\n<li>Fixed <code>SyntaxError</code> regression of 4.28.3.</li>\n</ul>\n<h2>4.28.3</h2>\n<ul>\n<li>Fixed baseline query case-insensitivity (by <a\nhref=\"https://github.com/swwind\"><code>@​swwind</code></a>).</li>\n</ul>\n<h2>4.28.2</h2>\n<ul>\n<li>Fix prototype pollution (by <a\nhref=\"https://github.com/chluo1997\"><code>@​chluo1997</code></a>).</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/f2f2e6cfb01bb4942941d328737546f4e2ae41ad\"><code>f2f2e6c</code></a>\nRelease 4.28.8 version</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/d0787c88fa29ba895fea51cfe921232c7b5d1377\"><code>d0787c8</code></a>\nUpdate dependencies</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/fcf8fa9857b30ccdf801a548f5d09d3c4ff0d43f\"><code>fcf8fa9</code></a>\nMerge pull request <a\nhref=\"https://redirect.github.com/browserslist/browserslist/issues/939\">#939</a>\nfrom Jaybhade/fix/baseline-kaios-without-downstream</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/57ecd64454e9252afdd6a7e76926e13dda48a38c\"><code>57ecd64</code></a>\nfix: support &quot;including kaios&quot; without downstream</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/093a0f67bb0becda55235d767b134df3197c54a1\"><code>093a0f6</code></a>\nUpdate EM banner</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/b637868045806d2fba4c24eb0060e4cc8b1db276\"><code>b637868</code></a>\nRelease 4.28.7 version</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/313f4659b9f985ade89d1d6a54a860371c41cc46\"><code>313f465</code></a>\nUpdate dependencies</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/c935c5a206f8b13db8846818bc03643e147dcbdf\"><code>c935c5a</code></a>\nFix regexp performance</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/d7e9e653cb53399065943f59f0b3063987b0a008\"><code>d7e9e65</code></a>\nRewrite structure parsing to make it always fast</li>\n<li><a\nhref=\"https://github.com/browserslist/browserslist/commit/ec4a55efd76bdfa506ec7ce4fea1691559e9ca8f\"><code>ec4a55e</code></a>\nFix import order</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/browserslist/browserslist/compare/4.28.1...4.28.8\">compare\nview</a></li>\n</ul>\n</details>\n<details>\n<summary>Maintainer changes</summary>\n<p>This version was pushed to npm by <a\nhref=\"https://www.npmjs.com/~GitHub%20Actions\">GitHub Actions</a>, a new\nreleaser for browserslist since your current version.</p>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=browserslist&package-manager=npm_and_yarn&previous-version=4.28.1&new-version=4.28.8)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-09-02T22:19:11Z",
+          "tree_id": "fa507756a6433ff2e9cfadff218a5592de1c9362",
+          "url": "https://github.com/eyereasoner/eye-js/commit/44bcc92537e350803f3d1a0231093422769e20a5"
+        },
+        "date": 1788390262276,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 17.4,
+            "range": "±4.03%",
+            "unit": "ops/sec",
+            "extra": "48 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.75,
+            "range": "±2.31%",
+            "unit": "ops/sec",
+            "extra": "48 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 173757,
+            "range": "±0.77%",
+            "unit": "ops/sec",
+            "extra": "96 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 243516,
+            "range": "±0.52%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 123,
+            "range": "±20.99%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.88,
+            "range": "±4.83%",
+            "unit": "ops/sec",
+            "extra": "32 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.27,
+            "range": "±0.24%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.69%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.92,
+            "range": "±16.81%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.65,
+            "range": "±22.97%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.17,
+            "range": "±24.68%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.18,
+            "range": "±2.57%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.26,
+            "range": "±1.87%",
+            "unit": "ops/sec",
+            "extra": "11 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.9,
+            "range": "±2.50%",
+            "unit": "ops/sec",
+            "extra": "24 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 6.18,
+            "range": "±0.21%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.25,
+            "range": "±0.25%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.3,
+            "range": "±0.30%",
+            "unit": "ops/sec",
+            "extra": "11 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 5.01,
+            "range": "±0.23%",
+            "unit": "ops/sec",
+            "extra": "24 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 6.31,
+            "range": "±0.30%",
             "unit": "ops/sec",
             "extra": "27 samples"
           }
