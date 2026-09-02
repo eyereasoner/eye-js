@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1787439925136,
+  "lastUpdate": 1788385463800,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -117406,6 +117406,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.28%",
             "unit": "ops/sec",
             "extra": "36 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "b13d824f8e280d361bdaf1b3be98f4d2b29516bf",
+          "message": "fix: bump fast-uri from 3.1.4 to 3.1.7 in /examples/rollup (#1977)\n\nBumps [fast-uri](https://github.com/fastify/fast-uri) from 3.1.4 to\n3.1.7.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/fastify/fast-uri/releases\">fast-uri's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v3.1.7</h2>\n<h2>⚠️ Security Warning</h2>\n<p>This is a security release that fixes the following high-severity\nsecurity advisories:</p>\n<ul>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-qw65-cvwx-89v3\">GHSA-qw65-cvwx-89v3</a>\n— authority injection via an unvalidated port in\n<code>serialize()</code></li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-58mr-gqgx-xq4g\">GHSA-58mr-gqgx-xq4g</a>\n— host confusion via unbalanced or misplaced IP-literal brackets</li>\n</ul>\n<p>Users of the v3.x release line should upgrade to v3.1.7.</p>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.6...v3.1.7\">https://github.com/fastify/fast-uri/compare/v3.1.6...v3.1.7</a></p>\n<h2>v3.1.6</h2>\n<h2>⚠️ Security Warning</h2>\n<p>This release addresses the following high-severity security\nadvisories:</p>\n<ul>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-5jgf-p345-68v8\">GHSA-5jgf-p345-68v8</a>\n— host confusion via skipped IDN canonicalization on scheme-relative\nreferences</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-fph4-wmhf-6fwf\">GHSA-fph4-wmhf-6fwf</a>\n— server-side request forgery via repeated hostname\npercent-decoding</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-f65p-4m7j-42xc\">GHSA-f65p-4m7j-42xc</a>\n— server-side request forgery via malformed IPv6 normalization</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-jqff-g426-hqxp\">GHSA-jqff-g426-hqxp</a>\n— host confusion via percent-encoded scheme normalization</li>\n</ul>\n<p>Users of the v3.x release line should upgrade to v3.1.6.</p>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.5...v3.1.6\">https://github.com/fastify/fast-uri/compare/v3.1.5...v3.1.6</a></p>\n<h2>v3.1.5</h2>\n<h2>⚠️ Security Warning</h2>\n<p>Fix for <a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-7p8r-x3mc-p8w7\">https://github.com/fastify/fast-uri/security/advisories/GHSA-7p8r-x3mc-p8w7</a></p>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.4...v3.1.5\">https://github.com/fastify/fast-uri/compare/v3.1.4...v3.1.5</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/412e40abd4eb8beabfb952d80abf949a2baf27a3\"><code>412e40a</code></a>\nBumped v3.1.7</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/9f4c943e4d2133e8d78e0941203879216255bb01\"><code>9f4c943</code></a>\nfix: backport port and IP-literal validation to v3.x (<a\nhref=\"https://redirect.github.com/fastify/fast-uri/issues/216\">#216</a>)</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/1eb3ce436fe050807caba79f886ab894f485a588\"><code>1eb3ce4</code></a>\nfix: treat unterminated bracket hosts as reg-names again (<a\nhref=\"https://redirect.github.com/fastify/fast-uri/issues/214\">#214</a>)</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/6f970b2951fd896aa0f3a7ff28eeb6640c137d33\"><code>6f970b2</code></a>\nBumped v3.1.6</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/d941579a84273ec7e96bde596b1f7a8be447df2a\"><code>d941579</code></a>\nfix: never run IDN canonicalization on bracketed IP literals</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/c0f0279cf370cb89ee56b04bbcde2a7afbe81aba\"><code>c0f0279</code></a>\ntest: adapt decoded-scheme handler assertion to 3.x (no mailto\nscheme)</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/37f3417c82994279656854f83ce938acd81c3862\"><code>37f3417</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/607bfbe953f28a14c2e06ae64aff38c81ca2937f\"><code>607bfbe</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/ae92a4c5d8c4b6c9e447f048d5fcbde7eebd5514\"><code>ae92a4c</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/444ecdad447db2cc23c4d422acc6f0daa6fa8eef\"><code>444ecda</code></a>\nMerge commit from fork</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.4...v3.1.7\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=fast-uri&package-manager=npm_and_yarn&previous-version=3.1.4&new-version=3.1.7)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-09-02T21:19:36Z",
+          "tree_id": "d79c61478f158efcc03614499b380b3cdf597eec",
+          "url": "https://github.com/eyereasoner/eye-js/commit/b13d824f8e280d361bdaf1b3be98f4d2b29516bf"
+        },
+        "date": 1788385404043,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 17.26,
+            "range": "±5.36%",
+            "unit": "ops/sec",
+            "extra": "43 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.55,
+            "range": "±7.24%",
+            "unit": "ops/sec",
+            "extra": "46 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 198443,
+            "range": "±0.96%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 288237,
+            "range": "±0.85%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 136,
+            "range": "±22.35%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 8.65,
+            "range": "±1.74%",
+            "unit": "ops/sec",
+            "extra": "33 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.34,
+            "range": "±0.93%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.05,
+            "range": "±0.64%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 8.51,
+            "range": "±19.46%",
+            "unit": "ops/sec",
+            "extra": "17 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.82,
+            "range": "±21.78%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.22,
+            "range": "±25.58%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2.74,
+            "range": "±2.57%",
+            "unit": "ops/sec",
+            "extra": "18 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.55,
+            "range": "±3.01%",
+            "unit": "ops/sec",
+            "extra": "12 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 5.97,
+            "range": "±2.78%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 7.43,
+            "range": "±1.49%",
+            "unit": "ops/sec",
+            "extra": "30 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.87,
+            "range": "±0.91%",
+            "unit": "ops/sec",
+            "extra": "17 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.63,
+            "range": "±0.76%",
+            "unit": "ops/sec",
+            "extra": "12 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 6.19,
+            "range": "±1.06%",
+            "unit": "ops/sec",
+            "extra": "27 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 7.61,
+            "range": "±1.30%",
+            "unit": "ops/sec",
+            "extra": "31 samples"
           }
         ]
       }
