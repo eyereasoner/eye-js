@@ -15,6 +15,8 @@
     "test:badges": "npm run test:coverage  && jest-coverage-badges",
     "test:unit": "npm run bundle:webpack && node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:cli": "npm run bundle:webpack && node --experimental-vm-modules node_modules/jest/bin/jest.js cli-test",
+    "spec:fetch": "ts-node scripts/fetch-n3-tests",
+    "test:spec": "npm run spec:fetch && node --experimental-vm-modules node_modules/jest/bin/jest.js --config jest.spec.config.json",
     "test:memory": "npm run test:memory:node && npm run test:memory:node:error && npm run test:memory:browser",
     "test:memory:node": "node --expose-gc __tests_memory__/leakTest",
     "test:memory:node:error": "node --expose-gc __tests_memory__/leakTestOnError",
