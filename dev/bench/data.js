@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1788785772899,
+  "lastUpdate": 1789018207246,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -118505,6 +118505,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.40%",
             "unit": "ops/sec",
             "extra": "27 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "c8e8f89f14c244c9d1c6c0b9251bf28ddec888ff",
+          "message": "fix: bump js-yaml from 3.14.2 to 3.15.2 (#1984)\n\nBumps [js-yaml](https://github.com/nodeca/js-yaml) from 3.14.2 to\n3.15.2.\n<details>\n<summary>Changelog</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/nodeca/js-yaml/blob/3.15.2/CHANGELOG.md\">js-yaml's\nchangelog</a>.</em></p>\n<blockquote>\n<h2>3.15.2 - 2026-08-26</h2>\n<h3>Changed</h3>\n<ul>\n<li>[backport] Hard-limit merge sequence size to 100.</li>\n</ul>\n<h3>Security</h3>\n<ul>\n<li>[backport] Count empty mappings in merge sequences toward\n<code>maxTotalMergeKeys</code>\nto limit CPU usage, <a\nhref=\"https://redirect.github.com/nodeca/js-yaml/issues/797\">#797</a>.</li>\n</ul>\n<h2>3.15.1 - 2026-07-31</h2>\n<h3>Security</h3>\n<ul>\n<li>[backport] Remove quadratic complexity from <code>!!omap</code>\nduplicate key detection.</li>\n</ul>\n<h2>3.15.0 - 2026-06-27</h2>\n<h3>Added</h3>\n<ul>\n<li>Added <code>maxTotalMergeKeys</code> (10000) loader option to limit\nthe total number of\nkeys processed by YAML merge (<code>&lt;&lt;</code>) across one\n<code>safeLoad()</code> / <code>safeLoadAll()</code>\ncall.</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/5c45bd6e960603c13644f5cc8b572ca257723b36\"><code>5c45bd6</code></a>\n3.15.2 released</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/5a708f9f4f22e78b87ebe363848cfa4fa4818c0d\"><code>5a708f9</code></a>\ndist rebuild</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/3485bc06ff8a0251505f44a00414d90df2466639\"><code>3485bc0</code></a>\nBackport merge limits from v5.4.1</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/f34812f1cea794f8c21e0a4e1f3a2584b720f305\"><code>f34812f</code></a>\nUpdate .gitignore</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/ab85ae2c622bc6d8cdbceccafe9f9b7df80463ed\"><code>ab85ae2</code></a>\n3.15.1 released</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/30a5e7647a4454f7bac969bfbbe7eac9921a4279\"><code>30a5e76</code></a>\ndist rebuild</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/22a8071ef032117bc6249c330b240ac3aa2d3ded\"><code>22a8071</code></a>\nBackport quadratic complexity fix for !!omap</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/c34b6c40027a769eb0d67958ae615268a1d55f54\"><code>c34b6c4</code></a>\n3.15.0 released</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/21e13d363f33501c7ee6ca988b88c29084999f72\"><code>21e13d3</code></a>\ndist rebuild</li>\n<li><a\nhref=\"https://github.com/nodeca/js-yaml/commit/4165c62630d64fe4f25fb0d03139c7e137b24b1c\"><code>4165c62</code></a>\nAdd v3-legacy tag for publish</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/nodeca/js-yaml/compare/3.14.2...3.15.2\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=js-yaml&package-manager=npm_and_yarn&previous-version=3.14.2&new-version=3.15.2)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-09-10T05:04:24Z",
+          "tree_id": "fc5d115f7936bf21424c90de29d83234fbc8d4e0",
+          "url": "https://github.com/eyereasoner/eye-js/commit/c8e8f89f14c244c9d1c6c0b9251bf28ddec888ff"
+        },
+        "date": 1789018160097,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 17,
+            "range": "±5.69%",
+            "unit": "ops/sec",
+            "extra": "52 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.56,
+            "range": "±1.66%",
+            "unit": "ops/sec",
+            "extra": "48 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 169150,
+            "range": "±0.97%",
+            "unit": "ops/sec",
+            "extra": "90 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 233564,
+            "range": "±0.68%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 113,
+            "range": "±17.46%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.54,
+            "range": "±3.97%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.24,
+            "range": "±1.13%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±1.09%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.38,
+            "range": "±16.78%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.6,
+            "range": "±21.87%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±24.01%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 2,
+            "range": "±2.47%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.15,
+            "range": "±1.81%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.46,
+            "range": "±3.25%",
+            "unit": "ops/sec",
+            "extra": "23 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.72,
+            "range": "±0.30%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.07,
+            "range": "±0.26%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.18,
+            "range": "±0.41%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.58,
+            "range": "±0.80%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.87,
+            "range": "±0.32%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
           }
         ]
       }
