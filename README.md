@@ -173,11 +173,11 @@ eyereasoner --nope --quiet ./socrates.n3 --query ./socrates-query.n3
 
 For convenience we provide deploy bundled versions of the eyereasoner on github pages which can be directly used in an HTML document as shown in [this example](https://github.com/eyereasoner/eye-js/tree/main/examples/prebuilt/index.html) which is also [deployed on github pages](https://eyereasoner.github.io/eye-js/example/index.html).
 
-There is a bundled version for each release - which can be found at the url:
+There is a bundled version for the most recent patch release of each minor version - which can be found at the url:
 <p align=center>
 https://eyereasoner.github.io/eye-js/vMajor/vMinor/vPatch/index.js
 
-for instance v2.3.14 has the url https://eyereasoner.github.io/eye-js/2/3/14/index.js. We also have shortcuts for:
+for instance v2.3.14 has the url https://eyereasoner.github.io/eye-js/2/3/14/index.js (superseded patch releases of the same minor version are pruned to keep the deployed site within GitHub Pages size limits - use the [npm package](https://www.npmjs.com/package/eyereasoner) if you need an exact older patch). We also have shortcuts for:
  - the latest version https://eyereasoner.github.io/eye-js/latest/index.js,
  - the latest of each major version https://eyereasoner.github.io/eye-js/vMajor/latest/index.js, and
  - the latest of each minor version https://eyereasoner.github.io/eye-js/vMajor/vMinor/latest/index.js

@@ -22,4 +22,10 @@ if (version) {
     }
     fs.copySync(path.join(__dirname, '..', ...version), destDir);
   }
+
+  // Publish a .nojekyll marker at the root of the pages site so GitHub skips
+  // the Jekyll build (which copies the whole multi-GB site on the runner and
+  // has been failing with "No space left on device").
+  // See https://github.com/eyereasoner/eye-js/issues/1845
+  fs.writeFileSync(path.join(__dirname, '..', version[0], '.nojekyll'), '');
 }
