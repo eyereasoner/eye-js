@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791819875350,
+  "lastUpdate": 1791821186141,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -118976,6 +118976,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.47%",
             "unit": "ops/sec",
             "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": true,
+          "id": "24b826afeacdec7cbb80ec9b108d8a756d90019d",
+          "message": "fix: bump brace-expansion from 1.1.11 to 1.1.21 (#1989)\n\nBumps [brace-expansion](https://github.com/juliangruber/brace-expansion)\nfrom 1.1.11 to 1.1.21.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/juliangruber/brace-expansion/releases\">brace-expansion's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v1.1.15</h2>\n<ul>\n<li>Backport v5.0.6 change to v1 (<a\nhref=\"https://redirect.github.com/juliangruber/brace-expansion/issues/111\">#111</a>)\n0b09384</li>\n</ul>\n<hr />\n<p><a\nhref=\"https://github.com/juliangruber/brace-expansion/compare/v1.1.14...v1.1.15\">https://github.com/juliangruber/brace-expansion/compare/v1.1.14...v1.1.15</a></p>\n<h2>v1.1.12</h2>\n<ul>\n<li>pkg: publish on tag 1.x  c460dbd</li>\n<li>fmt  ccb8ac6</li>\n<li>Fix potential ReDoS Vulnerability or Inefficient Regular Expression\n(<a\nhref=\"https://redirect.github.com/juliangruber/brace-expansion/issues/65\">#65</a>)\nc3c73c8</li>\n</ul>\n<hr />\n<p><a\nhref=\"https://github.com/juliangruber/brace-expansion/compare/v1.1.11...v1.1.12\">https://github.com/juliangruber/brace-expansion/compare/v1.1.11...v1.1.12</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/8e81e187b6e9c6c723d16c042657c00acefc2483\"><code>8e81e18</code></a>\n1.1.21</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/ffdfa3e3806bed17c0874b8f1439b084de354a7e\"><code>ffdfa3e</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/c6513ad31e08edb56dc414a629e39cba724b7548\"><code>c6513ad</code></a>\n1.1.20</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/1efee7c397c191da6287a78ec19512476a966a7b\"><code>1efee7c</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/a34340a053abb475cc226aeb3f71887018e71bd0\"><code>a34340a</code></a>\n1.1.19</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/0bcbfc0a5928c3073d48f42999d1ce4fc1c42fbc\"><code>0bcbfc0</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/758fcd6d188a95c2342818519c77b8c06794552b\"><code>758fcd6</code></a>\n1.1.18</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/27fbeed22b4fdf2c5f732f66bcf84d43f4a26c6e\"><code>27fbeed</code></a>\nMerge commit from fork</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/5c57cc2519dfb067e188b7cb0733fffbd02946bf\"><code>5c57cc2</code></a>\n1.1.17</li>\n<li><a\nhref=\"https://github.com/juliangruber/brace-expansion/commit/d757f1dde7808bcbcd7a4628ab913e5185ed3d57\"><code>d757f1d</code></a>\nnpm ignore <code>.claude</code></li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/juliangruber/brace-expansion/compare/1.1.11...v1.1.21\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=brace-expansion&package-manager=npm_and_yarn&previous-version=1.1.11&new-version=1.1.21)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-12T15:07:20Z",
+          "tree_id": "e70d1ffa0fff82adec12fbd947fae4245d01d9c1",
+          "url": "https://github.com/eyereasoner/eye-js/commit/24b826afeacdec7cbb80ec9b108d8a756d90019d"
+        },
+        "date": 1791821125595,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 22.73,
+            "range": "±6.14%",
+            "unit": "ops/sec",
+            "extra": "54 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 22,
+            "range": "±5.63%",
+            "unit": "ops/sec",
+            "extra": "55 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 261792,
+            "range": "±0.66%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 375033,
+            "range": "±1.42%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 153,
+            "range": "±22.40%",
+            "unit": "ops/sec",
+            "extra": "19 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 11.53,
+            "range": "±2.58%",
+            "unit": "ops/sec",
+            "extra": "42 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.45,
+            "range": "±1.01%",
+            "unit": "ops/sec",
+            "extra": "7 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.07,
+            "range": "±0.97%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 10.27,
+            "range": "±18.56%",
+            "unit": "ops/sec",
+            "extra": "20 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 1.01,
+            "range": "±19.73%",
+            "unit": "ops/sec",
+            "extra": "7 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.28,
+            "range": "±25.19%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 3.72,
+            "range": "±2.52%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 2.11,
+            "range": "±3.87%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 8.12,
+            "range": "±2.91%",
+            "unit": "ops/sec",
+            "extra": "35 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 10.31,
+            "range": "±0.45%",
+            "unit": "ops/sec",
+            "extra": "39 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 3.93,
+            "range": "±0.60%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 2.23,
+            "range": "±2.29%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 8.55,
+            "range": "±1.45%",
+            "unit": "ops/sec",
+            "extra": "35 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 11.1,
+            "range": "±0.59%",
+            "unit": "ops/sec",
+            "extra": "41 samples"
           }
         ]
       }
