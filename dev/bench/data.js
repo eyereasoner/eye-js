@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1789018207246,
+  "lastUpdate": 1791818920695,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -118662,6 +118662,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.32%",
             "unit": "ops/sec",
             "extra": "26 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "4d47f13a672864460959ac4d74d0e56ee6db2649",
+          "message": "fix: bump proxy-addr from 2.0.7 to 2.0.8 (#1987)\n\nBumps [proxy-addr](https://github.com/jshttp/proxy-addr) from 2.0.7 to\n2.0.8.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/jshttp/proxy-addr/releases\">proxy-addr's\nreleases</a>.</em></p>\n<blockquote>\n<h2>2.0.8</h2>\n<h2>Important</h2>\n<ul>\n<li>Fix <a\nhref=\"https://www.cve.org/CVERecord?id=CVE-2026-90711\">CVE-2026-90711</a>\n(<a\nhref=\"https://github.com/jshttp/proxy-addr/security/advisories/GHSA-jqcg-44mw-7w3h\">GHSA-jqcg-44mw-7w3h</a>)</li>\n</ul>\n<h2>What's Changed</h2>\n<ul>\n<li>Add OSSF scorecard action by <a\nhref=\"https://github.com/carpasse\"><code>@​carpasse</code></a> in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/27\">jshttp/proxy-addr#27</a></li>\n<li>Fix ci pipeline and add missing Node.JS versions by <a\nhref=\"https://github.com/carpasse\"><code>@​carpasse</code></a> in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/26\">jshttp/proxy-addr#26</a></li>\n<li>[StepSecurity] Apply security best practices by <a\nhref=\"https://github.com/step-security-bot\"><code>@​step-security-bot</code></a>\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/29\">jshttp/proxy-addr#29</a></li>\n<li>build(deps): bump coverallsapp/github-action from 1.2.5 to 2.3.6 by\n<a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/30\">jshttp/proxy-addr#30</a></li>\n<li>build(deps): bump github/codeql-action from 2.23.2 to 3.28.18 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/31\">jshttp/proxy-addr#31</a></li>\n<li>build(deps-dev): bump eslint-plugin-import from 2.23.4 to 2.31.0 by\n<a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/32\">jshttp/proxy-addr#32</a></li>\n<li>build(deps): bump ossf/scorecard-action from 2.0.6 to 2.4.2 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/33\">jshttp/proxy-addr#33</a></li>\n<li>build(deps): bump actions/upload-artifact from 3.1.3 to 4.6.2 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/35\">jshttp/proxy-addr#35</a></li>\n<li>build(deps-dev): bump deep-equal from 1.0.1 to 1.1.2 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/34\">jshttp/proxy-addr#34</a></li>\n<li>build(deps-dev): bump eslint-plugin-markdown from 2.2.0 to 2.2.1 by\n<a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/36\">jshttp/proxy-addr#36</a></li>\n<li>chore: add funding to package.json by <a\nhref=\"https://github.com/Phillip9587\"><code>@​Phillip9587</code></a> in\n<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/40\">jshttp/proxy-addr#40</a></li>\n<li>build(deps): bump github/codeql-action from 3.28.18 to 3.29.5 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/41\">jshttp/proxy-addr#41</a></li>\n<li>build(deps): bump github/codeql-action from 3.29.7 to 3.29.11 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/43\">jshttp/proxy-addr#43</a></li>\n<li>build(deps): bump actions/checkout from 3.6.0 to 5.0.0 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/42\">jshttp/proxy-addr#42</a></li>\n<li>build(deps): bump actions/upload-artifact from 4.6.2 to 5.0.0 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/47\">jshttp/proxy-addr#47</a></li>\n<li>build(deps): bump github/codeql-action from 3.29.11 to 4.31.2 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/46\">jshttp/proxy-addr#46</a></li>\n<li>build(deps): bump coverallsapp/github-action from 2.3.6 to 2.3.7 by\n<a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/50\">jshttp/proxy-addr#50</a></li>\n<li>build(deps): bump github/codeql-action from 4.31.2 to 4.31.5 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/49\">jshttp/proxy-addr#49</a></li>\n<li>build(deps): bump actions/checkout from 5.0.0 to 6.0.0 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/48\">jshttp/proxy-addr#48</a></li>\n<li>build(deps): bump actions/checkout from 6.0.0 to 6.0.2 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/56\">jshttp/proxy-addr#56</a></li>\n<li>build(deps): bump github/codeql-action from 4.31.5 to 4.32.0 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/55\">jshttp/proxy-addr#55</a></li>\n<li>build(deps): bump github/codeql-action from 4.32.0 to 4.32.4 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/57\">jshttp/proxy-addr#57</a></li>\n<li>build(deps): bump actions/upload-artifact from 5.0.0 to 7.0.0 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/58\">jshttp/proxy-addr#58</a></li>\n<li>Fix &quot;arugment&quot; typo in README by <a\nhref=\"https://github.com/schiwekM\"><code>@​schiwekM</code></a> in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/61\">jshttp/proxy-addr#61</a></li>\n<li>build(deps): bump github/codeql-action from 4.32.4 to 4.36.0 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/64\">jshttp/proxy-addr#64</a></li>\n<li>build(deps): bump actions/upload-artifact from 7.0.0 to 7.0.1 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/63\">jshttp/proxy-addr#63</a></li>\n<li>build(deps): bump ossf/scorecard-action from 2.4.2 to 2.4.3 by <a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/45\">jshttp/proxy-addr#45</a></li>\n<li>build(deps-dev): bump eslint-plugin-import from 2.31.0 to 2.32.0 by\n<a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/39\">jshttp/proxy-addr#39</a></li>\n<li>chore(ci): npm-publish via reusable workflows by <a\nhref=\"https://github.com/sheplu\"><code>@​sheplu</code></a> in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/54\">jshttp/proxy-addr#54</a></li>\n<li>refresh CI by <a\nhref=\"https://github.com/UlisesGascon\"><code>@​UlisesGascon</code></a>\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/69\">jshttp/proxy-addr#69</a></li>\n<li>fix: typo by <a\nhref=\"https://github.com/UlisesGascon\"><code>@​UlisesGascon</code></a>\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/71\">jshttp/proxy-addr#71</a></li>\n<li>Release: 2.0.8 by <a\nhref=\"https://github.com/UlisesGascon\"><code>@​UlisesGascon</code></a>\nin <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/70\">jshttp/proxy-addr#70</a></li>\n</ul>\n<h2>New Contributors</h2>\n<ul>\n<li><a href=\"https://github.com/carpasse\"><code>@​carpasse</code></a>\nmade their first contribution in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/27\">jshttp/proxy-addr#27</a></li>\n<li><a\nhref=\"https://github.com/step-security-bot\"><code>@​step-security-bot</code></a>\nmade their first contribution in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/29\">jshttp/proxy-addr#29</a></li>\n<li><a\nhref=\"https://github.com/dependabot\"><code>@​dependabot</code></a>[bot]\nmade their first contribution in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/30\">jshttp/proxy-addr#30</a></li>\n<li><a\nhref=\"https://github.com/Phillip9587\"><code>@​Phillip9587</code></a>\nmade their first contribution in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/40\">jshttp/proxy-addr#40</a></li>\n<li><a href=\"https://github.com/schiwekM\"><code>@​schiwekM</code></a>\nmade their first contribution in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/61\">jshttp/proxy-addr#61</a></li>\n<li><a href=\"https://github.com/sheplu\"><code>@​sheplu</code></a> made\ntheir first contribution in <a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/pull/54\">jshttp/proxy-addr#54</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/jshttp/proxy-addr/compare/v2.0.7...v2.0.8\">https://github.com/jshttp/proxy-addr/compare/v2.0.7...v2.0.8</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Changelog</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/jshttp/proxy-addr/blob/master/HISTORY.md\">proxy-addr's\nchangelog</a>.</em></p>\n<blockquote>\n<h1>2.0.8</h1>\n<ul>\n<li>Fix <a\nhref=\"https://www.cve.org/CVERecord?id=CVE-2026-90711\">CVE-2026-90711</a>\n(<a\nhref=\"https://github.com/jshttp/proxy-addr/security/advisories/GHSA-jqcg-44mw-7w3h\">GHSA-jqcg-44mw-7w3h</a>)</li>\n</ul>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/a11ad82545698af5c33e59f3ed0b52eab79bf610\"><code>a11ad82</code></a>\n2.0.8 (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/70\">#70</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/780911d84d18e2c5fa008ed0c0d387631ec11965\"><code>780911d</code></a>\nfix: reject IPv4 trust via mapped IPv6 subnets with a short prefix</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/92e103e3f3ab0467c8846cacea71f27dfc81091d\"><code>92e103e</code></a>\nfix(ci): use publised as release trigger event (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/71\">#71</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/3e5ac75d275d82606d33d6ac47c0ff43c2eccee9\"><code>3e5ac75</code></a>\nci: merge coverage via artifacts, disable fail-fast, add Node.js 23-26\n(<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/69\">#69</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/4b9db8190923840eb732b752a70f3e5ff713768c\"><code>4b9db81</code></a>\nchore(ci): npm-publish via workflows (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/54\">#54</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/655e8950435ac457c586e8287da4d5993b7d0db5\"><code>655e895</code></a>\nbuild(deps-dev): bump eslint-plugin-import from 2.31.0 to 2.32.0 (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/39\">#39</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/50ce4d09132a4c34f5485b52740ce879a9223b1f\"><code>50ce4d0</code></a>\nbuild(deps): bump ossf/scorecard-action from 2.4.2 to 2.4.3 (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/45\">#45</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/0fd347f5b342e7502da58a512dc998d4a59cea24\"><code>0fd347f</code></a>\nbuild(deps): bump actions/upload-artifact from 7.0.0 to 7.0.1 (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/63\">#63</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/6a517fa25c741cc107a90019df458b34f580ce55\"><code>6a517fa</code></a>\nbuild(deps): bump github/codeql-action from 4.32.4 to 4.36.0 (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/64\">#64</a>)</li>\n<li><a\nhref=\"https://github.com/jshttp/proxy-addr/commit/0d45e2a88e82a2faf1148956b6457e3a6c99ebcd\"><code>0d45e2a</code></a>\nFix &quot;arugment&quot; typo in README (<a\nhref=\"https://redirect.github.com/jshttp/proxy-addr/issues/61\">#61</a>)</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/jshttp/proxy-addr/compare/v2.0.7...v2.0.8\">compare\nview</a></li>\n</ul>\n</details>\n<details>\n<summary>Maintainer changes</summary>\n<p>This version was pushed to npm by <a\nhref=\"https://www.npmjs.com/~GitHub%20Actions\">GitHub Actions</a>, a new\nreleaser for proxy-addr since your current version.</p>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=proxy-addr&package-manager=npm_and_yarn&previous-version=2.0.7&new-version=2.0.8)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-12T14:54:08Z",
+          "tree_id": "27509a40397570900adf95bd5a1e20c5766a1279",
+          "url": "https://github.com/eyereasoner/eye-js/commit/4d47f13a672864460959ac4d74d0e56ee6db2649"
+        },
+        "date": 1791818874874,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 16.87,
+            "range": "±6.48%",
+            "unit": "ops/sec",
+            "extra": "53 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 16.72,
+            "range": "±1.70%",
+            "unit": "ops/sec",
+            "extra": "48 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 171752,
+            "range": "±1.07%",
+            "unit": "ops/sec",
+            "extra": "94 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 235345,
+            "range": "±0.84%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 115,
+            "range": "±20.25%",
+            "unit": "ops/sec",
+            "extra": "24 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.49,
+            "range": "±4.14%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.24,
+            "range": "±1.37%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±1.04%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.24,
+            "range": "±17.63%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.57,
+            "range": "±23.13%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.15,
+            "range": "±24.73%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 1.95,
+            "range": "±2.35%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.12,
+            "range": "±1.76%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.4,
+            "range": "±2.58%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.55,
+            "range": "±1.11%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.01,
+            "range": "±0.37%",
+            "unit": "ops/sec",
+            "extra": "13 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.15,
+            "range": "±0.35%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.5,
+            "range": "±0.32%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.72,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
           }
         ]
       }
