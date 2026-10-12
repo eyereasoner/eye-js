@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791818920695,
+  "lastUpdate": 1791819875350,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -118819,6 +118819,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.34%",
             "unit": "ops/sec",
             "extra": "25 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "04ba86a9d84f1ecd188194431cca7fe9da6b5916",
+          "message": "fix: bump handlebars from 4.7.9 to 4.7.10 (#1988)\n\nBumps [handlebars](https://github.com/handlebars-lang/handlebars.js)\nfrom 4.7.9 to 4.7.10.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/handlebars-lang/handlebars.js/releases\">handlebars's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v4.7.10</h2>\n<ul>\n<li>security: Sanitize the source map URL when minifying - f37c599</li>\n<li>security: Iterate lazily in #each and strip whitespace in linear\ntime - 812c226</li>\n<li>security: Escape <code>&lt;!--</code> and <code>&lt;script</code> in\nprecompiled output - 609d1b1 GHSA-xw65-4hp5-5hc7</li>\n<li>security: Don't trust special properties on context data - ceec388\nGHSA-p8wg-vrv2-v86f</li>\n<li>security: Only compile partials that are template strings -\nc28ee7a</li>\n<li>security: Only dispatch known node types in the Compiler and Visitor\n- 7d501a5</li>\n<li>security: Validate AST values in the compiler instead of the parser\n- 703fdcc GHSA-8r5x-fm3f-whwj</li>\n<li>Clarify that --root does not restrict filesystem access -\n0fcf25c</li>\n<li>Bump minimist to ^1.2.8 - ea8ed82</li>\n<li>Fix Ruby component publishing documentation - d069c1c</li>\n<li>Fix Composer component definition - 6714e07</li>\n</ul>\n<p>Compatibility notes:</p>\n<ul>\n<li><code>{{#each}}</code> iterates iterables such as <code>Map</code>,\n<code>Set</code> and generators lazily, like <code>for...of</code>,\ninstead of\ncopying them into an array first. Values added to the iterable while the\nblock renders are now visited too.</li>\n</ul>\n<p><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/compare/v4.7.9...v4.7.10\">Commits</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Changelog</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/handlebars-lang/handlebars.js/blob/v4.7.10/release-notes.md\">handlebars's\nchangelog</a>.</em></p>\n<blockquote>\n<h2>v4.7.10 - October 5th, 2026</h2>\n<ul>\n<li>security: Sanitize the source map URL when minifying - f37c599</li>\n<li>security: Iterate lazily in #each and strip whitespace in linear\ntime - 812c226</li>\n<li>security: Escape <code>&lt;!--</code> and <code>&lt;script</code> in\nprecompiled output - 609d1b1 GHSA-xw65-4hp5-5hc7</li>\n<li>security: Don't trust special properties on context data - ceec388\nGHSA-p8wg-vrv2-v86f</li>\n<li>security: Only compile partials that are template strings -\nc28ee7a</li>\n<li>security: Only dispatch known node types in the Compiler and Visitor\n- 7d501a5</li>\n<li>security: Validate AST values in the compiler instead of the parser\n- 703fdcc GHSA-8r5x-fm3f-whwj</li>\n<li>Clarify that --root does not restrict filesystem access -\n0fcf25c</li>\n<li>Bump minimist to ^1.2.8 - ea8ed82</li>\n<li>Fix Ruby component publishing documentation - d069c1c</li>\n<li>Fix Composer component definition - 6714e07</li>\n</ul>\n<p>Compatibility notes:</p>\n<ul>\n<li><code>{{#each}}</code> iterates iterables such as <code>Map</code>,\n<code>Set</code> and generators lazily, like <code>for...of</code>,\ninstead of\ncopying them into an array first. Values added to the iterable while the\nblock renders are now visited too.</li>\n</ul>\n<p><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/compare/v4.7.9...v4.7.10\">Commits</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/45ce15255e0f430ac6d19742b18e316b7539264e\"><code>45ce152</code></a>\nv4.7.10</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/e47b2365d5656ab5689ae226aef90a485a90c5d8\"><code>e47b236</code></a>\nUpdate release notes</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/f37c599de9187715eb1e9afedcb2d80c175487a0\"><code>f37c599</code></a>\nSanitize the source map URL when minifying</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/812c2260cb8794ef4ab63a7f1d946431112560ca\"><code>812c226</code></a>\nIterate lazily in #each and strip whitespace in linear time</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/609d1b11c833c9a3e00f56f2f34d22f425446725\"><code>609d1b1</code></a>\nEscape <code>&lt;!--</code> and <code>&lt;script</code> in precompiled\noutput</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/ceec388abe1d1aac8f6369860d5f390fa71ef4fa\"><code>ceec388</code></a>\nDon't trust special properties on context data</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/c28ee7adb312308e0fe26f4d435a481be5e1ff98\"><code>c28ee7a</code></a>\nOnly compile partials that are template strings</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/7d501a5af2ac3aa9ac788a8889dbe419849e46f1\"><code>7d501a5</code></a>\nOnly dispatch known node types in the Compiler and Visitor</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/703fdcc5fd6cc8d1cc0c33cc19de40c467c4b8d2\"><code>703fdcc</code></a>\nValidate AST values in the compiler instead of the parser</li>\n<li><a\nhref=\"https://github.com/handlebars-lang/handlebars.js/commit/0fcf25c63038b43e78e17adbf029cf073e80554d\"><code>0fcf25c</code></a>\nClarify that --root does not restrict filesystem access</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/handlebars-lang/handlebars.js/compare/v4.7.9...v4.7.10\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=handlebars&package-manager=npm_and_yarn&previous-version=4.7.9&new-version=4.7.10)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-12T15:01:40Z",
+          "tree_id": "3f811edadaea874a66711fd38ef98ffa8d8192a8",
+          "url": "https://github.com/eyereasoner/eye-js/commit/04ba86a9d84f1ecd188194431cca7fe9da6b5916"
+        },
+        "date": 1791819828832,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 16,
+            "range": "±7.10%",
+            "unit": "ops/sec",
+            "extra": "71 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 15.69,
+            "range": "±6.61%",
+            "unit": "ops/sec",
+            "extra": "70 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 168225,
+            "range": "±0.97%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 232375,
+            "range": "±0.97%",
+            "unit": "ops/sec",
+            "extra": "91 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 114,
+            "range": "±22.00%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.66,
+            "range": "±2.88%",
+            "unit": "ops/sec",
+            "extra": "29 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.24,
+            "range": "±0.26%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.77%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.39,
+            "range": "±16.88%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.57,
+            "range": "±22.17%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.16,
+            "range": "±23.26%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 1.96,
+            "range": "±2.67%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.13,
+            "range": "±1.78%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.43,
+            "range": "±2.57%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.66,
+            "range": "±0.31%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 2.02,
+            "range": "±0.49%",
+            "unit": "ops/sec",
+            "extra": "13 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.16,
+            "range": "±0.69%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.55,
+            "range": "±0.33%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.78,
+            "range": "±0.47%",
+            "unit": "ops/sec",
+            "extra": "26 samples"
           }
         ]
       }
