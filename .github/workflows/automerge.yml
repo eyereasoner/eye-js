@@ -41,11 +41,20 @@ jobs:
           steps.metadata.outputs.update-type == 'version-update:semver-major'
         run: |
           gh pr view "$PR_URL" --json body --jq .body > body.md
-          # Guard so re-runs (e.g. on synchronize) do not append the footer twice
+          # Guard so re-runs (e.g. on synchronize) do not add the note twice
           if ! grep -q '^BREAKING CHANGE:' body.md; then
-            printf '\n\nBREAKING CHANGE: %s updated from %s to %s (new major version). This update may contain breaking changes.\n' \
-              "$DEPENDENCY_NAMES" "$PREVIOUS_VERSION" "$NEW_VERSION" >> body.md
-            gh pr edit "$PR_URL" --body-file body.md
+            # The note MUST be prepended, not appended: the conventional-commits
+            # parser stops treating a "BREAKING CHANGE:" line as a footer note once
+            # a Markdown thematic break ("---", which dependabot always includes)
+            # sits between it and the header, so a trailing note is silently ignored
+            # and the release stays a patch. Putting it in the first paragraph makes
+            # the squashed commit resolve to a major release.
+            {
+              printf 'BREAKING CHANGE: %s updated from %s to %s (new major version). This update may contain breaking changes.\n\n' \
+                "$DEPENDENCY_NAMES" "$PREVIOUS_VERSION" "$NEW_VERSION"
+              cat body.md
+            } > body.new.md
+            gh pr edit "$PR_URL" --body-file body.new.md
           fi
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
