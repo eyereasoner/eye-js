@@ -304,6 +304,26 @@ _:ng3 {
 }`)
 ```
 
+## RDF 1.2 support
+
+RDF 1.2 handling in eye-js is **experimental**: the underlying EYE reasoner officially targets the
+[Notation3 specification](https://w3c.github.io/N3/spec/), and its parsing of RDF 1.1/1.2 syntax is
+experimental ([#1854](https://github.com/eyereasoner/eye-js/issues/1854)). For full RDF 1.2 inputs,
+the recommended path is to convert to N3 first, for example with
+[`n3gen`](https://github.com/eyereasoner/eyeling/blob/main/tools/n3gen.js) from
+[eyeling](https://github.com/eyereasoner/eyeling).
+
+The behaviour that is supported follows RDF 1.2 semantics:
+ - Annotation and quoted-triple syntax desugars to a blank-node reifier: `<< :s :p :o >> :is true.`
+   is shorthand for `_:r rdf:reifies <<( :s :p :o )>>. _:r :is true.` Triple terms only occur as the
+   object of `rdf:reifies`; the pre-1.2 RDF-star CG form (a quoted triple directly in the subject or
+   object position) is no longer produced.
+ - [N3.js](https://github.com/rdfjs/N3.js) v2, used for quad input/output since
+   [#1853](https://github.com/eyereasoner/eye-js/pull/1853), and EYE agree on this model, so string
+   and quad i/o behave consistently.
+ - The [`dataStar` test cases](https://github.com/eyereasoner/eye-js/blob/main/data/socrates.ts)
+   guard this behaviour.
+
 ## Cite
 
 If you are using or extending eye-js as part of a scientific publication, we would appreciate a citation of our [zenodo artefact](https://zenodo.org/doi/10.5281/zenodo.12211023).
