@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1792556580468,
+  "lastUpdate": 1793487199977,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -119290,6 +119290,163 @@ window.BENCHMARK_DATA = {
             "range": "±0.29%",
             "unit": "ops/sec",
             "extra": "25 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "3a915adb1ec8a337e9bbe33c27d28beeea577f39",
+          "message": "fix: bump fast-uri from 3.1.7 to 3.1.9 (#1993)\n\nBumps [fast-uri](https://github.com/fastify/fast-uri) from 3.1.7 to\n3.1.9.\n<details>\n<summary>Release notes</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/fastify/fast-uri/releases\">fast-uri's\nreleases</a>.</em></p>\n<blockquote>\n<h2>v3.1.9</h2>\n<h2>Security</h2>\n<p>This security release fixes four URI parsing and normalization\nvulnerabilities in fast-uri 3.x. Applications that process untrusted URI\ninput should upgrade to v3.1.9.</p>\n<ul>\n<li><strong>Medium — URI scheme spoofing through percent-encoded\nschemes</strong> (<a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-w74x-v6f9-j3xg\">GHSA-w74x-v6f9-j3xg</a>,\nCVE-2026-110306): percent-encoded scheme input is now rejected instead\nof being decoded into a live scheme.</li>\n<li><strong>Medium — Host confusion during domain-host\ncanonicalization</strong> (<a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-wjr9-j795-jxcr\">GHSA-wjr9-j795-jxcr</a>,\nCVE-2026-110180): malformed domain hosts containing ambiguous delimiters\nor stripped control characters are now rejected instead of being\nsilently rewritten.</li>\n<li><strong>Low — Incorrect relative-reference normalization</strong>\n(<a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-xhq7-xmqj-769h\">GHSA-xhq7-xmqj-769h</a>,\nCVE-2026-110095): dot-segment removal now preserves the resolution\nsemantics of relative references.</li>\n<li><strong>Low — Scheme injection in suffix references</strong> (<a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-333x-w4r6-6crp\">GHSA-333x-w4r6-6crp</a>,\nCVE-2026-110725): first-segment colons in path-only suffix references\nare now escaped so the output is not reparsed as a scheme.</li>\n</ul>\n<p>Upgrade with:</p>\n<pre lang=\"sh\"><code>npm install fast-uri@3.1.9\n</code></pre>\n<p>Thanks to <a href=\"https://github.com/zekth\"><code>@​zekth</code></a>\nfor reporting the scheme, host, and relative-reference issues, and to <a\nhref=\"https://github.com/UlisesGascon\"><code>@​UlisesGascon</code></a>\nfor finding the suffix-reference issue and reviewing the\nremediations.</p>\n<h2>What's Changed</h2>\n<ul>\n<li>ci: enable trusted publishing releases (v3.x) by <a\nhref=\"https://github.com/mcollina\"><code>@​mcollina</code></a> in <a\nhref=\"https://redirect.github.com/fastify/fast-uri/pull/229\">fastify/fast-uri#229</a></li>\n</ul>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.8...v3.1.9\">https://github.com/fastify/fast-uri/compare/v3.1.8...v3.1.9</a></p>\n<h2>v3.1.8</h2>\n<h2>⚠️ Security Warning</h2>\n<p>This security release fixes the following medium-severity security\nadvisory:</p>\n<ul>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/security/advisories/GHSA-hrr3-gc8f-f4qj\">GHSA-hrr3-gc8f-f4qj</a>\n— inconsistent host case normalization via percent-encoded octets</li>\n</ul>\n<p>Users of the v3.x release line should upgrade to v3.1.8.</p>\n<p><strong>Full Changelog</strong>: <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.7...v3.1.8\">https://github.com/fastify/fast-uri/compare/v3.1.7...v3.1.8</a></p>\n</blockquote>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/0def70338a0fa2f12a10c83ae8eafc2139ae9a07\"><code>0def703</code></a>\nBumped v3.1.9</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/a1d0da2f5c703244027c1b204c1aebd0516da338\"><code>a1d0da2</code></a>\ntest: generate only relative path references</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/9eb8759a9825c046f57f7f695f1944bc39b88abd\"><code>9eb8759</code></a>\nfix: preserve relative paths in suffix and relative resolution</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/54c30f75891b74e5a4393b44be9ea7ba43dd1e4b\"><code>54c30f7</code></a>\ndocs: note suffix-reference authority ambiguity</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/39e6493c1356f30a0084171627eb266786e1620e\"><code>39e6493</code></a>\nfix: escape a first-segment colon in suffix references</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/745183c1d9d98d113bed8a57bb1c9ceaf0147b7a\"><code>745183c</code></a>\ntest: cover first-segment colon in suffix references</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/ddfc6a51122dfce0365655f04479fc3adb7f6b3c\"><code>ddfc6a5</code></a>\nfix(SEC-03): reject non reg-name characters in domain hosts</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/d86a8d29f45187819dac2d4fe171c35e3e488264\"><code>d86a8d2</code></a>\nfix: keep a colon-first segment behind &quot;./&quot; in relative\nnormalization</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/eb483b5da2580bdecb8af644bbfee878d5424850\"><code>eb483b5</code></a>\ntest: cover colon-first relative references in normalization</li>\n<li><a\nhref=\"https://github.com/fastify/fast-uri/commit/b110a3571c37dfcf9d1c72ce2e2e178c78d1a424\"><code>b110a35</code></a>\nfix(SEC-02): preserve meaning of relative references during\nnormalization</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/fastify/fast-uri/compare/v3.1.7...v3.1.9\">compare\nview</a></li>\n</ul>\n</details>\n<details>\n<summary>Maintainer changes</summary>\n<p>This version was pushed to npm by <a\nhref=\"https://www.npmjs.com/~GitHub%20Actions\">GitHub Actions</a>, a new\nreleaser for fast-uri since your current version.</p>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=fast-uri&package-manager=npm_and_yarn&previous-version=3.1.7&new-version=3.1.9)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-10-31T22:24:17Z",
+          "tree_id": "5484f92483bb9c587a810e165cbe00194582aaa1",
+          "url": "https://github.com/eyereasoner/eye-js/commit/3a915adb1ec8a337e9bbe33c27d28beeea577f39"
+        },
+        "date": 1793487149817,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 22.16,
+            "range": "±6.21%",
+            "unit": "ops/sec",
+            "extra": "55 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 22.17,
+            "range": "±5.76%",
+            "unit": "ops/sec",
+            "extra": "52 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 254666,
+            "range": "±3.74%",
+            "unit": "ops/sec",
+            "extra": "86 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 384771,
+            "range": "±1.88%",
+            "unit": "ops/sec",
+            "extra": "89 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 148,
+            "range": "±22.60%",
+            "unit": "ops/sec",
+            "extra": "20 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 11.29,
+            "range": "±3.51%",
+            "unit": "ops/sec",
+            "extra": "43 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.43,
+            "range": "±1.11%",
+            "unit": "ops/sec",
+            "extra": "7 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.07,
+            "range": "±1.52%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 9.95,
+            "range": "±18.41%",
+            "unit": "ops/sec",
+            "extra": "20 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.99,
+            "range": "±21.66%",
+            "unit": "ops/sec",
+            "extra": "7 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.28,
+            "range": "±26.18%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 3.67,
+            "range": "±1.50%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 2.06,
+            "range": "±1.60%",
+            "unit": "ops/sec",
+            "extra": "15 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 7.9,
+            "range": "±2.87%",
+            "unit": "ops/sec",
+            "extra": "36 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 9.91,
+            "range": "±0.54%",
+            "unit": "ops/sec",
+            "extra": "39 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 3.79,
+            "range": "±1.54%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 2.11,
+            "range": "±1.25%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 8.05,
+            "range": "±0.59%",
+            "unit": "ops/sec",
+            "extra": "34 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 10.19,
+            "range": "±0.48%",
+            "unit": "ops/sec",
+            "extra": "39 samples"
           }
         ]
       }
