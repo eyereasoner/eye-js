@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1793501706064,
+  "lastUpdate": 1793502300704,
   "repoUrl": "https://github.com/eyereasoner/eye-js",
   "entries": {
     "EYE JS Benchmark": [
@@ -119916,6 +119916,163 @@ window.BENCHMARK_DATA = {
             "name": "Run timbl + owl2rl rules [string]",
             "value": 5.65,
             "range": "±0.18%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "49699333+dependabot[bot]@users.noreply.github.com",
+            "name": "dependabot[bot]",
+            "username": "dependabot[bot]"
+          },
+          "committer": {
+            "email": "noreply@github.com",
+            "name": "GitHub",
+            "username": "web-flow"
+          },
+          "distinct": false,
+          "id": "9d4ee4a974d6593e4f50ff98c22aeaa68d70c008",
+          "message": "fix: bump qs from 6.15.2 to 6.17.1 (#1996)\n\nBumps [qs](https://github.com/ljharb/qs) from 6.15.2 to 6.17.1.\n<details>\n<summary>Changelog</summary>\n<p><em>Sourced from <a\nhref=\"https://github.com/ljharb/qs/blob/main/CHANGELOG.md\">qs's\nchangelog</a>.</em></p>\n<blockquote>\n<h2><strong>6.17.1</strong></h2>\n<ul>\n<li>[Fix] <code>parse</code>: <code>interpretNumericEntities</code>:\ndecode code points above U+FFFF as surrogate pairs (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/640\">#640</a>)</li>\n<li>[Fix] <code>parse</code>: respect <code>plainObjects</code> for\n<code>[]</code> with <code>parseArrays: false</code> (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/639\">#639</a>)</li>\n<li>[Fix] <code>utils</code>: <code>merge</code>: count the elements of\na sparse array against <code>arrayLimit</code>, not its holes</li>\n<li>[Fix] <code>parse</code>: guard bracket-wrapped prototype keys at\ndepth 0 (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/638\">#638</a>)</li>\n<li>[Refactor] <code>parse</code>: extract wrapping-bracket stripping\nhelper</li>\n<li>[readme] document that <code>depth: 0</code> and <code>depth:\nfalse</code> keep keys flat</li>\n<li>[Tests] <code>parse</code>: pin depth-0 bracket stripping and\nprototype keys kept by\n<code>allowPrototypes</code>/<code>plainObjects</code></li>\n</ul>\n<h2><strong>6.17.0</strong></h2>\n<ul>\n<li>[New] <code>stringify</code>: add <code>WHATWG</code> format (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/623\">#623</a>)</li>\n<li>[Fix] <code>stringify</code>: do not sort the caller's\n<code>filter</code> array in place (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/637\">#637</a>)</li>\n<li>[Fix] <code>parse</code>: copy an own <code>__proto__</code> key as\ndata (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/636\">#636</a>)</li>\n<li>[Fix] <code>parse</code>: decode percent-encoded dots\ncase-insensitively (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/635\">#635</a>)</li>\n<li>[Fix] <code>stringify</code>: encode keys when\n<code>allowEmptyArrays</code> is set (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/561\">#561</a>)</li>\n<li>[Fix] <code>parse</code>: preserve comma arrays when interpreting\nnumeric entities (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/630\">#630</a>)</li>\n<li>[Fix] <code>parse</code>: allow scalar fields with a zero array\nlimit (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/627\">#627</a>)</li>\n<li>[Fix] <code>parse</code>: do not count an existing comma array\ntoward <code>arrayLimit</code> when <code>duplicates</code> discards or\nreplaces it</li>\n<li>[Fix] <code>utils</code>: <code>encode</code>: encode lone\nsurrogates as U+FFFD instead of consuming the next code unit (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/624\">#624</a>)</li>\n<li>[eslint] fix indentation</li>\n<li>[readme] document the encoder's <code>format</code> argument</li>\n<li>[meta] add changelog acknowledgement</li>\n<li>[meta] fix changelog indents</li>\n<li>[Dev Deps] update <code>eslint</code>, <code>evalmd</code>,\n<code>npmignore</code></li>\n<li>[Tests] <code>stringify</code>: pin <code>allowEmptyArrays</code>\noutput for keys that need no encoding</li>\n<li>[Tests] <code>stringify</code>: pin <code>sort</code> order for\nnested keys selected by an array <code>filter</code></li>\n<li>[Tests] <code>parse</code>: cover\n<code>interpretNumericEntities</code> across value shapes, keys, and the\ncharset sentinel</li>\n<li>[Tests] <code>parse</code>: cover more input that builds no array at\na zero or negative <code>arrayLimit</code></li>\n<li>[Tests] <code>parse</code>: cover <code>comma</code> with a zero or\nnegative <code>arrayLimit</code>, and combining a full comma array</li>\n<li>[Tests] <code>parse</code>: pin the behavior of a zero or negative\n<code>arrayLimit</code></li>\n<li>[Tests] <code>utils</code>/<code>stringify</code>: pin\n<code>~</code>, <code>*</code>, and parens encoding in RFC3986 and\nRFC1738</li>\n</ul>\n<h2><strong>6.16.2</strong></h2>\n<ul>\n<li>[Fix] <code>stringify</code>: encode keys when\n<code>allowEmptyArrays</code> is set (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/561\">#561</a>)</li>\n<li>[meta] use double quotes for better OS support</li>\n<li>[Dev Deps] update <code>evalmd</code>, <code>npmignore</code></li>\n<li>[Tests] <code>stringify</code>: pin <code>allowEmptyArrays</code>\noutput for keys that need no encoding</li>\n</ul>\n<h2><strong>6.16.1</strong></h2>\n<ul>\n<li>[Fix] <code>parse</code>: do not mutate an object input</li>\n<li>[Fix] <code>stringify</code>: stop re-encoding structural separator\ndots when <code>encodeDotInKeys</code> is set (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/564\">#564</a>)</li>\n<li>[Fix] <code>stringify</code>: <code>arrayFormat: 'comma'</code>:\npass the full encoder arguments with <code>encodeValuesOnly</code></li>\n<li>[Fix] <code>utils</code>: encode <code>+</code> as <code>%2B</code>\nin iso-8859-1 mode so values round-trip (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/565\">#565</a>)</li>\n<li>[Fix] parse: only convert top-level dots to brackets when allowDots\nis on (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/621\">#621</a>)</li>\n<li>[Fix] <code>stringify</code>: ignore inherited array format names\n(<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/622\">#622</a>)</li>\n<li>[Fix] <code>stringify</code>: <code>arrayFormat: 'comma'</code>: do\nnot throw on elements with no callable <code>toString</code></li>\n<li>[Fix] <code>utils</code>: <code>merge</code>: seed an overflow\ncontainer's index from its own keys, not just the source</li>\n<li>[Fix] <code>utils</code>: <code>merge</code>: keep a\n<code>strictMerge</code> conflict container's index and\n<code>arrayLimit</code> correct</li>\n<li>[Fix] <code>parse</code>: only treat <code>[]</code> as array syntax\nwhen it ends the key</li>\n<li>[Perf] <code>decode</code>: skip decoders when there is no percent\nsign (<a\nhref=\"https://redirect.github.com/ljharb/qs/issues/583\">#583</a>)</li>\n</ul>\n<!-- raw HTML omitted -->\n</blockquote>\n<p>... (truncated)</p>\n</details>\n<details>\n<summary>Commits</summary>\n<ul>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/43baea4655cb9b543fb1c5cc0db95cde42852140\"><code>43baea4</code></a>\nv6.17.1</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/54623b64dcef77a436b834b0413cf4cbb6bc6927\"><code>54623b6</code></a>\n[Fix] <code>parse</code>: <code>interpretNumericEntities</code>: decode\ncode points above U+FFFF as...</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/7924b65958d41cd91dbaf688f61e7029673eb33f\"><code>7924b65</code></a>\n[Fix] <code>parse</code>: respect <code>plainObjects</code> for\n<code>[]</code> with <code>parseArrays: false</code></li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/7d4b440de3c028e8497544d0474d5264d9d2bad9\"><code>7d4b440</code></a>\n[readme] document that <code>depth: 0</code> and <code>depth:\nfalse</code> keep keys flat</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/101492a5c4d9cb72f6510ecc15483759ec8e45fa\"><code>101492a</code></a>\n[Fix] <code>utils</code>: <code>merge</code>: count the elements of a\nsparse array against `arrayLi...</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/42eccf0f6292c502fb4bc175191f0812d5476769\"><code>42eccf0</code></a>\n[Fix] <code>parse</code>: guard bracket-wrapped prototype keys at depth\n0</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/ae0b5c7481fcc6483c4d8ff875e290b2387f87b6\"><code>ae0b5c7</code></a>\n[Refactor] <code>parse</code>: extract wrapping-bracket stripping\nhelper</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/6459f9fc5e5036cfdb6e120fcb94df8e48f584df\"><code>6459f9f</code></a>\n[Tests] <code>parse</code>: pin depth-0 bracket stripping and prototype\nkeys kept by `al...</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/cb6855c1eb72eb0a3ef549b3cf9fce904e6263ec\"><code>cb6855c</code></a>\nMerge backport release tags v6.12.6–v6.16.2 into main</li>\n<li><a\nhref=\"https://github.com/ljharb/qs/commit/136912a619c2d81c090ca196ea02b6c193580d1d\"><code>136912a</code></a>\nv6.16.2</li>\n<li>Additional commits viewable in <a\nhref=\"https://github.com/ljharb/qs/compare/v6.15.2...v6.17.1\">compare\nview</a></li>\n</ul>\n</details>\n<br />\n\n\n[![Dependabot compatibility\nscore](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=qs&package-manager=npm_and_yarn&previous-version=6.15.2&new-version=6.17.1)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)\n\nDependabot will resolve any conflicts with this PR as long as you don't\nalter it yourself. You can also trigger a rebase manually by commenting\n`@dependabot rebase`.\n\n[//]: # (dependabot-automerge-start)\n[//]: # (dependabot-automerge-end)\n\n---\n\n<details>\n<summary>Dependabot commands and options</summary>\n<br />\n\nYou can trigger Dependabot actions by commenting on this PR:\n- `@dependabot rebase` will rebase this PR\n- `@dependabot recreate` will recreate this PR, overwriting any edits\nthat have been made to it\n- `@dependabot show <dependency name> ignore conditions` will show all\nof the ignore conditions of the specified dependency\n- `@dependabot ignore this major version` will close this PR and stop\nDependabot creating any more for this major version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this minor version` will close this PR and stop\nDependabot creating any more for this minor version (unless you reopen\nthe PR or upgrade to it yourself)\n- `@dependabot ignore this dependency` will close this PR and stop\nDependabot creating any more for this dependency (unless you reopen the\nPR or upgrade to it yourself)\nYou can disable automated security fix PRs for this repo from the\n[Security Alerts\npage](https://github.com/eyereasoner/eye-js/network/alerts).\n\n</details>\n\nSigned-off-by: dependabot[bot] <support@github.com>\nCo-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",
+          "timestamp": "2026-11-01T02:15:53Z",
+          "tree_id": "a7f1880e3b8c0adb95223fb79748e93518c40e42",
+          "url": "https://github.com/eyereasoner/eye-js/commit/9d4ee4a974d6593e4f50ff98c22aeaa68d70c008"
+        },
+        "date": 1793502254609,
+        "tool": "benchmarkjs",
+        "benches": [
+          {
+            "name": "Initialise SWIPL with EYE image",
+            "value": 14.95,
+            "range": "±6.58%",
+            "unit": "ops/sec",
+            "extra": "65 samples"
+          },
+          {
+            "name": "Run socrates query",
+            "value": 14.44,
+            "range": "±6.72%",
+            "unit": "ops/sec",
+            "extra": "62 samples"
+          },
+          {
+            "name": "Load data into a module",
+            "value": 171726,
+            "range": "±0.92%",
+            "unit": "ops/sec",
+            "extra": "92 samples"
+          },
+          {
+            "name": "Load query into a module",
+            "value": 235128,
+            "range": "±0.64%",
+            "unit": "ops/sec",
+            "extra": "93 samples"
+          },
+          {
+            "name": "Executing the socrates query",
+            "value": 111,
+            "range": "±21.09%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10]",
+            "value": 6.36,
+            "range": "±3.94%",
+            "unit": "ops/sec",
+            "extra": "28 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50]",
+            "value": 0.24,
+            "range": "±0.43%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100]",
+            "value": 0.04,
+            "range": "±0.47%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [10] [reasoning only]",
+            "value": 7.25,
+            "range": "±16.87%",
+            "unit": "ops/sec",
+            "extra": "21 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [50] [reasoning only]",
+            "value": 0.58,
+            "range": "±22.57%",
+            "unit": "ops/sec",
+            "extra": "6 samples"
+          },
+          {
+            "name": "Run deep taxonomy benchmark [100] [reasoning only]",
+            "value": 0.15,
+            "range": "±24.06%",
+            "unit": "ops/sec",
+            "extra": "5 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules",
+            "value": 1.92,
+            "range": "±2.08%",
+            "unit": "ops/sec",
+            "extra": "14 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules",
+            "value": 1.1,
+            "range": "±1.61%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules",
+            "value": 4.28,
+            "range": "±2.70%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules",
+            "value": 5.5,
+            "range": "±0.19%",
+            "unit": "ops/sec",
+            "extra": "25 samples"
+          },
+          {
+            "name": "Run timbl + foaf + rdfs rules [string]",
+            "value": 1.98,
+            "range": "±0.55%",
+            "unit": "ops/sec",
+            "extra": "13 samples"
+          },
+          {
+            "name": "Run timbl + foaf + owl2rl rules [string]",
+            "value": 1.14,
+            "range": "±0.34%",
+            "unit": "ops/sec",
+            "extra": "10 samples"
+          },
+          {
+            "name": "Run timbl + rdfs rules [string]",
+            "value": 4.4,
+            "range": "±0.37%",
+            "unit": "ops/sec",
+            "extra": "22 samples"
+          },
+          {
+            "name": "Run timbl + owl2rl rules [string]",
+            "value": 5.61,
+            "range": "±0.35%",
             "unit": "ops/sec",
             "extra": "25 samples"
           }
