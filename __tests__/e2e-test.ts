@@ -3,6 +3,10 @@ import { firefox, chromium, type BrowserType } from 'playwright';
 import { createTestApp } from '../__test_utils__/serve';
 import { data } from '../data/socrates';
 
+// Generous timeout for the reasoner to produce a result on slow CI runners,
+// kept within the overall 120s jest timeout of each test below
+const RESULT_TIMEOUT = 90_000;
+
 describe('Testing browsers', () => {
   let server: Server;
 
@@ -24,28 +28,41 @@ describe('Testing browsers', () => {
     ([browserType, browserName]) => {
       it(`should be able to call the execute function in ${browserName}`, async () => {
         const browser = await browserType.launch();
-        const page = await browser.newPage();
 
-        await page.goto('http://localhost:3001/');
-        await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
-        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('');
+        // Ensure the browser is always closed, even when an expectation fails;
+        // a leaked browser stops the jest worker from exiting and hangs CI
+        try {
+          const page = await browser.newPage();
 
-        await page.click('button[id=execute]');
-        // Time for new result to be inserted in the DOM
-        await new Promise((res) => { setTimeout(res, 1000); });
+          await page.goto('http://localhost:3001/');
+          await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
+          await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('');
 
-        await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
-        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('@prefix : .:Socrates a :Mortal.');
+          await page.click('button[id=execute]');
+          // Wait for the reasoner to insert the result into the DOM rather
+          // than sleeping for a fixed amount of time
+          await page.waitForFunction(
+            () => (document.querySelector('div[id=result]')?.textContent ?? '').trim() !== '',
+            undefined,
+            { timeout: RESULT_TIMEOUT },
+          );
 
-        await page.click('button[id=clear]');
-        // Time for new result to be inserted in the DOM
-        await new Promise((res) => { setTimeout(res, 1000); });
+          await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
+          await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('@prefix : .:Socrates a :Mortal.');
 
-        await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
-        await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('');
+          await page.click('button[id=clear]');
+          // Wait for the result to be removed from the DOM
+          await page.waitForFunction(
+            () => (document.querySelector('div[id=result]')?.textContent ?? '').trim() === '',
+            undefined,
+            { timeout: RESULT_TIMEOUT },
+          );
 
-        await page.close();
-        await browser.close();
+          await expect(page.textContent('textarea[id=data]').then((r) => r?.trim())).resolves.toEqual(data.trim());
+          await expect(page.textContent('div[id=result]').then((r) => r?.trim())).resolves.toEqual('');
+        } finally {
+          await browser.close();
+        }
       }, 120_000);
     },
   );
