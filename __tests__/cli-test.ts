@@ -5,6 +5,7 @@ import { EventEmitter } from 'events';
 import 'jest-rdf';
 import { query, data, result } from '../data/socrates';
 import { mainFunc, convertToPosixPath } from '../dist/bin/main';
+import * as queryLib from '../dist/query';
 import { askCallback, askQuery, askResult } from '../data/ask';
 
 const files = {
@@ -22,6 +23,7 @@ const files = {
   { :Let :output ?out } => { 1 log:outputString ?out } .
   `,
   [path.join(__dirname, 'ask.n3')]: askQuery,
+  [path.join(__dirname, 'invalid.n3')]: 'this is not valid N3 {{{',
 };
 
 jest.mock('fs', () => ({
@@ -43,7 +45,7 @@ async function getConsoleOutput(args: string[]) {
   const restoreConsole = mockConsole();
   const stdin = new ReadStream();
 
-  await mainFunc({
+  const proc = {
     argv: ['/bin/node', 'eyereasoner', ...args],
     cwd: () => __dirname,
     stdin,
@@ -54,7 +56,9 @@ async function getConsoleOutput(args: string[]) {
         }
       },
     },
-  } as NodeJS.Process);
+  } as NodeJS.Process;
+
+  await mainFunc(proc);
 
   // @ts-ignore
   // eslint-disable-next-line no-console
@@ -68,7 +72,7 @@ async function getConsoleOutput(args: string[]) {
   const stdout = calls.map((call) => call.join(' ')).join('\n');
   const stderr = stderrCalls.map((call) => call.join(' ')).join('\n');
 
-  return { stdout, stderr };
+  return { stdout, stderr, exitCode: proc.exitCode };
 }
 
 describe('Testing convertToPosixPath', () => {
@@ -125,5 +129,33 @@ describe('Testing CLI', () => {
   it('Should get output for strings ask', async () => {
     const { stdout } = await getConsoleOutput(['--nope', '--quiet', './ask.n3']);
     expect(new Parser().parse(stdout)).toBeRdfIsomorphic(new Parser().parse(askResult));
+  });
+
+  it('Should not set an exit code on success', async () => {
+    const { exitCode } = await getConsoleOutput(['--nope', '--quiet', './socrates.n3', '--query', './socrates-query.n3']);
+    expect(exitCode).toBeUndefined();
+  });
+
+  it('Should set a non-zero exit code when the reasoner errors', async () => {
+    const { stdout, stderr, exitCode } = await getConsoleOutput(['--nope', '--quiet', './invalid.n3']);
+    expect(stdout).toEqual('');
+    expect(stderr).toContain('** ERROR **');
+    expect(exitCode).toEqual(1);
+  });
+
+  it('Should set a non-zero exit code and report the message when the query rejects with an Error', async () => {
+    const qaQuerySpy = jest.spyOn(queryLib, 'qaQuery').mockRejectedValueOnce(new Error('unexpected reasoner failure'));
+    const { stderr, exitCode } = await getConsoleOutput(['--nope', '--quiet', './socrates.n3']);
+    qaQuerySpy.mockRestore();
+    expect(stderr).toContain('unexpected reasoner failure');
+    expect(exitCode).toEqual(1);
+  });
+
+  it('Should set a non-zero exit code and report the value when the query rejects with a non-Error', async () => {
+    const qaQuerySpy = jest.spyOn(queryLib, 'qaQuery').mockRejectedValueOnce('non-error reasoner failure');
+    const { stderr, exitCode } = await getConsoleOutput(['--nope', '--quiet', './socrates.n3']);
+    qaQuerySpy.mockRestore();
+    expect(stderr).toContain('non-error reasoner failure');
+    expect(exitCode).toEqual(1);
   });
 });
